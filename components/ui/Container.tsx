@@ -1,34 +1,9 @@
-import { cn } from "@/lib/cn";
-import type { HTMLAttributes } from "react";
-
-interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
-  size?: "sm" | "md" | "lg" | "xl";
-  as?: "div" | "section" | "article" | "main" | "header" | "footer";
-}
-
-const sizeMap: Record<NonNullable<ContainerProps["size"]>, string> = {
-  sm: "max-w-3xl",
-  md: "max-w-5xl",
-  lg: "max-w-6xl",
-  xl: "max-w-7xl",
-};
-
+// helix: components/ui/Container.tsx
 /**
- * Container — centers content with a responsive horizontal max-width.
- * Use for all top-level page sections to keep rhythm consistent.
+ * Container — root-level re-export of the canonical Container implementation
+ * kept under app/components/ui/. This exists so that sections imported from
+ * app/ can resolve `@/components/ui/Container` regardless of where they sit
+ * in the tree, keeping the public alias surface stable.
  */
-export function Container({
-  className,
-  size = "xl",
-  as: Tag = "div",
-  ...props
-}: ContainerProps) {
-  return (
-    <Tag
-      className={cn("mx-auto w-full px-5 sm:px-6 lg:px-8", sizeMap[size], className)}
-      {...props}
-    />
-  );
-}
-
-export default Container;
+export { Container } from "../../app/components/ui/Container";
+export type { ContainerProps } from "../../app/components/ui/Container";
