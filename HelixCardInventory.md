@@ -1,13 +1,13 @@
 # Card Inventory
 
-- Sep 7, 2026, 10:53:58 AM CDT | USER-310000 | in_progress | development | Complete Helix landing site
+- Sep 7, 2026, 10:55:22 AM CDT | USER-310000 | done | development | Complete Helix landing site
+- Sep 7, 2026, 10:55:12 AM CDT | USER-63000 | in_progress | development | Assembly footer CTA Vercel deploy · deliverable: README.md
 - Sep 7, 2026, 10:53:45 AM CDT | USER-956000 | done | development | FAQ CTA footer and Vercel
 - Sep 7, 2026, 10:53:40 AM CDT | USER-128000 | done | development | Hero and personas section
 - Sep 7, 2026, 10:51:40 AM CDT | USER-23000 | done | development | Helix landing page site
 - Sep 7, 2026, 10:51:00 AM CDT | USER-217000 | done | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 10:49:42 AM CDT | USER-604000 | done | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 10:47:45 AM CDT | USER-616000 | done | development | Features and how it works
-- Sep 7, 2026, 10:47:26 AM CDT | USER-63000 | todo | development | Assembly footer CTA Vercel deploy · deliverable: README.md
 - Sep 7, 2026, 10:45:11 AM CDT | USER-812000 | done | development | Footer CTA Vercel ready
 - Sep 7, 2026, 10:39:32 AM CDT | USER-82000 | done | development | Footer and final CTA
 - Sep 7, 2026, 10:36:35 AM CDT | USER-915000 | todo | deployment | Final integration polish Vercel deploy
