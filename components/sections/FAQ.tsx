@@ -1,9 +1,9 @@
-// helix: components/sections/Faq.tsx
+// helix: components/sections/FAQ.tsx
 /**
- * @helix:story USER-607000
+ * @helix:story USER-956000
  *
- * Faq — re-export shim so `@/components/sections/Faq` resolves to
- * the canonical implementation. The named export is `FAQ`.
+ * FAQ — re-export shim so `@/components/sections/FAQ` resolves to
+ * the canonical implementation at `@/components/Faq`.
  */
-export { FAQ as Faq, FAQ } from "@/components/Faq";
+export { FAQ } from "@/components/Faq";
 export { default } from "@/components/Faq";
