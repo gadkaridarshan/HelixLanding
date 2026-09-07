@@ -1,3 +1,4 @@
+// helix: components/HowItWorks.tsx
 /**
  * @helix:story USER-933000
  *
@@ -64,7 +65,7 @@ export function HowItWorks({
         (className ?? "")
       }
     >
-      {/* Decorative background — soft aurora glow + faint grid */}
+      {/* Decorative background — soft aurora glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
@@ -117,30 +118,22 @@ export function HowItWorks({
                 {step.description}
               </p>
 
-              <ul role="list" className="mt-5 space-y-2">
-                {step.bullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="flex items-start gap-2 text-sm text-slate-300"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300"
+              {step.bullets.length > 0 ? (
+                <ul role="list" className="mt-4 space-y-2">
+                  {step.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-start gap-2 text-sm text-slate-300"
                     >
-                      <path
-                        d="M4 10.5l4 4 8-9"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                      <span
+                        aria-hidden="true"
+                        className="mt-1.5 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"
                       />
-                    </svg>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ol>

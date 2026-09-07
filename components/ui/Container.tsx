@@ -2,12 +2,12 @@
 /**
  * @helix:story USER-63000
  *
- * `Container` — shared max-width wrapper for every section.
+ * Container — shared layout primitive used by every marketing section.
  *
- * Caps the content at a comfortable reading width, applies consistent
- * horizontal padding at every breakpoint, and renders a `<div>` by
- * default. Sections can pass `as="section"` (or any other element)
- * to opt into semantic HTML without prop-drilling.
+ * Centres content with a max-width and horizontal padding that scales
+ * with the viewport. Exists as a single primitive so every section
+ * (Hero, Features, HowItWorks, Personas, FAQ, FinalCTA, Footer)
+ * aligns to the same gutter — no copy-pasted `mx-auto max-w-6xl`.
  *
  * Pure server component. No client interactivity.
  */
@@ -15,36 +15,35 @@ import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-type ContainerElement = keyof React.JSX.IntrinsicElements;
-
 export interface ContainerProps {
-  /** Optional extra classes appended after the base styles. */
   className?: string;
-  /** Render as a different element. Defaults to `<div>`. */
-  as?: ContainerElement;
-  /** Rendered children. */
-  children?: React.ReactNode;
-  /** Optional id, useful for anchor navigation from the navbar. */
-  id?: string;
-  /** Optional aria-label override when `as` is a landmark element. */
-  "aria-label"?: string;
+  children: React.ReactNode;
+  /** Override the default `max-w-6xl`. Accepts any Tailwind max-w class. */
+  width?: "narrow" | "default" | "wide" | "full";
+  /** Render as a different element (e.g. `<section>` or `<div>`). */
+  as?: keyof React.JSX.IntrinsicElements;
 }
+
+const widthStyles: Record<NonNullable<ContainerProps["width"]>, string> = {
+  narrow: "max-w-3xl",
+  default: "max-w-6xl",
+  wide: "max-w-7xl",
+  full: "max-w-none",
+};
 
 export function Container({
   className,
-  as,
   children,
-  id,
-  ...rest
+  width = "default",
+  as = "div",
 }: ContainerProps): React.ReactElement {
-  const Tag = (as ?? "div") as ContainerElement;
-  const base =
-    "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8";
-  return (
-    <Tag id={id} className={cn(base, className)} {...rest}>
-      {children}
-    </Tag>
+  const Component = as as React.ElementType;
+  const composed = cn(
+    "mx-auto w-full px-4 sm:px-6 lg:px-8",
+    widthStyles[width],
+    className,
   );
+  return <Component className={composed}>{children}</Component>;
 }
 
 export default Container;

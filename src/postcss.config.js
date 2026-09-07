@@ -2,10 +2,10 @@
 /**
  * @helix:story USER-63000
  *
- * PostCSS configuration — Tailwind v4 uses the dedicated
- * `@tailwindcss/postcss` plugin instead of the legacy v3 pipeline.
- * Autoprefixer is included to vendor-prefix any legacy properties
- * the marketing site relies on.
+ * PostCSS pipeline for Tailwind v4 + Autoprefixer. Tailwind is loaded
+ * via the official PostCSS plugin (`@tailwindcss/postcss`) which is
+ * the v4-recommended approach — the legacy `tailwindcss` PostCSS
+ * plugin is deprecated.
  */
 module.exports = {
   plugins: {

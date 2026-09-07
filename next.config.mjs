@@ -1,19 +1,27 @@
-// helix: next.config.mjs
 /**
- * @helix:story USER-63000
+ * @helix:story USER-23000
  *
- * Next.js configuration — minimal, framework defaults. Keeps the
- * marketing site deployable on Vercel with zero custom webpack
- * tweaks so the platform's defaults (image optimization, caching,
- * edge runtime) all stay intact.
+ * Next.js configuration for the Helix marketing site.
+ *
+ * - React Strict Mode is enabled to surface lifecycle / effect bugs early.
+ * - The default `x-powered-by` header is suppressed for a cleaner
+ *   security footprint (already covered by `vercel.json`, but kept
+ *   here as a belt-and-braces default).
+ * - `images.remotePatterns` whitelists the canonical brand hostname so
+ *   any future OG / social-share image hosted there can be optimized
+ *   through `next/image`.
  */
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  experimental: {
-    typedRoutes: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "helix-ai-orchestrator.vercel.app",
+      },
+    ],
   },
 };
 

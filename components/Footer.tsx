@@ -1,13 +1,14 @@
 // helix: components/Footer.tsx
 /**
- * @helix:story USER-63000
+ * @helix:story USER-812000
  *
- * Footer — site-wide footer with brand wordmark, navigation links,
- * legal links, social links, and a "deployed on Vercel" badge.
+ * Footer — site-wide footer with brand wordmark, Product / Resources
+ * / Company / Legal link columns, social links, and a "deployed on
+ * Vercel" badge.
  *
  * Pure server component. Brand surface (name, canonical URL, GitHub
- * URL) is sourced from `lib/brand.ts` so the same identity shows up
- * in `<title>`, OG cards, and this footer without duplication.
+ * URL) is sourced from `lib/brand.ts` so the same identity shows up in
+ * `<title>`, OG cards, and this footer without duplication.
  */
 import * as React from "react";
 
@@ -44,30 +45,38 @@ const productLinks: ReadonlyArray<FooterLink> = [
 const resourcesLinks: ReadonlyArray<FooterLink> = [
   { label: "GitHub", href: brand.githubUrl, external: true },
   {
-    label: "Reference site",
-    href: "https://helix-ai-orchestrator.vercel.app",
+    label: "Live orchestrator",
+    href: brand.url,
     external: true,
   },
-  { label: "Deploy on Vercel", href: "https://vercel.com/new", external: true },
-  { label: "Next.js docs", href: "https://nextjs.org/docs", external: true },
+  {
+    label: "Documentation",
+    href: `${brand.githubUrl}#readme`,
+    external: true,
+  },
 ];
 
 const companyLinks: ReadonlyArray<FooterLink> = [
   { label: "About", href: "#hero" },
-  { label: "Personas", href: "#personas" },
-  { label: "Early access", href: brand.url, external: true },
+  { label: "Get started", href: "#get-started" },
+  { label: "Roadmap", href: brand.githubUrl, external: true },
 ];
 
 const legalLinks: ReadonlyArray<FooterLink> = [
-  { label: "MIT License", href: `${brand.githubUrl}/blob/main/LICENSE`, external: true },
-  { label: "Privacy", href: `${brand.url}/privacy` },
-  { label: "Terms", href: `${brand.url}/terms` },
+  {
+    label: "MIT License",
+    href: `${brand.githubUrl}/blob/main/LICENSE`,
+    external: true,
+  },
+  {
+    label: "Privacy",
+    href: `${brand.githubUrl}/blob/main/docs/PRIVACY.md`,
+    external: true,
+  },
 ];
 
 const socialLinks: ReadonlyArray<SocialLink> = [
   { label: "GitHub", href: brand.githubUrl },
-  { label: "X / Twitter", href: "https://twitter.com/helix" },
-  { label: "Discord", href: "https://discord.gg/helix" },
 ];
 
 const columns: ReadonlyArray<FooterColumn> = [
@@ -77,134 +86,153 @@ const columns: ReadonlyArray<FooterColumn> = [
   { title: "Legal", links: legalLinks },
 ];
 
+function VercelBadge(): React.ReactElement {
+  return (
+    <a
+      href="https://vercel.com"
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label="Deployed on Vercel"
+      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="h-3.5 w-3.5 text-white"
+      >
+        <path d="M12 1L24 22H0L12 1Z" />
+      </svg>
+      <span className="font-medium tracking-tight">Deployed on Vercel</span>
+    </a>
+  );
+}
+
+function SocialIcon({
+  label,
+  href,
+}: {
+  label: string;
+  href: string;
+}): React.ReactElement {
+  if (label === "GitHub") {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Helix on GitHub"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="h-4 w-4"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          />
+        </svg>
+      </a>
+    );
+  }
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      aria-label={label}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+    >
+      <span className="text-xs font-medium">{label.charAt(0)}</span>
+    </a>
+  );
+}
+
 export function Footer({ className }: FooterProps): React.ReactElement {
   const year = new Date().getFullYear();
 
   return (
     <footer
       className={
-        "relative isolate border-t border-white/10 bg-ink-950/80 backdrop-blur " +
+        "relative isolate border-t border-white/10 bg-slate-950/60 " +
         (className ?? "")
       }
     >
-      {/* Decorative top edge — soft aurora line */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"
-      />
-
-      <Container className="py-14 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Brand block */}
-          <div className="lg:col-span-4">
+      <Container className="py-12 sm:py-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] lg:gap-12">
+          {/* Brand column */}
+          <div className="max-w-sm">
             <a
               href="#hero"
               className="inline-flex items-center gap-2 text-white"
+              aria-label={`${brand.name} home`}
             >
               <span
                 aria-hidden="true"
-                className="inline-block h-7 w-7 rounded-md bg-gradient-to-br from-brand-400 via-accent-400 to-aurora-500 shadow-glow"
-              />
-              <span className="font-mono text-lg font-semibold tracking-tight">
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-950 shadow-[0_8px_24px_-8px_rgba(34,211,238,0.6)]"
+              >
+                <span className="font-mono text-sm font-bold">H</span>
+              </span>
+              <span className="text-base font-semibold tracking-tight">
                 {brand.name}
               </span>
             </a>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">
-              {brand.tagline}. Decompose every prompt into atomic, reviewable
-              units and ship small, verifiable PRs.
+
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+              {brand.shortDescription}
             </p>
 
-            <div className="mt-6 flex items-center gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-pill border border-white/10 bg-white/5 text-ink-200 transition-colors hover:border-brand-400/40 hover:bg-white/10 hover:text-white"
-                >
-                  <span aria-hidden="true" className="text-xs font-semibold">
-                    {link.label.charAt(0)}
-                  </span>
-                </a>
+            <div className="mt-6">
+              <VercelBadge />
+            </div>
+
+            <div className="mt-6 flex items-center gap-2">
+              {socialLinks.map((s) => (
+                <SocialIcon key={s.label} label={s.label} href={s.href} />
               ))}
             </div>
           </div>
 
           {/* Link columns */}
-          <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8"
-          >
-            {columns.map((col) => (
-              <div key={col.title}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-300">
-                  {col.title}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target={link.external ? "_blank" : undefined}
-                        rel={link.external ? "noopener noreferrer" : undefined}
-                        className="text-sm text-ink-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                {col.title}
+              </h3>
+              <ul role="list" className="mt-4 space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      {...(link.external
+                        ? {
+                            target: "_blank",
+                            rel: "noreferrer noopener",
+                          }
+                        : {})}
+                      className="text-sm text-slate-300 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom row */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs text-ink-400">
-            © {year} {brand.name}. All rights reserved.
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs text-slate-500">
+            © {year} {brand.name}. Licensed under the MIT License.
           </p>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={brand.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-pill border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-ink-200 transition-colors hover:border-brand-400/40 hover:bg-white/10 hover:text-white"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-3.5 w-3.5"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12 2C6.475 2 2 6.475 2 12a9.99 9.99 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.025-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.513 2.338 1.088 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.02 10.02 0 0 0 22 12c0-5.525-4.475-10-10-10Z"
-                />
-              </svg>
-              Star
-            </a>
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-ink-400 transition-colors hover:text-white"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 76 65"
-                fill="currentColor"
-                className="h-3.5 w-3.5"
-              >
-                <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
-              </svg>
-              Deployed on Vercel
-            </a>
-          </div>
+          <p className="text-xs text-slate-500">
+            Built with Next.js · Atomic work-breakdown for AI coding agents.
+          </p>
         </div>
       </Container>
     </footer>

@@ -1,52 +1,31 @@
 {
-  "eyebrow": "Questions, answered",
-  "title": "Frequently asked questions",
-  "subtitle": "Everything you need to know about Helix, from how it works under the hood to how it ships to your team.",
+  "eyebrow": "FAQ",
+  "heading": "Questions, answered.",
+  "description": "Everything you need to know about Helix and how it orchestrates atomic work-breakdown for AI coding agents.",
   "items": [
     {
-      "id": "what-is-helix",
-      "question": "What exactly is Helix?",
-      "answer": "Helix is an AI coding orchestrator. It takes a feature request — a bug, a refactor, a whole epic — and breaks it down into atomic, reviewable cards. Each card is one focused change: one commit, one PR, one decision. You stay in control; Helix handles the planning, writing, and self-review."
+      "question": "What is Helix, in one sentence?",
+      "answer": "Helix is an atomic work-breakdown orchestrator for AI coding agents — it decomposes every prompt into reviewable units, executes them in dependency order, and verifies each one against your repo before opening a PR."
     },
     {
-      "id": "how-does-it-differ",
-      "question": "How is Helix different from running an LLM in my editor?",
-      "answer": "Most coding assistants generate a wall of text and hope you review it. Helix plans the work first, decomposes it into small verifiable steps, and verifies each step before moving on. The result is a stream of mergeable PRs you can actually review, instead of a 2,000-line diff you'll never read."
+      "question": "How is it different from running an agent directly in my IDE?",
+      "answer": "An in-IDE agent produces one sprawling diff. Helix produces many small, reviewable PRs — each scoped to a single atomic unit — so code review stays fast and regressions stay local."
     },
     {
-      "id": "languages-frameworks",
-      "question": "Which languages and frameworks does Helix support?",
-      "answer": "Helix works against any repository it can read: TypeScript, JavaScript, Python, Go, Rust, Java, Kotlin, Swift, Ruby, and more. It uses your existing test runner, linter, and type-checker to verify every card. No special tooling or DSL to learn."
+      "question": "Which AI models does Helix support?",
+      "answer": "Helix is model-agnostic. Bring any coding-agent capable of running shell commands and reading diffs — the orchestrator handles decomposition, dependency gating, and verification around the model."
     },
     {
-      "id": "self-hosting",
       "question": "Can I self-host Helix?",
-      "answer": "Yes. Helix is MIT licensed and self-hostable. You bring your own model provider (OpenAI, Anthropic, Bedrock, Azure, a local Ollama instance — anything with an OpenAI-compatible API), point Helix at your repos, and run it on your own infrastructure."
+      "answer": "Yes. Helix is MIT licensed. The orchestrator runs as a Node.js process; the dashboard is the Next.js marketing + control-plane site you are looking at right now."
     },
     {
-      "id": "deployment",
-      "question": "Where can I deploy Helix?",
-      "answer": "Helix itself runs anywhere a Node.js or container workload runs — Vercel, Fly.io, Render, a plain VPS, or Kubernetes. The Helix landing site you are looking at is deployed on Vercel. See the vercel.json and .vercelignore shipped with the repo for the reference configuration."
+      "question": "Does Helix send my code anywhere?",
+      "answer": "Only to the model provider you configure. Helix itself has no telemetry and no required cloud account — set the provider API key and you're done."
     },
     {
-      "id": "integrations",
-      "question": "How does Helix integrate with GitHub, GitLab, and Bitbucket?",
-      "answer": "Helix opens a PR (or merge request) per card using your existing SCM credentials. It reads your CI logs, posts review comments, and watches PR status to know when a card is verified. You can require human approval on every PR or let Helix auto-merge green cards."
-    },
-    {
-      "id": "pricing",
-      "question": "Is Helix free? What's the pricing model?",
-      "answer": "The orchestrator is MIT licensed and free forever. You only pay for the model tokens Helix consumes, billed by your chosen provider. Bring your own key, or plug into your enterprise LLM gateway. No Helix-side markup, no per-seat fees."
-    },
-    {
-      "id": "security",
-      "question": "How does Helix handle secrets and security?",
-      "answer": "Helix never sends your source code to a third party unless you point it at your own provider that does. Tokens, signing keys, and SCM credentials stay in your environment — Helix reads them, never exfiltrates them. Audit logs are local-first and exportable."
-    },
-    {
-      "id": "vercel-deploy",
-      "question": "Can I deploy this landing page to Vercel right now?",
-      "answer": "Yes — click the Vercel deploy badge in the footer or push the repo to a connected Vercel project. The shipped vercel.json configures the Next.js build, output directory, and framework detection so the deploy is one-click."
+      "question": "How do I deploy this site to Vercel?",
+      "answer": "From the repo root, run `vercel` for a preview deploy and `vercel --prod` for production. The included `vercel.json` pins framework, region, and security headers automatically."
     }
   ]
 }

@@ -1,9 +1,10 @@
 // helix: components/sections/FinalCTA.tsx
 /**
- * @helix:story USER-82000
+ * @helix:story USER-63000
  *
- * FinalCTA — re-export shim so `@/components/sections/FinalCTA`
- * resolves to the canonical implementation.
+ * FinalCTA — alternate re-export shim. Some callers reference the
+ * section as "FinalCTA" rather than "Cta"; both resolve to the
+ * canonical implementation in `components/Cta.tsx`.
  */
-export { FinalCTA } from "@/components/FinalCTA";
-export { default } from "@/components/FinalCTA";
+export { Cta as FinalCTA } from "@/components/Cta";
+export { default } from "@/components/Cta";

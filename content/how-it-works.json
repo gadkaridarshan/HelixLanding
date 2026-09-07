@@ -1,46 +1,46 @@
 {
-  "eyebrow": "How Helix works",
-  "heading": "From a fuzzy prompt to a stack of shippable PRs.",
-  "description": "Helix treats every request as a tree of atomic changes. Each atom is small enough to review and large enough to merge.",
+  "eyebrow": "How it works",
+  "heading": "From prompt to merged PR, atom by atom.",
+  "description": "Helix turns every coding task into a directed acyclic graph of small, reviewable units — then executes them in order with verification gates between each step.",
   "steps": [
     {
       "number": "01",
       "title": "Describe the goal",
-      "description": "Drop a prompt, a ticket, or a screenshot. Helix scopes the work and surfaces ambiguities before a single file is touched.",
+      "description": "Tell Helix what you want to build. It accepts natural-language prompts, ticket links, or diffs to extend.",
       "bullets": [
-        "Natural-language intake",
-        "Ambiguity checklist",
-        "Scope boundary detection"
+        "Prompt or ticket in, plan out",
+        "Idempotent — re-run to refine",
+        "Local or remote execution"
       ]
     },
     {
       "number": "02",
       "title": "Decompose into atoms",
-      "description": "Helix proposes a stack of atomic changes — each one a reviewable diff with a clear title, rationale, and dependency edge.",
+      "description": "Helix breaks the goal into atomic work units with explicit dependencies. Each atom is small enough to review in under five minutes.",
       "bullets": [
-        "Atomic work breakdown",
-        "Dependency graph",
-        "Diff-sized estimates"
+        "Dependency graph per goal",
+        "Each atom is a single concern",
+        "Reviewable in < 5 minutes"
       ]
     },
     {
       "number": "03",
       "title": "Apply, review, merge",
-      "description": "Helix writes each atom in your conventions, runs your checks, opens the PR, and waits for your review gate before the next atom.",
+      "description": "Parallel agents implement each atom; Helix gates execution on dependencies and verifies the result against types, tests, and lint before opening the PR.",
       "bullets": [
-        "Style-aware edits",
-        "Run your lint and tests",
-        "One PR per atom"
+        "Parallel where safe",
+        "Serial where dependent",
+        "Types + tests + lint gates"
       ]
     },
     {
       "number": "04",
       "title": "Ship with confidence",
-      "description": "Every ship is auditable. Roll back a single atom, replay it on another branch, or hand the graph off to a teammate.",
+      "description": "Every atom lands as its own PR with full provenance — what changed, why, and which gates it passed. Roll back any atom without touching the rest.",
       "bullets": [
-        "Per-atom history",
-        "Replay on any branch",
-        "Reviewer-friendly summaries"
+        "One PR per atom",
+        "Full audit trail",
+        "Replayable end-to-end"
       ]
     }
   ]
