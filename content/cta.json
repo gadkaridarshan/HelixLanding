@@ -1,16 +1,14 @@
 {
-  "eyebrow": "Ready when you are",
-  "title": "Ship your next feature in atomic, reviewable steps.",
-  "subtitle": "Helix plans, writes, and reviews code as a stream of focused cards. Every change is one commit, one PR, and one decision — so your team can move fast without losing the plot.",
-  "primaryCta": {
-    "label": "Get started on GitHub",
-    "href": "https://github.com/gadkaridarshan/Helix",
-    "external": true
+  "eyebrow": "Ship small PRs, not sprawling diffs",
+  "heading": "Ready to orchestrate your next feature with Helix?",
+  "description": "Spin up the live orchestrator on Vercel or grab the source and run it locally — small, reviewable PRs are one prompt away.",
+  "primary": {
+    "label": "Try the live orchestrator",
+    "href": "https://helix-ai-orchestrator.vercel.app"
   },
-  "secondaryCta": {
-    "label": "Read the docs",
-    "href": "#how-it-works",
-    "external": false
+  "secondary": {
+    "label": "View on GitHub",
+    "href": "https://github.com/gadkaridarshan/Helix"
   },
-  "footnote": "MIT licensed · Self-hostable · Vercel-ready"
+  "footnote": "Open-source under the repository's license. Bring your own model API key."
 }

@@ -1,11 +1,9 @@
 // helix: components/landing/faq/index.ts
 /**
- * @helix:story USER-303000
+ * @helix:story USER-956000
  *
- * Re-export the canonical FAQ implementation so the
- * `components/landing/faq` alias resolves from both the `app/` and
- * root-level section trees.
+ * Barrel re-exports for the FAQ landing section.
  */
-export { FAQ } from "@/components/landing/faq/FAQ";
-export { default } from "@/components/landing/faq/FAQ";
-export type { FAQProps, FaqItem } from "@/components/landing/faq/FAQ";
+export { FAQ } from "./FAQ";
+export { default } from "./FAQ";
+export type { FAQProps, FAQItem } from "./FAQ";

@@ -1,165 +1,217 @@
 // helix: components/landing/footer/Footer.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-956000
  *
- * Footer — site chrome with link columns, brand mark, and a clearly-labelled
- * reference-site pointer.
+ * Footer — site-wide footer with brand mark, Product / Resources
+ * / Company / Legal link columns, social links, a GitHub star CTA,
+ * a Vercel deploy reference, and copyright.
  *
- * The reference-site link points to `helix-ai-orchestrator.vercel.app`,
- * which is an externally-hosted Helix deployment used purely as a visual
- * / brand reference. It is **NOT** the live landing page for this product,
- * it is **NOT** deployed from this repository, and the canonical live URL
- * for this product lives in `lib/brand.ts` (`brand.url`).
+ * Pure server component. Brand surface (name, canonical URL,
+ * GitHub URL) is sourced from `lib/brand.ts` so the same identity
+ * shows up in `<title>`, OG cards, and this footer without
+ * duplication.
  *
- * Every piece of UI that surfaces this URL — the visible link text, the
- * badge, the surrounding paragraph, and the accessible name — makes it
- * explicit that:
- *
- *   1. The link goes to a **reference site** (visual / brand reference only).
- *   2. It is **not** the live landing page for this product.
- *   3. The live landing page for this product is a **different site**,
- *      deployed at the URL configured in `lib/brand.ts` (`brand.url`).
- *
- * Visitors should not be misled into thinking that following this link
- * will take them back to the site they are currently viewing.
+ * Lives at the canonical path `components/landing/footer/Footer.tsx`.
+ * Re-export shims at `components/Footer.tsx`,
+ * `components/sections/Footer.tsx`, and
+ * `app/components/sections/Footer.tsx` point here so all import
+ * paths resolve to the same implementation.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
 import { brand } from "@/lib/brand";
 
-interface FooterColumn {
-  heading: string;
-  links: ReadonlyArray<{ label: string; href: string }>;
+export interface FooterProps {
+  className?: string;
 }
 
-const COLUMNS: ReadonlyArray<FooterColumn> = [
-  {
-    heading: "Product",
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "How it works", href: "#how-it-works" },
-      { label: "Personas", href: "#personas" },
-      { label: "FAQ", href: "#faq" },
-    ],
-  },
-  {
-    heading: "Get involved",
-    links: [
-      {
-        label: "Request early access",
-        href: "mailto:hello@helix.dev",
-      },
-      { label: "Source on GitHub", href: brand.repoUrl },
-    ],
-  },
-  {
-    heading: "Reference",
-    links: [
-      {
-        label: "Reference site (visual only)",
-        href: brand.referenceUrl,
-      },
-    ],
-  },
+interface FooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface FooterColumn {
+  title: string;
+  links: ReadonlyArray<FooterLink>;
+}
+
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+const productLinks: ReadonlyArray<FooterLink> = [
+  { label: "Features", href: "#features" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Personas", href: "#personas" },
+  { label: "FAQ", href: "#faq" },
 ];
 
-export function Footer(): React.ReactElement {
+const resourcesLinks: ReadonlyArray<FooterLink> = [
+  { label: "GitHub", href: brand.githubUrl, external: true },
+  { label: "Live orchestrator", href: brand.url, external: true },
+];
+
+const companyLinks: ReadonlyArray<FooterLink> = [
+  { label: "Contact", href: `mailto:${brand.contactEmail}` },
+];
+
+const legalLinks: ReadonlyArray<FooterLink> = [
+  { label: "Privacy", href: "#privacy" },
+  { label: "Terms", href: "#terms" },
+];
+
+const columns: ReadonlyArray<FooterColumn> = [
+  { title: "Product", links: productLinks },
+  { title: "Resources", links: resourcesLinks },
+  { title: "Company", links: companyLinks },
+  { title: "Legal", links: legalLinks },
+];
+
+const socialLinks: ReadonlyArray<SocialLink> = [
+  { label: "GitHub", href: brand.githubUrl },
+];
+
+function GitHubIcon(): React.ReactElement {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.07c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.96 10.96 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
+    </svg>
+  );
+}
+
+export function Footer({ className }: FooterProps): React.ReactElement {
+  const year = new Date().getFullYear();
   return (
     <footer
       aria-labelledby="footer-heading"
-      className="relative border-t border-helix-border bg-black/20 py-16"
+      className={
+        "relative isolate border-t border-white/10 bg-slate-950/60 " +
+        (className ?? "")
+      }
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/40 to-transparent"
+      />
+
       <h2 id="footer-heading" className="sr-only">
         Site footer
       </h2>
 
-      <Container size="lg">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2">
+      <Container className="py-14 sm:py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          {/* Brand column */}
+          <div className="md:col-span-5">
+            <a
+              href="#hero"
+              className="inline-flex items-center gap-2 text-base font-semibold text-ink-50"
+            >
               <span
                 aria-hidden="true"
-                className="grid h-8 w-8 place-items-center rounded-lg border border-helix-border-strong bg-gradient-to-br from-cyan-400/30 to-violet-500/30 text-sm font-bold text-helix-text"
-              >
-                {brand.mark}
-              </span>
-              <span className="font-semibold tracking-tight text-helix-text">
-                {brand.name}
-              </span>
-            </div>
-            <p className="mt-4 text-sm text-helix-text-muted">
-              Atomic work-breakdown for AI coding agents.
+                className="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-brand-400 via-aurora-400 to-accent-400 shadow-[0_0_20px_-2px_rgba(34,211,238,0.55)]"
+              />
+              <span className="font-mono tracking-tight">{brand.name}</span>
+            </a>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-400">
+              {brand.shortDescription}
             </p>
 
-            <div className="mt-6 rounded-lg border border-amber-400/30 bg-amber-400/[0.06] p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-300">
-                Reference site
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-helix-text-muted">
-                The link below is to a{" "}
-                <span className="font-semibold text-helix-text">
-                  visual / brand reference
-                </span>{" "}
-                deployment. It is{" "}
-                <span className="font-semibold text-helix-text">
-                  not
-                </span>{" "}
-                this product's live landing page and is{" "}
-                <span className="font-semibold text-helix-text">
-                  not
-                </span>{" "}
-                deployed from this repository.
-              </p>
+            {/* GitHub star CTA */}
+            <a
+              href={brand.githubUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-ink-100 transition-colors hover:border-white/30 hover:bg-white/10"
+            >
+              <GitHubIcon />
+              <span>Star on GitHub</span>
+            </a>
+
+            {/* Vercel deploy reference */}
+            <p className="mt-6 text-xs leading-relaxed text-ink-500">
+              Deployed on{" "}
               <a
-                href={brand.referenceUrl}
+                href="https://vercel.com"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-amber-300 underline-offset-4 hover:underline"
-                aria-label="Reference site for Helix (visual / brand reference only — opens in a new tab)"
+                rel="noreferrer noopener"
+                className="text-ink-300 underline decoration-white/20 underline-offset-2 hover:text-ink-100"
               >
-                {brand.referenceUrl.replace(/^https?:\/\//, "")}
-                <span aria-hidden="true">↗</span>
+                Vercel
               </a>
-            </div>
+              . Source:{" "}
+              <a
+                href={brand.githubUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-ink-300 underline decoration-white/20 underline-offset-2 hover:text-ink-100"
+              >
+                github.com/{brand.name.toLowerCase()}
+              </a>
+              .
+            </p>
           </div>
 
-          {COLUMNS.map((col) => (
-            <div key={col.heading}>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-helix-text">
-                {col.heading}
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-sm text-helix-text-muted transition-colors hover:text-helix-text"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 md:col-span-7">
+            {columns.map((column) => (
+              <div key={column.title}>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-400">
+                  {column.title}
+                </h3>
+                <ul className="mt-4 space-y-2">
+                  {column.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-sm text-ink-300 transition-colors hover:text-ink-50"
+                        {...(link.external
+                          ? {
+                              target: "_blank",
+                              rel: "noreferrer noopener",
+                            }
+                          : {})}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-helix-border pt-6 text-xs text-helix-text-dim sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center">
           <p>
-            © {new Date().getFullYear()} {brand.name}. Built with Next.js.
+            © {year} {brand.name}. All rights reserved.
           </p>
-          <p>
-            Live site:{" "}
-            <a
-              href={brand.url}
-              className="text-helix-text-muted underline-offset-4 hover:text-helix-text hover:underline"
-            >
-              {brand.url.replace(/^https?:\/\//, "")}
-            </a>
+          <p className="font-mono tracking-tight">
+            Built with <span className="text-brand-300">{brand.name}</span>.
           </p>
+          <ul className="flex items-center gap-4">
+            {socialLinks.map((social) => (
+              <li key={social.label}>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={social.label}
+                  className="text-ink-400 transition-colors hover:text-ink-100"
+                >
+                  <GitHubIcon />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </footer>

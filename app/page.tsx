@@ -34,7 +34,7 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <Navbar />
-      <main id="main" className="relative">
+      <main id="main">
         <Hero />
         <StatsBar />
         <Features />

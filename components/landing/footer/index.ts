@@ -1,11 +1,9 @@
 // helix: components/landing/footer/index.ts
 /**
- * @helix:story USER-303000
+ * @helix:story USER-956000
  *
- * Re-export the canonical Footer implementation so the
- * `components/landing/footer` alias resolves from both the
- * `app/` and root-level section trees.
+ * Barrel re-exports for the Footer landing section.
  */
-export { Footer } from "@/components/landing/footer/Footer";
-export { default } from "@/components/landing/footer/Footer";
-export type { FooterProps, FooterColumn, FooterLink } from "@/components/landing/footer/Footer";
+export { Footer } from "./Footer";
+export { default } from "./Footer";
+export type { FooterProps } from "./Footer";

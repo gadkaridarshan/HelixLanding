@@ -5,3 +5,4 @@
  * to the canonical implementation.
  */
 export { FAQ as Faq, FAQ } from "@/components/Faq";
+export { FAQ as default } from "@/components/Faq";
