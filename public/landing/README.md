@@ -23,7 +23,7 @@ This repo ships **only the marketing surface** — the orchestrator engine itsel
 - 🎨 **Tailwind v4** CSS-first tokens — `ink-*`, `brand-*`, `accent-*`, `aurora-*` palettes, no JS Tailwind config file.
 - 🔍 **Production SEO** — full Open Graph, Twitter Card, JSON-LD-ready metadata, sitemap, robots, web manifest.
 - ♿ **Accessible** — skip-to-content link, keyboard-navigable Personas, focus-visible rings, semantic landmarks.
-- 🛡️ **Hardened** — `next.config.ts` adds HSTS-friendly defaults, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff.
+- 🛡️ **Hardened** — `vercel.json` adds HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff.
 - 📦 **One-step deploy** — `vercel --prod` is all you need; everything else is config-free.
 
 ## Prerequisites

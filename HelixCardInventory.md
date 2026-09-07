@@ -1,9 +1,13 @@
 # Card Inventory
 
+- Sep 7, 2026, 4:31:02 PM CDT | USER-397000 | done | development | Use cases grid and metrics
+- Sep 7, 2026, 4:30:30 PM CDT | USER-74000 | in_progress | development | Personas and social proof sections
+- Sep 7, 2026, 4:30:30 PM CDT | USER-248000 | in_progress | development | FAQ CTA Footer Vercel SEO
+- Sep 7, 2026, 4:30:29 PM CDT | USER-707000 | todo | deployment | Vercel deployment wiring and verification · deliverable: README.md
+- Sep 7, 2026, 4:30:17 PM CDT | USER-45000 | in_progress | deployment | Vercel deployment and SEO wiring · deliverable: README.md
 - Sep 7, 2026, 4:29:36 PM CDT | USER-73000 | done | development | Use cases social proof FAQ
 - Sep 7, 2026, 4:29:25 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 4:28:26 PM CDT | USER-478000 | done | development | Hero how it works features
-- Sep 7, 2026, 4:28:07 PM CDT | USER-45000 | todo | deployment | Vercel deployment and SEO wiring · deliverable: README.md
 - Sep 7, 2026, 4:26:58 PM CDT | USER-303000 | done | development | Helix landing page site
 - Sep 7, 2026, 4:25:24 PM CDT | USER-468000 | done | development | Use cases section component
 - Sep 7, 2026, 4:21:31 PM CDT | USER-94000 | done | development | Footer with Vercel SEO

@@ -1,10 +1,17 @@
-## Troubleshooting
+# Helix Landing — robots.txt
+# https://helix-ai-orchestrator.vercel.app/
 
-- **Wrong canonical URL on the live site** — make sure `NEXT_PUBLIC_BRAND_URL` is set in the Vercel project settings, not just locally, and re-deploy.
-- **OG image not updating in social previews** — social crawlers cache aggressively. Use the validator links above and append `?v=2` to the OG URL to bust caches.
-- **`/sitemap.xml` returning 404** — confirm `public/sitemap.xml` exists; Vercel serves anything under `public/` at the site root.
-- **Security header missing** — `vercel.json` is applied at the edge on every deploy. If a header disappears after a manual change in the dashboard, the dashboard value overrides the file — re-apply in the dashboard or revert there.
+User-agent: *
+Allow: /
 
-## License
+# Block known noisy / internal paths just in case.
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /*?*
 
-MIT — see [`LICENSE`](./LICENSE). Marketing copy and brand assets are © Helix.
+# Sitemap location.
+Sitemap: https://helix-ai-orchestrator.vercel.app/sitemap.xml
+
+# Crawl-delay hint for well-behaved bots.
+Crawl-delay: 1

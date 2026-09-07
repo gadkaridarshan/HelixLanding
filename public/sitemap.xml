@@ -1,18 +1,95 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>https://helix-ai-orchestrator.vercel.app/</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://helix-ai-orchestrator.vercel.app/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://helix-ai-orchestrator.vercel.app/" />
-    <image:image>
-      <image:loc>https://helix-ai-orchestrator.vercel.app/og-image.svg</image:loc>
-      <image:title>Helix — Atomic work breakdown for AI coding agents</image:title>
-      <image:caption>Helix AI Orchestrator marketing site</image:caption>
-    </image:image>
-  </url>
-</urlset>
+## Deploy to Vercel
+
+This repo is pre-wired for Vercel — `vercel.json` configures security headers, immutable asset caching, and production redirects. Pick **one** of the two flows below.
+
+### Option A — Dashboard import (recommended for first deploy)
+
+1. Push the repo to GitHub (or GitLab / Bitbucket).
+2. In Vercel, click **Add New → Project**, then **Import** this repository.
+3. Vercel auto-detects the framework as **Next.js**. Confirm:
+    - Build Command: `next build`
+    - Output Directory: `.next`
+    - Install Command: `npm install`
+4. (Optional) Add an environment variable:
+    - `NEXT_PUBLIC_BRAND_URL` = `https://your-custom-domain.example`
+5. Click **Deploy**. Subsequent pushes to your default branch auto-deploy to production.
+
+### Option B — Vercel CLI (good for scripted deploys)
+
+1. **Install the CLI and log in**
+
+    ```bash
+    npm i -g vercel
+    vercel login
+    ```
+
+2. **Link the project (first time only)**
+
+    ```bash
+    vercel link
+    ```
+
+3. **Deploy a preview**
+
+    ```bash
+    vercel
+    ```
+
+4. **Deploy to production**
+
+    ```bash
+    vercel --prod
+    ```
+
+5. **Set the canonical URL (optional)**
+
+    ```bash
+    vercel env add NEXT_PUBLIC_BRAND_URL production
+    # paste https://your-custom-domain.example when prompted
+    vercel --prod   # redeploy to pick up the env var
+    ```
+
+### Verifying a successful deploy
+
+After the deploy finishes:
+
+- Open the production URL — the landing page renders with the navbar, hero, features, how-it-works, personas, FAQ, final CTA, and footer.
+- Visit `/sitemap.xml` — returns valid XML referencing your production host.
+- Visit `/robots.txt` — returns the production allow/deny rules and a `Sitemap:` line.
+- Inspect response headers (`curl -I https://your-domain/`):
+    - `strict-transport-security`, `x-content-type-options: nosniff`, `x-frame-options: SAMEORIGIN`, `referrer-policy`, and `permissions-policy` should all be present.
+- Run a social-share validator:
+    - Facebook Sharing Debugger: <https://developers.facebook.com/tools/debug/>
+    - Twitter Card Validator: <https://cards-dev.twitter.com/validator>
+    - LinkedIn Post Inspector: <https://www.linkedin.com/post-inspector/>
+
+## Custom domain
+
+1. In Vercel, open **Project Settings → Domains**.
+2. Add your apex domain and follow the DNS instructions (A record or `ALIAS` for apex; `CNAME` for subdomains).
+3. Vercel auto-issues a Let's Encrypt certificate.
+4. Set `NEXT_PUBLIC_BRAND_URL=https://your-domain` in **Project Settings → Environment Variables**, then redeploy.
+
+## SEO checklist
+
+- [x] `<title>` and `<meta name="description">` set in `app/layout.tsx`
+- [x] Open Graph + Twitter Card metadata in `app/layout.tsx`
+- [x] Canonical URL via `alternates.canonical` in `lib/metadata.ts`
+- [x] `public/sitemap.xml` references production host
+- [x] `public/robots.txt` allows crawling and points to the sitemap
+- [x] `public/og-image.svg` (and PNG variant) at the site root
+- [x] Semantic landmarks (`<header>`, `<main>`, `<footer>`, `aria-labelledby`)
+- [x] Skip-to-content link for keyboard users
+- [ ] Submit sitemap to Google Search Console after first deploy
+- [ ] Submit sitemap to Bing Webmaster Tools after first deploy
+
+## Troubleshooting
+
+- **Wrong canonical URL on the live site** — make sure `NEXT_PUBLIC_BRAND_URL` is set in the Vercel project settings, not just locally, and re-deploy.
+- **OG image not updating in social previews** — social crawlers cache aggressively. Use the validator links above and append `?v=2` to the OG URL to bust caches.
+- **`/sitemap.xml` returning 404** — confirm `public/sitemap.xml` exists; Vercel serves anything under `public/` at the site root.
+- **Security header missing** — `vercel.json` is applied at the edge on every deploy. If a header disappears after a manual change in the dashboard, the dashboard value overrides the file — re-apply in the dashboard or revert there.
+
+## License
+
+MIT — see [`LICENSE`](./LICENSE). Marketing copy and brand assets are © Helix.

@@ -1,6 +1,7 @@
 // helix: components/landing/Sections.tsx
 /**
  * @helix:story USER-303000
+ * @helix:story USER-397000
  *
  * Section composition root — owns the full narrative order of the
  * Helix landing page. The narrative arc:
@@ -11,7 +12,8 @@
  *   Features        → core capability grid
  *   HowItWorks      → 3-step walkthrough
  *   Personas        → who Helix is for
- *   UseCases        → representative scenarios + quotes
+ *   UseCases        → concrete scenarios + quotes
+ *   MetricsBand     → quantifiable outcomes band
  *   FAQ             → last-mile objections
  *   FinalCTA        → closing conversion moment
  *   CTASection      → final full-bleed call-to-action block
@@ -27,14 +29,15 @@ import { Features } from "@/components/sections/Features";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Personas } from "@/components/sections/Personas";
+import { MetricsBand } from "@/components/sections/MetricsBand";
+import { Personas } from "@/components/sections/personas/Personas";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { StatsBar } from "@/components/sections/StatsBar";
-import { UseCases } from "@/components/UseCases";
+import { UseCases } from "@/components/sections/UseCases";
 
 export function Sections(): ReactElement {
   return (
-    <>
+    <main id="main" className="relative isolate">
       <Hero />
       <SocialProof />
       <StatsBar />
@@ -42,10 +45,11 @@ export function Sections(): ReactElement {
       <HowItWorks />
       <Personas />
       <UseCases />
+      <MetricsBand />
       <FAQ />
       <FinalCTA />
       <CTASection />
-    </>
+    </main>
   );
 }
 
