@@ -1,11 +1,9 @@
 // helix: app/components/sections/Features.tsx
 /**
- * @helix:story USER-986000
+ * @helix:story USER-303000
  *
- * Features section — re-exports the canonical implementation under
- * `components/sections/Features` so the alias resolves from the
- * `app/` and root-level section trees alike.
+ * Features — re-export of the canonical implementation.
  */
 
-export { Features } from "@/components/sections/Features";
-export { default } from "@/components/sections/Features";
+export { Features } from "@/components/landing/features/Features";
+export { default } from "@/components/landing/features/Features";

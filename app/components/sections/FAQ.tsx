@@ -1,6 +1,6 @@
 // helix: app/components/sections/FAQ.tsx
 /**
- * @helix:story USER-956000
+ * @helix:story USER-303000
  *
  * Re-export the canonical FAQ implementation from
  * `components/landing/faq/FAQ` so both `@/app/components/sections/FAQ`

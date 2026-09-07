@@ -1,9 +1,34 @@
 // helix: components/ui/Container.tsx
 /**
- * Container — root-level re-export of the canonical Container implementation
- * kept under app/components/ui/. This exists so that sections imported from
- * app/ can resolve `@/components/ui/Container` regardless of where they sit
- * in the tree, keeping the public alias surface stable.
+ * @helix:story USER-303000
+ *
+ * Container — max-width, horizontally-padded layout wrapper.
  */
-export { Container } from "../../app/components/ui/Container";
-export type { ContainerProps } from "../../app/components/ui/Container";
+import type { HTMLAttributes } from "react";
+import { cn } from "@/components/ui/cn";
+
+export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * When true, removes the default horizontal padding.
+   */
+  flush?: boolean;
+}
+
+export function Container({
+  className,
+  flush = false,
+  ...props
+}: ContainerProps) {
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8",
+        flush && "px-0",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+export default Container;

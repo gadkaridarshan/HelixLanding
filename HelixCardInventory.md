@@ -1,7 +1,11 @@
 # Card Inventory
 
+- Sep 7, 2026, 8:51:36 AM CDT | USER-616000 | done | development | Relabel reference site link
+- Sep 7, 2026, 8:50:44 AM CDT | USER-384000 | in_progress | development | Clarify reference site link copy
+- Sep 7, 2026, 8:50:36 AM CDT | USER-303000 | in_progress | development | Helix landing page site
+- Sep 7, 2026, 8:46:27 AM CDT | USER-440000 | in_progress | development | Correct reference site link copy
+- Sep 7, 2026, 8:31:03 AM CDT | USER-986000 | done | development | Scaffold brand theme and section
 - Sep 7, 2026, 8:27:37 AM CDT | USER-349000 | done | development | Helix AI orchestrator landing page
-- Sep 7, 2026, 8:25:41 AM CDT | USER-986000 | in_progress | development | Scaffold brand theme and section
 - Sep 7, 2026, 8:23:20 AM CDT | USER-956000 | done | development | FAQ CTA footer and Vercel
 - Sep 7, 2026, 8:22:25 AM CDT | USER-217000 | done | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 8:21:41 AM CDT | USER-993000 | done | development | Hero features personas and social

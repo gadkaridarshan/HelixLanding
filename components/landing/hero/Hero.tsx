@@ -1,117 +1,117 @@
 // helix: components/landing/hero/Hero.tsx
 /**
- * @helix:story USER-993000
+ * @helix:story USER-303000
  *
- * Hero — above-the-fold hero for the Helix landing page.
- *
- * Composition root for the Hero section. Reads its copy from
- * `lib/content.ts` (`heroContent`) and renders:
- *   - the copy column (eyebrow, headline, subheadline, CTAs, trust line)
- *   - the decorative `HeroVisual` SVG illustration
- *
- * The section is a server component (no client interactivity required);
- * the layout adapts responsively via Tailwind grid utilities.
+ * Hero — above-the-fold section for the Helix landing page.
+ * Server-rendered, no client interactivity. Pairs copy + dual CTAs
+ * with the decorative `HeroVisual` SVG.
  */
 
 import * as React from "react";
-import Link from "next/link";
-
-import { Container } from "@/components/ui/Container";
-import { heroContent } from "@/lib/content";
+import { brand } from "@/lib/brand";
 import { HeroVisual } from "@/components/landing/hero/HeroVisual";
 
-export interface HeroProps {
-  className?: string;
-}
-
-export function Hero({ className }: HeroProps): React.ReactElement {
-  const {
-    eyebrow,
-    headline,
-    highlight,
-    subheadline,
-    primaryCta,
-    secondaryCta,
-    trustLine,
-  } = heroContent;
-
+export function Hero(): React.ReactElement {
   return (
     <section
-      className={
-        "relative overflow-hidden bg-slate-950 text-slate-100 " +
-        (className ?? "")
-      }
-      aria-labelledby="hero-heading"
+      aria-labelledby="hero-title"
+      className="relative isolate pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-32"
     >
-      {/* Decorative background gradient — sits behind the grid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.18),_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(168,85,247,0.14),_transparent_55%)]" />
-      </div>
-
-      <Container className="relative pt-20 pb-24 sm:pt-28 sm:pb-32 lg:pt-32 lg:pb-40">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Copy column */}
           <div className="lg:col-span-7">
-            {eyebrow ? (
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-cyan-300">
-                <span
-                  className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400"
-                  aria-hidden="true"
-                />
-                {eyebrow}
-              </p>
-            ) : null}
+            <span className="chip">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan" />
+              v0.1 — Orchestrating the agent loop
+            </span>
 
             <h1
-              id="hero-heading"
-              className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+              id="hero-title"
+              className="h-display mt-6 text-4xl font-semibold text-white sm:text-5xl lg:text-6xl"
             >
-              {headline}{" "}
-              {highlight ? (
-                <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-fuchsia-300 bg-clip-text text-transparent">
-                  {highlight}
-                </span>
-              ) : null}
+              One prompt.{" "}
+              <span className="text-gradient-brand">Atomic PRs.</span>
+              <br />
+              A coherent codebase.
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-              {subheadline}
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-muted sm:text-xl">
+              {brand.name} breaks every coding request into small, reviewable
+              units, executes them in order, and verifies each one against the
+              rest of your repo — so autonomous agents ship working code
+              instead of tangles.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link
-                href={primaryCta.href}
-                className="inline-flex items-center justify-center rounded-md bg-cyan-400 px-6 py-3 text-base font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-              >
-                {primaryCta.label}
-                <span className="ml-2" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-              <Link
-                href={secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-md border border-slate-700 bg-slate-900/60 px-6 py-3 text-base font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-              >
-                {secondaryCta.label}
-              </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#cta" className="btn-primary">
+                Get early access
+                <svg
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+              <a href="#how-it-works" className="btn-secondary">
+                See how it works
+              </a>
             </div>
 
-            {trustLine ? (
-              <p className="mt-6 text-sm text-slate-400">{trustLine}</p>
-            ) : null}
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-brand-muted">
+              <li className="flex items-center gap-2">
+                <CheckIcon />
+                Works with any code agent
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckIcon />
+                Atomic, reviewable PRs
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckIcon />
+                Repo-aware verification
+              </li>
+            </ul>
           </div>
 
           {/* Visual column */}
           <div className="lg:col-span-5">
-            <HeroVisual />
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-br from-brand-cyan/20 via-brand-violet/15 to-transparent blur-2xl"
+              />
+              <div className="card-glass rounded-3xl p-3">
+                <HeroVisual className="rounded-2xl bg-brand-ink/60" />
+              </div>
+            </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
+  );
+}
+
+function CheckIcon(): React.ReactElement {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-4 w-4 text-brand-emerald"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.704 5.29a.75.75 0 0 1 .006 1.06l-7.5 7.6a.75.75 0 0 1-1.073.004L3.29 8.95a.75.75 0 1 1 1.06-1.06l4.085 4.085 7.207-7.3a.75.75 0 0 1 1.062.015Z"
+        clipRule="evenodd"
+      />
+    </svg>
   );
 }
 

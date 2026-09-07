@@ -2,15 +2,16 @@
 /**
  * @helix:story USER-986000
  *
- * Navbar — top-level navigation chrome. Placeholder logo + nav links
- * pointing at the section anchors. Full mobile menu and CTA land with
- * the Navbar card.
+ * Navbar — top-level navigation chrome. Sticky header with the brand
+ * mark, primary nav links (anchors to landing sections), and a single
+ * primary CTA button. Designed to render cleanly against the brand
+ * gradient background defined in `app/globals.css`.
  */
 import type { ReactElement } from "react";
 
 import { brand } from "@/lib/brand";
 
-const NAV_LINKS = [
+const NAV_LINKS: ReadonlyArray<{ readonly href: string; readonly label: string }> = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#features", label: "Features" },
   { href: "#personas", label: "Personas" },
@@ -19,13 +20,17 @@ const NAV_LINKS = [
 
 export function Navbar(): ReactElement {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-ink-950/70 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/5 bg-brand-ink/70 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
           href="#top"
           className="flex items-center gap-2 text-sm font-semibold text-ink-50"
+          aria-label={`${brand.name} home`}
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 text-ink-950">
+          <span
+            aria-hidden="true"
+            className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-primary to-brand-accent text-brand-ink"
+          >
             ✦
           </span>
           {brand.name}
@@ -43,7 +48,7 @@ export function Navbar(): ReactElement {
         </nav>
         <a
           href="#cta"
-          className="rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 px-4 py-2 text-sm font-semibold text-ink-950 transition hover:opacity-90"
+          className="rounded-lg bg-gradient-to-br from-brand-primary to-brand-accent px-4 py-2 text-sm font-semibold text-brand-ink transition hover:opacity-90"
         >
           Get started
         </a>

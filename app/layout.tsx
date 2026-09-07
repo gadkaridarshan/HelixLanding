@@ -1,6 +1,6 @@
 // helix: app/layout.tsx
 /**
- * @helix:story USER-349000
+ * @helix:story USER-303000
  *
  * Root layout — applies global styles, fonts, and metadata for the entire
  * Helix landing surface. Metadata here is the source of truth for SEO,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     description: brand.description,
     images: [
       {
-        url: "/landing/og-image.svg",
+        url: "/landing/og-image.png",
         width: 1200,
         height: 630,
         alt: `${brand.name} — ${brand.tagline}`,
@@ -57,15 +57,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${brand.name} — ${brand.tagline}`,
     description: brand.description,
-    creator: brand.twitter,
-    images: ["/landing/og-image.svg"],
+    images: ["/landing/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
@@ -83,7 +83,15 @@ export default function RootLayout({
 }): ReactElement {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-screen bg-brand-bg font-sans text-brand-fg antialiased selection:bg-brand-cyan/30 selection:text-white">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-cyan focus:px-3 focus:py-2 focus:text-brand-ink"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

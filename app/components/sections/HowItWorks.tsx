@@ -1,11 +1,9 @@
 // helix: app/components/sections/HowItWorks.tsx
 /**
- * @helix:story USER-986000
+ * @helix:story USER-303000
  *
- * HowItWorks section — re-exports the canonical implementation under
- * `components/sections/HowItWorks` so the alias resolves from the
- * `app/` and root-level section trees alike.
+ * HowItWorks — re-export of the canonical implementation.
  */
 
-export { HowItWorks } from "@/components/sections/HowItWorks";
-export { default } from "@/components/sections/HowItWorks";
+export { HowItWorks } from "@/components/landing/how/HowItWorks";
+export { default } from "@/components/landing/how/HowItWorks";
