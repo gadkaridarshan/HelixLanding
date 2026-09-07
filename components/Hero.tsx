@@ -1,22 +1,23 @@
-// helix: components/Hero.tsx
-/**
- * @helix:story USER-615000
- *
- * Hero — above-the-fold value proposition with headline, subhead, dual CTA
- * (live site + GitHub), social-proof bullets, and a decorative atom/orbit SVG.
- *
- * Single source of truth: `components/landing/hero/Hero`, composed of
- * `HeroCopy` (headline, subhead, dual CTAs, bullets) and `HeroVisual`
- * (decorative atom/orbit motif + code surface).
- *
- * This file is a thin re-export so `@/components/Hero` resolves to the
- * same component consumed by `app/page.tsx` via `app/components/sections/Hero`.
- *
- * Acceptance scope for USER-615000:
- *   • Hero copy with headline, subhead, dual CTAs (live site + GitHub).
- *   • Decorative visual atom/orbit SVG.
- *   • Social-proof bullets reinforcing trust.
- *   • Pure server component — no client interactivity.
- */
-export { Hero } from "@/components/landing/hero/Hero";
-export { default } from "@/components/landing/hero/Hero";
+### Option B — Git integration
+
+1. Push the repo to GitHub / GitLab / Bitbucket.
+2. Visit <https://vercel.com/new> and **Import Project**.
+3. Vercel auto-detects Next.js. Leave defaults:
+   - Build command: `next build`
+   - Output: `.next`
+   - Install command: `npm install`
+4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
+
+> The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`) and can be overridden via the `NEXT_PUBLIC_BRAND_URL` environment variable. It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
+
+## Reference vs. live site — at a glance
+
+| Label               | URL                                          | What it is                                                                 |
+| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
+| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
+| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.  |
+| **Source**          | <https://github.com/gadkaridarshan/Helix>    | Open-source Helix orchestrator this site markets.                          |
+
+## License
+
+See repository metadata.
