@@ -1,109 +1,92 @@
 {
-  "eyebrow": "Built for every seat at the table",
-  "heading": "Whoever you are on the team, Helix has a workflow for you.",
-  "description": "From solo founders to platform leads, Helix adapts the orchestration surface to the role that's holding the keyboard.",
+  "eyebrow": "Built for every role",
+  "heading": "Helix fits how you already work",
+  "description": "Whether you're shipping solo or leading a team, Helix decomposes every prompt into small, reviewable units so you stay in control of the diff.",
   "items": [
     {
       "id": "solo-founder",
-      "title": "Solo founders",
-      "tagline": "Ship like a team of five.",
-      "description": "Turn late-night product ideas into reviewable diffs you can actually trust at 2am.",
+      "title": "Solo Founders",
+      "tagline": "Ship faster without burning out",
+      "description": "Turn one big idea into a stack of small, reviewable PRs you can actually trust.",
       "painPoints": [
-        "No one to review the change",
-        "Big-bang commits that are hard to revert",
-        "Context switching between idea and PR"
+        "AI generates a wall of code you can't review",
+        "Every change risks breaking the rest of the app",
+        "Hard to stay in flow when the diff is overwhelming"
       ],
       "outcomes": [
-        "One atomic PR per idea",
-        "Self-review summaries",
-        "Re-runnable build history"
+        "Small, atomic PRs you can read in minutes",
+        "Repo-aware verification catches regressions early",
+        "Stay in shipping mode instead of cleanup mode"
       ],
       "icon": "rocket"
     },
     {
       "id": "staff-engineer",
-      "title": "Staff engineers",
-      "tagline": "Decompose the rewrite before you start it.",
-      "description": "Plan a cross-cutting migration as a graph of safe atoms and ship it without breaking the build.",
+      "title": "Staff Engineers",
+      "tagline": "Keep architectural standards as agents ship",
+      "description": "Decomposition exposes intent; verification enforces the bar your codebase already expects.",
       "painPoints": [
-        "Risky refactors across many files",
-        "Reviewer fatigue on large PRs",
-        "Migration debt that stalls delivery"
+        "Agents bypass the conventions you spent years enforcing",
+        "Sprawling diffs hide subtle coupling and dead code",
+        "Review burden falls back on you either way"
       ],
       "outcomes": [
-        "Dependency-mapped atom graphs",
-        "Review-friendly PR size",
-        "Per-atom rollback"
-      ],
-      "icon": "compass"
-    },
-    {
-      "id": "engineering-manager",
-      "title": "Engineering managers",
-      "tagline": "Forecast scope, track atoms, unblock review.",
-      "description": "See every in-flight change as a tile on a graph — with risk, owner, and review state surfaced at a glance.",
-      "painPoints": [
-        "Opaque AI-generated PRs",
-        "Reviewers drowning in noise",
-        "Loose estimates on agent work"
-      ],
-      "outcomes": [
-        "Live atom dashboard",
-        "Reviewer load balancing",
-        "Diff-sized forecasts"
-      ],
-      "icon": "chart"
-    },
-    {
-      "id": "open-source-maintainer",
-      "title": "Open-source maintainers",
-      "tagline": "Triage issues into mergeable atoms.",
-      "description": "Convert a flood of issues into a queue of well-scoped PRs contributors can pick up safely.",
-      "painPoints": [
-        "Issue triage backlog",
-        "Inconsistent contributor PRs",
-        "Maintainer review bottleneck"
-      ],
-      "outcomes": [
-        "Issue → atom proposals",
-        "Contributor-ready PRs",
-        "Style-aware suggestions"
-      ],
-      "icon": "globe"
-    },
-    {
-      "id": "platform-team",
-      "title": "Platform & DevEx teams",
-      "tagline": "Standardize AI work across the org.",
-      "description": "Codify review policy, conventions, and CI gates so every agent-driven PR meets the bar before review.",
-      "painPoints": [
-        "Inconsistent AI output quality",
-        "Drift from internal standards",
-        "Security review surprises"
-      ],
-      "outcomes": [
-        "Org-wide conventions",
-        "Policy-as-code gates",
-        "Audit trail per atom"
+        "Each unit is checked against types, tests, and lint",
+        "Dependency graph prevents cross-module breakage",
+        "PRs arrive structured, not monolithic"
       ],
       "icon": "shield"
     },
     {
-      "id": "product-engineer",
-      "title": "Product engineers",
-      "tagline": "Prototype the feature, ship the polish.",
-      "description": "Sketch a UX change in the morning and land the production-grade refactor in the afternoon — without a 2,000-line PR.",
+      "id": "engineering-manager",
+      "title": "Engineering Managers",
+      "tagline": "Predictable velocity without the babysitting",
+      "description": "Helix turns agent output into a stream of safe, auditable work — your team reviews outcomes, not chaos.",
       "painPoints": [
-        "Huge PRs on every release",
-        "Polish work stuck behind review",
-        "Hard to share WIP with PMs"
+        "Throughput claims don't match what actually ships",
+        "Hard to attribute agent output to a deliverable",
+        "Quality drift erodes trust in the AI toolchain"
       ],
       "outcomes": [
-        "Tiny, frequent merges",
-        "Reviewable polish PRs",
-        "Shareable WIP links"
+        "Each run is replayable and auditable end-to-end",
+        "Throughput measured in merged PRs, not tokens",
+        "Quality bar enforced automatically, not negotiated"
       ],
-      "icon": "spark"
+      "icon": "graph"
+    },
+    {
+      "id": "tech-lead",
+      "title": "Tech Leads",
+      "tagline": "Stay close to the design without doing every PR",
+      "description": "Dependency-aware execution keeps architectural seams intact so you can delegate safely.",
+      "painPoints": [
+        "Agents love to refactor the wrong abstraction",
+        "Cross-cutting changes get committed in one shot",
+        "Hard to coach a team when the diff is unreadable"
+      ],
+      "outcomes": [
+        "Decomposed units respect module boundaries",
+        "Each PR is scoped to one architectural concern",
+        "Coach on the diff, not the cleanup"
+      ],
+      "icon": "compass"
+    },
+    {
+      "id": "ai-engineer",
+      "title": "AI Engineers",
+      "tagline": "A real orchestration substrate for agents",
+      "description": "Helix is the runtime you wanted: explicit dependency graphs, repo-aware checks, replayable runs.",
+      "painPoints": [
+        "Most 'agents' are prompts dressed up as systems",
+        "No notion of dependency between steps",
+        "Evaluation is an afterthought, not a primitive"
+      ],
+      "outcomes": [
+        "Explicit DAG with gated, parallel execution",
+        "Repo-aware verification as a first-class step",
+        "Replayable runs you can diff and audit"
+      ],
+      "icon": "atom"
     }
   ]
 }

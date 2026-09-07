@@ -1,17 +1,16 @@
 # Card Inventory
 
+- Sep 7, 2026, 10:49:56 AM CDT | USER-128000 | done | development | Hero and personas section
+- Sep 7, 2026, 10:49:53 AM CDT | USER-23000 | done | development | Helix landing page site
+- Sep 7, 2026, 10:49:42 AM CDT | USER-604000 | done | deployment | Page assembly and Vercel deployment
+- Sep 7, 2026, 10:49:39 AM CDT | USER-956000 | in_progress | development | FAQ CTA footer and Vercel
+- Sep 7, 2026, 10:49:37 AM CDT | USER-310000 | in_progress | development | Complete Helix landing site
+- Sep 7, 2026, 10:49:37 AM CDT | USER-217000 | in_progress | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 10:47:46 AM CDT | USER-616000 | done | development | Features and how it works
-- Sep 7, 2026, 10:47:36 AM CDT | USER-23000 | in_progress | development | Helix landing page site
-- Sep 7, 2026, 10:47:34 AM CDT | USER-128000 | in_progress | development | Hero and personas section
 - Sep 7, 2026, 10:47:26 AM CDT | USER-63000 | todo | development | Assembly footer CTA Vercel deploy · deliverable: README.md
-- Sep 7, 2026, 10:46:19 AM CDT | USER-726000 | todo | development | Social proof FAQ and footer
-- Sep 7, 2026, 10:45:58 AM CDT | USER-604000 | in_progress | deployment | Page assembly and Vercel deployment
-- Sep 7, 2026, 10:45:58 AM CDT | USER-310000 | in_progress | development | Complete Helix landing site
-- Sep 7, 2026, 10:45:23 AM CDT | USER-956000 | in_progress | development | FAQ CTA footer and Vercel
-- Sep 7, 2026, 10:45:12 AM CDT | USER-812000 | done | development | Footer CTA Vercel ready
-- Sep 7, 2026, 10:39:33 AM CDT | USER-82000 | done | development | Footer and final CTA
+- Sep 7, 2026, 10:45:11 AM CDT | USER-812000 | done | development | Footer CTA Vercel ready
+- Sep 7, 2026, 10:39:32 AM CDT | USER-82000 | done | development | Footer and final CTA
 - Sep 7, 2026, 10:36:35 AM CDT | USER-915000 | todo | deployment | Final integration polish Vercel deploy
-- Sep 7, 2026, 10:36:35 AM CDT | USER-217000 | in_progress | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 10:21:50 AM CDT | USER-933000 | done | development | How it works social proof
 - Sep 7, 2026, 10:14:00 AM CDT | USER-742000 | done | development | Hero features personas block
 - Sep 7, 2026, 10:07:53 AM CDT | USER-525000 | done | deployment | Vercel deploy config and SEO

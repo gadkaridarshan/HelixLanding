@@ -1,6 +1,6 @@
 // helix: components/landing/hero/HeroVisual.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-128000
  *
  * HeroVisual — purely decorative SVG hero illustration for the
  * above-the-fold Hero. Renders an atom/orbit motif (matching the Helix
@@ -38,25 +38,25 @@ export function HeroVisual({
             <stop offset="60%" stopColor="#22d3ee" stopOpacity="0.05" />
             <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
           </radialGradient>
-          <linearGradient id="hv-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="hv-orbit" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.9" />
           </linearGradient>
-          <linearGradient id="hv-fill" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.25" />
+          <linearGradient id="hv-card" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#0f172a" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#1e293b" stopOpacity="0.9" />
           </linearGradient>
         </defs>
 
-        {/* Glow */}
+        {/* Soft glow backdrop */}
         <circle cx="300" cy="300" r="260" fill="url(#hv-glow)" />
 
         {/* Outer orbits */}
         <g
           fill="none"
-          stroke="url(#hv-stroke)"
+          stroke="url(#hv-orbit)"
           strokeWidth="1.25"
-          opacity="0.85"
+          opacity="0.75"
         >
           <ellipse cx="300" cy="300" rx="240" ry="90" />
           <ellipse
@@ -75,44 +75,47 @@ export function HeroVisual({
           />
         </g>
 
-        {/* Core nucleus */}
-        <circle cx="300" cy="300" r="46" fill="url(#hv-fill)" />
-        <circle
-          cx="300"
-          cy="300"
-          r="46"
-          fill="none"
-          stroke="url(#hv-stroke)"
-          strokeWidth="1.5"
-        />
-
-        {/* Electrons */}
+        {/* Electron nodes */}
         <g>
-          <circle cx="540" cy="300" r="6" fill="#22d3ee" />
-          <circle cx="180" cy="380" r="6" fill="#a78bfa" />
-          <circle cx="420" cy="120" r="6" fill="#67e8f9" />
+          <circle cx="540" cy="300" r="7" fill="#22d3ee" />
+          <circle cx="180" cy="300" r="7" fill="#22d3ee" />
+          <circle cx="420" cy="378" r="5" fill="#a78bfa" />
+          <circle cx="180" cy="222" r="5" fill="#a78bfa" />
+          <circle cx="420" cy="222" r="5" fill="#a78bfa" />
+        </g>
+
+        {/* Central nucleus */}
+        <g>
+          <circle cx="300" cy="300" r="48" fill="#0f172a" stroke="#22d3ee" strokeWidth="1.5" />
+          <circle cx="300" cy="300" r="22" fill="url(#hv-orbit)" opacity="0.9" />
         </g>
 
         {/* Code surface */}
-        <g transform="translate(120 380)">
+        <g transform="translate(150, 380)">
           <rect
-            width="360"
-            height="160"
-            rx="14"
-            fill="rgba(2,6,23,0.85)"
-            stroke="rgba(148,163,184,0.18)"
+            x="0"
+            y="0"
+            width="300"
+            height="120"
+            rx="12"
+            fill="url(#hv-card)"
+            stroke="rgba(255,255,255,0.12)"
+            strokeWidth="1"
           />
-          <g
-            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-            fontSize="11"
-            fill="#94a3b8"
-          >
-            <text x="18" y="28">unit-01 · schema</text>
-            <text x="18" y="48" fill="#22d3ee">✓ verified</text>
-            <text x="18" y="76">unit-02 · types</text>
-            <text x="18" y="96" fill="#22d3ee">✓ verified</text>
-            <text x="18" y="124">unit-03 · ui</text>
-            <text x="120" y="124" fill="#facc15">⋯ running</text>
+          {/* Window dots */}
+          <circle cx="18" cy="18" r="4" fill="#ef4444" opacity="0.7" />
+          <circle cx="34" cy="18" r="4" fill="#f59e0b" opacity="0.7" />
+          <circle cx="50" cy="18" r="4" fill="#22c55e" opacity="0.7" />
+
+          {/* Code lines */}
+          <g fill="rgba(148,163,184,0.9)" fontFamily="ui-monospace, monospace" fontSize="9">
+            <rect x="18" y="42" width="80" height="6" rx="2" fill="#22d3ee" opacity="0.7" />
+            <rect x="104" y="42" width="60" height="6" rx="2" fill="#a78bfa" opacity="0.7" />
+            <rect x="34" y="58" width="120" height="6" rx="2" fill="#cbd5e1" opacity="0.4" />
+            <rect x="34" y="74" width="100" height="6" rx="2" fill="#cbd5e1" opacity="0.4" />
+            <rect x="34" y="90" width="140" height="6" rx="2" fill="#cbd5e1" opacity="0.4" />
+            <rect x="18" y="106" width="40" height="6" rx="2" fill="#22d3ee" opacity="0.7" />
+            <rect x="64" y="106" width="60" height="6" rx="2" fill="#a78bfa" opacity="0.7" />
           </g>
         </g>
       </svg>

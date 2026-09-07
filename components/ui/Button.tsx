@@ -33,9 +33,9 @@ const variantMap: Record<ButtonVariant, string> = {
   primary:
     "bg-brand-500 text-ink-950 hover:bg-brand-400 active:bg-brand-600 shadow-[0_8px_30px_-12px_rgba(34,211,238,0.6)]",
   secondary:
-    "bg-white/5 text-ink-100 ring-1 ring-inset ring-white/15 hover:bg-white/10 hover:ring-white/25 backdrop-blur",
+    "bg-white/5 text-ink-100 ring-1 ring-inset ring-white/15 hover:bg-white/10 hover:ring-white/25",
   ghost:
-    "bg-transparent text-ink-200 hover:text-ink-50 hover:bg-white/5",
+    "bg-transparent text-ink-100 hover:bg-white/5",
 };
 
 const sizeMap: Record<ButtonSize, string> = {
@@ -44,16 +44,8 @@ const sizeMap: Record<ButtonSize, string> = {
   lg: "h-12 px-6 text-base",
 };
 
-function baseClasses(variant: ButtonVariant, size: ButtonSize): string {
-  return cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight",
-    "transition-colors duration-150 ease-out",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
-    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400",
-    variantMap[variant],
-    sizeMap[size],
-  );
-}
+const baseClasses =
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none";
 
 export function Button({
   variant = "primary",
@@ -65,26 +57,29 @@ export function Button({
   type,
   ...rest
 }: ButtonProps): React.ReactElement {
-  const classes = cn(baseClasses(variant, size), className);
+  const classes = cn(baseClasses, variantMap[variant], sizeMap[size], className);
 
-  if (href !== undefined) {
+  if (href) {
     const anchorProps: React.AnchorHTMLAttributes<HTMLAnchorElement> = {
       href,
       className: classes,
-      children,
+      ...(external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {}),
     };
-    if (external) {
-      anchorProps.target = "_blank";
-      anchorProps.rel = "noreferrer noopener";
-    }
-    return <a {...anchorProps} />;
+    return (
+      <a {...anchorProps}>
+        {children}
+      </a>
+    );
   }
 
-  return (
-    <button className={classes} type={type ?? "button"} {...rest}>
-      {children}
-    </button>
-  );
+  const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {
+    type: type ?? "button",
+    className: classes,
+    ...rest,
+  };
+  return <button {...buttonProps}>{children}</button>;
 }
 
 export default Button;

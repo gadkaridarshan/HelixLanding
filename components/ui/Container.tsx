@@ -1,25 +1,25 @@
 // helix: components/ui/Container.tsx
 /**
- * @helix:story USER-63000
+ * @helix:story USER-604000
  *
- * Container — centered, max-width page wrapper. Owns the standard
- * horizontal padding rhythm so every section aligns to the same
- * grid without each component reinventing it.
+ * Container — shared width-constrained wrapper used by every section
+ * to keep content aligned to the same max-width gutters.
  *
- * Pure server component.
+ * Pure server component. Renders a `<div>` with the configured
+ * `max-w-*` class plus responsive horizontal padding.
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContainerProps {
+  className?: string;
   children: React.ReactNode;
 }
 
 export function Container({
   className,
   children,
-  ...rest
 }: ContainerProps): React.ReactElement {
   return (
     <div
@@ -27,7 +27,6 @@ export function Container({
         "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
         className
       )}
-      {...rest}
     >
       {children}
     </div>

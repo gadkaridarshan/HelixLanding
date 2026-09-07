@@ -1,56 +1,49 @@
 // helix: components/landing/personas/PersonasTabs.tsx
+"use client";
+
 /**
  * @helix:story USER-308000
  *
- * PersonasTabs — client island for the Personas section. Renders a
- * tab list and swaps the highlighted persona's content. The parent
- * owns the panel rendering through `renderPanel` so the panel can
- * include rich content (pain points, outcomes, descriptions, icons)
- * without bloating this client island.
- *
- * Kept as a tiny dedicated client component so the parent `Personas`
- * section can stay a pure server component.
+ * PersonasTabs — small client-side island that powers the role tabs on
+ * the Personas section. Keeps the parent `Personas` component a pure
+ * server component while still allowing interactive role switching.
  */
-"use client";
-
 import * as React from "react";
 
-export interface PersonaTab {
+export interface PersonaTabDescriptor {
   id: string;
   label: string;
   role: string;
+  description: string;
   bullets: ReadonlyArray<string>;
-  description?: string;
-  painPoints?: ReadonlyArray<string>;
-  icon?: string;
+  painPoints: ReadonlyArray<string>;
+  icon: string;
 }
 
 export interface PersonasTabsProps {
-  tabs: ReadonlyArray<PersonaTab>;
-  renderPanel?: (tab: PersonaTab) => React.ReactNode;
+  tabs: ReadonlyArray<PersonaTabDescriptor>;
+  renderPanel: (tab: PersonaTabDescriptor) => React.ReactNode;
 }
 
 export function PersonasTabs({
   tabs,
   renderPanel,
 }: PersonasTabsProps): React.ReactElement {
-  const firstId = tabs[0]?.id ?? "";
-  const [activeId, setActiveId] = React.useState<string>(firstId);
+  const [activeId, setActiveId] = React.useState<string>(
+    tabs[0]?.id ?? ""
+  );
+
   const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
 
-  if (!active) {
-    return <div className="text-ink-300">No personas configured.</div>;
-  }
-
   return (
-    <div className="mx-auto mt-12 max-w-5xl">
+    <div className="mt-12">
       <div
         role="tablist"
-        aria-label="Personas"
-        className="flex flex-wrap justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur"
+        aria-label="Persona"
+        className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 p-2 backdrop-blur"
       >
         {tabs.map((tab) => {
-          const isActive = tab.id === active.id;
+          const isActive = tab.id === active?.id;
           return (
             <button
               key={tab.id}
@@ -61,10 +54,10 @@ export function PersonasTabs({
               id={`persona-tab-${tab.id}`}
               onClick={() => setActiveId(tab.id)}
               className={
-                "rounded-xl px-4 py-2 text-sm font-medium transition-colors " +
+                "rounded-full px-4 py-2 text-sm font-medium transition " +
                 (isActive
                   ? "bg-brand-500 text-ink-950 shadow-[0_8px_30px_-12px_rgba(34,211,238,0.6)]"
-                  : "text-ink-300 hover:bg-white/5 hover:text-ink-50")
+                  : "text-ink-200 hover:text-ink-50 hover:bg-white/10")
               }
             >
               {tab.label}
@@ -73,37 +66,27 @@ export function PersonasTabs({
         })}
       </div>
 
-      {renderPanel ? (
-        <>{renderPanel(active)}</>
-      ) : (
-        <div
-          id={`persona-panel-${active.id}`}
-          role="tabpanel"
-          aria-labelledby={`persona-tab-${active.id}`}
-          className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur"
-        >
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-400">
-            {active.label}
-          </p>
-          <p className="mt-3 text-xl font-semibold tracking-tight text-ink-50">
-            {active.role}
-          </p>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {active.bullets.map((b) => (
-              <li
-                key={b}
-                className="flex items-start gap-3 rounded-xl bg-white/5 p-4 text-sm text-ink-200"
-              >
-                <span
-                  aria-hidden="true"
-                  className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-brand-400"
-                />
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className="mt-8">
+        {active ? (
+          <div
+            role="tabpanel"
+            id={`persona-panel-${active.id}`}
+            aria-labelledby={`persona-tab-${active.id}`}
+          >
+            <div className="mx-auto mb-6 max-w-3xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-wider text-brand-400">
+                {active.role}
+              </p>
+              <p className="mt-2 text-base leading-relaxed text-ink-300 sm:text-lg">
+                {active.description}
+              </p>
+            </div>
+            {renderPanel(active)}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
+
+export default PersonasTabs;

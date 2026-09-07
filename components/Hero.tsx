@@ -1,23 +1,73 @@
-### Option B — Git integration
+// helix: components/Hero.tsx
+/**
+ * @helix:story USER-128000
+ *
+ * Hero — canonical above-the-fold value proposition for Helix.
+ *
+ * Composed from `HeroCopy` (text column) and `HeroVisual` (decorative
+ * atom/orbit SVG). Pure server component, no client interactivity.
+ *
+ * Layout:
+ *   • Layered radial gradients + subtle grid texture backdrop.
+ *   • Two-column grid on `lg+` (text left, visual right).
+ *   • Brand-led headline, dual CTAs, four social-proof bullets.
+ */
+import * as React from "react";
 
-1. Push the repo to GitHub / GitLab / Bitbucket.
-2. Visit <https://vercel.com/new> and **Import Project**.
-3. Vercel auto-detects Next.js. Leave defaults:
-   - Build command: `next build`
-   - Output: `.next`
-   - Install command: `npm install`
-4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
+import { HeroCopy } from "@/components/landing/hero/HeroCopy";
+import { HeroVisual } from "@/components/landing/hero/HeroVisual";
 
-> The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`) and can be overridden via the `NEXT_PUBLIC_BRAND_URL` environment variable. It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
+export interface HeroProps {
+  className?: string;
+}
 
-## Reference vs. live site — at a glance
+export function Hero({ className }: HeroProps): React.ReactElement {
+  return (
+    <section
+      id="hero"
+      aria-labelledby="hero-heading"
+      className={
+        "relative isolate overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-28 lg:pt-40 lg:pb-32 " +
+        (className ?? "")
+      }
+    >
+      {/* Layered radial glow background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-slate-950" />
+        <div
+          className="absolute inset-0 opacity-70"
+          style={{
+            backgroundImage:
+              "radial-gradient(60% 50% at 15% 20%, rgba(34,211,238,0.22) 0%, rgba(34,211,238,0) 60%), radial-gradient(55% 45% at 85% 25%, rgba(167,139,250,0.20) 0%, rgba(167,139,250,0) 65%), radial-gradient(50% 50% at 50% 90%, rgba(192,132,252,0.15) 0%, rgba(192,132,252,0) 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
+      </div>
 
-| Label               | URL                                          | What it is                                                                 |
-| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
-| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
-| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.  |
-| **Source**          | <https://github.com/gadkaridarshan/Helix>    | Open-source Helix orchestrator this site markets.                          |
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+        <div className="lg:col-span-7">
+          <HeroCopy />
+        </div>
+        <div className="lg:col-span-5">
+          <HeroVisual />
+        </div>
+      </div>
+    </section>
+  );
+}
 
-## License
-
-See repository metadata.
+export default Hero;

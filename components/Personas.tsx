@@ -67,14 +67,68 @@ export function Personas({
           >
             {content.heading}
           </h2>
-          <p className="mt-4 text-lg leading-8 text-ink-300">
+          <p className="mt-4 text-base leading-relaxed text-ink-300 sm:text-lg">
             {content.description}
           </p>
         </div>
 
-        <div className="mt-12 sm:mt-16">
-          <PersonasTabs items={content.items} />
-        </div>
+        <PersonasTabs
+          tabs={content.items.map((p) => ({
+            id: p.id,
+            label: p.title,
+            role: p.tagline,
+            bullets: p.painPoints,
+            description: p.description,
+            painPoints: p.painPoints,
+            icon: p.icon,
+          }))}
+          renderPanel={(tab) => {
+            const persona = content.items.find((p) => p.id === tab.id);
+            if (!persona) return null;
+            return (
+              <div className="grid gap-8 md:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-accent-400">
+                    Pain points
+                  </h3>
+                  <ul className="mt-4 space-y-3">
+                    {persona.painPoints.map((point) => (
+                      <li
+                        key={point}
+                        className="flex gap-3 text-base text-ink-200"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent-400"
+                        />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl border border-brand-500/30 bg-brand-500/5 p-6 backdrop-blur">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-400">
+                    Outcomes
+                  </h3>
+                  <ul className="mt-4 space-y-3">
+                    {persona.outcomes.map((outcome) => (
+                      <li
+                        key={outcome}
+                        className="flex gap-3 text-base text-ink-200"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400"
+                        />
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          }}
+        />
       </Container>
     </section>
   );
