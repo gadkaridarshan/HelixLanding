@@ -1,0 +1,47 @@
+{
+  "eyebrow": "How Helix works",
+  "heading": "From a fuzzy prompt to a stack of shippable PRs.",
+  "description": "Helix treats every request as a tree of atomic changes. Each atom is small enough to review and large enough to merge.",
+  "steps": [
+    {
+      "number": "01",
+      "title": "Describe the goal",
+      "description": "Drop a prompt, a ticket, or a screenshot. Helix scopes the work and surfaces ambiguities before a single file is touched.",
+      "bullets": [
+        "Natural-language intake",
+        "Ambiguity checklist",
+        "Scope boundary detection"
+      ]
+    },
+    {
+      "number": "02",
+      "title": "Decompose into atoms",
+      "description": "Helix proposes a stack of atomic changes — each one a reviewable diff with a clear title, rationale, and dependency edge.",
+      "bullets": [
+        "Atomic work breakdown",
+        "Dependency graph",
+        "Diff-sized estimates"
+      ]
+    },
+    {
+      "number": "03",
+      "title": "Apply, review, merge",
+      "description": "Helix writes each atom in your conventions, runs your checks, opens the PR, and waits for your review gate before the next atom.",
+      "bullets": [
+        "Style-aware edits",
+        "Run your lint and tests",
+        "One PR per atom"
+      ]
+    },
+    {
+      "number": "04",
+      "title": "Ship with confidence",
+      "description": "Every ship is auditable. Roll back a single atom, replay it on another branch, or hand the graph off to a teammate.",
+      "bullets": [
+        "Per-atom history",
+        "Replay on any branch",
+        "Reviewer-friendly summaries"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Capabilities",
+  "heading": "Everything Helix does so your team doesn't have to.",
+  "description": "A focused toolset for code-orchestration work — built around reviewable change, not autonomous chaos.",
+  "items": [
+    {
+      "title": "Atomic decomposition",
+      "description": "Splits ambiguous requests into a directed graph of small, reviewable diffs you can reason about.",
+      "icon": "atom"
+    },
+    {
+      "title": "Convention-aware edits",
+      "description": "Reads your repo's style, imports, and test patterns before it writes a line. No surprise refactors.",
+      "icon": "convention"
+    },
+    {
+      "title": "Review gate enforcement",
+      "description": "Pauses after each atom for human review, CI green, or policy checks. You stay in control of the merge button.",
+      "icon": "gate"
+    },
+    {
+      "title": "Branch & PR hygiene",
+      "description": "Creates one branch and one PR per atom with conventional titles, descriptions, and reviewers assigned.",
+      "icon": "branch"
+    },
+    {
+      "title": "Resumable runs",
+      "description": "Pause, replay, or fork any atom. Every run is checkpointed so you can iterate without losing work.",
+      "icon": "resume"
+    },
+    {
+      "title": "Local-first execution",
+      "description": "Runs against your real files in your real repo. No copy-paste playground, no detached cloud sandbox.",
+      "icon": "local"
+    }
+  ]
+}

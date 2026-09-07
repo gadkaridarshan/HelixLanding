@@ -1,29 +1,46 @@
-import type { Metadata } from "next";
+// helix: app/layout.tsx
+/**
+ * @helix:story USER-217000
+ *
+ * Root layout — applies global styles, fonts, and metadata for the entire
+ * Helix landing surface. Metadata here is the source of truth for SEO,
+ * OpenGraph, Twitter cards, and favicon resolution.
+ */
+
+import type { Metadata, Viewport } from "next";
+import type { ReactElement, ReactNode } from "react";
+
 import "./globals.css";
 
+const SITE_URL = "https://helix-ai-orchestrator.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Helix — Atomic Work-Breakdown Orchestrator",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Helix — Atomic Work-Breakdown Orchestrator",
+    template: "%s · Helix",
+  },
   description:
-    "Helix plans, writes, and ships code in atomic, reviewable steps — for indie developers, startup CTOs, engineering managers, and enterprise platform teams. Move from prompt to preview with bounded writes, language-locked plans, and audit-friendly diffs.",
-  metadataBase: new URL("https://helix-ai-orchestrator.vercel.app"),
+    "Plan, write, and ship code in atomic, reviewable steps. Helix is the AI coding orchestrator that respects your files, your conventions, and your reviewers.",
   applicationName: "Helix",
   keywords: [
-    "Helix",
-    "AI orchestrator",
-    "atomic work breakdown",
+    "AI coding orchestrator",
     "code agent",
+    "work breakdown",
+    "atomic PRs",
+    "Helix",
     "developer tools",
-    "AI coding",
-    "vercel",
-    "platform engineering",
   ],
   authors: [{ name: "Helix Team" }],
   creator: "Helix",
   publisher: "Helix",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://helix-ai-orchestrator.vercel.app",
+    url: SITE_URL,
     siteName: "Helix",
     title: "Helix — Atomic Work-Breakdown Orchestrator",
     description:
@@ -40,7 +57,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Helix — Atomic Work-Breakdown Orchestrator",
-    description: "Plan, write, and ship code in atomic, reviewable steps. Helix is the AI coding orchestrator that respects your files, your conventions, and your reviewers.",
+    description:
+      "Plan, write, and ship code in atomic, reviewable steps. Helix is the AI coding orchestrator that respects your files, your conventions, and your reviewers.",
     images: ["/og-image.svg"],
     creator: "@helix",
   },
@@ -57,20 +75,26 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
-      "max-video-preview": -1,
     },
   },
-  category: "developer tools",
+  category: "technology",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b1020",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
-}) {
+  children: ReactNode;
+}): ReactElement {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-slate-950 font-sans text-slate-100 antialiased">
         {children}
       </body>
     </html>

@@ -1,0 +1,9 @@
+{
+  "eyebrow": "Atomic Work-Breakdown Orchestrator",
+  "headline": "Plan, write, and ship code",
+  "highlight": "one atomic PR at a time.",
+  "subheadline": "Helix breaks every change into reviewable, conventional steps so your team ships faster without surrendering code review, conventions, or context.",
+  "primaryCta": { "label": "Start free", "href": "#start" },
+  "secondaryCta": { "label": "See how it works", "href": "#how-it-works" },
+  "trustLine": "No credit card · Open source · Built for review-heavy teams"
+}

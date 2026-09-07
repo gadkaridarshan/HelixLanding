@@ -1,0 +1,109 @@
+{
+  "eyebrow": "Built for every seat at the table",
+  "heading": "Whoever you are on the team, Helix has a workflow for you.",
+  "description": "From solo founders to platform leads, Helix adapts the orchestration surface to the role that's holding the keyboard.",
+  "items": [
+    {
+      "id": "solo-founder",
+      "title": "Solo founders",
+      "tagline": "Ship like a team of five.",
+      "description": "Turn late-night product ideas into reviewable diffs you can actually trust at 2am.",
+      "painPoints": [
+        "No one to review the change",
+        "Big-bang commits that are hard to revert",
+        "Context switching between idea and PR"
+      ],
+      "outcomes": [
+        "One atomic PR per idea",
+        "Self-review summaries",
+        "Re-runnable build history"
+      ],
+      "icon": "rocket"
+    },
+    {
+      "id": "staff-engineer",
+      "title": "Staff engineers",
+      "tagline": "Decompose the rewrite before you start it.",
+      "description": "Plan a cross-cutting migration as a graph of safe atoms and ship it without breaking the build.",
+      "painPoints": [
+        "Risky refactors across many files",
+        "Reviewer fatigue on large PRs",
+        "Migration debt that stalls delivery"
+      ],
+      "outcomes": [
+        "Dependency-mapped atom graphs",
+        "Review-friendly PR size",
+        "Per-atom rollback"
+      ],
+      "icon": "compass"
+    },
+    {
+      "id": "engineering-manager",
+      "title": "Engineering managers",
+      "tagline": "Forecast scope, track atoms, unblock review.",
+      "description": "See every in-flight change as a tile on a graph — with risk, owner, and review state surfaced at a glance.",
+      "painPoints": [
+        "Opaque AI-generated PRs",
+        "Reviewers drowning in noise",
+        "Loose estimates on agent work"
+      ],
+      "outcomes": [
+        "Live atom dashboard",
+        "Reviewer load balancing",
+        "Diff-sized forecasts"
+      ],
+      "icon": "chart"
+    },
+    {
+      "id": "open-source-maintainer",
+      "title": "Open-source maintainers",
+      "tagline": "Triage issues into mergeable atoms.",
+      "description": "Convert a flood of issues into a queue of well-scoped PRs contributors can pick up safely.",
+      "painPoints": [
+        "Issue triage backlog",
+        "Inconsistent contributor PRs",
+        "Maintainer review bottleneck"
+      ],
+      "outcomes": [
+        "Issue → atom proposals",
+        "Contributor-ready PRs",
+        "Style-aware suggestions"
+      ],
+      "icon": "globe"
+    },
+    {
+      "id": "platform-team",
+      "title": "Platform & DevEx teams",
+      "tagline": "Standardize AI work across the org.",
+      "description": "Codify review policy, conventions, and CI gates so every agent-driven PR meets the bar before review.",
+      "painPoints": [
+        "Inconsistent AI output quality",
+        "Drift from internal standards",
+        "Security review surprises"
+      ],
+      "outcomes": [
+        "Org-wide conventions",
+        "Policy-as-code gates",
+        "Audit trail per atom"
+      ],
+      "icon": "shield"
+    },
+    {
+      "id": "product-engineer",
+      "title": "Product engineers",
+      "tagline": "Prototype the feature, ship the polish.",
+      "description": "Sketch a UX change in the morning and land the production-grade refactor in the afternoon — without a 2,000-line PR.",
+      "painPoints": [
+        "Huge PRs on every release",
+        "Polish work stuck behind review",
+        "Hard to share WIP with PMs"
+      ],
+      "outcomes": [
+        "Tiny, frequent merges",
+        "Reviewable polish PRs",
+        "Shareable WIP links"
+      ],
+      "icon": "spark"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "eyebrow": "Common questions",
+  "title": "Everything you wanted to ask before you ship with Helix.",
+  "subtitle": "Quick answers about how Helix orchestrates atomic work, integrates with your stack, and ships to production.",
+  "items": [
+    {
+      "id": "what-is-helix",
+      "question": "What exactly is Helix?",
+      "answer": "Helix is an AI coding orchestrator that breaks a feature request into a stream of small, reviewable cards. Each card maps to one commit and one pull request, so your reviewers always see a focused diff instead of a wall of speculative code."
+    },
+    {
+      "id": "how-is-it-different",
+      "question": "How is Helix different from a normal code agent?",
+      "answer": "Most agents generate a large, hard-to-review patch in a single pass. Helix decomposes the same intent into ordered, dependency-aware cards, executes them sequentially, and stops for review at every boundary. The result is auditable, revertable, and friendly to your existing CI."
+    },
+    {
+      "id": "where-runs",
+      "question": "Where does Helix run?",
+      "answer": "Helix is self-hostable. You can run it on your laptop, on a VM, on Kubernetes, or as a managed deploy on Vercel. It works against any Git host — GitHub, GitLab, Bitbucket, or a self-hosted Gitea — and never requires pushing your code to a third party."
+    },
+    {
+      "id": "integrations",
+      "question": "Which languages, frameworks, and tools does it support?",
+      "answer": "Helix is language-agnostic: it reads your repo to infer conventions, then operates on the files it finds. Teams ship with it for Next.js, React, Node, Python, Go, Rust, and more. It respects your linters, formatters, and test runners rather than imposing its own."
+    },
+    {
+      "id": "pricing",
+      "question": "How is Helix licensed and priced?",
+      "answer": "Helix is MIT licensed and free to self-host. Cloud-hosted tiers and team features will be introduced as the project stabilizes — see the GitHub repo for the current roadmap."
+    },
+    {
+      "id": "security",
+      "question": "How do you keep my code and credentials safe?",
+      "answer": "Helix runs on your infrastructure with your secrets. It never requires you to upload source code to a third-party service. All Git credentials are scoped to the repositories you choose, and every action is auditable in your own Git history."
+    },
+    {
+      "id": "review",
+      "question": "Will my reviewers actually like this?",
+      "answer": "Yes — that is the whole point. Helix produces small, single-purpose pull requests with clear commit messages and a description of the card that produced each change. Reviewers see one decision at a time, with the context they need to approve or request changes."
+    },
+    {
+      "id": "deploy",
+      "question": "Can I deploy Helix to Vercel?",
+      "answer": "The Helix landing page itself is Vercel-ready out of the box. The orchestrator runtime can be deployed to Vercel, Fly, Render, or any container host — see the deployment guide in the repo for a step-by-step walkthrough."
+    }
+  ]
+}

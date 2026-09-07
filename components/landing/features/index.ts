@@ -1,4 +1,4 @@
-// helix: app/components/sections/Features.tsx
+// helix: components/landing/features/index.ts
 /**
  * @helix:story USER-993000
  */

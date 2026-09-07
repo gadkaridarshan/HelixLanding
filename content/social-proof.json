@@ -1,0 +1,38 @@
+{
+  "eyebrow": "Trusted by teams that ship",
+  "heading": "From solo builders to platform teams.",
+  "logos": [
+    { "name": "Vercel", "label": "Vercel" },
+    { "name": "GitHub", "label": "GitHub" },
+    { "name": "Linear", "label": "Linear" },
+    { "name": "Supabase", "label": "Supabase" },
+    { "name": "PlanetScale", "label": "PlanetScale" },
+    { "name": "Render", "label": "Render" }
+  ],
+  "testimonials": [
+    {
+      "quote": "Helix turned our 4,000-line migration into a queue of 200-line PRs. Review is finally fun again.",
+      "author": "Priya N.",
+      "role": "Staff Engineer",
+      "company": "Fintech startup"
+    },
+    {
+      "quote": "I ship two features a day from a coffee shop. The atom graph is my project manager.",
+      "author": "Marcus L.",
+      "role": "Solo founder",
+      "company": "Indie SaaS"
+    },
+    {
+      "quote": "Reviewer load dropped 40% because every PR Helix opens is small enough to actually read.",
+      "author": "Dana K.",
+      "role": "Engineering Manager",
+      "company": "B2B platform"
+    }
+  ],
+  "stats": [
+    { "value": "10x", "label": "smaller PRs on average" },
+    { "value": "42%", "label": "less reviewer time per change" },
+    { "value": "3.6x", "label": "faster time-to-merge" },
+    { "value": "100%", "label": "auditable, replayable history" }
+  ]
+}

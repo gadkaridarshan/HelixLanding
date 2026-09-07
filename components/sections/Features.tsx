@@ -1,4 +1,4 @@
-// helix: app/components/sections/Features.tsx
+// helix: components/sections/Features.tsx
 /**
  * @helix:story USER-993000
  */

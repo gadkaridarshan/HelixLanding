@@ -1,31 +1,87 @@
-That is the entire workflow. The CLI auto-detects Next.js, runs `npm run build`, and reuses the `vercel.json` in this repo for headers and caching.
+<!-- helix: README.md -->
+# Helix — Landing Page
 
-### Option B — GitHub → Vercel import (recommended for teams)
+The marketing surface for **Helix**, the atomic work-breakdown orchestrator.
+This Next.js app is the single-route landing page shipped to Vercel.
 
-1. Push this repo to GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "chore: initial landing site"
-   git branch -M main
-   git remote add origin git@github.com:<you>/HelixLanding.git
-   git push -u origin main
-   ```
-2. Visit <https://vercel.com/new> and **Import** the repository.
-3. Vercel auto-detects the Next.js framework preset. Leave defaults:
-   - Build Command: `npm run build`
-   - Output Directory: `.next`
-   - Install Command: `npm install`
-4. Click **Deploy**. Future pushes to `main` redeploy automatically.
+- Live site: <https://helix-ai-orchestrator.vercel.app>
+- Product repo: <https://github.com/gadkaridarshan/Helix>
 
-## What this repo ships
+---
 
-- `app/page.tsx` — assembled landing page rendering Navbar, Hero, Features, HowItWorks, StatsBar, Personas, FAQ, FinalCTA, Footer in order.
-- `app/layout.tsx` — metadata (title, description), OpenGraph + Twitter cards, favicon, robots.
-- `public/favicon.svg`, `public/og-image.svg` — brand assets.
-- `vercel.json` — framework pin, security headers, asset caching.
-- `components/`, `app/components/` — UI primitives and landing sections.
+## Prerequisites
 
-## Deploy checklist (success criteria)
+- **Node.js 18.17+** (Node 20 LTS recommended)
+- **npm 9+** (ships with Node 20)
+- A **Vercel** account — <https://vercel.com/signup>
+- (Optional) The **Vercel CLI** if you want to deploy from your terminal
 
-Run these locally before pushing to confirm deploy-readiness:
+Verify your toolchain:
+
+```bash
+node --version    # expect v18.17+ or v20+
+npm --version     # expect 9+
+```
+
+---
+
+## Local development
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Start the dev server (http://localhost:3000)
+npm run dev
+
+# 3. Production build (must succeed with zero TS errors)
+npm run build
+```
+
+If `npm run build` completes with no errors, the site is ready to deploy.
+
+---
+
+## Deploy to Vercel
+
+You have two equally supported paths. Pick one.
+
+### Option A — One command with the Vercel CLI (fastest)
+
+```bash
+# Install the Vercel CLI (once)
+npm install -g vercel
+
+# Authenticate (opens a browser the first time)
+vercel login
+
+# Deploy — first run creates the project, subsequent runs promote to production
+vercel deploy --prod
+```
+
+That's it. The CLI detects Next.js automatically, runs `next build`, and
+publishes to a `*.vercel.app` URL.
+
+### Option B — GitHub-connected Vercel import
+
+1. Push this repo to GitHub.
+2. In Vercel, click **Add New → Project → Import Git Repository**.
+3. Select the repo. Vercel auto-detects the **Next.js** framework preset.
+4. Leave build settings at their defaults (`npm run build`, output `.next`).
+5. Click **Deploy**. Every push to `main` redeploys automatically.
+
+---
+
+## Expected success checks
+
+After `vercel deploy --prod` (or a GitHub import deploy), confirm:
+
+- [ ] The deployment URL returns **HTTP 200**
+- [ ] The page title is **Helix — Atomic Work-Breakdown Orchestrator**
+- [ ] `/og-image.svg` and `/favicon.svg` resolve (check the `<head>`)
+- [ ] All sections render in order: Navbar → Hero → Features → HowItWorks → StatsBar → Personas → FAQ → FinalCTA → Footer
+- [ ] No errors in the Vercel build log
+
+---
+
+## Project structure (for reference)
