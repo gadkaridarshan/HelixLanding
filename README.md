@@ -34,7 +34,10 @@ npm install
 # 2. Start the dev server (http://localhost:3000)
 npm run dev
 
-# 3. Production build (must succeed with zero TS errors)
+# 3. Type-check the whole project (must succeed with zero errors)
+npm run typecheck
+
+# 4. Production build (must succeed with zero TS errors)
 npm run build
 ```
 
@@ -79,9 +82,10 @@ After `vercel deploy --prod` (or a GitHub import deploy), confirm:
 - [ ] The deployment URL returns **HTTP 200**
 - [ ] The page title is **Helix — Atomic Work-Breakdown Orchestrator**
 - [ ] `/og-image.svg` and `/favicon.svg` resolve (check the `<head>`)
-- [ ] All sections render in order: Navbar → Hero → Features → HowItWorks → StatsBar → Personas → FAQ → FinalCTA → Footer
+- [ ] All sections render in order: Navbar → Hero → HowItWorks → Features → Personas → StatsBar → FAQ → FinalCTA → Footer
 - [ ] No errors in the Vercel build log
+- [ ] `npm run typecheck` passes with zero errors
 
 ---
 
-## Project structure (for reference)
+## Project structure

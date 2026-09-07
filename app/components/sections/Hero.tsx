@@ -2,8 +2,10 @@
 /**
  * @helix:story USER-993000
  *
- * Re-export the canonical Hero implementation from
- * `components/landing/hero/Hero` so both `@/app/components/sections/Hero`
- * and `@/components/sections/Hero` resolve to the same component.
+ * Hero section — re-exports the canonical implementation under
+ * `components/sections/Hero` so the alias resolves from the `app/` and
+ * root-level section trees alike.
  */
-export { Hero, default } from "@/components/landing/hero/Hero";
+
+export { Hero } from "@/components/sections/Hero";
+export { default } from "@/components/sections/Hero";

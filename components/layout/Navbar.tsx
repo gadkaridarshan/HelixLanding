@@ -1,78 +1,47 @@
-"use client";
-
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/cn";
-import { Container } from "@/components/ui/Container";
-import { ButtonLink } from "@/components/ui/Button";
-
+// helix: components/layout/Navbar.tsx
 /**
- * Navbar — transparent at top of page, transitions to a solid, blurred
- * surface after the user scrolls past 16px. Pure UI shell: no nav copy
- * beyond the brand mark and a single primary CTA, per card scope.
+ * @helix:story USER-986000
+ *
+ * Navbar — top-level site navigation. Server component; the only
+ * interactivity (mobile menu) is delegated to a small client island
+ * landing in a follow-up card.
  */
-export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+import type { ReactElement } from "react";
 
+import { brand } from "@/lib/brand";
+
+export function Navbar(): ReactElement {
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "border-b border-white/5 bg-ink-950/70 backdrop-blur-xl shadow-card"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <Container className="flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="group flex items-center gap-2.5"
-          aria-label="Helix home"
+    <header className="sticky top-0 z-40 w-full border-b border-white/5 bg-ink-950/70 backdrop-blur">
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+      >
+        <a
+          href="#hero"
+          className="text-sm font-semibold tracking-wide text-ink-50"
         >
-          <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 shadow-glow-brand">
-            <span className="absolute inset-0 rounded-lg bg-aurora-gradient opacity-60 mix-blend-overlay" />
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="relative h-5 w-5 text-white"
-              aria-hidden
-            >
-              <path
-                d="M5 4c4 0 4 4 7 4s3-4 7-4M5 20c4 0 4-4 7-4s3 4 7 4M5 4v16M19 4v16"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-          <span className="text-base font-semibold tracking-tight text-ink-50">
-            Helix
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {/* Nav items intentionally omitted per card scope */}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <ButtonLink
-            href="#deploy"
-            variant="primary"
-            size="sm"
-            className="hidden sm:inline-flex"
-          >
-            Deploy
-          </ButtonLink>
-        </div>
-      </Container>
+          {brand.name}
+        </a>
+        <ul className="hidden items-center gap-6 text-sm text-ink-300 sm:flex">
+          <li>
+            <a className="hover:text-ink-50" href="#features">
+              Features
+            </a>
+          </li>
+          <li>
+            <a className="hover:text-ink-50" href="#how-it-works">
+              How it works
+            </a>
+          </li>
+          <li>
+            <a className="hover:text-ink-50" href="#faq">
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

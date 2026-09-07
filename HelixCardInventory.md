@@ -1,9 +1,9 @@
 # Card Inventory
 
+- Sep 7, 2026, 8:22:25 AM CDT | USER-217000 | done | deployment | Page assembly and Vercel deployment
+- Sep 7, 2026, 8:22:16 AM CDT | USER-986000 | todo | development | Scaffold brand theme and section · deliverable: README.md
+- Sep 7, 2026, 8:22:16 AM CDT | USER-956000 | in_progress | development | FAQ CTA footer and Vercel
 - Sep 7, 2026, 8:21:41 AM CDT | USER-993000 | done | development | Hero features personas and social
-- Sep 7, 2026, 8:20:08 AM CDT | USER-956000 | in_progress | development | FAQ CTA footer and Vercel
-- Sep 7, 2026, 8:14:17 AM CDT | USER-986000 | in_progress | development | Scaffold brand theme and section · deliverable: README.md
-- Sep 7, 2026, 8:13:41 AM CDT | USER-217000 | in_progress | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 8:12:13 AM CDT | USER-349000 | done | development | Add Hero module declaration
 - Sep 7, 2026, 8:12:13 AM CDT | USER-348000 | done | development | Fix Hero import path resolution
 - Sep 7, 2026, 8:04:05 AM CDT | USER-347000 | done | development | Hero features and how-it-works sections
