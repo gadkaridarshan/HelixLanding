@@ -1,74 +1,75 @@
 // helix: components/ui/SectionHeading.tsx
 /**
- * @helix:story USER-171000
+ * @helix:story USER-445000
  *
- * SectionHeading — shared heading primitive used by every landing
- * section (Features, HowItWorks, Personas, SocialProof, FAQ).
+ * SectionHeading — consistent eyebrow + heading + lede pattern
+ * used across marketing sections. Pure server component.
  *
- * Renders an optional eyebrow chip, a display headline, and an
- * optional description. Supports `center` alignment for sections
- * like FAQ where the heading sits above a constrained column.
- *
- * Pure server component.
+ *   • `eyebrow`     — small uppercase chip above the heading
+ *   • `heading`     — display-font title (h2 by default)
+ *   • `lede`        — optional supporting paragraph
+ *   • `align`       — `left` (default) or `center`
+ *   • `headingId`   — id for the heading (used for aria-labelledby)
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
+export type SectionHeadingAlign = "left" | "center";
+
 export interface SectionHeadingProps {
   eyebrow?: string;
   heading: string;
-  description?: string;
+  lede?: string;
+  align?: SectionHeadingAlign;
   headingId?: string;
-  align?: "left" | "center";
   className?: string;
+  children?: React.ReactNode;
 }
+
+const alignClasses: Record<SectionHeadingAlign, string> = {
+  left: "text-left items-start",
+  center: "text-center items-center mx-auto",
+};
 
 export function SectionHeading({
   eyebrow,
   heading,
-  description,
-  headingId,
+  lede,
   align = "left",
+  headingId,
   className,
+  children,
 }: SectionHeadingProps): React.ReactElement {
-  const isCenter = align === "center";
-
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
-        isCenter ? "items-center text-center" : "items-start text-left",
+        "flex max-w-3xl flex-col gap-3",
+        alignClasses[align],
         className,
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-300">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-brand-300">
           <span
             aria-hidden="true"
-            className="h-1.5 w-1.5 rounded-full bg-brand-400"
+            className="size-1.5 rounded-full bg-brand-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
           />
           {eyebrow}
         </span>
       ) : null}
-
       <h2
         id={headingId}
-        className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
+        className="font-display text-3xl font-semibold leading-tight tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
       >
         {heading}
       </h2>
-
-      {description ? (
-        <p
-          className={cn(
-            "max-w-2xl text-pretty text-base leading-relaxed text-ink-200 sm:text-lg",
-            isCenter && "mx-auto",
-          )}
-        >
-          {description}
+      {lede ? (
+        <p className="max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg">
+          {lede}
         </p>
       ) : null}
+      {children}
     </div>
   );
 }

@@ -1,22 +1,13 @@
 // helix: components/ui/index.ts
 /**
- * @helix:story USER-63000
+ * @helix:story USER-445000
  *
- * Barrel export for shared UI primitives. Lets callers do
- * `import { Container, Button } from "@/components/ui"` without
- * caring about individual file paths.
+ * Barrel module — re-exports every reusable UI primitive from
+ * `@/components/ui/*` so section components can import the whole
+ * surface from a single path: `import { Container, Button } from
+ * "@/components/ui"`.
  */
-export { Container } from "@/components/ui/Container";
-export type { ContainerProps } from "@/components/ui/Container";
-
-export { Button } from "@/components/ui/Button";
-export type {
-  ButtonProps,
-  ButtonVariant,
-  ButtonSize,
-  ButtonLinkProps,
-  ButtonActionProps,
-} from "@/components/ui/Button";
-
-export { cn } from "@/components/ui/cn";
-export type { ClassValue } from "@/components/ui/cn";
+export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from "./Button";
+export { Container, type ContainerProps, type ContainerWidth } from "./Container";
+export { SectionHeading, type SectionHeadingProps, type SectionHeadingAlign } from "./SectionHeading";
+export { cn } from "./cn";

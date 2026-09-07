@@ -1,9 +1,9 @@
 # Card Inventory
 
+- Sep 7, 2026, 12:21:05 PM CDT | USER-63000 | in_progress | development | Assembly footer CTA Vercel deploy · deliverable: README.md
+- Sep 7, 2026, 12:18:14 PM CDT | USER-445000 | done | development | App shell fonts metadata
+- Sep 7, 2026, 12:15:49 PM CDT | USER-915000 | todo | deployment | Final integration polish Vercel deploy
 - Sep 7, 2026, 12:10:58 PM CDT | USER-34000 | done | development | Compose page sections
-- Sep 7, 2026, 12:10:37 PM CDT | USER-445000 | in_progress | development | App shell fonts metadata
-- Sep 7, 2026, 12:09:20 PM CDT | USER-63000 | todo | development | Assembly footer CTA Vercel deploy · deliverable: README.md
-- Sep 7, 2026, 12:07:15 PM CDT | USER-915000 | in_progress | deployment | Final integration polish Vercel deploy
 - Sep 7, 2026, 11:22:01 AM CDT | USER-507000 | done | development | Features how-it-works sections
 - Sep 7, 2026, 11:14:56 AM CDT | USER-495000 | done | development | Hero personas sections
 - Sep 7, 2026, 11:12:40 AM CDT | USER-171000 | done | development | Social proof FAQ CTA assembly

@@ -1,45 +1,53 @@
+// helix: components/ui/Container.tsx
 /**
- * @helix:story USER-604000
+ * @helix:story USER-445000
  *
- * Container — layout primitive that constrains page content
- * to a responsive max-width with consistent horizontal padding.
+ * Container — width-clamped, horizontally-padded layout primitive
+ * used by every section to keep a consistent max-width.
  *
- * Pure server component.
+ * Renders a `<div>` with `mx-auto` + responsive horizontal padding
+ * and a configurable `maxWidth` (default `6xl`). Pure server
+ * component; no client interactivity.
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  as?: "div" | "section" | "article" | "main" | "header" | "footer";
-  size?: "sm" | "md" | "lg" | "xl";
+export type ContainerWidth = "5xl" | "6xl" | "7xl";
+
+export interface ContainerProps {
+  as?: keyof React.JSX.IntrinsicElements;
+  maxWidth?: ContainerWidth;
+  className?: string;
+  children: React.ReactNode;
+  id?: string;
 }
 
-const sizeMap: Record<NonNullable<ContainerProps["size"]>, string> = {
-  sm: "max-w-3xl",
-  md: "max-w-5xl",
-  lg: "max-w-6xl",
-  xl: "max-w-7xl",
+const maxWidthClasses: Record<ContainerWidth, string> = {
+  "5xl": "max-w-5xl",
+  "6xl": "max-w-6xl",
+  "7xl": "max-w-7xl",
 };
 
 export function Container({
-  as: Tag = "div",
-  size = "lg",
+  as = "div",
+  maxWidth = "6xl",
   className,
   children,
-  ...rest
+  id,
 }: ContainerProps): React.ReactElement {
+  const Component = as as React.ElementType;
   return (
-    <Tag
+    <Component
+      id={id}
       className={cn(
         "mx-auto w-full px-4 sm:px-6 lg:px-8",
-        sizeMap[size],
+        maxWidthClasses[maxWidth],
         className,
       )}
-      {...rest}
     >
       {children}
-    </Tag>
+    </Component>
   );
 }
 

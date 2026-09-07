@@ -1,12 +1,15 @@
+// helix: postcss.config.mjs
 /**
- * @helix:story USER-23000
+ * @helix:story USER-445000
  *
- * PostCSS configuration — Tailwind v4 PostCSS plugin wiring.
- * Tailwind v4 uses `@tailwindcss/postcss` as its single PostCSS plugin.
+ * PostCSS pipeline for Tailwind v4. The `@tailwindcss/postcss`
+ * plugin replaces the legacy `tailwindcss` PostCSS plugin and
+ * handles `@import "tailwindcss"` declarations in CSS source.
  */
 const config = {
   plugins: {
     "@tailwindcss/postcss": {},
+    autoprefixer: {},
   },
 };
 

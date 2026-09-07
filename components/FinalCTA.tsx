@@ -1,29 +1,51 @@
 // helix: components/FinalCTA.tsx
 /**
- * @helix:story USER-812000
+ * @helix:story USER-63000
  *
- * FinalCTA — last call-to-action section that lives just above the
- * Footer. Visitors who scrolled the entire landing page should land
- * here with one obvious next step: launch the live Helix orchestrator
- * at `brand.url`.
+ * FinalCTA — the closing conversion block at the bottom of the
+ * marketing page. Sits between the last content section (FAQ) and
+ * the site footer.
  *
- * Pure server component. All CTA links point to the canonical
- * production URL exposed by `lib/brand.ts` so the marketing site and
- * the live product stay in lockstep.
+ * Composition:
+ *   • High-contrast gradient panel (brand → accent) on the dark
+ *     canvas so the closing CTA visually pops.
+ *   • Headline, subheadline, primary CTA (Get early access) +
+ *     secondary GitHub link, plus a short "what you get" bullet
+ *     row to remove final friction.
  *
- * Lives at the canonical path `components/FinalCTA.tsx` (this file).
- * Re-export shims at `components/sections/FinalCTA.tsx` and
- * `app/components/sections/FinalCTA.tsx` point here so both import
- * paths resolve to the same implementation.
+ * Copy is sourced from `@/content/final-cta.json` so marketing can
+ * iterate without touching this component. Pure server component —
+ * no client interactivity. Renders a polished `<section>` with
+ * semantic landmarks and accessible focus rings.
  */
 import * as React from "react";
 
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { brand } from "@/lib/brand";
+
+import finalCtaData from "@/content/final-cta.json";
 
 export interface FinalCTAProps {
   className?: string;
 }
+
+interface FinalCTAContent {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  primaryCta: {
+    label: string;
+    href: string;
+  };
+  secondaryCta: {
+    label: string;
+    href: string;
+  };
+  bullets: ReadonlyArray<string>;
+}
+
+const content = finalCtaData as FinalCTAContent;
 
 export function FinalCTA({ className }: FinalCTAProps): React.ReactElement {
   return (
@@ -31,143 +53,113 @@ export function FinalCTA({ className }: FinalCTAProps): React.ReactElement {
       id="final-cta"
       aria-labelledby="final-cta-heading"
       className={
-        "relative isolate overflow-hidden py-24 sm:py-32 " + (className ?? "")
+        "relative isolate overflow-hidden py-20 sm:py-24 lg:py-32 " +
+        (className ?? "")
       }
     >
-      {/* Layered radial + grid background */}
+      {/* Layered radial glows — brand + accent, sitting behind the
+          gradient panel so the section reads as a single, focused
+          moment. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10
-                   bg-[radial-gradient(70%_70%_at_50%_0%,rgba(34,211,238,0.18),rgba(124,58,237,0.10)_55%,transparent_80%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08]
-                   [background-image:linear-gradient(to_right,rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.6)_1px,transparent_1px)]
-                   [background-size:48px_48px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48
-                   bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent"
-      />
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-slate-950/40 [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_75%)]" />
+        <div className="absolute -top-32 left-1/2 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
+        <div className="absolute -bottom-32 left-1/4 -z-10 h-[32rem] w-[32rem] rounded-full bg-accent-500/20 blur-3xl" />
+      </div>
 
       <Container>
-        <div
-          className="relative mx-auto max-w-4xl rounded-3xl
-                     border border-white/10 bg-white/[0.04] p-10 sm:p-14
-                     shadow-[0_30px_120px_-30px_rgba(34,211,238,0.35)]
-                     backdrop-blur-xl"
-        >
-          {/* Inner glow */}
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-brand-600/90 via-brand-500/80 to-accent-600/90 px-6 py-12 shadow-[0_30px_80px_-30px_rgba(34,211,238,0.5)] sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+          {/* Subtle inner grid texture for depth. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 rounded-3xl
-                       bg-[radial-gradient(80%_60%_at_50%_0%,rgba(34,211,238,0.18),rgba(124,58,237,0.10)_55%,transparent_80%)]"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_70%)]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
           />
 
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300">
-            Ready when you are
-          </p>
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/90 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              {content.eyebrow}
+            </span>
 
-          <h2
-            id="final-cta-heading"
-            className="mt-4 text-balance text-3xl font-semibold tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
-          >
-            Ship small PRs from any prompt — start with Helix today.
-          </h2>
-
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-200 sm:text-lg">
-            Decompose a goal into atomic units, run dependent agents in
-            parallel, and merge reviewable diffs in minutes. No new
-            IDE, no new language — just a workflow that respects how
-            your repo already works.
-          </p>
-
-          <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <a
-              href={brand.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full
-                         bg-brand-500 px-6 py-3 text-base font-semibold text-ink-950
-                         shadow-[0_8px_30px_-12px_rgba(34,211,238,0.6)]
-                         hover:bg-brand-400 active:bg-brand-600 transition-colors
-                         focus-visible:outline focus-visible:outline-2
-                         focus-visible:outline-offset-2 focus-visible:outline-brand-300"
+            <h2
+              id="final-cta-heading"
+              className="mt-6 text-3xl font-display font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
             >
-              Try the live orchestrator
-              <svg
-                viewBox="0 0 20 20"
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 10h10" />
-                <path d="M11 5l5 5-5 5" />
-              </svg>
-            </a>
+              {content.heading}
+            </h2>
 
-            <a
-              href={brand.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full
-                         bg-white/5 px-6 py-3 text-base font-semibold text-ink-50
-                         ring-1 ring-inset ring-white/15 hover:bg-white/10 transition-colors
-                         focus-visible:outline focus-visible:outline-2
-                         focus-visible:outline-offset-2 focus-visible:outline-ink-300"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-5 w-5"
-                fill="currentColor"
-                aria-hidden="true"
+            <p className="mt-5 max-w-2xl text-base text-white/85 sm:text-lg">
+              {content.description}
+            </p>
+
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+              <Button
+                href={content.primaryCta.href}
+                variant="primary"
+                size="lg"
+                className="bg-white text-ink-950 hover:bg-white/90 active:bg-white/80 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)]"
               >
-                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-1.93c-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.95 10.95 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
-              </svg>
-              Star on GitHub
-            </a>
+                {content.primaryCta.label}
+                <span aria-hidden="true" className="ml-1">
+                  →
+                </span>
+              </Button>
+              <Button
+                href={content.secondaryCta.href}
+                variant="secondary"
+                size="lg"
+                className="border-white/30 bg-white/10 text-white hover:bg-white/20 active:bg-white/30"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="mr-2 h-5 w-5"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"
+                  />
+                </svg>
+                {content.secondaryCta.label}
+              </Button>
+            </div>
+
+            <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/80">
+              {content.bullets.map((bullet) => (
+                <li key={bullet} className="flex items-center gap-2">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    className="h-4 w-4 text-white"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.704 5.29a1 1 0 0 1 .006 1.414l-7.5 7.5a1 1 0 0 1-1.42-.004l-3.5-3.5a1 1 0 0 1 1.414-1.414L8.5 12.086l6.79-6.79a1 1 0 0 1 1.414-.006Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-6 text-xs text-white/60">
+              {brand.name} — {brand.tagline}
+            </p>
           </div>
-
-          <ul className="mt-10 grid grid-cols-1 gap-3 text-sm text-ink-200 sm:grid-cols-3">
-            <li className="flex items-start gap-2">
-              <CheckMark />
-              <span>No credit card to try the orchestrator</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckMark />
-              <span>Works with any Git repo on GitHub</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckMark />
-              <span>Open source, self-hostable</span>
-            </li>
-          </ul>
         </div>
       </Container>
     </section>
-  );
-}
-
-function CheckMark(): React.ReactElement {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      className="mt-0.5 h-4 w-4 shrink-0 text-brand-400"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 10.5l3.5 3.5L16 5.5" />
-    </svg>
   );
 }
 

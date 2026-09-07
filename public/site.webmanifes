@@ -1,7 +1,7 @@
 {
-  "name": "Helix — Atomic work breakdown for AI coding agents",
+  "name": "Helix — Atomic work-breakdown for AI coding agents",
   "short_name": "Helix",
-  "description": "The orchestrator for AI coding agents. Decompose any goal into reviewable, atomic PRs.",
+  "description": "Helix is the atomic work-breakdown orchestrator for AI coding agents — decompose any goal into dependency-gated, parallel tasks and ship auditable PRs.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -18,7 +18,8 @@
     {
       "src": "/apple-icon.svg",
       "sizes": "180x180",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "categories": ["developer", "productivity", "utilities"]

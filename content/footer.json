@@ -1,0 +1,81 @@
+{
+  "tagline": "The atomic work-breakdown orchestrator for AI coding agents. Decompose a goal into dependency-aware, review-ready PRs.",
+  "columns": [
+    {
+      "heading": "Product",
+      "links": [
+        { "label": "Features", "href": "#features" },
+        { "label": "How it works", "href": "#how-it-works" },
+        { "label": "Personas", "href": "#personas" },
+        { "label": "FAQ", "href": "#faq" }
+      ]
+    },
+    {
+      "heading": "Resources",
+      "links": [
+        {
+          "label": "Documentation",
+          "href": "https://github.com/gadkaridarshan/Helix#readme",
+          "external": true
+        },
+        {
+          "label": "GitHub repo",
+          "href": "https://github.com/gadkaridarshan/Helix",
+          "external": true
+        },
+        {
+          "label": "Changelog",
+          "href": "https://github.com/gadkaridarshan/Helix/releases",
+          "external": true
+        }
+      ]
+    },
+    {
+      "heading": "Company",
+      "links": [
+        { "label": "About", "href": "#hero" },
+        {
+          "label": "Twitter / X",
+          "href": "https://twitter.com/helix",
+          "external": true
+        },
+        {
+          "label": "LinkedIn",
+          "href": "https://www.linkedin.com/company/helix",
+          "external": true
+        }
+      ]
+    },
+    {
+      "heading": "Legal",
+      "links": [
+        { "label": "Privacy", "href": "#hero" },
+        { "label": "Terms", "href": "#hero" },
+        { "label": "Security", "href": "#hero" }
+      ]
+    }
+  ],
+  "social": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/gadkaridarshan/Helix",
+      "icon": "github"
+    },
+    {
+      "label": "Twitter",
+      "href": "https://twitter.com/helix",
+      "icon": "twitter"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/company/helix",
+      "icon": "linkedin"
+    }
+  ],
+  "copyright": "Helix. All rights reserved.",
+  "legal": [
+    { "label": "Privacy", "href": "#hero" },
+    { "label": "Terms", "href": "#hero" },
+    { "label": "Cookies", "href": "#hero" }
+  ]
+}

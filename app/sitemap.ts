@@ -1,3 +1,4 @@
+// helix: app/sitemap.ts
 import type { MetadataRoute } from "next";
 
 import { brand } from "@/lib/brand";
@@ -15,15 +16,17 @@ import { brand } from "@/lib/brand";
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const siteUrl = brand.url.endsWith("/") ? brand.url.slice(0, -1) : brand.url;
+
   return [
     {
-      url: brand.url,
+      url: siteUrl,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
       alternates: {
         languages: {
-          "en-US": brand.url,
+          "en-US": siteUrl,
         },
       },
     },
