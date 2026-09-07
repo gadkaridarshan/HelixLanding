@@ -1,132 +1,97 @@
 // helix: components/landing/personas/PersonasTabs.tsx
+/**
+ * @helix:story USER-23000
+ *
+ * PersonasTabs — client island that powers the role tabs in the
+ * Personas section. The parent `Personas` component stays a pure
+ * server component, while this small client island handles the
+ * active-tab state.
+ */
 "use client";
 
-/**
- * @helix:story USER-308000
- *
- * PersonasTabs — interactive tab strip that swaps the highlighted persona
- * card. Client island because it manages local state (active tab).
- */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
-
-export interface PersonaItem {
-  id: string;
-  role: string;
-  tagline: string;
-  pain: string;
-  value: string;
-  bullets: string[];
-  accent: "cyan" | "violet" | "fuchsia" | "emerald" | "amber";
-}
+import type { Persona } from "@/content/personas";
 
 export interface PersonasTabsProps {
-  personas: PersonaItem[];
+  personas: ReadonlyArray<Persona>;
+  className?: string;
 }
-
-const accentMap: Record<PersonaItem["accent"], string> = {
-  cyan: "from-cyan-400/30 to-cyan-500/10 text-cyan-200 ring-cyan-400/40",
-  violet:
-    "from-violet-400/30 to-violet-500/10 text-violet-200 ring-violet-400/40",
-  fuchsia:
-    "from-fuchsia-400/30 to-fuchsia-500/10 text-fuchsia-200 ring-fuchsia-400/40",
-  emerald:
-    "from-emerald-400/30 to-emerald-500/10 text-emerald-200 ring-emerald-400/40",
-  amber: "from-amber-400/30 to-amber-500/10 text-amber-200 ring-amber-400/40",
-};
 
 export function PersonasTabs({
   personas,
+  className,
 }: PersonasTabsProps): React.ReactElement {
   const [activeId, setActiveId] = React.useState<string>(
     personas[0]?.id ?? "",
   );
+  const active = personas.find((p) => p.id === activeId) ?? personas[0];
 
-  const active = React.useMemo(
-    () => personas.find((p) => p.id === activeId) ?? personas[0],
-    [activeId, personas],
-  );
+  if (!active) {
+    return <div className={className} />;
+  }
 
   return (
-    <div className="mx-auto max-w-5xl">
-      {/* Tab list */}
+    <div className={cn("mt-10", className)}>
       <div
         role="tablist"
         aria-label="Personas"
-        className="flex flex-wrap justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] p-2 backdrop-blur"
+        className="flex flex-wrap items-center justify-center gap-2"
       >
-        {personas.map((p) => {
-          const isActive = p.id === activeId;
+        {personas.map((persona) => {
+          const isActive = persona.id === active.id;
           return (
             <button
-              key={p.id}
-              type="button"
+              key={persona.id}
               role="tab"
-              id={`persona-tab-${p.id}`}
+              type="button"
               aria-selected={isActive}
-              aria-controls={`persona-panel-${p.id}`}
               tabIndex={isActive ? 0 : -1}
-              onClick={() => setActiveId(p.id)}
+              onClick={() => setActiveId(persona.id)}
               className={cn(
-                "rounded-xl px-4 py-2 text-sm font-medium transition",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60",
+                "rounded-pill border px-4 py-1.5 text-sm font-medium transition",
                 isActive
-                  ? "bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
-                  : "text-slate-300 hover:text-white hover:bg-white/5",
+                  ? "border-transparent bg-white text-slate-950"
+                  : "border-white/15 bg-white/5 text-slate-300 hover:border-white/30 hover:text-white",
               )}
             >
-              {p.role}
+              {persona.shortRole}
             </button>
           );
         })}
       </div>
 
-      {/* Active panel */}
-      {active ? (
-        <div
-          role="tabpanel"
-          id={`persona-panel-${active.id}`}
-          aria-labelledby={`persona-tab-${active.id}`}
-          className={cn(
-            "mt-8 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br p-8 ring-1 backdrop-blur",
-            accentMap[active.accent],
-          )}
+      <div
+        role="tabpanel"
+        aria-labelledby={`persona-tab-${active.id}`}
+        className="mx-auto mt-8 max-w-3xl rounded-card border border-white/10 bg-white/5 p-8"
+      >
+        <p className="text-xs font-semibold uppercase tracking-wide text-cyan-300">
+          {active.role}
+        </p>
+        <h3 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+          {active.headline}
+        </h3>
+        <p className="mt-3 text-base text-slate-300">{active.description}</p>
+        <ul className="mt-5 space-y-2 text-sm text-slate-200">
+          {active.bullets.map((bullet) => (
+            <li key={bullet} className="flex items-start gap-2">
+              <span
+                aria-hidden="true"
+                className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400"
+              />
+              {bullet}
+            </li>
+          ))}
+        </ul>
+        <a
+          href={active.ctaHref}
+          className="mt-6 inline-flex items-center justify-center rounded-pill bg-white px-5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
         >
-          <div className="grid gap-8 lg:grid-cols-5">
-            <div className="lg:col-span-2">
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/70">
-                {active.tagline}
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                {active.role}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/80 sm:text-base">
-                <span className="font-semibold text-white/90">Pain: </span>
-                {active.pain}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base">
-                <span className="font-semibold text-white/90">Helix: </span>
-                {active.value}
-              </p>
-            </div>
-            <ul className="lg:col-span-3 space-y-3">
-              {active.bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white/85"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-current"
-                  />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ) : null}
+          {active.ctaLabel}
+        </a>
+      </div>
     </div>
   );
 }

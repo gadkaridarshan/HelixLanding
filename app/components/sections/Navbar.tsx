@@ -1,6 +1,6 @@
 // helix: app/components/sections/Navbar.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-23000
  *
  * Navbar — re-export shim so `@/app/components/sections/Navbar` resolves
  * to the canonical implementation.

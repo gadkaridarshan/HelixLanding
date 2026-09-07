@@ -1,8 +1,11 @@
 # Card Inventory
 
+- Sep 7, 2026, 10:14:01 AM CDT | USER-742000 | done | development | Hero features personas block
+- Sep 7, 2026, 10:13:04 AM CDT | USER-933000 | in_progress | development | How it works social proof
+- Sep 7, 2026, 10:13:04 AM CDT | USER-63000 | in_progress | development | Assembly footer CTA Vercel deploy · deliverable: README.md
+- Sep 7, 2026, 10:12:32 AM CDT | USER-23000 | in_progress | development | Helix landing page site · deliverable: README.md
 - Sep 7, 2026, 10:07:53 AM CDT | USER-525000 | done | deployment | Vercel deploy config and SEO
 - Sep 7, 2026, 10:06:14 AM CDT | USER-310000 | in_progress | development | Complete Helix landing site · deliverable: README.md
-- Sep 7, 2026, 10:02:24 AM CDT | USER-23000 | in_progress | development | Helix landing page site · deliverable: README.md
 - Sep 7, 2026, 9:59:26 AM CDT | USER-719000 | done | development | How it works section
 - Sep 7, 2026, 9:58:53 AM CDT | USER-82000 | done | development | Footer and final CTA
 - Sep 7, 2026, 9:55:25 AM CDT | USER-308000 | done | development | Features grid section

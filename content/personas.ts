@@ -1,86 +1,97 @@
 // helix: content/personas.ts
 /**
- * @helix:story USER-308000
+ * @helix:story USER-23000
  *
- * Personas content — five role-targeted value props surfaced by the
- * `components/Personas.tsx` section. Pure data; no React.
+ * Persona content for the Personas section. Each entry powers a tab
+ * in the tabbed UI and includes a role-specific headline, value
+ * bullets, and call-to-action.
  */
-import type { PersonaItem } from "@/components/landing/personas/PersonasTabs";
 
-export const personas: PersonaItem[] = [
+export interface Persona {
+  id: string;
+  role: string;
+  shortRole: string;
+  headline: string;
+  description: string;
+  bullets: ReadonlyArray<string>;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+export const personas: ReadonlyArray<Persona> = [
   {
     id: "developer",
     role: "Developer",
-    tagline: "For the engineer in the loop",
-    pain: "AI suggestions are sprawling, untested diffs that break the build.",
-    value:
-      "Helix breaks every prompt into atomic, reviewable units — small enough to read, with type/test/lint gates baked in.",
+    shortRole: "Dev",
+    headline: "Ship small, reviewable PRs — not one sprawling diff.",
+    description:
+      "Helix decomposes every prompt into atomic units, executes them in order, and verifies each one against your repo before shipping.",
     bullets: [
-      "Reviewable units, not 800-line diffs",
-      "Explicit dependencies between units, so the build order is obvious",
-      "Auto-verified against your repo's types, tests, and lint before you ever see the PR",
-      "Stays inside your editor workflow — no new tool to babysit",
+      "Atomic plans you can read and approve.",
+      "Type-checked, linted, tested before review.",
+      "Local + CI parity — no surprise regressions.",
     ],
-    accent: "cyan",
+    ctaLabel: "Read the dev quickstart",
+    ctaHref: "#how-it-works",
   },
   {
     id: "tech-lead",
     role: "Tech Lead",
-    tagline: "For the person owning the architecture",
-    pain: "AI output is a black box — you can't tell what's safe to merge.",
-    value:
-      "Every unit ships with its contract, its dependencies, and a green verification report. You review code, not vibes.",
+    shortRole: "Lead",
+    headline: "Review PRs in minutes, not hours.",
+    description:
+      "Every PR is small, scoped, and verified. Your reviewers see one change at a time, with explicit dependencies and a quality bar.",
     bullets: [
-      "Per-unit verification report (types, tests, lint) attached to each PR",
-      "Dependency graph makes blast radius obvious before merge",
-      "Atomic units keep architectural intent intact — no silent refactors",
-      "Audit-friendly history: one card per unit, one commit per card",
+      "Small, dependency-ordered diffs.",
+      "Protected paths honored across stacks.",
+      "Quality bar: types, tests, lint on every unit.",
     ],
-    accent: "violet",
+    ctaLabel: "See the review workflow",
+    ctaHref: "#features",
   },
   {
     id: "ai-engineer",
     role: "AI Engineer",
-    tagline: "For the person wiring the agents",
-    pain: "Prompting a monolith model gives you monolith output you can't trust.",
-    value:
-      "Helix is a deterministic orchestrator: explicit planning, explicit ordering, explicit verification. Composable, not magical.",
+    shortRole: "AI",
+    headline: "Orchestrate agents with explicit, reviewable units.",
+    description:
+      "Treat agent execution like a build pipeline. Helix gives you atomic plans, dependency graphs, and verifiable outcomes.",
     bullets: [
-      "Plan → decompose → execute → verify, every time, no surprise paths",
-      "Pluggable verification gates so you can wire in your own evals",
-      "Structured unit artifacts you can inspect, log, and replay",
-      "No prompt spaghetti — the prompt is the plan, the plan is the diff",
+      "Dependency graph between units.",
+      "Deterministic, parallelizable execution.",
+      "Pluggable verifiers (types, tests, lint).",
     ],
-    accent: "fuchsia",
+    ctaLabel: "Explore the orchestration model",
+    ctaHref: "#features",
   },
   {
     id: "product-manager",
     role: "Product Manager",
-    tagline: "For the person owning the outcome",
-    pain: "AI work is invisible until it ships — and when it ships, it's a coin flip.",
-    value:
-      "Helix turns the work into a visible queue of small, scoped units. You see what's being built, in what order, and why.",
+    shortRole: "PM",
+    headline: "Predictable velocity from your AI coding agents.",
+    description:
+      "Helix turns prompt-to-PR into a measurable, gated pipeline. Track units shipped, units verified, and time-to-merge.",
     bullets: [
-      "Live board of units in flight — clear status, no mystery",
-      "Scope is enforced up-front; agents can't quietly expand the diff",
-      "Per-unit PRs mean faster, safer rollouts and cleaner rollbacks",
-      "Shipped work is provably green: types, tests, and lint passed",
+      "Pipeline metrics, not vibes.",
+      "Gated parallelization keeps velocity predictable.",
+      "Clear audit trail for every shipped change.",
     ],
-    accent: "emerald",
+    ctaLabel: "See the metrics dashboard",
+    ctaHref: "#stats",
   },
   {
     id: "founder",
     role: "Founder",
-    tagline: "For the person owning the runway",
-    pain: "AI speed means nothing if it ships bugs faster than you can fix them.",
-    value:
-      "Helix trades raw speed for compounding velocity — small units, green checks, fewer incidents.",
+    shortRole: "Founder",
+    headline: "One prompt. Many small PRs. Zero review chaos.",
+    description:
+      "Solo founders get the leverage of a senior engineer. Helix keeps the codebase green while you focus on the product.",
     bullets: [
-      "Fewer rollbacks — every unit is verified before it lands",
-      "Faster onboarding — new engineers read the unit graph, not the codebase",
-      "Predictable cadence — scope is bounded, output is bounded",
-      "Defensible velocity — speed that survives contact with production",
+      "Hands-off, gated shipping.",
+      "Language-aware protected paths.",
+      "Works with the AI agent you already use.",
     ],
-    accent: "amber",
+    ctaLabel: "Get early access",
+    ctaHref: "#cta",
   },
 ];

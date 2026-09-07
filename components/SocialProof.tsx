@@ -1,18 +1,45 @@
 // helix: components/SocialProof.tsx
 /**
- * @helix:story USER-308000
+ * @helix:story USER-23000
  *
- * SocialProof — logos row + testimonial-style metric cards reinforcing
- * trust. Pure server component.
+ * SocialProof — testimonial / quote block giving the landing page
+ * credible third-party validation.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
-import { socialProof } from "@/content/socialProof";
 
 export interface SocialProofProps {
   className?: string;
 }
+
+interface Quote {
+  id: string;
+  body: string;
+  author: string;
+  role: string;
+}
+
+const quotes: ReadonlyArray<Quote> = [
+  {
+    id: "q1",
+    body: "Helix turned one 4,000-line PR into eleven small, verified PRs. Review went from a meeting to a coffee break.",
+    author: "M. Reyes",
+    role: "Staff Engineer, fintech platform",
+  },
+  {
+    id: "q2",
+    body: "We finally trust our AI agent to merge code while we sleep. The unit gate catches what humans used to.",
+    author: "D. Okafor",
+    role: "CTO, dev-tools startup",
+  },
+  {
+    id: "q3",
+    body: "Atomic plans changed how I think about prompting. I read the plan, approve it, and ship it.",
+    author: "L. Tanaka",
+    role: "Solo founder, two-person team",
+  },
+];
 
 export function SocialProof({
   className,
@@ -22,73 +49,33 @@ export function SocialProof({
       id="social-proof"
       aria-labelledby="social-proof-heading"
       className={
-        "relative isolate border-y border-white/10 bg-white/[0.02] py-16 sm:py-20 " +
-        (className ?? "")
+        "relative isolate py-20 sm:py-28 lg:py-32 " + (className ?? "")
       }
     >
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="social-proof-heading"
-            className="text-sm font-semibold uppercase tracking-widest text-cyan-300"
+            className="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Trusted workflow
+            Trusted by engineers shipping with AI agents
           </h2>
-          <p className="mt-3 text-pretty text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Built for teams who measure AI by{" "}
-            <span className="bg-gradient-to-r from-cyan-300 to-violet-300 bg-clip-text text-transparent">
-              shipped, green PRs — not vibes.
-            </span>
-          </p>
         </div>
-
-        {/* Logo strip */}
-        <ul
-          aria-label="Reference customers"
-          className="mt-10 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 lg:grid-cols-6"
-        >
-          {socialProof.logos.map((logo) => (
-            <li
-              key={logo}
-              className="flex h-12 items-center justify-center rounded-lg border border-white/10 bg-black/30 px-4 text-center text-xs font-semibold uppercase tracking-widest text-slate-400"
-            >
-              {logo}
-            </li>
-          ))}
-        </ul>
-
-        {/* Metric cards */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {socialProof.metrics.map((m) => (
-            <div
-              key={m.label}
-              className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6"
-            >
-              <p className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                {m.value}
-              </p>
-              <p className="mt-2 text-sm text-slate-300">{m.label}</p>
-              {m.helper ? (
-                <p className="mt-1 text-xs text-slate-500">{m.helper}</p>
-              ) : null}
-            </div>
-          ))}
-        </div>
-
-        {/* Testimonial-style quotes */}
-        <div className="mt-12 grid gap-4 lg:grid-cols-2">
-          {socialProof.quotes.map((q) => (
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {quotes.map((quote) => (
             <figure
-              key={q.author}
-              className="rounded-2xl border border-white/10 bg-black/30 p-6"
+              key={quote.id}
+              className="flex flex-col justify-between rounded-card border border-white/10 bg-white/5 p-6"
             >
-              <blockquote className="text-pretty text-base leading-relaxed text-slate-200 sm:text-lg">
-                “{q.quote}”
+              <blockquote className="text-sm leading-relaxed text-slate-200">
+                “{quote.body}”
               </blockquote>
-              <figcaption className="mt-4 text-sm text-slate-400">
-                <span className="font-semibold text-white">{q.author}</span>
+              <figcaption className="mt-6 text-xs text-slate-400">
+                <span className="font-semibold text-white">
+                  {quote.author}
+                </span>
                 {" · "}
-                <span>{q.role}</span>
+                {quote.role}
               </figcaption>
             </figure>
           ))}

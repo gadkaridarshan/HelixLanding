@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "FeaturesStrip",
+  "description": "Why-Helix 3-up feature strip rendered directly under the Hero. Each card highlights a single, concrete differentiator with an icon, headline, and one-line proof line.",
+  "items": [
+    {
+      "id": "atomic-breakdown",
+      "icon": "Atom",
+      "title": "Atomic work-breakdown",
+      "body": "Every prompt is decomposed into small, reviewable units — no more sprawling 2,000-line diffs that no reviewer wants to touch.",
+      "proof": "Plan → execute → ship, one unit at a time."
+    },
+    {
+      "id": "verified-prs",
+      "icon": "ShieldCheck",
+      "title": "Verified before it ships",
+      "body": "Each unit is checked against your repo — types, tests, lint, and protected paths — before a PR is opened.",
+      "proof": "Quality bar enforced per unit, not per agent run."
+    },
+    {
+      "id": "dependency-aware",
+      "icon": "GitBranch",
+      "title": "Dependency-aware orchestration",
+      "body": "Units are executed in order with explicit dependencies, so refactors land safely on top of foundation work.",
+      "proof": "Parallelize only when it's actually safe to do so."
+    }
+  ]
+}

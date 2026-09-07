@@ -1,6 +1,6 @@
 // helix: app/components/sections/Personas.tsx
 /**
- * @helix:story USER-308000
+ * @helix:story USER-23000
  *
  * Personas — re-export shim so `@/app/components/sections/Personas` resolves
  * to the canonical implementation.

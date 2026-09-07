@@ -1,9 +1,9 @@
-// helix: app/components/sections/CTA.tsx
+// helix: app/components/sections/Cta.tsx
 /**
- * @helix:story USER-567000
+ * @helix:story USER-23000
  *
- * CTA — re-export of the canonical implementation from
- * `components/landing/final-cta/FinalCTA`.
+ * Cta — re-export shim so `@/app/components/sections/Cta` resolves
+ * to the canonical implementation.
  */
-export { CTA } from "@/components/landing/final-cta/FinalCTA";
-export { default } from "@/components/landing/final-cta/FinalCTA";
+export { Cta } from "@/components/Cta";
+export { default } from "@/components/Cta";

@@ -1,6 +1,6 @@
 // helix: app/layout.tsx
 /**
- * @helix:story USER-308000
+ * @helix:story USER-23000
  *
  * Root layout — applies brand fonts to `<html>`, sets the dark color scheme,
  * and mounts the global metadata + viewport for the marketing site.

@@ -1,6 +1,6 @@
 // helix: app/components/sections/Hero.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-23000
  *
  * Hero — re-export shim so `@/app/components/sections/Hero` resolves
  * to the canonical implementation.

@@ -1,53 +1,20 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+// helix: next.config.mjs
+/**
+ * @helix:story USER-63000
+ *
+ * Next.js configuration — minimal, framework defaults. Keeps the
+ * marketing site deployable on Vercel with zero custom webpack
+ * tweaks so the platform's defaults (image optimization, caching,
+ * edge runtime) all stay intact.
+ */
 
-# Testing
-coverage/
-*.lcov
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  poweredByHeader: false,
+  experimental: {
+    typedRoutes: false,
+  },
+};
 
-.next/
-out/
-build/
-dist/
-
-# Misc
-.DS_Store
-*.pem
-Thumbs.db
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# Env files
-.env
-.env.*
-!.env.example
-
-# Vercel
-.vercel
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
-
-# IDE / editors
-.idea/
-.vscode/*
-!.vscode/.eslintrc.json
-!.vscode/settings.json
-!.vscode/extensions.json
-*.swp
-*.swo
-
-# OS
-.DS_Store
+export default nextConfig;

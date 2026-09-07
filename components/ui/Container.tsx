@@ -1,8 +1,10 @@
 // helix: components/ui/Container.tsx
 /**
- * @helix:story USER-308000
+ * @helix:story USER-23000
  *
- * Container — centered, responsive max-width wrapper. Pure server component.
+ * `Container` — shared max-width wrapper used by every marketing
+ * section. Applies consistent horizontal padding and a comfortable
+ * reading width at every breakpoint.
  */
 import * as React from "react";
 
@@ -10,7 +12,7 @@ import { cn } from "@/components/ui/cn";
 
 export interface ContainerProps {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   as?: keyof React.JSX.IntrinsicElements;
 }
 
@@ -19,16 +21,16 @@ export function Container({
   children,
   as: Tag = "div",
 }: ContainerProps): React.ReactElement {
-  const Component = Tag as React.ElementType;
+  const Element = Tag as React.ElementType;
   return (
-    <Component
+    <Element
       className={cn(
-        "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8",
+        "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
         className,
       )}
     >
       {children}
-    </Component>
+    </Element>
   );
 }
 
