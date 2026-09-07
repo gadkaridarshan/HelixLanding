@@ -19,6 +19,19 @@ import * as React from "react";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/components/ui/cn";
 
+interface LogoEntry {
+  readonly label: string;
+  readonly className?: string;
+}
+
+const LOGOS: ReadonlyArray<LogoEntry> = [
+  { label: "Acme", className: "font-semibold tracking-tight" },
+  { label: "Northwind", className: "font-semibold tracking-tight" },
+  { label: "Globex", className: "font-semibold tracking-tight" },
+  { label: "Initech", className: "font-semibold tracking-tight" },
+  { label: "Hooli", className: "font-semibold tracking-tight" },
+];
+
 interface Testimonial {
   readonly quote: string;
   readonly author: string;
@@ -43,25 +56,11 @@ const TESTIMONIALS: ReadonlyArray<Testimonial> = [
   },
   {
     quote:
-      "Main hasn't been red in three months. That's a first for us with AI agents.",
+      "Main hasn't been red in three months — that's a first for us with AI agents in the loop.",
     author: "Marcus D.",
     role: "Founding Engineer",
     company: "Dev Tools Startup",
   },
-];
-
-interface LogoEntry {
-  readonly label: string;
-  readonly className?: string;
-}
-
-const LOGOS: ReadonlyArray<LogoEntry> = [
-  { label: "Acme", className: "font-semibold tracking-tight" },
-  { label: "Northwind", className: "font-semibold tracking-tight" },
-  { label: "Globex", className: "font-semibold tracking-tight" },
-  { label: "Initech", className: "font-semibold tracking-tight" },
-  { label: "Hooli", className: "font-semibold tracking-tight" },
-  { label: "Stark", className: "font-semibold tracking-tight" },
 ];
 
 export interface SocialProofProps {
@@ -76,75 +75,78 @@ export function SocialProof({
       id="social-proof"
       aria-labelledby="social-proof-heading"
       className={cn(
-        "relative border-y border-white/5 bg-white/[0.02] py-16 sm:py-20",
+        "relative border-y border-white/5 bg-white/[0.02] py-20 sm:py-24",
         className,
       )}
     >
       <Container>
-        <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
-            Trusted by builders
-          </p>
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="hx-chip mx-auto">
+            <span className="hx-chip-dot" />
+            Trusted by teams shipping with AI
+          </span>
           <h2
             id="social-proof-heading"
-            className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Teams shipping verified AI code with Helix.
+            Engineers and teams use Helix to ship AI-generated code they
+            actually trust.
           </h2>
-          <p className="mt-4 text-pretty text-base text-white/70 sm:text-lg">
-            From early-stage startups to platform teams at scale, Helix is
-            the orchestration layer for AI-driven development.
+          <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+            From solo makers to platform teams at scale — Helix turns
+            AI-generated diffs into review-ready units.
           </p>
-        </header>
+        </div>
 
+        {/* Logo wordmark band */}
         <ul
           role="list"
           aria-label="Companies using Helix"
-          className="mx-auto mt-10 flex w-full max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-4 text-white/45 sm:gap-x-12"
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-white/40"
         >
           {LOGOS.map((logo) => (
             <li
               key={logo.label}
               className={cn(
-                "text-lg uppercase tracking-[0.18em] sm:text-xl",
+                "text-lg uppercase tracking-[0.2em]",
                 logo.className,
               )}
-              aria-label={logo.label}
             >
               {logo.label}
             </li>
           ))}
         </ul>
 
+        {/* Testimonial cards */}
         <ul
           role="list"
-          className="mx-auto mt-12 grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-3"
+          className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3"
         >
-          {TESTIMONIALS.map((t, i) => (
+          {TESTIMONIALS.map((testimonial) => (
             <li
-              key={`${t.author}-${i}`}
-              className="relative isolate overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+              key={testimonial.author}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-black/10 backdrop-blur"
             >
               <svg
                 aria-hidden="true"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-6 w-6 text-cyan-400/60"
+                className="h-6 w-6 text-cyan-400/70"
               >
                 <path
                   d="M7.17 6C4.87 6 3 7.87 3 10.17c0 1.94 1.34 3.55 3.13 4.01-.2 1.34-.85 2.51-2.13 3.49 2.36-.34 4.13-1.45 5.16-3.04.71-1.1 1.34-2.54 1.34-4.46C10.5 7.87 8.63 6 7.17 6zm10 0c-2.3 0-4.17 1.87-4.17 4.17 0 1.94 1.34 3.55 3.13 4.01-.2 1.34-.85 2.51-2.13 3.49 2.36-.34 4.13-1.45 5.16-3.04.71-1.1 1.34-2.54 1.34-4.46 0-2.3-1.87-4.17-4.17-4.17z"
                   fill="currentColor"
                 />
               </svg>
-              <blockquote className="mt-4 text-pretty text-base leading-relaxed text-white/85">
-                {t.quote}
+              <blockquote className="mt-4 text-sm leading-relaxed text-white/80">
+                {testimonial.quote}
               </blockquote>
-              <figcaption className="mt-5 text-sm text-white/55">
-                <span className="font-semibold text-white/85">{t.author}</span>
-                <span aria-hidden="true"> · </span>
-                <span>
-                  {t.role}, {t.company}
+              <figcaption className="mt-5 text-xs text-white/50">
+                <span className="font-semibold text-white/80">
+                  {testimonial.author}
                 </span>
+                {" · "}
+                {testimonial.role}, {testimonial.company}
               </figcaption>
             </li>
           ))}

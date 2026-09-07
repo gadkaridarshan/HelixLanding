@@ -101,26 +101,20 @@ const USE_CASES: ReadonlyArray<UseCase> = [
     outcome:
       "Spin up Helix against any agent SDK, run the same prompt through atomic units, and compare the verified outputs side by side.",
     quote:
-      "Helix gave us reproducible, auditable runs across four agents in an afternoon.",
-    attribution: "Dr. Hana O., Research Lead — Applied AI Lab",
+      "Helix gave us reproducible, auditable runs across every agent we benchmark.",
+    attribution: "Dr. Hana T., ML Research Lead — Applied AI Lab",
     accent: "amber",
   },
 ];
 
-const accentRing: Record<Accent, string> = {
-  cyan: "before:bg-cyan-400/40",
-  violet: "before:bg-violet-400/40",
-  fuchsia: "before:bg-fuchsia-400/40",
-  emerald: "before:bg-emerald-400/40",
-  amber: "before:bg-amber-400/40",
-};
-
-const accentChip: Record<Accent, string> = {
-  cyan: "bg-cyan-400/10 text-cyan-200 ring-cyan-400/30",
-  violet: "bg-violet-400/10 text-violet-200 ring-violet-400/30",
-  fuchsia: "bg-fuchsia-400/10 text-fuchsia-200 ring-fuchsia-400/30",
-  emerald: "bg-emerald-400/10 text-emerald-200 ring-emerald-400/30",
-  amber: "bg-amber-400/10 text-amber-200 ring-amber-400/30",
+const ACCENT_CLASSES: Readonly<Record<Accent, string>> = {
+  cyan: "from-cyan-400/20 to-cyan-400/0 text-cyan-300 ring-cyan-400/30",
+  violet: "from-violet-400/20 to-violet-400/0 text-violet-300 ring-violet-400/30",
+  fuchsia:
+    "from-fuchsia-400/20 to-fuchsia-400/0 text-fuchsia-300 ring-fuchsia-400/30",
+  amber: "from-amber-400/20 to-amber-400/0 text-amber-300 ring-amber-400/30",
+  emerald:
+    "from-emerald-400/20 to-emerald-400/0 text-emerald-300 ring-emerald-400/30",
 };
 
 export interface UseCasesProps {
@@ -132,99 +126,98 @@ export function UseCases({ className }: UseCasesProps): React.ReactElement {
     <section
       id="use-cases"
       aria-labelledby="use-cases-heading"
-      className={cn(
-        "relative isolate overflow-hidden border-y border-white/5 bg-white/[0.015] py-24 sm:py-32",
-        className,
-      )}
+      className={cn("relative py-24 sm:py-32", className)}
     >
+      {/* Subtle decorative backdrop */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(60% 50% at 20% 0%, rgba(34,211,238,0.10), transparent 60%), radial-gradient(50% 50% at 85% 10%, rgba(139,92,246,0.10), transparent 60%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(80% 60% at 50% 30%, black 0%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(80% 60% at 50% 30%, black 0%, transparent 70%)",
+            "radial-gradient(700px 400px at 10% 0%, rgba(34,211,238,0.10), transparent 60%), radial-gradient(800px 400px at 100% 100%, rgba(139,92,246,0.10), transparent 60%)",
         }}
       />
 
       <Container>
-        <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="hx-chip mx-auto">
+            <span className="hx-chip-dot" />
             Use cases
-          </p>
+          </span>
           <h2
             id="use-cases-heading"
-            className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+            className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Built for every team shipping with AI.
+            Built for every way teams ship code with AI.
           </h2>
-          <p className="mt-4 text-pretty text-base text-white/70 sm:text-lg">
-            From solo founders to platform teams, Helix turns one good prompt
-            into a stack of atomic, reviewable pull requests.
+          <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+            From a single developer chasing a side project to a platform
+            team rolling out AI-assisted coding org-wide — Helix adapts to
+            the shape of your team.
           </p>
-        </header>
+        </div>
 
         <ul
           role="list"
-          className="mx-auto mt-12 grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {USE_CASES.map((uc) => (
-            <li
-              key={uc.id}
-              className={cn(
-                "group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-colors hover:border-white/20 hover:bg-white/[0.05]",
-                "before:absolute before:inset-x-0 before:top-0 before:h-px",
-                accentRing[uc.accent],
-              )}
-            >
-              <span
-                className={cn(
-                  "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ring-1 ring-inset",
-                  accentChip[uc.accent],
-                )}
+          {USE_CASES.map((useCase) => {
+            const accent = ACCENT_CLASSES[useCase.accent];
+            return (
+              <li
+                key={useCase.id}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-black/10 backdrop-blur transition hover:border-white/20 hover:bg-white/[0.05]"
               >
-                {uc.role}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold tracking-tight text-white">
-                {uc.headline}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/65">
-                <span className="font-semibold text-white/85">Scenario. </span>
-                {uc.scenario}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">
-                <span className="font-semibold text-white/85">Outcome. </span>
-                {uc.outcome}
-              </p>
+                {/* Accent gradient strip */}
+                <div
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-x-0 top-0 h-px bg-gradient-to-r",
+                    accent,
+                  )}
+                />
 
-              <figure className="mt-5 border-t border-white/10 pt-4">
-                <blockquote className="text-sm leading-relaxed text-white/80">
-                  <span aria-hidden="true" className="select-none text-cyan-300/70">
-                    &ldquo;
+                <div className="flex items-center justify-between">
+                  <span
+                    className={cn(
+                      "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset",
+                      accent,
+                    )}
+                  >
+                    {useCase.role}
                   </span>
-                  {uc.quote}
-                  <span aria-hidden="true" className="select-none text-cyan-300/70">
-                    &rdquo;
-                  </span>
-                </blockquote>
-                <figcaption className="mt-2 text-xs text-white/55">
-                  {uc.attribution}
-                </figcaption>
-              </figure>
-            </li>
-          ))}
+                </div>
+
+                <h3 className="mt-5 text-lg font-semibold text-white">
+                  {useCase.headline}
+                </h3>
+
+                <div className="mt-4 space-y-3 text-sm leading-relaxed text-white/70">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/50">
+                      Scenario
+                    </p>
+                    <p className="mt-1">{useCase.scenario}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/50">
+                      Outcome
+                    </p>
+                    <p className="mt-1">{useCase.outcome}</p>
+                  </div>
+                </div>
+
+                <figure className="mt-6 border-t border-white/10 pt-5">
+                  <blockquote className="text-sm italic leading-relaxed text-white/80">
+                    “{useCase.quote}”
+                  </blockquote>
+                  <figcaption className="mt-2 text-xs text-white/50">
+                    — {useCase.attribution}
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })}
         </ul>
       </Container>
     </section>

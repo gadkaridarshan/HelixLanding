@@ -1,7 +1,7 @@
 # Card Inventory
 
-- Sep 7, 2026, 4:28:54 PM CDT | USER-73000 | in_progress | development | Use cases social proof FAQ
-- Sep 7, 2026, 4:28:54 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
+- Sep 7, 2026, 4:29:36 PM CDT | USER-73000 | done | development | Use cases social proof FAQ
+- Sep 7, 2026, 4:29:25 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 4:28:26 PM CDT | USER-478000 | done | development | Hero how it works features
 - Sep 7, 2026, 4:28:07 PM CDT | USER-45000 | todo | deployment | Vercel deployment and SEO wiring · deliverable: README.md
 - Sep 7, 2026, 4:26:58 PM CDT | USER-303000 | done | development | Helix landing page site

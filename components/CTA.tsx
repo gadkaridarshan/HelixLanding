@@ -1,22 +1,23 @@
 // helix: components/CTA.tsx
 /**
  * @helix:story USER-73000
- * @helix:story USER-434000
+ * @helix:story USER-303000
  *
- * CTA — canonical landing-page closing call-to-action banner.
+ * CTA — the closing call-to-action block that converts a site
+ * visitor into a user or contributor.
  *
- *   • Polished, gradient-rich card with eyebrow, headline, copy.
- *   • Dual primary + secondary CTAs (live orchestrator + GitHub).
- *   • Bullet row removing last-mile friction.
+ *   • Eyebrow + bold headline + supporting copy.
+ *   • Primary CTA (Get early access) + secondary GitHub link.
+ *   • Short bullet row to remove the last bit of friction.
  *
- * Pure server component. Content is colocated so the surface ships
- * independently of any in-flight `@/content/cta.json` refactor.
+ * Pure server component. Brand surface (name, tagline, GitHub URL)
+ * is sourced from `lib/brand.ts` so the CTA matches the navbar,
+ * footer, and OG metadata without copy drift.
  */
 import * as React from "react";
 
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { cn } from "@/components/ui/cn";
+import { brand } from "@/lib/brand";
 
 export interface CTAProps {
   className?: string;
@@ -25,90 +26,134 @@ export interface CTAProps {
 export function CTA({ className }: CTAProps): React.ReactElement {
   return (
     <section
-      id="get-started"
+      id="cta"
       aria-labelledby="cta-heading"
-      className={cn("relative py-24 sm:py-32", className)}
+      className={"relative py-24 sm:py-32 " + (className ?? "")}
     >
       <Container size="md">
         <div
-          className="relative overflow-hidden rounded-3xl border border-white/10 p-10 text-center sm:p-14"
+          className="hx-surface-strong relative overflow-hidden rounded-3xl p-10 text-center sm:p-14"
           style={{
             backgroundImage:
-              "radial-gradient(800px 400px at 20% 0%, rgba(34,211,238,0.20), transparent 60%), radial-gradient(700px 400px at 100% 100%, rgba(139,92,246,0.20), transparent 60%), linear-gradient(135deg, #0a0f1f 0%, #0b1020 100%)",
+              "radial-gradient(800px 400px at 20% 0%, rgba(34,211,238,0.18), transparent 60%), radial-gradient(700px 400px at 100% 100%, rgba(139,92,246,0.18), transparent 60%)",
           }}
         >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-              backgroundSize: "44px 44px",
-              maskImage:
-                "radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%)",
-              WebkitMaskImage:
-                "radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%)",
-            }}
-          />
+          <span className="hx-chip mx-auto">
+            <span className="hx-chip-dot" />
+            Early access
+          </span>
 
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
-            Ready when you are
-          </p>
           <h2
             id="cta-heading"
-            className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+            className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Ship the next feature like you planned it.
+            Ship AI-generated code you actually trust.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-base text-white/70 sm:text-lg">
-            Helix turns one good prompt into a stack of atomic, reviewable
-            pull requests. Start orchestrating your AI coding agents today.
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+            Join the early access program for {brand.name} — atomic units,
+            verified merges, and an AI coding workflow your team can stand
+            behind.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              href="https://helix-ai-orchestrator.vercel.app"
-              variant="primary"
-              size="lg"
-              ariaLabel="Open the Helix live orchestrator"
+            <a
+              href="#get-started"
+              className="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-cyan-400 to-violet-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-300 hover:to-violet-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
             >
               Get early access
-            </Button>
-            <Button
-              href="https://github.com/gadkaridarshan/Helix"
-              variant="secondary"
-              size="lg"
-              ariaLabel="View Helix on GitHub"
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="ml-2 h-4 w-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+            <a
+              href={brand.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              View on GitHub
-            </Button>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="mr-2 h-4 w-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.72-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.81 0 .27.18.6.69.49C19.14 20.62 22 16.78 22 12.25 22 6.58 17.52 2 12 2z"
+                />
+              </svg>
+              Star on GitHub
+            </a>
           </div>
 
           <ul
             role="list"
-            className="mx-auto mt-10 grid w-full max-w-2xl grid-cols-1 gap-3 text-left sm:grid-cols-3"
+            className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-3 text-left text-sm text-white/70 sm:grid-cols-3"
           >
-            {[
-              "One-line intent → dependency graph in seconds",
-              "Isolated worktrees, auditable runs",
-              "Review-ready PRs with full traces",
-            ].map((line) => (
-              <li
-                key={line}
-                className="flex items-start gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white/75"
+            <li className="flex items-start gap-2">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400"
               >
-                <span
-                  aria-hidden="true"
-                  className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-cyan-300"
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
                 />
-                <span>{line}</span>
-              </li>
-            ))}
+              </svg>
+              <span>Verified atomic units</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span>Bring your own CI</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span>Free during early access</span>
+            </li>
           </ul>
-
-          <p className="mt-8 text-xs text-white/50">
-            Open source. Self-hosted. Built for teams that ship.
-          </p>
         </div>
       </Container>
     </section>

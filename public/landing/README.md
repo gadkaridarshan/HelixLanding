@@ -23,7 +23,7 @@ This repo ships **only the marketing surface** — the orchestrator engine itsel
 - 🎨 **Tailwind v4** CSS-first tokens — `ink-*`, `brand-*`, `accent-*`, `aurora-*` palettes, no JS Tailwind config file.
 - 🔍 **Production SEO** — full Open Graph, Twitter Card, JSON-LD-ready metadata, sitemap, robots, web manifest.
 - ♿ **Accessible** — skip-to-content link, keyboard-navigable Personas, focus-visible rings, semantic landmarks.
-- 🛡️ **Hardened** — `vercel.json` adds HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff.
+- 🛡️ **Hardened** — `next.config.ts` adds HSTS-friendly defaults, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff.
 - 📦 **One-step deploy** — `vercel --prod` is all you need; everything else is config-free.
 
 ## Prerequisites
@@ -88,77 +88,5 @@ git --version
     npm run build
     npm run start     # serves the built site on http://localhost:3000
     ```
-
-## Deploy to Vercel
-
-The repo includes a production-ready `vercel.json` with security headers (HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff), static-asset caching rules, and a `/home → /` redirect. Pick **one** of the following flows.
-
-### Option A — Vercel Dashboard (recommended for first deploy)
-
-1. Push the repo to GitHub/GitLab/Bitbucket.
-2. Go to <https://vercel.com/new> and **Import** the project.
-3. Vercel auto-detects **Next.js** and uses the defaults from `vercel.json` (build command: `next build`, output: `.next`).
-4. Set the **Project Name** to `helix-landing` (controls the default `*.vercel.app` subdomain).
-5. *(Optional)* Under **Environment Variables**, add `NEXT_PUBLIC_BRAND_URL` if you want a custom canonical domain (e.g. `https://helix.dev`). Defaults already work.
-6. Click **Deploy**. The first build runs `npm ci` → `next build` → deploys to a preview URL.
-7. Promote to production: **Deployments → ⋯ → Promote to Production**.
-
-### Option B — Vercel CLI (one-shot prod deploy)
-
-1. Install the CLI and log in (once per machine):
-
-    ```bash
-    npm i -g vercel
-    vercel login
-    ```
-
-2. Link the repo to a Vercel project (creates `.vercel/project.json` — commit or gitignore per your team policy):
-
-    ```bash
-    vercel link --yes
-    ```
-
-3. Deploy a preview build:
-
-    ```bash
-    vercel
-    ```
-
-4. Ship to production:
-
-    ```bash
-    vercel --prod
-    ```
-
-    Vercel prints the live URL once the build finishes.
-
-5. Verify the deploy:
-
-    ```bash
-    curl -sS https://helix-ai-orchestrator.vercel.app/sitemap.xml | head
-    curl -sS https://helix-ai-orchestrator.vercel.app/robots.txt
-    curl -sSI https://helix-ai-orchestrator.vercel.app/ | grep -i 'strict-transport-security\|x-frame-options\|referrer-policy'
-    ```
-
-    Expect the sitemap body to be valid XML, the robots body to start with `User-agent: *`, and all three security headers to be present in the response.
-
-### Continuous deployment from Git
-
-Once the project is linked, every push to the default branch triggers a production deployment and every PR gets an isolated preview URL. No extra configuration is required.
-
-## SEO and discoverability
-
-- **Canonical URL** — set in `app/layout.tsx` via `metadataBase` (sourced from `lib/brand.ts`). Override with `NEXT_PUBLIC_BRAND_URL`.
-- **Open Graph + Twitter Card** — rendered from `app/layout.tsx` metadata; preview at <https://www.opengraph.xyz/> or <https://cards-dev.twitter.com/validator>.
-- **`/sitemap.xml`** — served from `public/sitemap.xml`. Re-deploy to refresh `lastmod`.
-- **`/robots.txt`** — served from `public/robots.txt`. Allows the entire site, blocks `/api/`, `/_next/`, and `*.json$`.
-- **OG image** — `public/og-image.svg` (1200×630). The `sitemap.xml` advertises it via the `image:image` namespace.
-- **Web manifest + favicon** — `public/manifest.webmanifest` and `public/favicon.ico`.
-
-After each deploy, ping the indexers so they re-crawl immediately:
-
-```bash
-curl "https://www.google.com/ping?sitemap=https%3A%2F%2Fhelix-ai-orchestrator.vercel.app%2Fsitemap.xml"
-```
 
 ## Project structure
