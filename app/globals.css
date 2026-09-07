@@ -1,43 +1,62 @@
-// helix: app/globals.css
+/* helix: app/globals.css */
 /**
  * @helix:story USER-176000
+ * @helix:story USER-765000
  *
- * Global CSS — Tailwind v4 entry, brand tokens, and base resets.
+ * globals.css — global stylesheet for the Helix landing page.
  *
- * This file is the single source of truth for the marketing site's
- * global styling. It does three things in order:
+ * Responsibilities:
+ *   1. Load Tailwind v4 and register the brand design tokens inside the
+ *      `@theme` block so utility classes (e.g. `bg-ink-950`, `text-brand-400`,
+ *      `rounded-card`) resolve at build time.
+ *   2. Mirror the token values from `lib/theme.ts` into CSS custom
+ *      properties on `:root` so plain CSS, inline `style` attributes, and
+ *      SVG fills can consume them without going through Tailwind.
+ *   3. Apply a polished, on-brand background (layered radial + linear
+ *      gradients with a subtle grid + noise texture) so the page never
+ *      looks unfinished.
+ *   4. Apply base resets (modern-normalize-style), default body type, and
+ *      typographic defaults that every later section can rely on.
+ *   5. Provide a few high-leverage utility classes (`.surface`, `.glow`,
+ *      `.text-gradient`) used across sections.
  *
- *   1. Imports Tailwind v4 (`@import "tailwindcss"`).
- *   2. Re-declares the brand tokens inside `@theme` so utility classes
- *      like `bg-ink-950`, `text-brand-400`, and `rounded-card` resolve
- *      at build time. These mirror the values in `lib/theme.ts`.
- *   3. Sets `:root` CSS custom properties and applies base resets
- *      (font smoothing, body background, etc.).
- *
- * Dark mode is the default — we set `color-scheme: dark` on `<html>`
- * and pick a deep ink-blue canvas. The page is intentionally dark-first
- * because the brand speaks fluent dev-tool / terminal and the aurora
- * gradient highlights read best on a deep canvas.
+ * Notes:
+ *   • Tailwind v4 uses the `@import "tailwindcss"` syntax; no
+ *     `tailwind.config.js` is required (config lives in this `@theme`
+ *     block). The PostCSS pipeline is configured in `postcss.config.mjs`
+ *     to use `@tailwindcss/postcss`.
+ *   • Token values intentionally mirror `lib/theme.ts` so the TypeScript
+ *     and CSS surfaces stay in lockstep. If you change one, change the
+ *     other.
+ *   • The background is intentionally subtle — gradient washes plus a
+ *     hairline grid — so it never competes with section content.
  */
 
 @import "tailwindcss";
 
-@theme {
-  /* Cool dark-blue ink family — page canvas. */
-  --color-ink-50: #f5f7fb;
-  --color-ink-100: #e6ebf3;
-  --color-ink-200: #c8d3e3;
-  --color-ink-300: #9aabc4;
-  --color-ink-400: #64779a;
-  --color-ink-500: #3f5275;
-  --color-ink-600: #2a3a5a;
-  --color-ink-700: #1d2a44;
-  --color-ink-800: #121c30;
-  --color-ink-900: #0a1222;
-  --color-ink-950: #050a14;
+/* -------------------------------------------------------------------------
+ * 1. Design tokens — CSS custom properties on :root
+ *
+ * These mirror `lib/theme.ts` so plain CSS / inline `style` attributes /
+ * SVG fills can consume them directly (no Tailwind round-trip required).
+ * ------------------------------------------------------------------------- */
 
-  /* Cyan brand family — primary CTAs. */
-  --color-brand-50: #ecfeff;
+:root {
+  /* Ink (cool dark canvas) */
+  --color-ink-50:  #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+
+  /* Brand (cyan) */
+  --color-brand-50:  #ecfeff;
   --color-brand-100: #cffafe;
   --color-brand-200: #a5f3fc;
   --color-brand-300: #67e8f9;
@@ -49,8 +68,8 @@
   --color-brand-900: #164e63;
   --color-brand-950: #083344;
 
-  /* Violet accent family — emphasis. */
-  --color-accent-50: #f5f3ff;
+  /* Accent (violet) */
+  --color-accent-50:  #f5f3ff;
   --color-accent-100: #ede9fe;
   --color-accent-200: #ddd6fe;
   --color-accent-300: #c4b5fd;
@@ -62,119 +81,390 @@
   --color-accent-900: #4c1d95;
   --color-accent-950: #2e1065;
 
-  /* Aurora highlight scale. */
-  --color-aurora-50: #f0fbff;
-  --color-aurora-100: #d6f1ff;
-  --color-aurora-200: #b4e7ff;
-  --color-aurora-300: #8ad8ff;
-  --color-aurora-400: #5cc3ff;
-  --color-aurora-500: #33a8ff;
-  --color-aurora-600: #1f8aff;
-  --color-aurora-700: #176fe6;
-  --color-aurora-800: #1559bf;
-  --color-aurora-900: #174a8c;
-  --color-aurora-950: #0f2c5c;
+  /* Aurora (multi-stop highlight family) */
+  --color-aurora-300: #a5f3fc;
+  --color-aurora-400: #67e8f9;
+  --color-aurora-500: #22d3ee;
+  --color-aurora-600: #a78bfa;
 
-  /* Neutral scale — text on dark. */
-  --color-neutral-50: #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
-  --color-neutral-950: #020617;
+  /* Neutral */
+  --color-neutral-50:  #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+  --color-neutral-950: #09090b;
 
-  /* Radii. */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-card: 1rem;
-  --radius-lg: 1.25rem;
+  /* Gradients */
+  --gradient-aurora:  linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #f0abfc 100%);
+  --gradient-brand:   linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  --gradient-accent:  linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  --gradient-surface: linear-gradient(180deg, #020617 0%, #0f172a 50%, #020617 100%);
+
+  /* Radii */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-card: 0.875rem;
+  --radius-lg:   1rem;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md:   0 4px 6px -1px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.45);
+  --shadow-lg:   0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 40px -8px rgb(34 211 238 / 0.45);
+  --shadow-ring: 0 0 0 1px rgb(148 163 184 / 0.15);
+
+  /* Font stacks (consumed by `app/fonts.ts` CSS variables) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+               Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Motion */
+  --motion-fast:   120ms;
+  --motion-base:   200ms;
+  --motion-slow:   320ms;
+  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Page-level */
+  --page-bg:           #020617;
+  --page-fg:           #e2e8f0;
+  --page-muted:        #94a3b8;
+  --page-grid-color:   rgb(148 163 184 / 0.06);
+  --page-glow-brand:   rgb(34 211 238 / 0.18);
+  --page-glow-accent:  rgb(167 139 250 / 0.14);
+
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------------------------------
+ * 2. Tailwind v4 `@theme` — re-declares tokens so utilities resolve at build.
+ * ------------------------------------------------------------------------- */
+
+@theme {
+  /* Color scales — Tailwind v4 reads `--color-*` to emit utilities like
+   * `bg-ink-950`, `text-brand-400`, `border-accent-500/40`, etc. */
+  --color-ink-50:  #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+
+  --color-brand-50:  #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
+  --color-brand-950: #083344;
+
+  --color-accent-50:  #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+  --color-accent-700: #6d28d9;
+  --color-accent-800: #5b21b6;
+  --color-accent-900: #4c1d95;
+  --color-accent-950: #2e1065;
+
+  --color-aurora-300: #a5f3fc;
+  --color-aurora-400: #67e8f9;
+  --color-aurora-500: #22d3ee;
+  --color-aurora-600: #a78bfa;
+
+  --color-neutral-50:  #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+  --color-neutral-950: #09090b;
+
+  /* Radii */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-card: 0.875rem;
+  --radius-lg:   1rem;
   --radius-pill: 9999px;
 
-  /* Shadows. */
-  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.35);
-  --shadow-md: 0 4px 12px rgba(2, 6, 23, 0.45);
-  --shadow-lg: 0 12px 32px rgba(2, 6, 23, 0.55);
-  --shadow-glow: 0 0 40px rgba(34, 211, 238, 0.25);
-  --shadow-ring: 0 0 0 1px rgba(148, 163, 184, 0.18);
+  /* Shadows */
+  --shadow-sm:   0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md:   0 4px 6px -1px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.45);
+  --shadow-lg:   0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 40px -8px rgb(34 211 238 / 0.45);
 
-  /* Font stacks — applied via CSS variables from app/fonts.ts. */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
-    Menlo, Consolas, "Liberation Mono", monospace;
+  /* Font families */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Font sizes — `[fontSize, lineHeight]` tuples per Tailwind convention. */
+  --text-xs:   0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm:   0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg:   1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl:   1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl:  1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl:  1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl:  2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl:  3rem;
+  --text-5xl--line-height: 1.1;
+  --text-6xl:  3.75rem;
+  --text-6xl--line-height: 1.05;
+
+  /* Tracking */
+  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.035em;
 }
 
-:root {
-  color-scheme: dark;
-  --background: #050a14;
-  --foreground: #e2e8f0;
-  --muted: #94a3b8;
-  --border: rgba(148, 163, 184, 0.18);
-  --ring: rgba(34, 211, 238, 0.4);
+/* -------------------------------------------------------------------------
+ * 3. Base resets + modern typography defaults
+ *
+ * Modeled on modern-normalize: predictable defaults across browsers,
+ * accessible defaults, and brand-aligned type.
+ * ------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--color-ink-700);
 }
 
-* {
-  border-color: var(--border);
-}
-
-html,
-body {
-  background-color: var(--background);
-  color: var(--foreground);
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.5;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100dvh;
-  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--page-bg);
+  color: var(--page-fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-feature-settings: "ss01", "cv11";
 }
 
-::selection {
-  background-color: rgba(34, 211, 238, 0.35);
-  color: #f8fafc;
+/* Headings — display voice with tight tracking, relying on Inter 600/700. */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink-50);
+  line-height: 1.15;
 }
 
-:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
+h1 { font-size: var(--text-5xl); letter-spacing: var(--tracking-tighter); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+@media (min-width: 1024px) {
+  h1 { font-size: var(--text-6xl); }
+  h2 { font-size: var(--text-5xl); }
+}
+
+p {
+  margin: 0;
+  color: var(--color-ink-200);
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 code,
-pre,
 kbd,
-samp {
+samp,
+pre {
   font-family: var(--font-mono);
+  font-size: 0.95em;
 }
 
-/* Subtle global background — layered radial glows on the deep canvas. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
+::selection {
+  background-color: var(--color-brand-500);
+  color: var(--color-ink-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* -------------------------------------------------------------------------
+ * 4. Polished page background — layered gradient + grid + soft glow
+ *
+ * Applied to `body` via `background-image` (in addition to the solid
+ * background-color fallback above). The grid is intentionally hairline
+ * and the radial glows are heavily diffused so the page reads as
+ * "polished dark" rather than "flat black".
+ * ------------------------------------------------------------------------- */
+
+body {
+  background-color: var(--page-bg);
+  background-image:
+    /* Brand-tinted radial glow (top-left) */
     radial-gradient(
-      60% 50% at 20% 0%,
-      rgba(34, 211, 238, 0.10),
+      ellipse 80% 60% at 15% 0%,
+      var(--page-glow-brand) 0%,
       transparent 60%
     ),
+    /* Accent-tinted radial glow (bottom-right) */
     radial-gradient(
-      50% 40% at 90% 10%,
-      rgba(167, 139, 250, 0.10),
-      transparent 60%
+      ellipse 70% 50% at 85% 100%,
+      var(--page-glow-accent) 0%,
+      transparent 65%
     ),
-    radial-gradient(
-      80% 60% at 50% 100%,
-      rgba(15, 44, 92, 0.35),
-      transparent 60%
+    /* Hairline grid texture */
+    linear-gradient(var(--page-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--page-grid-color) 1px, transparent 1px),
+    /* Deep vertical wash for depth */
+    var(--gradient-surface);
+  background-size:
+    100% 100%,
+    100% 100%,
+    48px 48px,
+    48px 48px,
+    100% 100%;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+  background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+}
+
+/* -------------------------------------------------------------------------
+ * 5. High-leverage utility classes used across sections.
+ *
+ * Kept minimal — sections should compose Tailwind utilities for everything
+ * they can; these are reserved for cross-section patterns that benefit
+ * from a single named class.
+ * ------------------------------------------------------------------------- */
+
+@layer components {
+  /* Subtle frosted card surface used by Features / Personas / FAQ etc. */
+  .surface {
+    background-color: rgb(15 23 42 / 0.6);
+    border: 1px solid rgb(148 163 184 / 0.12);
+    border-radius: var(--radius-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Soft cyan glow used for hero accents, CTA hover halos, etc. */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Aurora gradient text used for the brand wordmark and headlines. */
+  .text-gradient {
+    background-image: var(--gradient-aurora);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Hairline divider that reads on dark without screaming. */
+  .divider {
+    height: 1px;
+    width: 100%;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(148 163 184 / 0.25) 50%,
+      transparent 100%
     );
+  }
+}
+
+/* -------------------------------------------------------------------------
+ * 6. Reduced motion — respect the OS-level preference.
+ * ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
