@@ -33,32 +33,41 @@ export function Personas({ className }: PersonasProps): React.ReactElement {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute -top-32 left-1/2 h-[480px] w-[860px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(34,211,238,0.18),transparent_70%)] blur-2xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.06)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_80%)]" />
+        <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-brand-500/10 blur-3xl" />
+        <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-accent-500/10 blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
       </div>
 
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-cyan-300">
-            Built for every seat at the table
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-brand-200">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-brand-400"
+            />
+            Built for every role
           </p>
           <h2
             id="personas-heading"
-            className="mt-5 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            className="mt-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
           >
-            Whether you write the code, review it, or ship it —{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
-              Helix fits how you work.
-            </span>
+            One orchestrator. Five ways to win.
           </h2>
-          <p className="mt-4 text-pretty text-base leading-relaxed text-slate-300 sm:text-lg">
-            Pick the role closest to yours. Every persona gets a different
-            angle on the same orchestrator — atomic work-breakdown, explicit
-            dependencies, and reviewable PRs.
+          <p className="mt-4 text-base leading-relaxed text-ink-200 sm:text-lg">
+            Whether you write the code, review the PRs, or sign off the
+            roadmap — Helix makes AI-driven delivery feel like a teammate you
+            actually trust.
           </p>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-12 sm:mt-16">
           <PersonasTabs personas={personas} />
         </div>
       </Container>
