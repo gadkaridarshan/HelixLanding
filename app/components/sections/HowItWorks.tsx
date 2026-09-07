@@ -1,3 +1,3 @@
 // helix: app/components/sections/HowItWorks.tsx
-export { HowItWorks } from "@/components/landing/how-it-works/HowItWorks";
-export { default } from "@/components/landing/how-it-works/HowItWorks";
+export { HowItWorks } from "@/components/sections/HowItWorks";
+export { default } from "@/components/sections/HowItWorks";

@@ -1,24 +1,23 @@
-<!-- helix: public/og.svg -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#05060d"/>
-      <stop offset="100%" stop-color="#0a0b1a"/>
+      <stop offset="0%" stop-color="#060818"/>
+      <stop offset="100%" stop-color="#0a0f24"/>
     </linearGradient>
-    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="50%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#f59e0b"/>
+    <linearGradient id="text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
     </linearGradient>
     <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="950" cy="180" r="260" fill="url(#glow)"/>
-  <text x="80" y="280" font-family="Inter, system-ui, sans-serif" font-size="64" font-weight="700" fill="#ffffff">Helix</text>
-  <text x="80" y="360" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="600" fill="url(#brand)">Atomic work-breakdown for</text>
-  <text x="80" y="420" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="600" fill="url(#brand)">AI coding agents</text>
-  <text x="80" y="540" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#94a3b8">Reviewable atoms, not sprawling diffs.</text>
+  <circle cx="200" cy="150" r="320" fill="url(#glow)"/>
+  <circle cx="1000" cy="500" r="280" fill="url(#glow)" opacity="0.7"/>
+  <text x="80" y="320" font-family="Inter, system-ui, sans-serif" font-size="86" font-weight="700" fill="url(#text)">Helix</text>
+  <text x="80" y="420" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="600" fill="#e6ebff">Atomic work-breakdown</text>
+  <text x="80" y="490" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="600" fill="#e6ebff">for AI coding agents.</text>
 </svg>

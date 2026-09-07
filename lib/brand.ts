@@ -24,17 +24,43 @@
  *     Anywhere that URL is rendered on this product's live site it
  *     **must** be labelled as a "reference site" link (see the Footer
  *     for the canonical pattern). It must never be labelled as "live
- *     site", "deployed site", or any equivalent phrase.
+ *     site", "our site", "the Helix app", or anything that would
+ *     conflate the two.
  */
 
-export const brand = {
+export interface Brand {
+  /** Short product name. */
+  name: string;
+  /** Brand mark (single character / glyph) used in the navbar logo. */
+  mark: string;
+  /** One-line value proposition shown in metadata + hero. */
+  tagline: string;
+  /** Longer description for SEO + social cards. */
+  description: string;
+  /** Canonical live URL of this product (what Vercel deploys). */
+  url: string;
+  /** Visual / brand reference URL — labelled as "reference site" only. */
+  referenceUrl: string;
+  /** Source repository. */
+  repoUrl: string;
+  /** Primary support / contact email (placeholder). */
+  email: string;
+  /** OG image path under `public/`. */
+  ogImage: string;
+  /** Twitter handle. */
+  twitter: string;
+}
+
+export const brand: Brand = {
   name: "Helix",
+  mark: "H",
   tagline: "Atomic work-breakdown for AI coding agents",
   description:
-    "Helix is the atomic work-breakdown orchestrator for AI coding agents. Decompose every prompt into reviewable steps, execute them in order with explicit dependencies, and ship small, verifiable PRs instead of one sprawling diff.",
-  url: "https://helix.dev",
-  twitter: "@helixdev",
+    "Helix decomposes every prompt into atomic, reviewable units, executes them in order with explicit dependencies, and verifies each unit against your repo — producing small, reviewable PRs instead of one sprawling diff.",
+  url: "https://helix-landing.vercel.app",
+  referenceUrl: "https://helix-ai-orchestrator.vercel.app",
+  repoUrl: "https://github.com/gadkaridarshan/Helix",
+  email: "hello@helix.dev",
   ogImage: "/og.svg",
-} as const;
-
-export type Brand = typeof brand;
+  twitter: "@helix_dev",
+};

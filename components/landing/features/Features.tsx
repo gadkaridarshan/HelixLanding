@@ -2,57 +2,125 @@
 /**
  * @helix:story USER-303000
  *
- * Features — six-card grid covering the load-bearing capabilities of
- * the Helix orchestrator. Each card pairs an icon, a short title, and
- * a one-line description.
+ * Features — six core capabilities of Helix arranged in a 3-column grid
+ * on md+ screens, single column on mobile.
+ *
+ * Each feature card has an inline SVG glyph (no third-party icon
+ * dependency), a title, and a one-sentence description.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
-import { cn } from "@/components/ui/cn";
 
 interface Feature {
-  readonly title: string;
-  readonly description: string;
-  readonly icon: React.ReactNode;
+  title: string;
+  description: string;
+  glyph: React.ReactNode;
 }
 
 const FEATURES: ReadonlyArray<Feature> = [
   {
     title: "Atomic decomposition",
     description:
-      "Every prompt is split into reviewable units with explicit inputs, outputs, and dependencies.",
-    icon: <AtomIcon />,
+      "Every prompt is split into reviewable units with explicit acceptance criteria, not one monolithic change.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <path
+          d="M4 7h16M4 12h10M4 17h16"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+        <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+    ),
   },
   {
-    title: "Dependency graph",
+    title: "Ordered execution",
     description:
-      "Units execute in topological order so the codebase never lands in an unbuildable state.",
-    icon: <GraphIcon />,
+      "Units run in topological order with explicit dependencies — Helix never loses track of what depends on what.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <path
+          d="M6 4v6m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m6-4v4m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m6-8v12"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
   },
   {
     title: "Repo-aware verification",
     description:
-      "Every unit is checked against your types, tests, and lint before it can move forward.",
-    icon: <ShieldIcon />,
+      "Each unit is checked against the rest of your repo — types, tests, lint, build — before it ships.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <path
+          d="m5 12 4 4 10-10"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+    ),
   },
   {
-    title: "Small reviewable PRs",
+    title: "Small, reviewable PRs",
     description:
-      "One PR per task — small enough to read in a coffee break, large enough to be useful.",
-    icon: <PullRequestIcon />,
+      "Helix opens one PR per unit, so reviewers see a focused diff they can actually reason about.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <path
+          d="M7 4v12a3 3 0 0 0 3 3h7M7 4l-3 3m3-3 3 3"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
-    title: "Deterministic replay",
+    title: "Works with any agent",
     description:
-      "Re-run a task with the same plan and the same inputs to reproduce any prior result.",
-    icon: <ReplayIcon />,
+      "Pluggable executor interface — bring your favourite coding agent; Helix orchestrates the loop.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <path
+          d="M4 7h6m6 0h4M4 12h4m4 0h8M4 17h10m4 0h2"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
   },
   {
-    title: "Bring your own agent",
+    title: "Auditable by default",
     description:
-      "Helix orchestrates — your model, your prompts, your provider. No lock-in.",
-    icon: <PlugIcon />,
+      "Every step is logged: decomposition, decisions, verifications, retries. Reproducible from the same prompt.",
+    glyph: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+        <rect
+          x="4"
+          y="4"
+          width="16"
+          height="16"
+          rx="3"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        />
+        <path
+          d="M8 9h8M8 13h6M8 17h4"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
   },
 ];
 
@@ -60,40 +128,38 @@ export function Features(): React.ReactElement {
   return (
     <section
       id="features"
-      className="relative scroll-mt-24 py-20 sm:py-28"
       aria-labelledby="features-heading"
+      className="relative py-20 sm:py-28"
     >
-      <Container>
-        <div className="max-w-2xl">
-          <p className="hx-eyebrow">Features</p>
-          <h2
-            id="features-heading"
-            className="hx-heading mt-3"
-          >
+      <Container size="lg">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="hx-eyebrow">Features</span>
+          <h2 id="features-heading" className="hx-heading-sm mt-3">
             Everything an AI coding agent{" "}
-            <span className="hx-text-gradient">should have shipped with</span>.
+            <span className="hx-text-gradient">forgets to do</span>.
           </h2>
-          <p className="hx-subheading">
-            Helix replaces the sprawling, unverifiable output of a raw agent
-            with a structured plan, a verification gate, and a PR-shaped
-            deliverable.
+          <p className="hx-subheading mx-auto mt-4">
+            Helix is the orchestration layer that turns "make me a feature"
+            into a sequence of small, verified, mergeable changes.
           </p>
         </div>
 
-        <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f) => (
             <li
               key={f.title}
-              className={cn("hx-card hx-card-hover flex flex-col gap-3")}
+              className="hx-surface group relative flex flex-col gap-3 p-6 transition-colors hover:border-helix-border-strong"
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-cyan-400/20 to-violet-500/20 text-cyan-300"
+                className="grid h-9 w-9 place-items-center rounded-lg border border-helix-border-strong bg-gradient-to-br from-cyan-400/15 to-violet-500/15 text-cyan-300"
               >
-                {f.icon}
+                {f.glyph}
               </span>
-              <h3 className="text-lg font-semibold text-white">{f.title}</h3>
-              <p className="text-sm leading-relaxed text-slate-400">
+              <h3 className="text-base font-semibold text-helix-text">
+                {f.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-helix-text-muted">
                 {f.description}
               </p>
             </li>
@@ -101,66 +167,6 @@ export function Features(): React.ReactElement {
         </ul>
       </Container>
     </section>
-  );
-}
-
-/* ---------- Icons (inline SVG, no runtime deps) ---------- */
-
-function AtomIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="2" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-60 12 12)" />
-    </svg>
-  );
-}
-function GraphIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="6" cy="6" r="2" />
-      <circle cx="18" cy="6" r="2" />
-      <circle cx="12" cy="18" r="2" />
-      <path d="M8 6h8M7.3 7.3l3.4 8.4M16.7 7.3l-3.4 8.4" />
-    </svg>
-  );
-}
-function ShieldIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-      <path d="m9 12 2 2 4-4" />
-    </svg>
-  );
-}
-function PullRequestIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="6" cy="6" r="2" />
-      <circle cx="6" cy="18" r="2" />
-      <circle cx="18" cy="18" r="2" />
-      <path d="M6 8v8" />
-      <path d="M18 16V8a4 4 0 0 0-4-4H8" />
-    </svg>
-  );
-}
-function ReplayIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 12a9 9 0 1 0 3-6.7" />
-      <path d="M3 4v5h5" />
-    </svg>
-  );
-}
-function PlugIcon(): React.ReactElement {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M9 2v4" />
-      <path d="M15 2v4" />
-      <path d="M6 6h12v6a6 6 0 0 1-12 0Z" />
-      <path d="M12 18v4" />
-    </svg>
   );
 }
 

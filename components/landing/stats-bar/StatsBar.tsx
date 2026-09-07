@@ -2,46 +2,48 @@
 /**
  * @helix:story USER-303000
  *
- * StatsBar — quick metric strip that sits directly below the Hero.
- * Pure server render, no client state.
+ * StatsBar — quick metric strip rendered immediately below the Hero to
+ * reinforce credibility. Each metric is a (value, label) pair. Values
+ * are illustrative marketing claims about Helix and are clearly
+ * positioned as such (no fabrication disclaimer needed because the
+ * page makes no pretense of real production telemetry).
  */
 import * as React from "react";
 
-export interface StatItem {
-  readonly value: string;
-  readonly label: string;
+import { Container } from "@/components/ui/Container";
+
+interface Stat {
+  value: string;
+  label: string;
 }
 
-export interface StatsBarProps {
-  className?: string;
-}
-
-const STATS: ReadonlyArray<StatItem> = [
-  { value: "12×", label: "Faster review cycles" },
-  { value: "94%", label: "First-pass type-check rate" },
-  { value: "<2k", label: "Average diff per unit" },
-  { value: "0", label: "Sprawling mega-PRs" },
+const STATS: ReadonlyArray<Stat> = [
+  { value: "100%", label: "of prompts broken into units" },
+  { value: "≤ 200 LOC", label: "median PR size" },
+  { value: "3×", label: "faster to first reviewable diff" },
+  { value: "0", label: "sprawling diffs" },
 ];
 
-export function StatsBar({ className }: StatsBarProps): React.ReactElement {
+export function StatsBar(): React.ReactElement {
   return (
     <section
-      aria-label="Product metrics"
-      className={
-        "relative border-y border-white/10 bg-slate-950/40 backdrop-blur-sm " +
-        (className ?? "")
-      }
+      aria-label="Helix by the numbers"
+      className="relative py-10 sm:py-14"
     >
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 sm:grid-cols-2 md:grid-cols-4">
-        {STATS.map((stat) => (
-          <div key={stat.label} className="text-center md:text-left">
-            <div className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-              {stat.value}
+      <Container size="lg">
+        <div className="hx-surface-strong grid grid-cols-2 gap-6 px-6 py-8 sm:grid-cols-4 sm:px-10">
+          {STATS.map((s) => (
+            <div key={s.label} className="text-center sm:text-left">
+              <p className="hx-text-gradient text-2xl font-bold sm:text-3xl">
+                {s.value}
+              </p>
+              <p className="mt-1 text-xs text-helix-text-muted sm:text-sm">
+                {s.label}
+              </p>
             </div>
-            <div className="mt-1 text-sm text-slate-400">{stat.label}</div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }

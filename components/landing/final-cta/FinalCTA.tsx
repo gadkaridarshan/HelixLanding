@@ -2,61 +2,69 @@
 /**
  * @helix:story USER-303000
  *
- * FinalCTA — last call-to-action block before the footer. Reinforces
- * the value prop and gives a single, unmissable "request access"
- * affordance.
+ * FinalCTA — the last conversion surface before the footer.
+ *
+ *   • Bold closing headline.
+ *   • Subheadline.
+ *   • Primary CTA (early access) + ghost CTA (reference site, clearly
+ *     labelled).
+ *
+ * Background uses a stronger gradient panel so it visually stands
+ * apart from the FAQ above it.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
+import { brand } from "@/lib/brand";
 
 export function FinalCTA(): React.ReactElement {
   return (
     <section
       id="cta"
-      className="relative scroll-mt-24 py-20 sm:py-28"
       aria-labelledby="cta-heading"
+      className="relative py-24 sm:py-32"
     >
-      <Container>
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-950/80 to-slate-900/80 px-8 py-14 text-center shadow-[0_30px_80px_-30px_rgba(34,211,238,0.25)] sm:px-14 sm:py-20">
-          {/* glow */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[60%] -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-24 left-1/3 h-72 w-[50%] rounded-full bg-violet-500/20 blur-3xl"
-          />
-
-          <p className="relative hx-chip mx-auto">
-            <span className="hx-chip-dot" aria-hidden="true" />
-            <span>Private beta — limited seats</span>
-          </p>
+      <Container size="md">
+        <div
+          className="hx-surface-strong relative overflow-hidden p-10 text-center sm:p-14"
+          style={{
+            backgroundImage:
+              "radial-gradient(800px 400px at 20% 0%, rgba(34,211,238,0.18), transparent 60%), radial-gradient(700px 400px at 100% 100%, rgba(139,92,246,0.18), transparent 60%)",
+          }}
+        >
+          <span className="hx-chip mx-auto">
+            <span className="hx-chip-dot" />
+            Early access · invite-only
+          </span>
 
           <h2
             id="cta-heading"
-            className="relative mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl"
+            className="hx-heading mt-6"
           >
             Stop reviewing{" "}
-            <span className="hx-text-gradient">1,000-line AI diffs</span>.
+            <span className="hx-text-gradient">sprawling AI diffs</span>.
           </h2>
-          <p className="relative mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
-            Get onboarded to the Helix private beta and ship your next AI
-            feature as a series of small, verified, mergeable PRs.
+
+          <p className="hx-subheading mx-auto mt-4">
+            Join the teams using atomic work-breakdown to ship AI-generated
+            code their reviewers actually trust.
           </p>
 
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="mailto:hello@helix.dev?subject=Helix%20early%20access" className="hx-btn-primary">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a href="mailto:hello@helix.dev" className="hx-btn-primary">
               Request early access
+              <span aria-hidden="true">→</span>
             </a>
             <a
-              href="https://github.com/gadkaridarshan/Helix"
+              href={brand.referenceUrl}
               target="_blank"
-              rel="noreferrer noopener"
-              className="hx-btn-secondary"
+              rel="noopener noreferrer"
+              className="hx-btn-ghost"
+              aria-label={`${brand.name} reference site (visual / brand reference only, opens in a new tab)`}
+              title="Reference site — visual / brand reference only"
             >
-              Read the source
+              See reference site
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>

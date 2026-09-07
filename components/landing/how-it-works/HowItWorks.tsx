@@ -2,43 +2,37 @@
 /**
  * @helix:story USER-303000
  *
- * HowItWorks — four-step flow that walks a visitor through the
- * Helix pipeline: prompt → plan → execute → verify → PR.
+ * HowItWorks — three-step execution loop, rendered as a numbered
+ * grid with an inline SVG diagram connecting the steps.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
 
 interface Step {
-  readonly number: string;
-  readonly title: string;
-  readonly description: string;
+  number: string;
+  title: string;
+  description: string;
 }
 
 const STEPS: ReadonlyArray<Step> = [
   {
     number: "01",
-    title: "Prompt",
+    title: "Decompose",
     description:
-      "Describe what you want changed. A short paragraph is enough — no special DSL required.",
+      "Helix reads your prompt, explores the repo, and breaks the work into atomic units with explicit acceptance criteria.",
   },
   {
     number: "02",
-    title: "Plan",
+    title: "Execute & verify",
     description:
-      "Helix decomposes the prompt into a dependency graph: inputs, outputs, and ordered units.",
+      "Each unit is implemented in topological order by a coding agent, then verified against your types, tests, and lint.",
   },
   {
     number: "03",
-    title: "Execute",
+    title: "Ship small PRs",
     description:
-      "Each unit runs against your real codebase, in order, with the prior unit's output as context.",
-  },
-  {
-    number: "04",
-    title: "Verify & PR",
-    description:
-      "Every unit is gated by types, tests, and lint. The result lands as one clean, reviewable PR.",
+      "Verified units are opened as focused PRs — small enough to review in one sitting, ready to merge.",
   },
 ];
 
@@ -46,49 +40,69 @@ export function HowItWorks(): React.ReactElement {
   return (
     <section
       id="how-it-works"
-      className="relative scroll-mt-24 py-20 sm:py-28"
       aria-labelledby="how-heading"
+      className="relative py-20 sm:py-28"
     >
-      <Container>
-        <div className="max-w-2xl">
-          <p className="hx-eyebrow">How it works</p>
-          <h2 id="how-heading" className="hx-heading mt-3">
-            From prompt to PR,{" "}
-            <span className="hx-text-gradient">one verified step at a time</span>.
+      <Container size="lg">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="hx-eyebrow">How it works</span>
+          <h2 id="how-heading" className="hx-heading-sm mt-3">
+            A clear, three-step{" "}
+            <span className="hx-text-gradient">execution loop</span>.
           </h2>
-          <p className="hx-subheading">
-            Helix turns a vague ask into a concrete plan and walks it across
-            your repo — never producing a diff you can&apos;t reason about.
+          <p className="hx-subheading mx-auto mt-4">
+            No black box. Every step is observable, every unit is
+            traceable from prompt to PR.
           </p>
         </div>
 
-        <ol className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {STEPS.map((step) => (
+        <ol className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {STEPS.map((s) => (
             <li
-              key={step.number}
-              className="hx-card relative flex gap-5 overflow-hidden"
+              key={s.number}
+              className="hx-surface relative flex flex-col gap-3 p-6"
             >
               <span
                 aria-hidden="true"
-                className="hx-mono text-3xl font-bold leading-none text-cyan-400/80"
+                className="hx-text-gradient text-3xl font-bold tracking-tight"
               >
-                {step.number}
+                {s.number}
               </span>
-              <div>
-                <h3 className="text-lg font-semibold text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-sm leading-relaxed text-slate-400">
-                  {step.description}
-                </p>
-              </div>
-              <span
-                aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
-              />
+              <h3 className="text-lg font-semibold text-helix-text">
+                {s.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-helix-text-muted">
+                {s.description}
+              </p>
             </li>
           ))}
         </ol>
+
+        <div className="mt-12 flex justify-center">
+          <svg
+            viewBox="0 0 600 80"
+            className="w-full max-w-2xl text-helix-text-muted"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="hw-line" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#67e8f9" />
+                <stop offset="50%" stopColor="#a78bfa" />
+                <stop offset="100%" stopColor="#f472b6" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M40 40 H560"
+              stroke="url(#hw-line)"
+              strokeWidth="2"
+              strokeDasharray="4 6"
+              fill="none"
+            />
+            <circle cx="100" cy="40" r="5" fill="#67e8f9" />
+            <circle cx="300" cy="40" r="5" fill="#a78bfa" />
+            <circle cx="500" cy="40" r="5" fill="#f472b6" />
+          </svg>
+        </div>
       </Container>
     </section>
   );

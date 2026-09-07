@@ -37,24 +37,28 @@ export function HeroVisual({
             <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="hv-stroke" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#22d3ee" />
-            <stop offset="100%" stopColor="#8b5cf6" />
+            <stop offset="0%" stopColor="#67e8f9" />
+            <stop offset="50%" stopColor="#a78bfa" />
+            <stop offset="100%" stopColor="#f472b6" />
           </linearGradient>
-          <linearGradient id="hv-stroke-2" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#f59e0b" />
+          <linearGradient id="hv-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.08" />
           </linearGradient>
+          <filter id="hv-soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="0.5" />
+          </filter>
         </defs>
 
-        {/* glow */}
+        {/* Outer glow */}
         <circle cx="300" cy="300" r="260" fill="url(#hv-glow)" />
 
-        {/* orbits */}
+        {/* Orbit rings */}
         <g
           fill="none"
           stroke="url(#hv-stroke)"
-          strokeWidth="1.5"
-          strokeOpacity="0.7"
+          strokeWidth="1.25"
+          opacity="0.65"
         >
           <ellipse cx="300" cy="300" rx="240" ry="90" />
           <ellipse
@@ -69,63 +73,62 @@ export function HeroVisual({
             cy="300"
             rx="240"
             ry="90"
-            transform="rotate(-60 300 300)"
+            transform="rotate(120 300 300)"
           />
         </g>
 
-        {/* nucleus */}
-        <circle cx="300" cy="300" r="18" fill="#22d3ee" />
+        {/* Inner nucleus */}
         <circle
           cx="300"
           cy="300"
-          r="38"
-          fill="none"
-          stroke="#22d3ee"
-          strokeOpacity="0.4"
-          strokeWidth="1"
+          r="78"
+          fill="url(#hv-fill)"
+          stroke="url(#hv-stroke)"
+          strokeWidth="1.5"
         />
+        <circle cx="300" cy="300" r="14" fill="#67e8f9" opacity="0.85" />
 
-        {/* electrons */}
-        <g fill="#8b5cf6">
-          <circle cx="540" cy="300" r="8" />
-          <circle cx="60" cy="300" r="8" />
-        </g>
-        <g fill="#f59e0b">
-          <circle cx="420" cy="438" r="6" />
-          <circle cx="180" cy="162" r="6" />
+        {/* Electrons */}
+        <g fill="#67e8f9">
+          <circle cx="540" cy="300" r="6" />
+          <circle cx="180" cy="210" r="5" opacity="0.85" />
+          <circle cx="420" cy="390" r="5" opacity="0.85" />
+          <circle cx="300" cy="60" r="4" opacity="0.7" />
+          <circle cx="300" cy="540" r="4" opacity="0.7" />
         </g>
 
-        {/* code surface — bottom-left */}
-        <g transform="translate(60 400)">
-          <rect
-            width="220"
-            height="120"
-            rx="14"
-            fill="rgba(15,23,42,0.85)"
-            stroke="rgba(148,163,184,0.25)"
-          />
-          <rect width="220" height="22" rx="14" fill="rgba(148,163,184,0.12)" />
-          <circle cx="14" cy="11" r="3" fill="#f87171" />
-          <circle cx="26" cy="11" r="3" fill="#fbbf24" />
-          <circle cx="38" cy="11" r="3" fill="#34d399" />
-          <g
-            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-            fontSize="10"
-            fill="#cbd5e1"
-          >
-            <text x="14" y="48">unit 1: parse prompt</text>
-            <text x="14" y="66" fill="#94a3b8">unit 2: scaffold types</text>
-            <text x="14" y="84" fill="#22d3ee">unit 3: implement</text>
-            <text x="14" y="102" fill="#94a3b8">unit 4: verify + PR</text>
+        {/* Atomic units (work-breakdown tiles) */}
+        <g fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" fontSize="11" fill="#cbd5ff">
+          <g transform="translate(70 90)">
+            <rect width="130" height="42" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+            <text x="14" y="26">unit · 01</text>
+          </g>
+          <g transform="translate(400 130)">
+            <rect width="130" height="42" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+            <text x="14" y="26">unit · 02</text>
+          </g>
+          <g transform="translate(80 430)">
+            <rect width="130" height="42" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+            <text x="14" y="26">unit · 03</text>
+          </g>
+          <g transform="translate(420 440)">
+            <rect width="130" height="42" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+            <text x="14" y="26">unit · 04</text>
           </g>
         </g>
 
-        {/* atoms — top-right */}
-        <g transform="translate(420 80)" stroke="url(#hv-stroke-2)" fill="none">
-          <circle cx="0" cy="0" r="32" strokeWidth="1.5" />
-          <circle cx="0" cy="0" r="14" fill="rgba(139,92,246,0.15)" />
-          <circle cx="32" cy="0" r="6" fill="#f59e0b" stroke="none" />
-          <circle cx="-32" cy="0" r="6" fill="#22d3ee" stroke="none" />
+        {/* Connector lines */}
+        <g
+          fill="none"
+          stroke="url(#hv-stroke)"
+          strokeWidth="1"
+          strokeDasharray="3 4"
+          opacity="0.55"
+        >
+          <path d="M200 111 L260 250" />
+          <path d="M400 152 L340 250" />
+          <path d="M210 451 L270 360" />
+          <path d="M420 461 L340 360" />
         </g>
       </svg>
     </div>

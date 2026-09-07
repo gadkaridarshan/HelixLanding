@@ -2,35 +2,41 @@
 /**
  * @helix:story USER-303000
  *
- * Container — horizontal layout rail that constrains content to a
- * readable max-width while keeping responsive gutters. Used by every
- * landing section so spacing rhythm stays consistent.
+ * Container — width-clamped, horizontally-padded wrapper used by every
+ * landing section to keep the reading width consistent.
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export interface ContainerProps {
-  readonly className?: string;
-  readonly children: React.ReactNode;
-  readonly as?: keyof React.JSX.IntrinsicElements;
-  readonly id?: string;
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  as?: keyof React.JSX.IntrinsicElements;
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
+const SIZE_MAP: Record<NonNullable<ContainerProps["size"]>, string> = {
+  sm: "max-w-3xl",
+  md: "max-w-5xl",
+  lg: "max-w-6xl",
+  xl: "max-w-7xl",
+};
+
 export function Container({
+  as = "div",
+  size = "lg",
   className,
   children,
-  as: Tag = "div",
-  id,
+  ...rest
 }: ContainerProps): React.ReactElement {
-  const Component = Tag as React.ElementType;
+  const Component = as as React.ElementType;
   return (
     <Component
-      id={id}
       className={cn(
-        "mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10",
-        className
+        "mx-auto w-full px-6 sm:px-8",
+        SIZE_MAP[size],
+        className,
       )}
+      {...rest}
     >
       {children}
     </Component>

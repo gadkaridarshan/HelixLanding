@@ -1,0 +1,276 @@
+/* helix: components/sections/SocialProof.module.css */
+.section {
+  position: relative;
+  padding: 5rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 26, 0) 0%,
+    rgba(34, 211, 238, 0.04) 50%,
+    rgba(10, 11, 26, 0) 100%
+  );
+}
+
+.header {
+  max-width: 48rem;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hx-accent-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--hx-fg);
+  margin: 0;
+}
+
+.badges {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 800px) {
+  .badges {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.githubBadge,
+.referenceBadge {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  background: rgba(10, 11, 26, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 160ms ease, border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.githubBadge:hover,
+.referenceBadge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.45);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.githubIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.65rem;
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--hx-fg);
+}
+
+.referenceDot {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.12);
+  margin: 0 0.75rem;
+}
+
+.badgeBody {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.badgeLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hx-accent-cyan);
+}
+
+.badgeValue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hx-fg);
+}
+
+.badgeStars,
+.badgeForks {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.badgeDot {
+  display: inline-block;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.5);
+}
+
+.badgeHint {
+  font-size: 0.82rem;
+  color: var(--hx-fg-muted);
+}
+
+.callout {
+  margin: 0 0 2.5rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--hx-fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.callout strong {
+  color: #fbbf24;
+}
+
+.callout code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.05rem 0.35rem;
+  border-radius: 0.3rem;
+  font-size: 0.85em;
+}
+
+.testimonials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 800px) {
+  .testimonials {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.testimonial {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(10, 11, 26, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.testimonial:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.35);
+}
+
+.testimonial[data-accent="cyan"] {
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.1);
+}
+.testimonial[data-accent="violet"] {
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.12);
+}
+.testimonial[data-accent="amber"] {
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.12);
+}
+
+.placeholderBadge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.14);
+  color: var(--hx-fg-muted);
+}
+
+.quote {
+  margin: 0;
+}
+
+.quote p {
+  margin: 0;
+  color: var(--hx-fg);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.attribution {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: auto;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  color: #05060d;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.who {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.role {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--hx-fg);
+}
+
+.segment {
+  font-size: 0.82rem;
+  color: var(--hx-fg-muted);
+}
+
+.disclaimer {
+  margin: 2rem 0 0;
+  font-size: 0.82rem;
+  color: var(--hx-fg-muted);
+  text-align: center;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .githubBadge,
+  .referenceBadge,
+  .testimonial {
+    transition: none;
+  }
+}

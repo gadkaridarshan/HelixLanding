@@ -1,13 +1,15 @@
 // helix: components/landing/hero/Hero.tsx
 /**
  * @helix:story USER-303000
- * @helix:story USER-868000
  *
- * Hero — above-the-fold pitch with headline, dual CTAs, social-proof
- * bullets, and a decorative atom/orbit SVG visual.
+ * Hero — above-the-fold value proposition.
  *
- * The reference-site link inside the Hero is explicitly labelled as
- * such (never as the live site).
+ *   • Eyebrow chip ("Atomic work-breakdown · v1")
+ *   • Headline with gradient accent on the key phrase.
+ *   • Subheading explaining what Helix does in one sentence.
+ *   • Dual CTAs (primary → early access, ghost → reference site demo).
+ *   • Social-proof bullets (the three things Helix guarantees).
+ *   • Decorative HeroVisual (SVG) on the right at md+ screens.
  */
 import * as React from "react";
 
@@ -16,106 +18,94 @@ import { brand } from "@/lib/brand";
 
 import { HeroVisual } from "./HeroVisual";
 
-const REFERENCE_SITE_URL = "https://helix-ai-orchestrator.vercel.app";
-const REFERENCE_SITE_LABEL =
-  "Reference site — visual / brand reference only (not the live site)";
+const PROOFS: ReadonlyArray<{ label: string; detail: string }> = [
+  {
+    label: "Atomic units",
+    detail: "Every prompt becomes small, reviewable work items.",
+  },
+  {
+    label: "Verified output",
+    detail: "Each unit is checked against your repo's types, tests, lint.",
+  },
+  {
+    label: "Small PRs",
+    detail: "Ship incremental diffs, not one sprawling change.",
+  },
+];
 
 export function Hero(): React.ReactElement {
   return (
     <section
-      id="top"
-      className="relative overflow-hidden pb-20 pt-24 sm:pt-28 lg:pb-28 lg:pt-32"
+      aria-labelledby="hero-heading"
+      className="relative overflow-hidden pt-20 pb-24 sm:pt-28 sm:pb-32"
     >
-      <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7">
-            <span className="hx-chip">
-              <span className="hx-chip-dot" aria-hidden="true" />
-              <span>Now in private beta</span>
-            </span>
+      <Container
+        size="lg"
+        className="grid grid-cols-1 items-center gap-14 md:grid-cols-2"
+      >
+        <div className="text-left">
+          <span className="hx-chip">
+            <span className="hx-chip-dot" />
+            {brand.name} · v1 — atomic work-breakdown
+          </span>
 
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Ship AI code as
-              <span className="hx-text-gradient"> reviewable atoms</span>,
-              <br className="hidden sm:block" /> not sprawling diffs.
-            </h1>
+          <h1 id="hero-heading" className="hx-heading mt-6">
+            <span className="hx-text-gradient">Atomic work-breakdown</span>
+            <br />
+            for AI coding agents.
+          </h1>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-              {brand.description}
-            </p>
+          <p className="hx-subheading mt-6">
+            {brand.name} decomposes every prompt into atomic, reviewable
+            units, executes them in order with explicit dependencies, and
+            verifies each one against your repo — producing small,
+            reviewable PRs instead of one sprawling diff.
+          </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#cta" className="hx-btn-primary">
-                Request early access
-                <svg
-                  aria-hidden="true"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </a>
-              <a
-                href={REFERENCE_SITE_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={REFERENCE_SITE_LABEL}
-                title={REFERENCE_SITE_LABEL}
-                className="hx-btn-secondary"
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#cta" className="hx-btn-primary">
+              Get early access
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href={brand.referenceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hx-btn-ghost"
+              aria-label={`${brand.name} reference site (visual / brand reference only, opens in a new tab)`}
+              title="Reference site — visual / brand reference only"
+            >
+              See reference site
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {PROOFS.map((p) => (
+              <li
+                key={p.label}
+                className="hx-surface p-4"
               >
-                <span aria-hidden="true">↗</span>
-                See reference site
-                <span className="ml-1 rounded-full border border-amber-400/30 bg-amber-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-300">
-                  Reference
-                </span>
-              </a>
-            </div>
+                <p className="text-sm font-semibold text-helix-text">
+                  {p.label}
+                </p>
+                <p className="mt-1 text-xs text-helix-text-muted">
+                  {p.detail}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            <ul className="mt-10 grid grid-cols-1 gap-3 text-sm text-slate-300 sm:grid-cols-3">
-              <li className="flex items-center gap-2">
-                <Check /> Decomposed, atomic units
-              </li>
-              <li className="flex items-center gap-2">
-                <Check /> Verified against your repo
-              </li>
-              <li className="flex items-center gap-2">
-                <Check /> Small, reviewable PRs
-              </li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-5">
-            <HeroVisual />
-          </div>
+        <div className="relative">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 mx-auto h-72 max-w-md rounded-full bg-gradient-to-br from-cyan-500/20 via-violet-500/15 to-pink-500/10 blur-3xl"
+          />
+          <HeroVisual />
         </div>
       </Container>
     </section>
-  );
-}
-
-function Check(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-cyan-400"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   );
 }
 

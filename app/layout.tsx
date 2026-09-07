@@ -1,9 +1,8 @@
 // helix: app/layout.tsx
 /**
  * @helix:story USER-303000
- * @helix:story USER-969000
  *
- * Root layout for the Helix landing page.
+ * Root layout for the Helix landing site.
  *
  * Owns:
  *   • The document chrome (<html>, <head>, <body>).
@@ -47,54 +46,75 @@ export const metadata: Metadata = {
   applicationName: brand.name,
   keywords: [
     "AI coding agent",
-    "work breakdown",
     "code orchestrator",
-    "atomic commits",
-    "reviewable PRs",
+    "atomic work-breakdown",
+    "AI code review",
+    "automated PRs",
     "Helix",
   ],
-  authors: [{ name: "Helix" }],
+  authors: [{ name: brand.name, url: brand.url }],
   creator: brand.name,
   publisher: brand.name,
+  alternates: {
+    canonical: brand.url,
+  },
   openGraph: {
     type: "website",
+    locale: "en_US",
     url: brand.url,
     title: `${brand.name} — ${brand.tagline}`,
     description: brand.description,
     siteName: brand.name,
+    images: [
+      {
+        url: brand.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${brand.name} — ${brand.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${brand.name} — ${brand.tagline}`,
     description: brand.description,
+    images: [brand.ogImage],
     creator: brand.twitter,
   },
-  robots: { index: true, follow: true },
-  alternates: { canonical: brand.url },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060d",
-  colorScheme: "dark",
+  themeColor: "#0b1020",
   width: "device-width",
   initialScale: 1,
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
 }: {
-  readonly children: React.ReactNode;
+  children: React.ReactNode;
 }): React.ReactElement {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} hx-bg`}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="antialiased min-h-dvh bg-[#05060d] text-slate-100">
+      <body className="hx-body antialiased">
+        <a
+          href="#main"
+          className="hx-skip-link"
+        >
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

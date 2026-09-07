@@ -1,260 +1,267 @@
-/* helix: app/globals.css
+// helix: app/globals.css
+/**
+ * @helix:story USER-303000
  *
- * Global styles for the Helix landing surface.
+ * Global stylesheet for the Helix landing site.
  *
- * Goals:
- *   • Modern, readable typography (Inter for UI, JetBrains Mono for code).
- *   • Polished, layered background (gradient + radial glows + subtle grid).
- *   • Accessible focus rings and reduced-motion respect.
- *   • Smooth anchor scrolling for the in-page section links.
- *
- * Tailwind v4: directives use the @import form so the entrypoint
- * resolves cleanly under @tailwindcss/postcss.
+ * - Tailwind v4 entry point (`@import "tailwindcss";`).
+ * - CSS custom properties for the brand theme (colors, gradients,
+ *   shadows, radii).
+ * - Polished, layered background using radial + conic gradients
+ *   on the body and a subtle grid + noise overlay.
+ * - Reusable utility classes used across sections (chip, heading
+ *   scale, subheading, surface card, primary/ghost buttons, skip link).
  */
 
 @import "tailwindcss";
 
 @theme {
-  --color-bg-0: #05060d;
-  --color-bg-1: #0a0b1a;
-  --color-fg: #e6e9f5;
-  --color-fg-muted: #94a3b8;
-  --color-accent-cyan: #22d3ee;
-  --color-accent-violet: #8b5cf6;
-  --color-accent-amber: #f59e0b;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-helix-bg: #060818;
+  --color-helix-bg-2: #0b1020;
+  --color-helix-surface: rgba(255, 255, 255, 0.04);
+  --color-helix-surface-strong: rgba(255, 255, 255, 0.06);
+  --color-helix-border: rgba(255, 255, 255, 0.08);
+  --color-helix-border-strong: rgba(255, 255, 255, 0.14);
+  --color-helix-text: #e6ebff;
+  --color-helix-text-muted: #9aa3c7;
+  --color-helix-text-dim: #6b7299;
+  --color-helix-cyan: #22d3ee;
+  --color-helix-violet: #8b5cf6;
+  --color-helix-pink: #f472b6;
+  --color-helix-amber: #fbbf24;
+  --color-helix-emerald: #34d399;
 }
 
-@layer base {
-  :root {
-    color-scheme: dark;
-
-    --hx-bg-0: #05060d;
-    --hx-bg-1: #0a0b1a;
-    --hx-fg: #e6e9f5;
-    --hx-fg-muted: #94a3b8;
-    --hx-accent-cyan: #22d3ee;
-    --hx-accent-violet: #8b5cf6;
-    --hx-accent-amber: #f59e0b;
-
-    --hx-shadow-lg:
-      0 30px 80px -30px rgba(34, 211, 238, 0.25),
-      0 20px 60px -30px rgba(139, 92, 246, 0.2);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    color: var(--hx-fg);
-    background-color: var(--hx-bg-0);
-    font-family:
-      var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-feature-settings: "ss01", "cv11";
-    min-height: 100dvh;
-    overflow-x: hidden;
-  }
-
-  ::selection {
-    background-color: rgba(34, 211, 238, 0.35);
-    color: #f8fafc;
-  }
-
-  *:focus-visible {
-    outline: 2px solid var(--hx-accent-cyan);
-    outline-offset: 2px;
-    border-radius: 6px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  code,
-  pre,
-  kbd {
-    font-family:
-      var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
-      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
-    }
-  }
+:root {
+  color-scheme: dark;
+  --hx-radius-sm: 8px;
+  --hx-radius-md: 14px;
+  --hx-radius-lg: 22px;
+  --hx-radius-xl: 28px;
 }
 
-@layer components {
-  /* Polished background — layered gradient + glows + faint grid.
-     Applied to <html> via a fixed pseudo-layer so it never moves
-     while content scrolls, keeping the GPU cost negligible. */
-  .hx-bg {
-    position: relative;
-    isolation: isolate;
-    background:
-      radial-gradient(
-        1200px 600px at 15% -10%,
-        rgba(34, 211, 238, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        900px 500px at 85% 10%,
-        rgba(139, 92, 246, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        800px 600px at 50% 110%,
-        rgba(245, 158, 11, 0.08),
-        transparent 60%
-      ),
-      linear-gradient(180deg, #05060d 0%, #07091a 50%, #05060d 100%);
-  }
-
-  .hx-bg::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 30%,
-      black,
-      transparent 75%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 30%,
-      black,
-      transparent 75%
-    );
-  }
-
-  .hx-bg::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        600px 400px at 50% 0%,
-        rgba(34, 211, 238, 0.08),
-        transparent 70%
-      );
-    opacity: 0.9;
-  }
-
-  /* Reusable chip / pill used by badges and eyebrows. */
-  .hx-chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10
-      bg-white/5 px-3 py-1 text-xs font-medium text-slate-200
-      backdrop-blur-sm;
-  }
-
-  .hx-chip-dot {
-    @apply h-1.5 w-1.5 rounded-full bg-cyan-400;
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
-  }
-
-  /* Primary / secondary button system. */
-  .hx-btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5
-      py-2.5 text-sm font-semibold transition-all duration-200
-      focus-visible:outline-none focus-visible:ring-2
-      focus-visible:ring-cyan-400 focus-visible:ring-offset-2
-      focus-visible:ring-offset-slate-950 disabled:pointer-events-none
-      disabled:opacity-50;
-  }
-
-  .hx-btn-primary {
-    @apply hx-btn bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950
-      shadow-[0_10px_30px_-10px_rgba(34,211,238,0.6)]
-      hover:shadow-[0_15px_40px_-10px_rgba(34,211,238,0.7)]
-      hover:brightness-110 active:scale-[0.98];
-  }
-
-  .hx-btn-secondary {
-    @apply hx-btn border border-white/15 bg-white/5 text-slate-100
-      backdrop-blur-sm hover:bg-white/10 active:scale-[0.98];
-  }
-
-  /* Section heading rhythm. */
-  .hx-eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300;
-  }
-
-  .hx-heading {
-    @apply text-3xl font-semibold leading-tight text-white sm:text-4xl
-      md:text-5xl;
-  }
-
-  .hx-subheading {
-    @apply mt-4 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg;
-  }
-
-  /* Frosted card surface used by Features, Personas, FAQ, etc. */
-  .hx-card {
-    @apply relative rounded-2xl border border-white/10 bg-white/[0.03]
-      p-6 backdrop-blur-sm transition-all duration-300
-      hover:border-white/20 hover:bg-white/[0.05];
-  }
-
-  .hx-card-hover {
-    @apply hover:-translate-y-0.5 hover:shadow-[0_20px_60px_-20px_rgba(34,211,238,0.25)];
-  }
+html,
+body {
+  background: var(--color-helix-bg);
 }
 
-@layer utilities {
-  .hx-text-gradient {
-    background: linear-gradient(
-      90deg,
-      #22d3ee 0%,
-      #8b5cf6 50%,
-      #f59e0b 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-helix-text);
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  .hx-divider {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(148, 163, 184, 0.25),
-      transparent
-    );
-    height: 1px;
-  }
+/* ---- Polished layered background ----------------------------------- */
 
-  .hx-mono {
-    font-family:
-      var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
-      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      1100px 700px at 12% -10%,
+      rgba(34, 211, 238, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 700px at 90% 0%,
+      rgba(139, 92, 246, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 600px at 50% 110%,
+      rgba(244, 114, 182, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #060818 0%, #0a0f24 60%, #060818 100%);
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ---- Typography utilities ------------------------------------------ */
+
+.hx-heading {
+  font-size: clamp(2.25rem, 4.5vw + 0.5rem, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--color-helix-text);
+}
+
+.hx-heading-sm {
+  font-size: clamp(1.75rem, 2.5vw + 0.5rem, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--color-helix-text);
+}
+
+.hx-subheading {
+  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
+  line-height: 1.6;
+  color: var(--color-helix-text-muted);
+  max-width: 60ch;
+}
+
+.hx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-helix-cyan);
+}
+
+.hx-text-gradient {
+  background: linear-gradient(
+    90deg,
+    #67e8f9 0%,
+    #a78bfa 50%,
+    #f472b6 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Surface / card utilities -------------------------------------- */
+
+.hx-surface {
+  background: var(--color-helix-surface);
+  border: 1px solid var(--color-helix-border);
+  border-radius: var(--hx-radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+.hx-surface-strong {
+  background: var(--color-helix-surface-strong);
+  border: 1px solid var(--color-helix-border-strong);
+  border-radius: var(--hx-radius-lg);
+  backdrop-filter: blur(12px);
+}
+
+/* ---- Chip / badge -------------------------------------------------- */
+
+.hx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-helix-text);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 999px;
+}
+
+.hx-chip-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--color-helix-cyan);
+  box-shadow: 0 0 12px var(--color-helix-cyan);
+}
+
+/* ---- Buttons ------------------------------------------------------- */
+
+.hx-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #061018;
+  background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 100%);
+  border-radius: var(--hx-radius-md);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 12px 30px -10px rgba(139, 92, 246, 0.55);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.hx-btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.hx-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-helix-text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-helix-border-strong);
+  border-radius: var(--hx-radius-md);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.hx-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+/* ---- Skip link ----------------------------------------------------- */
+
+.hx-skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-helix-bg-2);
+  color: var(--color-helix-text);
+  border-radius: var(--hx-radius-sm);
+  border: 1px solid var(--color-helix-border-strong);
+  z-index: 100;
+}
+
+.hx-skip-link:focus {
+  top: 1rem;
+}
+
+/* ---- Selection ----------------------------------------------------- */
+
+::selection {
+  background: rgba(139, 92, 246, 0.35);
+  color: #ffffff;
+}
+
+/* ---- Reduced motion ------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }

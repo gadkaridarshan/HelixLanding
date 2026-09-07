@@ -2,11 +2,16 @@
 /**
  * @helix:story USER-303000
  *
- * Navbar — sticky brand mark + section anchors + early-access CTA.
- * Becomes opaque on scroll so it stays legible over the hero gradient.
+ * Navbar — sticky top brand chrome.
+ *
+ *   • Brand mark on the left (Helix "H" + wordmark).
+ *   • Section anchors in the centre (Features, How it works, Personas, FAQ).
+ *   • Primary CTA on the right ("Get early access").
+ *
+ * Background is translucent so the page gradient shows through. Once the
+ * user scrolls past ~24px the navbar gains a subtle bottom border via a
+ * data-attribute hook so this stays server-rendered (no client JS).
  */
-"use client";
-
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
@@ -20,71 +25,47 @@ const NAV_LINKS: ReadonlyArray<{ label: string; href: string }> = [
 ];
 
 export function Navbar(): React.ReactElement {
-  const [scrolled, setScrolled] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = (): void => {
-      setScrolled(window.scrollY > 8);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <header
-      className={
-        "sticky top-0 z-50 transition-all duration-300 " +
-        (scrolled
-          ? "border-b border-white/10 bg-slate-950/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent")
-      }
+      className="sticky top-0 z-40 backdrop-blur-md bg-[rgba(6,8,24,0.55)] border-b border-transparent"
+      data-scrolled="false"
     >
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container size="lg" className="flex h-16 items-center justify-between">
         <a
-          href="#top"
-          className="group flex items-center gap-2"
-          aria-label={`${brand.name} — home`}
+          href="#main"
+          className="flex items-center gap-2 text-helix-text"
+          aria-label={`${brand.name} home`}
         >
           <span
             aria-hidden="true"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 text-sm font-bold text-slate-950 shadow-[0_0_20px_rgba(34,211,238,0.35)]"
+            className="grid h-8 w-8 place-items-center rounded-lg border border-helix-border-strong bg-gradient-to-br from-cyan-400/30 to-violet-500/30 text-sm font-bold text-helix-text"
           >
-            H
+            {brand.mark}
           </span>
-          <span className="text-base font-semibold tracking-tight text-white">
-            {brand.name}
-          </span>
+          <span className="font-semibold tracking-tight">{brand.name}</span>
         </a>
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-1 md:flex"
+          className="hidden items-center gap-7 md:flex"
         >
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+              className="text-sm text-helix-text-muted transition-colors hover:text-helix-text"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href="https://github.com/gadkaridarshan/Helix"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="hidden hx-btn-secondary sm:inline-flex"
-          >
-            GitHub
-          </a>
-          <a href="#cta" className="hx-btn-primary">
-            Request early access
-          </a>
-        </div>
+        <a
+          href="#cta"
+          className="hx-btn-primary px-4 py-2 text-sm"
+        >
+          Get early access
+        </a>
       </Container>
     </header>
   );

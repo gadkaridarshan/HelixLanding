@@ -1,9 +1,9 @@
 # Card Inventory
 
+- Sep 7, 2026, 9:29:45 AM CDT | USER-641000 | done | development | Personas social proof FAQ CTA
+- Sep 7, 2026, 9:29:36 AM CDT | USER-969000 | todo | development | Scaffold Next.js theme shell
+- Sep 7, 2026, 9:29:36 AM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 9:25:47 AM CDT | USER-773000 | done | development | Hero features and how-it-works
-- Sep 7, 2026, 9:25:25 AM CDT | USER-303000 | in_progress | development | Helix landing page site
-- Sep 7, 2026, 9:25:24 AM CDT | USER-641000 | in_progress | development | Personas social proof FAQ CTA
-- Sep 7, 2026, 9:25:22 AM CDT | USER-969000 | todo | development | Scaffold Next.js theme and shell · deliverable: README.md
 - Sep 7, 2026, 9:20:50 AM CDT | USER-574000 | done | development | Correct live site URL copy
 - Sep 7, 2026, 9:18:49 AM CDT | USER-633000 | done | development | Clarify reference site link copy
 - Sep 7, 2026, 9:12:38 AM CDT | USER-868000 | done | development | Clarify reference site link copy

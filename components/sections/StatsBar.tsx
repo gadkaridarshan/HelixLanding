@@ -3,7 +3,7 @@
  * @helix:story USER-303000
  *
  * StatsBar — re-export of the canonical implementation under
- * `components/landing/stats/StatsBar`.
+ * `components/landing/stats-bar/StatsBar`.
  */
-export { StatsBar } from "@/components/landing/stats/StatsBar";
-export { default } from "@/components/landing/stats/StatsBar";
+export { StatsBar } from "@/components/landing/stats-bar/StatsBar";
+export { default } from "@/components/landing/stats-bar/StatsBar";

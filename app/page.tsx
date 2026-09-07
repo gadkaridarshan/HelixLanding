@@ -1,54 +1,48 @@
 // helix: app/page.tsx
 /**
  * @helix:story USER-303000
- * @helix:story USER-969000
  *
- * Landing page entry for the scaffold card. This card only ships a
- * minimal placeholder so the shell builds and runs end-to-end;
- * section composition (Navbar, Hero, etc.) is owned by later cards.
+ * Landing page composition — single ordered tree of all section
+ * components. Sections themselves own their internal layout,
+ * styling, and copy.
  *
- * Replace this body with the real section tree in `app/page.tsx`
- * once the Hero / Features / HowItWorks / Personas / FAQ / FinalCTA /
- * Footer cards are merged.
+ * Section order is deliberate:
+ *   1. Navbar (sticky brand chrome)
+ *   2. Hero (above-the-fold value prop + CTAs + decorative visual)
+ *   3. StatsBar (quick metric strip)
+ *   4. Features (six core capabilities)
+ *   5. HowItWorks (three-step execution loop)
+ *   6. Personas (who Helix is for + social proof)
+ *   7. FAQ (objection handling)
+ *   8. FinalCTA (last conversion push)
+ *   9. Footer (reference-site pointer + link columns + brand mark)
  */
 import * as React from "react";
 
+import { Navbar } from "@/components/landing/Navbar/Navbar";
+import { Hero } from "@/components/landing/hero/Hero";
+import { StatsBar } from "@/components/landing/stats-bar/StatsBar";
+import { Features } from "@/components/landing/features/Features";
+import { HowItWorks } from "@/components/landing/how-it-works/HowItWorks";
+import { Personas } from "@/components/landing/personas/Personas";
+import { FAQ } from "@/components/landing/faq/FAQ";
+import { FinalCTA } from "@/components/landing/final-cta/FinalCTA";
+import { Footer } from "@/components/landing/footer/Footer";
+
 export default function Page(): React.ReactElement {
   return (
-    <main
-      id="main"
-      className="relative mx-auto flex min-h-dvh max-w-5xl flex-col items-center justify-center px-6 py-24 text-center"
-    >
-      <span className="hx-chip">
-        <span className="hx-chip-dot" />
-        Helix · scaffold
-      </span>
-
-      <h1 className="hx-heading mt-6">
-        <span className="hx-text-gradient">Atomic work-breakdown</span>
-        <br />
-        for AI coding agents.
-      </h1>
-
-      <p className="hx-subheading mx-auto">
-        Next.js 14 App Router shell is live. Theme tokens, fonts, and
-        the polished background are wired up. Section components land
-        in the next cards.
-      </p>
-
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-        <a className="hx-btn-primary" href="#main">
-          Start here
-        </a>
-        <a
-          className="hx-btn-secondary"
-          href="https://github.com/gadkaridarshan/Helix"
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          Source
-        </a>
-      </div>
-    </main>
+    <>
+      <Navbar />
+      <main id="main" className="relative">
+        <Hero />
+        <StatsBar />
+        <Features />
+        <HowItWorks />
+        <Personas />
+        <FAQ />
+        <FinalCTA />
+      </main>
+      <Footer />
+    </>
   );
 }
