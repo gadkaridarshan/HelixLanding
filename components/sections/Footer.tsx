@@ -65,12 +65,11 @@ const COLUMNS: ReadonlyArray<FooterColumn> = [
 ];
 
 function isExternal(href: string): boolean {
-  return /^(https?:)?\/\//i.test(href);
+  return /^(https?:)?\/\//i.test(href) || href.startsWith("mailto:");
 }
 
 export function Footer({ className }: FooterProps): React.ReactElement {
   const year = new Date().getFullYear();
-  const liveSiteUrl = brand.url;
 
   return (
     <footer
@@ -123,7 +122,7 @@ export function Footer({ className }: FooterProps): React.ReactElement {
                     cy="12"
                     rx="10"
                     ry="4"
-                    transform="rotate(120 12 12)"
+                    transform="rotate(-60 12 12)"
                   />
                 </svg>
               </span>
@@ -132,78 +131,114 @@ export function Footer({ className }: FooterProps): React.ReactElement {
               </span>
             </div>
 
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-              {brand.description}
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400">
+              {brand.tagline}. Decompose every prompt into atomic, reviewable
+              units — verified, sequenced, and shipped as small PRs.
             </p>
 
-            {/* Reference-site block — explicitly NOT the live landing page */}
-            <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-300">
+            {/* Reference-site pointer — explicitly labelled, never "live site" */}
+            <aside
+              aria-labelledby="reference-site-heading"
+              className="mt-8 rounded-xl border border-amber-400/20 bg-amber-400/5 p-4"
+            >
+              <div className="flex items-start gap-3">
+                <span
+                  aria-hidden="true"
+                  className="mt-0.5 inline-flex shrink-0 items-center rounded-md border border-amber-400/30 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-300"
+                >
                   Reference site
                 </span>
-                <span className="text-xs font-medium text-amber-200/90">
-                  External — not this product's live site
-                </span>
+                <div className="min-w-0">
+                  <p
+                    id="reference-site-heading"
+                    className="text-xs font-medium uppercase tracking-wider text-amber-200/80"
+                  >
+                    External reference — not this product
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                    An externally-hosted Helix deployment used only as a
+                    visual / brand reference. It is{" "}
+                    <strong className="font-semibold text-white">
+                      not
+                    </strong>{" "}
+                    the live landing page for this product, and is{" "}
+                    <strong className="font-semibold text-white">
+                      not
+                    </strong>{" "}
+                    deployed from this repository.
+                  </p>
+                  <a
+                    href={REFERENCE_SITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open the Helix reference site (external — not the live deployment of this product) in a new tab"
+                    title="Helix reference site (external, not the live deployment)"
+                    className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-amber-300 underline decoration-amber-400/40 underline-offset-4 transition-colors hover:text-amber-200 hover:decoration-amber-300"
+                  >
+                    <span>helix-ai-orchestrator.vercel.app</span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-3.5 w-3.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                </div>
               </div>
+            </aside>
 
-              <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                The link below goes to an external Helix deployment used
-                purely as a visual / brand reference. It is{" "}
-                <strong className="font-semibold text-white">
-                  not
-                </strong>{" "}
-                the live landing page for this product and is{" "}
-                <strong className="font-semibold text-white">
-                  not
-                </strong>{" "}
-                deployed from this repository. You are currently viewing{" "}
-                <span className="font-mono text-cyan-300">{liveSiteUrl}</span>
-                .
-              </p>
-
+            {/* Live-site canonical pointer — this IS the live destination */}
+            <p className="mt-6 text-xs leading-relaxed text-slate-500">
+              <span className="font-semibold text-slate-300">
+                This page is the live site.
+              </span>{" "}
+              The canonical production URL for this product is{" "}
               <a
-                href={REFERENCE_SITE_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Visit the external Helix reference site (opens in a new tab) — not the live landing page for this product"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-amber-200 underline decoration-amber-400/40 underline-offset-4 transition hover:text-amber-100 hover:decoration-amber-300"
+                href={brand.url}
+                className="text-slate-300 underline decoration-slate-500/60 underline-offset-4 transition-colors hover:text-white hover:decoration-slate-300"
               >
-                View Helix reference site
-                <span aria-hidden="true" className="text-amber-300">
-                  ↗
-                </span>
+                {brand.url.replace(/^https?:\/\//, "")}
               </a>
-            </div>
+              .
+            </p>
           </div>
 
           {/* Link columns */}
           <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7"
+            aria-label="Footer navigation"
+            className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7"
           >
             {COLUMNS.map((column) => (
               <div key={column.title}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-200">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
                   {column.title}
                 </h3>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => {
                     const external = link.external ?? isExternal(link.href);
                     return (
-                      <li key={`${column.title}:${link.label}`}>
+                      <li key={link.label}>
                         <a
                           href={link.href}
-                          target={external ? "_blank" : undefined}
-                          rel={external ? "noreferrer noopener" : undefined}
-                          className="text-sm text-slate-400 transition hover:text-white"
+                          {...(external
+                            ? {
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                              }
+                            : {})}
+                          className="text-sm text-slate-400 transition-colors hover:text-white"
                         >
                           {link.label}
-                          {external ? (
-                            <span aria-hidden="true" className="ml-1 text-slate-500">
-                              ↗
-                            </span>
-                          ) : null}
                         </a>
                       </li>
                     );
@@ -215,24 +250,16 @@ export function Footer({ className }: FooterProps): React.ReactElement {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:justify-between">
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center">
           <p>
             © {year} {brand.name}. All rights reserved.
           </p>
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span>
-              Live site:{" "}
-              <span className="font-mono text-slate-400">{liveSiteUrl}</span>
-            </span>
-            <span aria-hidden="true" className="text-slate-700">
-              •
-            </span>
-            <span>
-              Reference site:{" "}
-              <span className="font-mono text-slate-400">
-                helix-ai-orchestrator.vercel.app
-              </span>
-            </span>
+          <p className="flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400/80"
+            />
+            <span>Live deployment served from this repository.</span>
           </p>
         </div>
       </div>
