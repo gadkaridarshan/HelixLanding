@@ -1,5 +1,8 @@
 # Card Inventory
 
+- Sep 7, 2026, 9:43:43 AM CDT | USER-765000 | in_progress | development | Brand theme typography globals
+- Sep 7, 2026, 9:43:43 AM CDT | USER-308000 | in_progress | development | Personas social proof FAQ CTA
+- Sep 7, 2026, 9:43:32 AM CDT | USER-615000 | done | development | Hero features how-it-works sections
 - Sep 7, 2026, 9:41:50 AM CDT | USER-176000 | done | development | Brand theme typography and globals
 - Sep 7, 2026, 9:36:44 AM CDT | USER-954000 | done | development | Hero how-it-works features sections
 - Sep 7, 2026, 9:36:16 AM CDT | USER-567000 | done | development | Personas social proof FAQ CTA
