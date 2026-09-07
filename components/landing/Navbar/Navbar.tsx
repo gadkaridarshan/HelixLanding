@@ -2,71 +2,75 @@
 /**
  * @helix:story USER-303000
  *
- * Navbar — sticky top brand chrome.
+ * Navbar — sticky brand chrome with brand mark, section anchors, and
+ * an early-access CTA.
  *
- *   • Brand mark on the left (Helix "H" + wordmark).
- *   • Section anchors in the centre (Features, How it works, Personas, FAQ).
- *   • Primary CTA on the right ("Get early access").
- *
- * Background is translucent so the page gradient shows through. Once the
- * user scrolls past ~24px the navbar gains a subtle bottom border via a
- * data-attribute hook so this stays server-rendered (no client JS).
+ * Pure server component. Section anchors link to in-page ids declared
+ * by each section component.
  */
 import * as React from "react";
 
-import { Container } from "@/components/ui/Container";
-import { brand } from "@/lib/brand";
+export interface NavbarProps {
+  className?: string;
+}
 
-const NAV_LINKS: ReadonlyArray<{ label: string; href: string }> = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Personas", href: "#personas" },
-  { label: "FAQ", href: "#faq" },
+interface NavLink {
+  readonly href: string;
+  readonly label: string;
+}
+
+const links: ReadonlyArray<NavLink> = [
+  { href: "#features", label: "Features" },
+  { href: "#how-it-works", label: "How it works" },
+  { href: "#personas", label: "For you" },
+  { href: "#faq", label: "FAQ" },
 ];
 
-export function Navbar(): React.ReactElement {
+export function Navbar({ className }: NavbarProps): React.ReactElement {
   return (
     <header
-      className="sticky top-0 z-40 backdrop-blur-md bg-[rgba(6,8,24,0.55)] border-b border-transparent"
-      data-scrolled="false"
+      className={
+        "sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/70 backdrop-blur supports-[backdrop-filter]:bg-slate-950/60 " +
+        (className ?? "")
+      }
     >
-      <Container size="lg" className="flex h-16 items-center justify-between">
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6 lg:px-8"
+      >
         <a
-          href="#main"
-          className="flex items-center gap-2 text-helix-text"
-          aria-label={`${brand.name} home`}
+          href="#hero"
+          className="flex items-center gap-2 text-sm font-semibold text-white"
         >
           <span
             aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-lg border border-helix-border-strong bg-gradient-to-br from-cyan-400/30 to-violet-500/30 text-sm font-bold text-helix-text"
+            className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-cyan-400 to-violet-500 text-[11px] font-bold text-slate-950"
           >
-            {brand.mark}
+            H
           </span>
-          <span className="font-semibold tracking-tight">{brand.name}</span>
+          Helix
         </a>
 
-        <nav
-          aria-label="Primary"
-          className="hidden items-center gap-7 md:flex"
-        >
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm text-helix-text-muted transition-colors hover:text-helix-text"
-            >
-              {link.label}
-            </a>
+        <ul className="hidden items-center gap-7 text-sm text-slate-300 md:flex">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                className="transition hover:text-white focus:outline-none focus-visible:text-white"
+              >
+                {l.label}
+              </a>
+            </li>
           ))}
-        </nav>
+        </ul>
 
         <a
           href="#cta"
-          className="hx-btn-primary px-4 py-2 text-sm"
+          className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-cyan-400 to-violet-400 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:from-cyan-300 hover:to-violet-300"
         >
           Get early access
         </a>
-      </Container>
+      </nav>
     </header>
   );
 }

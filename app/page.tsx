@@ -3,8 +3,8 @@
  * @helix:story USER-303000
  *
  * Landing page composition — single ordered tree of all section
- * components. Sections themselves own their internal layout,
- * styling, and copy.
+ * components. Sections themselves own their internal layout, styling,
+ * and copy.
  *
  * Section order is deliberate:
  *   1. Navbar (sticky brand chrome)
@@ -33,7 +33,7 @@ export default function Page(): React.ReactElement {
   return (
     <>
       <Navbar />
-      <main id="main" className="relative">
+      <main>
         <Hero />
         <StatsBar />
         <Features />
