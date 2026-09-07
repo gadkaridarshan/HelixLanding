@@ -1,21 +1,4 @@
 // helix: components/ui/Button.tsx
-/**
- * @helix:story USER-445000
- *
- * Button — reusable button primitive.
- *
- * Variants:
- *   • `primary`   — solid brand-cyan CTA
- *   • `secondary` — bordered glass surface (secondary actions)
- *   • `ghost`     — transparent text-only link-style button
- *
- * Sizes:
- *   • `sm` `md` `lg`
- *
- * Pure server component — no client interactivity. Renders a
- * `<button>` or `<a>` (when `href` is provided). Polymorphic via
- * `as` prop with safe defaults.
- */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
@@ -23,46 +6,44 @@ import { cn } from "@/components/ui/cn";
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps
-  extends Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "className" | "href"
-  > {
+export interface ButtonProps {
+  href?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  href?: string;
   className?: string;
   children: React.ReactNode;
+  type?: "button" | "submit" | "reset";
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  ariaLabel?: string;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-brand-500 text-ink-950 hover:bg-brand-400 active:bg-brand-600 shadow-[0_10px_30px_-10px_rgba(34,211,238,0.7)]",
+    "bg-brand-500 text-slate-950 hover:bg-brand-400 focus-visible:ring-cyan-400/60",
   secondary:
-    "bg-white/[0.04] text-ink-100 border border-white/10 hover:bg-white/[0.08] hover:border-white/20",
-  ghost: "bg-transparent text-ink-200 hover:text-ink-50 hover:bg-white/[0.04]",
+    "border border-white/15 bg-white/5 text-ink-50 hover:bg-white/10 focus-visible:ring-cyan-400/60",
+  ghost:
+    "bg-transparent text-ink-50 hover:bg-white/5 focus-visible:ring-cyan-400/60",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-4 py-2 text-sm",
+  lg: "px-5 py-3 text-base",
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium " +
-  "transition-colors duration-200 focus-visible:outline-none " +
-  "focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 " +
-  "focus-visible:ring-offset-ink-950 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60";
 
 export function Button({
+  href,
   variant = "primary",
   size = "md",
-  href,
   className,
   children,
-  type,
-  ...rest
+  type = "button",
+  onClick,
+  ariaLabel,
 }: ButtonProps): React.ReactElement {
   const classes = cn(
     baseClasses,
@@ -71,9 +52,17 @@ export function Button({
     className,
   );
 
-  if (typeof href === "string" && href.length > 0) {
+  if (href) {
+    const isExternal = /^https?:\/\//.test(href);
     return (
-      <a className={classes} href={href} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <a
+        href={href}
+        className={classes}
+        aria-label={ariaLabel}
+        {...(isExternal
+          ? { target: "_blank", rel: "noreferrer noopener" }
+          : {})}
+      >
         {children}
       </a>
     );
@@ -81,9 +70,10 @@ export function Button({
 
   return (
     <button
+      type={type}
       className={classes}
-      type={type ?? "button"}
-      {...rest}
+      onClick={onClick}
+      aria-label={ariaLabel}
     >
       {children}
     </button>

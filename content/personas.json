@@ -1,67 +1,55 @@
 {
-  "eyebrow": "Built for every role on the team",
-  "heading": "One orchestrator. Every workflow.",
-  "description": "Helix adapts to the way each member of your team ships code — so atomic work-breakdown is useful from the first commit to the last review.",
+  "eyebrow": "Built for",
+  "heading": "For every kind of builder.",
+  "description": "Helix fits the way you already work — solo, in a team, or across an enterprise org.",
   "items": [
     {
-      "id": "solo-dev",
-      "role": "Solo dev",
-      "title": "Move from idea to PR without losing the thread",
-      "description": "Describe the goal in plain language and Helix returns reviewable units — with types, tests, and a clean diff for each one.",
+      "id": "developers",
+      "role": "Developers",
+      "title": "Ship features, not diffs.",
+      "description": "Stop reviewing 2,000-line AI PRs. Focus on the change that matters.",
       "outcomes": [
-        "Skip the blank-page paralysis on big refactors",
-        "Keep personal projects on a real, auditable cadence",
-        "Ship side projects without babysitting long-running agents"
+        "Every unit passes types, tests, and lint.",
+        "Smaller PRs, faster reviews, happier teams.",
+        "Spend time on design — not on diffs."
       ],
-      "quote": "It feels like pair-programming with a teammate who actually remembers the last ten PRs."
+      "quote": "Helix turns AI output into work I actually want to merge."
     },
     {
-      "id": "founder",
-      "role": "Founders",
-      "title": "Move fast without breaking things",
-      "description": "Atomic PRs keep main green and give you a paper trail your investors can actually verify.",
-      "outcomes": [
-        "Atomic PRs keep main green",
-        "Fewer late-night hotfixes from sprawling AI diffs",
-        "Velocity your investors can verify"
-      ],
-      "quote": "Helix is the first orchestrator that ships work I can confidently put in front of customers."
-    },
-    {
-      "id": "product-manager",
+      "id": "pms",
       "role": "Product managers",
-      "title": "Predictable AI delivery",
-      "description": "Plan features, not vibes. Clear scope per unit, traceable end-to-end.",
+      "title": "Predictable AI delivery.",
+      "description": "Plan features, not vibes. Track each unit end-to-end.",
       "outcomes": [
-        "Plan features, not vibes",
-        "Clear scope per unit, traceable end-to-end",
-        "Tell stakeholders what shipped and why"
+        "Clear scope per unit, traceable end-to-end.",
+        "Tell stakeholders what shipped and why.",
+        "No more 'AI surprise' in standups."
       ],
-      "quote": "I can finally answer 'what did we ship this week?' with a unit-by-unit story."
+      "quote": "I finally know what the AI will ship before it ships."
     },
     {
-      "id": "engineering-leader",
-      "role": "Eng leader",
-      "title": "Forecast, parallelize, and unblock with confidence",
-      "description": "Helix surfaces what is parallelizable, what is blocked, and where reviewers should focus — turning orchestrator output into engineering signal.",
+      "id": "founders",
+      "role": "Founders",
+      "title": "Move fast without breaking things.",
+      "description": "Atomic PRs keep main green. Velocity your investors can verify.",
       "outcomes": [
-        "Identify blockers in real time across active runs",
-        "Forecast completion with explicit dependencies",
-        "Turn orchestrator output into engineering signal"
+        "Fewer late-night hotfixes from sprawling AI diffs.",
+        "Predictable shipping cadence.",
+        "Demo day without a fire drill."
       ],
-      "quote": "The atomic unit of work is finally visible end-to-end."
+      "quote": "Helix is the only AI tool I'd ship a product on."
     },
     {
-      "id": "agency",
-      "role": "Agencies",
-      "title": "Handoff-ready output for every client repo",
-      "description": "Helix produces PRs that any client's team can review, replay, or revert — without re-learning the AI's plan.",
+      "id": "enterprise",
+      "role": "Enterprise teams",
+      "title": "Governance, by construction.",
+      "description": "Every change is scoped, reviewed, and verified — automatically.",
       "outcomes": [
-        "Replayable run logs handed off to client teams",
-        "Per-unit revert paths that don't disturb other work",
-        "Clean, dependency-ordered diffs per repo"
+        "Audit trail per unit, per repo, per release.",
+        "Works with your existing CI and review tooling.",
+        "Self-host on your own infrastructure."
       ],
-      "quote": "Our clients get handoffs they actually want to read."
+      "quote": "Helix gave us AI velocity without giving up governance."
     }
   ]
 }

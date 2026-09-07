@@ -1,213 +1,27 @@
-/**
- * @helix:story USER-285000
- *
- * globals.css — Tailwind v4 entry point + brand token surface.
- *
- * Tailwind v4 uses CSS-first configuration: tokens are declared
- * inside `@theme` and consumed as utilities (`bg-ink-950`,
- * `text-brand-400`, etc.). The PostCSS pipeline is wired up via
- * `postcss.config.js`.
- *
- * Layer order (Tailwind v4):
- *   1. `@import "tailwindcss"` — base + components + utilities
- *   2. `@theme`                  — design tokens (overrides + new)
- *   3. `@layer base`             — element-level resets
- *   4. `@layer components`       — reusable component classes
- *
- * The palette below defines the Helix brand surface:
- *   • `ink-*`    — neutral text + surface scale (deep dark base)
- *   • `brand-*`  — primary cyan accent (CTAs, links)
- *   • `accent-*` — violet/purple highlight (personas)
- *   • `aurora-*` — multi-hue gradient stops (hero glows)
- *
- * The `--font-*` variables are produced by `next/font/google` in
- * `app/fonts.ts` and applied via `<html className={fontVariables}>`.
- * Tailwind v4 promotes those CSS variables into native utilities
- * (`font-sans`, `font-display`, `font-mono`).
- */
-@import "tailwindcss";
+// helix: app/globals.css
 
-@theme {
-  /* ── ink (neutral surface scale) ─────────────────────────────── */
-  --color-ink-50: #f8fafc;
-  --color-ink-100: #e2e8f0;
-  --color-ink-200: #cbd5e1;
-  --color-ink-300: #94a3b8;
-  --color-ink-400: #64748b;
-  --color-ink-500: #475569;
-  --color-ink-600: #334155;
-  --color-ink-700: #1e293b;
-  --color-ink-800: #0f172a;
-  --color-ink-900: #0b1220;
-  --color-ink-950: #050816;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  /* ── brand (cyan accent — primary CTAs, links) ──────────────── */
-  --color-brand-50: #ecfeff;
-  --color-brand-100: #cffafe;
-  --color-brand-200: #a5f3fc;
-  --color-brand-300: #67e8f9;
-  --color-brand-400: #22d3ee;
-  --color-brand-500: #06b6d4;
-  --color-brand-600: #0891b2;
-  --color-brand-700: #0e7490;
-  --color-brand-800: #155e75;
-  --color-brand-900: #164e63;
-
-  /* ── accent (violet highlight — personas, badges) ────────────── */
-  --color-accent-50: #f5f3ff;
-  --color-accent-100: #ede9fe;
-  --color-accent-200: #ddd6fe;
-  --color-accent-300: #c4b5fd;
-  --color-accent-400: #a78bfa;
-  --color-accent-500: #8b5cf6;
-  --color-accent-600: #7c3aed;
-  --color-accent-700: #6d28d9;
-  --color-accent-800: #5b21b6;
-  --color-accent-900: #4c1d95;
-
-  /* ── aurora (multi-hue gradient stops — hero glows) ──────────── */
-  --color-aurora-pink: #f472b6;
-  --color-aurora-violet: #a78bfa;
-  --color-aurora-cyan: #22d3ee;
-  --color-aurora-mint: #34d399;
-
-  /* ── radii ────────────────────────────────────────────────────── */
-  --radius-card: 1rem;
-  --radius-pill: 9999px;
-
-  /* ── shadows ─────────────────────────────────────────────────── */
-  --shadow-glow-brand: 0 10px 40px -10px rgba(34, 211, 238, 0.5);
-  --shadow-glow-accent: 0 10px 40px -10px rgba(139, 92, 246, 0.5);
-
-  /* ── fonts (consumed by `font-sans`, `font-display`, `font-mono`) */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif;
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+:root {
+  color-scheme: dark;
 }
 
-@layer base {
-  html {
-    color-scheme: dark;
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  body {
-    background-color: var(--color-ink-950);
-    color: var(--color-ink-100);
-  }
-
-  /* Non-flat, polished background: layered radial aurora glows over
-     a deep ink base, plus a subtle dotted grid texture. Lives on
-     the body so every page inherits it without re-declaring. */
-  body {
-    background-image:
-      radial-gradient(
-        ellipse 80% 60% at 20% 0%,
-        rgba(139, 92, 246, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 90% 10%,
-        rgba(34, 211, 238, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 70% 50% at 50% 100%,
-        rgba(244, 114, 182, 0.12),
-        transparent 60%
-      ),
-      linear-gradient(
-        180deg,
-        var(--color-ink-950) 0%,
-        var(--color-ink-900) 100%
-      );
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-  }
-
-  /* Subtle dotted grid overlay (purely decorative) */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px
-    );
-    background-size: 24px 24px;
-    mask-image: radial-gradient(
-      ellipse at center,
-      black 0%,
-      transparent 70%
-    );
-  }
-
-  /* Ensure content sits above the background pseudo-element */
-  body > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-  }
-
-  ::selection {
-    background-color: rgba(34, 211, 238, 0.3);
-    color: var(--color-ink-50);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-brand-400);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
+html,
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 
-@layer components {
-  /* Vertical rhythm used by every landing section. */
+.section-pad {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
   .section-pad {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-  @media (min-width: 640px) {
-    .section-pad {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-    }
-  }
-  @media (min-width: 1024px) {
-    .section-pad {
-      padding-top: 7rem;
-      padding-bottom: 7rem;
-    }
-  }
-
-  .glass-surface {
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .text-gradient-brand {
-    background-image: linear-gradient(
-      135deg,
-      var(--color-brand-300) 0%,
-      var(--color-accent-400) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }

@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Ready when you are",
+  "heading": "Stop reviewing AI diffs. Start shipping features.",
+  "description": "Spin up Helix, point it at a repo, and watch a single prompt become atomic, verified units of work — ready to merge.",
+  "primary": {
+    "label": "Get started",
+    "href": "https://github.com/gadkaridarshan/Helix"
+  },
+  "secondary": {
+    "label": "Read the docs",
+    "href": "#how-it-works"
+  }
+}

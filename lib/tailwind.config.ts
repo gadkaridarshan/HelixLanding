@@ -1,23 +1,19 @@
-// helix: tailwind.config.ts
-/**
- * @helix:story USER-285000
- *
- * Tailwind v4 is CSS-first — tokens live in `app/globals.css`
- * under `@theme`. This file is intentionally minimal: it only
- * points the Tailwind v4 engine at our content roots so that any
- * class emitted by `.tsx` files is detected. The full design
- * token surface (ink/brand/accent/aurora, fonts, radii, shadows)
- * is declared in `app/globals.css`.
- */
 import type { Config } from "tailwindcss";
 
+/**
+ * Tailwind v4 uses a CSS-first config (`@theme` in globals.css),
+ * so this JS config is intentionally minimal. We only declare the
+ * content globs so Tailwind knows which files to scan for class
+ * usage, and the dark-mode strategy.
+ */
 const config: Config = {
   content: [
-    "./app/**/*.{ts,tsx,js,jsx,mdx}",
-    "./components/**/*.{ts,tsx,js,jsx,mdx}",
-    "./lib/**/*.{ts,tsx,js,jsx,mdx}",
-    "./content/**/*.{md,mdx,json}",
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}",
+    "./content/**/*.{ts,tsx,json}",
   ],
+  darkMode: "class",
   theme: {
     extend: {},
   },

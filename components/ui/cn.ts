@@ -1,17 +1,37 @@
 // helix: components/ui/cn.ts
 /**
- * @helix:story USER-445000
- *
- * cn — className concatenation helper. Combines `clsx` (for
- * conditional + array/object classnames) with `tailwind-merge`
- * (to dedupe conflicting Tailwind utilities so the last one wins,
- * e.g. `cn("px-2", "px-4")` → `"px-4"`).
+ * Tiny class-name combinator. Filters out falsy values and joins the
+ * remainder with single spaces. Mirrors the popular `clsx` API for
+ * the limited subset we actually use.
  */
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+export type ClassValue =
+  | string
+  | number
+  | null
+  | undefined
+  | false
+  | true
+  | ClassValue[]
+  | { [key: string]: unknown };
 
 export function cn(...inputs: ClassValue[]): string {
-  return twMerge(clsx(inputs));
+  const out: string[] = [];
+  for (const input of inputs) {
+    if (!input) continue;
+    if (typeof input === "string" || typeof input === "number") {
+      out.push(String(input));
+    } else if (Array.isArray(input)) {
+      const nested = cn(...input);
+      if (nested) out.push(nested);
+    } else if (typeof input === "object") {
+      for (const key of Object.keys(input)) {
+        if (Boolean((input as Record<string, unknown>)[key])) {
+          out.push(key);
+        }
+      }
+    }
+  }
+  return out.join(" ");
 }
 
 export default cn;

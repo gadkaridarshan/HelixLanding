@@ -42,7 +42,7 @@ export interface SectionProps {
   tone?: SectionTone;
   /** Optional className applied to the outer `<section>`. */
   className?: string;
-  /** Optional className applied to the inner `<Container>`. */
+  /** Optional className applied to the inner container. */
   innerClassName?: string;
   /** Section body. */
   children: React.ReactNode;

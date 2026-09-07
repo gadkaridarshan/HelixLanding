@@ -1,37 +1,37 @@
 {
-  "eyebrow": "Questions, answered",
-  "heading": "Frequently asked questions",
-  "description": "Everything you need to know before you put Helix to work on your repo.",
+  "eyebrow": "FAQ",
+  "heading": "Questions, answered.",
+  "description": "Everything you need to know before you wire Helix into your workflow.",
   "items": [
     {
       "id": "what-is-helix",
-      "question": "What is Helix and how do I use it?",
-      "answer": "Helix is an atomic work-breakdown orchestrator for AI coding agents. Describe the feature or fix you want, and Helix decomposes it into small, well-scoped units — each with its own acceptance criteria. Your coding agent then executes the units sequentially, so dependencies are always satisfied and every change ships clean."
-    },
-    {
-      "id": "how-does-it-deploy",
-      "question": "How do I deploy and run Helix in my workflow?",
-      "answer": "Helix runs locally as a CLI and plugs into the IDE or CI you already use. Point it at a repository, describe what you want shipped, and it returns a stack of atomic pull requests ready to review. There is nothing to host — Helix is an open-source orchestrator that sits between you and the agent."
-    },
-    {
-      "id": "what-is-the-approach",
-      "question": "What is the orchestration approach?",
-      "answer": "Plan, execute, verify. Helix reads your intent and the codebase, produces an ordered list of units with clear scope, hands each unit to your agent with just-enough context, then type-checks, tests, and lints the result before it can move on. Failures pause the loop so nothing ships broken."
-    },
-    {
-      "id": "who-is-it-for",
-      "question": "Who is Helix built for?",
-      "answer": "Developers shipping features without reviewing 2,000-line AI diffs. Product managers who need predictable delivery they can report on. Founders who want velocity without late-night hotfixes. And enterprise teams who need governance, traceability, and the option to plug Helix into their own agent stack."
+      "question": "What is Helix, exactly?",
+      "answer": "Helix is an AI orchestrator that turns a single prompt into atomic, verified code units. It plans the work, executes it unit-by-unit against your repo, and verifies every change before merge."
     },
     {
       "id": "how-is-it-different",
-      "question": "How is Helix different from a plain AI coding agent?",
-      "answer": "Plain agents produce sprawling diffs with mixed quality. Helix enforces structure: every change is a small, scoped, verified unit. You get the speed of an AI agent with the reviewability of a human-sized PR — and a full audit trail of what shipped and why."
+      "question": "How is Helix different from a coding agent?",
+      "answer": "A coding agent writes one big diff. Helix writes many small, scoped units — each type-checked, tested, and linted against the rest of your repo. Failures pause the loop, so main stays green."
     },
     {
-      "id": "can-i-bring-my-own-agent",
-      "question": "Can I bring my own coding agent?",
-      "answer": "Yes. Helix is agent-agnostic. Point it at the agent you already trust — Claude, GPT, an in-house model — and Helix orchestrates the work. Bring your own keys, your own prompts, your own review policy."
+      "id": "what-languages",
+      "question": "Which languages and frameworks does Helix support?",
+      "answer": "Helix is language-agnostic. It works with any repo that has a working type-check, test, and lint pipeline — TypeScript, Go, Python, Rust, and more."
+    },
+    {
+      "id": "self-hosted",
+      "question": "Can I self-host Helix?",
+      "answer": "Yes. Helix is open source and runs anywhere you can run Node.js — your laptop, a CI runner, or your own infrastructure."
+    },
+    {
+      "id": "pricing",
+      "question": "How is Helix priced?",
+      "answer": "Helix itself is open source and free. You bring your own model and your own compute — Helix orchestrates the loop."
+    },
+    {
+      "id": "open-source",
+      "question": "Is Helix open source?",
+      "answer": "Yes. The full source is on GitHub under a permissive license, and contributions are welcome."
     }
   ]
 }

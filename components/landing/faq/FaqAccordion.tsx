@@ -1,12 +1,6 @@
 // helix: components/landing/faq/FaqAccordion.tsx
 "use client";
 
-/**
- * @helix:story USER-308000
- *
- * FaqAccordion — accessible accordion (one item open at a time).
- * Client island because of local state.
- */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
@@ -42,21 +36,28 @@ export function FaqAccordion({
                 aria-controls={panelId}
                 onClick={() => setOpenId(isOpen ? null : item.id)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-4 px-5 py-5 text-left text-base font-medium text-white transition",
-                  "hover:bg-white/5 focus:outline-none focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-cyan-400/60",
-                  isOpen && "bg-white/[0.04]",
+                  "flex w-full items-center justify-between gap-4 px-5 py-5 sm:px-6 sm:py-6 text-left text-base sm:text-lg font-medium text-ink-50 transition-colors",
+                  "hover:bg-white/[0.04] focus-visible:bg-white/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60",
                 )}
               >
                 <span>{item.question}</span>
-                <span
+                <svg
                   aria-hidden="true"
+                  viewBox="0 0 20 20"
                   className={cn(
-                    "inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/15 text-cyan-300 transition-transform",
-                    isOpen && "rotate-45",
+                    "h-5 w-5 flex-none text-brand-300 transition-transform",
+                    isOpen ? "rotate-180" : "rotate-0",
                   )}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
                 >
-                  +
-                </span>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 8l4 4 4-4"
+                  />
+                </svg>
               </button>
             </h3>
             <div
@@ -64,7 +65,7 @@ export function FaqAccordion({
               role="region"
               aria-labelledby={buttonId}
               hidden={!isOpen}
-              className="px-5 pb-5 text-sm leading-relaxed text-slate-300 sm:text-base"
+              className="px-5 pb-6 text-sm leading-relaxed text-slate-300 sm:px-6"
             >
               {item.answer}
             </div>

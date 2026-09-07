@@ -2,42 +2,26 @@
 /**
  * @helix:story USER-285000
  *
- * Brand fonts wired up via `next/font/google`.
+ * Font registration for the Helix landing site. Uses `next/font/google`
+ * so the chosen families ship as self-hosted, preloaded assets with
+ * automatic subsetting and zero CLS.
  *
- *   • Inter         — workhorse UI sans (body copy, controls)
- *   • Space Grotesk — display sans (hero, section headings)
- *   • JetBrains Mono — monospace (code chips, diff lines)
- *
- * Each font is exposed as a CSS variable so `app/globals.css`
- * (`@theme`) can promote them into Tailwind v4 utilities
- * (`font-sans`, `font-display`, `font-mono`).
- *
- * `fontVariables` is the single string applied to `<html className>`
- * in `app/layout.tsx`.
+ * We pair:
+ *   • `Geist Sans`  — primary UI / body font (a modern, neutral
+ *     sans-serif with excellent on-screen legibility).
+ *   • `Geist Mono`  — used for the eyebrow chips, badges, and code-
+ *     style labels where a technical tone is desired.
  */
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
-export const inter = Inter({
+export const fontSans = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
-export const spaceGrotesk = Space_Grotesk({
+export const fontMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
 });
-
-export const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains-mono",
-});
-
-export const fontVariables = [
-  inter.variable,
-  spaceGrotesk.variable,
-  jetbrainsMono.variable,
-].join(" ");

@@ -1,31 +1,15 @@
 // helix: components/sections/personas/Personas.tsx
 /**
- * @helix:story USER-167000
+ * @helix:story USER-303000
  *
- * Personas — canonical audience-targeted value-prop section.
- *
- * Composed of:
- *   • `PersonasTabs` (client island, keyboard-navigable role switcher)
- *   • `PersonaCard`  (server-rendered value-prop card primitive)
- *   • `personas.json` content (sourced from `@/content/personas.json`)
- *
- * Renders at least four persona tiles (founders, PMs, engineering
- * leads, solo devs, agencies).
+ * Personas — "Built for" grid.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-import personasData from "@/content/personas.json";
-import { PersonaCard } from "@/components/ui/persona-card";
-import { PersonasTabs } from "./PersonasTabs";
-
-export interface PersonasProps {
-  className?: string;
-}
-
-export interface PersonaItem {
+interface PersonaItem {
   id: string;
   role: string;
   title: string;
@@ -33,6 +17,8 @@ export interface PersonaItem {
   outcomes: ReadonlyArray<string>;
   quote?: string;
 }
+
+import personasData from "@/content/personas.json";
 
 interface PersonasContent {
   eyebrow: string;
@@ -43,42 +29,60 @@ interface PersonasContent {
 
 const content: PersonasContent = personasData as PersonasContent;
 
-const tabItems = content.items.map((p) => ({ id: p.id, role: p.role }));
+export interface PersonasProps {
+  className?: string;
+}
 
 export function Personas({ className }: PersonasProps): React.ReactElement {
   return (
     <section
       id="personas"
       aria-labelledby="personas-heading"
-      className={
-        "relative isolate scroll-mt-24 py-20 sm:py-28 " + (className ?? "")
-      }
+      className={"section-pad " + (className ?? "")}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-0 bg-slate-950" />
-        <div className="absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
-      </div>
-
       <Container>
         <SectionHeading
           eyebrow={content.eyebrow}
           heading={content.heading}
           description={content.description}
-          headingId="personas-heading"
         />
-
-        <PersonasTabs items={tabItems}>
-          {(active) => {
-            const persona = content.items.find((p) => p.id === active.id);
-            if (!persona) {
-              return null;
-            }
-            return <PersonaCard persona={persona} />;
-          }}
-        </PersonasTabs>
+        <ul
+          role="list"
+          className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2"
+        >
+          {content.items.map((persona) => (
+            <li
+              key={persona.id}
+              className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-brand-300">
+                {persona.role}
+              </p>
+              <h3 className="mt-2 text-lg font-semibold text-ink-50">
+                {persona.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                {persona.description}
+              </p>
+              <ul role="list" className="mt-4 space-y-2 text-sm text-slate-300">
+                {persona.outcomes.map((outcome) => (
+                  <li key={outcome} className="flex items-start gap-2">
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-brand-400"
+                    />
+                    <span>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+              {persona.quote ? (
+                <blockquote className="mt-5 border-l-2 border-brand-400/60 pl-3 text-sm italic text-slate-300">
+                  “{persona.quote}”
+                </blockquote>
+              ) : null}
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );

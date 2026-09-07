@@ -1,36 +1,25 @@
 {
-  "eyebrow": "Trusted by teams that ship",
-  "heading": "From solo builders to staff engineers",
-  "description": "Helix is in production with founders, PMs, engineering leads, and agencies shipping AI-generated code without the 2,000-line PRs.",
-  "logos": [
-    { "name": "acme", "label": "Acme" },
-    { "name": "northwind", "label": "Northwind" },
-    { "name": "globex", "label": "Globex" },
-    { "name": "initech", "label": "Initech" },
-    { "name": "hooli", "label": "Hooli" }
-  ],
+  "eyebrow": "Trusted by builders",
+  "heading": "Engineering teams ship faster with Helix.",
+  "description": "From solo founders to platform teams, Helix fits into the workflows that already work.",
   "testimonials": [
     {
-      "quote": "Helix turned a sprawling AI refactor into a stack of small, reviewable PRs. Our team finally trusts the diff queue again.",
-      "author": "Priya Subramanian",
+      "quote": "We cut our AI PR review time in half. Helix turns a vague prompt into a stack of tiny, mergeable PRs.",
+      "author": "Maya Chen",
       "role": "Staff Engineer",
       "company": "Northwind"
     },
     {
-      "quote": "We deploy Helix runs to Vercel on every merge. The atomic units make rollbacks boring — which is the best kind of rollback.",
-      "author": "Marcus Lee",
-      "role": "Founding Engineer",
-      "company": "Hooli"
+      "quote": "Our main branch has been green for six weeks. Atomic units changed everything.",
+      "author": "Jonas Beck",
+      "role": "Solo Founder",
+      "company": "Acme"
     },
     {
-      "quote": "As a PM, I finally know what shipped and why. Helix surfaces the unit-level story behind every AI change.",
-      "author": "Jordan Park",
+      "quote": "Helix is the missing piece between planning and shipping. Predictable delivery, end-to-end.",
+      "author": "Priya Raman",
       "role": "Product Manager",
       "company": "Globex"
     }
-  ],
-  "githubStars": {
-    "label": "Star Helix on GitHub",
-    "href": "https://github.com/gadkaridarshan/Helix"
-  }
+  ]
 }

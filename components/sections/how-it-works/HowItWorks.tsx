@@ -1,75 +1,81 @@
 // helix: components/sections/how-it-works/HowItWorks.tsx
 /**
- * @helix:story USER-167000
+ * @helix:story USER-303000
  *
- * HowItWorks — canonical 3-step orchestration flow for Helix,
- * shown as a diagrammatic explainer with connectors, atom tiles,
- * and copy bullets.
- *
- *   1. Describe the goal        — natural language intent
- *   2. Decompose & orchestrate  — parallel agents, dependency gating
- *   3. Review & ship            — auditable PRs, replayable runs
- *
- * Content is sourced from `@/content/how-it-works.json` so the
- * marketing copy can evolve without touching the component tree.
- *
- * Pure server component. Uses the shared `Container` primitive and
- * brand tokens via Tailwind utilities.
+ * HowItWorks — three-step walkthrough of the Helix orchestration loop.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-import howItWorksData from "@/content/how-it-works.json";
+interface Step {
+  readonly num: string;
+  readonly title: string;
+  readonly description: string;
+}
 
-import { StepsList } from "./StepsList";
-import type { HowItWorksStep } from "./StepsList";
+const STEPS: ReadonlyArray<Step> = [
+  {
+    num: "01",
+    title: "Plan",
+    description:
+      "Helix reads your prompt and the codebase, then produces an ordered list of atomic units — each with a clear scope and acceptance criteria.",
+  },
+  {
+    num: "02",
+    title: "Execute",
+    description:
+      "Each unit is handed to your coding agent with just-enough context. Units run sequentially so dependencies are always satisfied.",
+  },
+  {
+    num: "03",
+    title: "Verify",
+    description:
+      "Every unit is type-checked, tested, and linted against the rest of the repo before it can be merged. Failures pause the loop.",
+  },
+];
 
 export interface HowItWorksProps {
   className?: string;
 }
 
-export type { HowItWorksStep };
-
-interface HowItWorksContent {
-  eyebrow: string;
-  heading: string;
-  description: string;
-  steps: ReadonlyArray<HowItWorksStep>;
-}
-
-const content: HowItWorksContent = howItWorksData as HowItWorksContent;
-
-export function HowItWorks({ className }: HowItWorksProps): React.ReactElement {
+export function HowItWorks({
+  className,
+}: HowItWorksProps): React.ReactElement {
   return (
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
-      className={
-        "relative isolate scroll-mt-24 py-20 sm:py-28 " + (className ?? "")
-      }
+      className={"section-pad " + (className ?? "")}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-0 bg-slate-950" />
-        <div
-          className="absolute left-1/2 top-1/3 h-[420px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl"
-        />
-      </div>
-
       <Container>
         <SectionHeading
-          eyebrow={content.eyebrow}
-          heading={content.heading}
-          description={content.description}
-          headingId="how-it-works-heading"
+          eyebrow="How it works"
+          heading="Plan. Execute. Verify."
+          description="A simple loop that turns AI output into work you actually want to merge."
         />
-        <div className="mt-12">
-          <StepsList steps={content.steps} />
-        </div>
+        <ol
+          role="list"
+          className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3"
+        >
+          {STEPS.map((step) => (
+            <li
+              key={step.num}
+              className="relative h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+            >
+              <span className="font-mono text-xs text-brand-300">
+                {step.num}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-ink-50">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                {step.description}
+              </p>
+            </li>
+          ))}
+        </ol>
       </Container>
     </section>
   );
