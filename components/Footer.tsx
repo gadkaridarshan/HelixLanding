@@ -1,14 +1,20 @@
 // helix: components/Footer.tsx
 /**
- * @helix:story USER-812000
+ * @helix:story USER-82000
  *
- * Footer — site-wide footer with brand wordmark, Product / Resources
- * / Company / Legal link columns, social links, and a "deployed on
- * Vercel" badge.
+ * Footer — site-wide footer with brand wordmark, Product / Resources /
+ * Company / Legal link columns, social links, copyright, and a
+ * "Built with Helix" wordmark.
  *
- * Pure server component. Brand surface (name, canonical URL, GitHub
- * URL) is sourced from `lib/brand.ts` so the same identity shows up in
- * `<title>`, OG cards, and this footer without duplication.
+ * Pure server component. Brand surface (name, canonical URL,
+ * GitHub URL) is sourced from `lib/brand.ts` so the same identity
+ * shows up in `<title>`, OG cards, and this footer without
+ * duplication.
+ *
+ * Lives at the canonical path `components/Footer.tsx` (this file).
+ * Re-export shims at `components/sections/Footer.tsx` and
+ * `app/components/sections/Footer.tsx` point here so both import
+ * paths resolve to the same implementation.
  */
 import * as React from "react";
 
@@ -45,38 +51,20 @@ const productLinks: ReadonlyArray<FooterLink> = [
 const resourcesLinks: ReadonlyArray<FooterLink> = [
   { label: "GitHub", href: brand.githubUrl, external: true },
   {
-    label: "Live orchestrator",
+    label: "Live site",
     href: brand.url,
-    external: true,
-  },
-  {
-    label: "Documentation",
-    href: `${brand.githubUrl}#readme`,
     external: true,
   },
 ];
 
 const companyLinks: ReadonlyArray<FooterLink> = [
-  { label: "About", href: "#hero" },
-  { label: "Get started", href: "#get-started" },
-  { label: "Roadmap", href: brand.githubUrl, external: true },
+  { label: "Contact", href: `mailto:${brand.contactEmail}` },
+  { label: "Reference", href: brand.referenceUrl, external: true },
 ];
 
 const legalLinks: ReadonlyArray<FooterLink> = [
-  {
-    label: "MIT License",
-    href: `${brand.githubUrl}/blob/main/LICENSE`,
-    external: true,
-  },
-  {
-    label: "Privacy",
-    href: `${brand.githubUrl}/blob/main/docs/PRIVACY.md`,
-    external: true,
-  },
-];
-
-const socialLinks: ReadonlyArray<SocialLink> = [
-  { label: "GitHub", href: brand.githubUrl },
+  { label: "Privacy", href: "#privacy" },
+  { label: "Terms", href: "#terms" },
 ];
 
 const columns: ReadonlyArray<FooterColumn> = [
@@ -86,125 +74,156 @@ const columns: ReadonlyArray<FooterColumn> = [
   { title: "Legal", links: legalLinks },
 ];
 
-function VercelBadge(): React.ReactElement {
-  return (
-    <a
-      href="https://vercel.com"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Deployed on Vercel"
-      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
-    >
+const socialLinks: ReadonlyArray<SocialLink> = [
+  { label: "GitHub", href: brand.githubUrl },
+];
+
+function SocialIcon({ label }: { label: string }): React.ReactElement {
+  if (label === "GitHub") {
+    return (
       <svg
-        aria-hidden="true"
         viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        className="h-5 w-5"
         fill="currentColor"
-        className="h-3.5 w-3.5 text-white"
       >
-        <path d="M12 1L24 22H0L12 1Z" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"
+        />
       </svg>
-      <span className="font-medium tracking-tight">Deployed on Vercel</span>
-    </a>
+    );
+  }
+  // Generic fallback — a simple dot.
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="h-5 w-5"
+      fill="currentColor"
+    >
+      <circle cx="12" cy="12" r="4" />
+    </svg>
   );
 }
 
-function SocialIcon({
-  label,
-  href,
-}: {
-  label: string;
-  href: string;
-}): React.ReactElement {
-  if (label === "GitHub") {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer noopener"
-        aria-label="Helix on GitHub"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-4 w-4"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"
-          />
-        </svg>
-      </a>
-    );
-  }
+function VercelBadge(): React.ReactElement {
   return (
     <a
-      href={href}
+      href="https://vercel.com?utm_source=helix-landing&utm_medium=badge"
       target="_blank"
       rel="noreferrer noopener"
-      aria-label={label}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-ink-200 transition hover:bg-white/10 hover:text-white"
+      aria-label="Powered by Vercel"
     >
-      <span className="text-xs font-medium">{label.charAt(0)}</span>
+      <svg
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        className="h-3.5 w-3.5"
+        fill="currentColor"
+      >
+        <path d="M12 2 1 21h22L12 2Z" />
+      </svg>
+      <span>Deployed on Vercel</span>
     </a>
   );
 }
 
 export function Footer({ className }: FooterProps): React.ReactElement {
   const year = new Date().getFullYear();
-
   return (
     <footer
       className={
         "relative isolate border-t border-white/10 bg-slate-950/60 " +
         (className ?? "")
       }
+      aria-labelledby="footer-heading"
     >
-      <Container className="py-12 sm:py-16">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] lg:gap-12">
-          {/* Brand column */}
-          <div className="max-w-sm">
+      <h2 id="footer-heading" className="sr-only">
+        Site footer
+      </h2>
+
+      {/* Decorative top glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"
+      />
+
+      <Container className="py-14 sm:py-20">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
+          {/* Brand block */}
+          <div className="col-span-2 md:col-span-2">
             <a
               href="#hero"
-              className="inline-flex items-center gap-2 text-white"
-              aria-label={`${brand.name} home`}
+              className="inline-flex items-center gap-2 font-mono text-lg font-semibold text-white"
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-950 shadow-[0_8px_24px_-8px_rgba(34,211,238,0.6)]"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-brand-400 to-accent-500 text-ink-950"
               >
-                <span className="font-mono text-sm font-bold">H</span>
+                {/* Mini atom mark */}
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                >
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="9"
+                    ry="3.5"
+                    transform="rotate(60 12 12)"
+                  />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="9"
+                    ry="3.5"
+                    transform="rotate(-60 12 12)"
+                  />
+                </svg>
               </span>
-              <span className="text-base font-semibold tracking-tight">
-                {brand.name}
-              </span>
+              {brand.name}
             </a>
-
-            <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              {brand.shortDescription}
+            <p className="mt-4 max-w-xs text-sm leading-6 text-ink-300">
+              {brand.tagline}. The atomic work-breakdown orchestrator for AI
+              coding agents — ship small, reviewable PRs.
             </p>
 
-            <div className="mt-6">
-              <VercelBadge />
-            </div>
-
-            <div className="mt-6 flex items-center gap-2">
-              {socialLinks.map((s) => (
-                <SocialIcon key={s.label} label={s.label} href={s.href} />
+            <div className="mt-6 flex items-center gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={link.label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-ink-200 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
+                >
+                  <SocialIcon label={link.label} />
+                </a>
               ))}
             </div>
           </div>
 
           {/* Link columns */}
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                {col.title}
+          {columns.map((column) => (
+            <div key={column.title} className="col-span-1 md:col-span-1">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-400">
+                {column.title}
               </h3>
-              <ul role="list" className="mt-4 space-y-3">
-                {col.links.map((link) => (
+              <ul className="mt-4 space-y-3">
+                {column.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
@@ -214,7 +233,7 @@ export function Footer({ className }: FooterProps): React.ReactElement {
                             rel: "noreferrer noopener",
                           }
                         : {})}
-                      className="text-sm text-slate-300 transition-colors hover:text-white"
+                      className="text-sm text-ink-200 transition hover:text-white"
                     >
                       {link.label}
                     </a>
@@ -225,14 +244,17 @@ export function Footer({ className }: FooterProps): React.ReactElement {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-slate-500">
-            © {year} {brand.name}. Licensed under the MIT License.
+        {/* Bottom row */}
+        <div className="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs text-ink-400">
+            © {year} {brand.name}. All rights reserved.
           </p>
-          <p className="text-xs text-slate-500">
-            Built with Next.js · Atomic work-breakdown for AI coding agents.
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-ink-400">
+              Built with {brand.name}
+            </span>
+            <VercelBadge />
+          </div>
         </div>
       </Container>
     </footer>

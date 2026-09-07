@@ -1,4 +1,3 @@
-// helix: app/components/sections/FAQ.tsx
 /**
  * @helix:story USER-23000
  *

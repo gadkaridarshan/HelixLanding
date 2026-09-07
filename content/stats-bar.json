@@ -1,0 +1,17 @@
+{
+  "eyebrow": "Helix by the numbers",
+  "items": [
+    {
+      "value": "8×",
+      "label": "Smaller PRs on average"
+    },
+    {
+      "value": "<15m",
+      "label": "From prompt to review-ready diff"
+    },
+    {
+      "value": "100%",
+      "label": "Atoms gated on type-check + tests"
+    }
+  ]
+}

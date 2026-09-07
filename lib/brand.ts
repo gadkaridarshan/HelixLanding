@@ -1,6 +1,6 @@
 // helix: lib/brand.ts
 /**
- * @helix:story USER-23000
+ * @helix:story USER-63000
  *
  * Brand surface for the Helix marketing site.
  *
@@ -13,13 +13,19 @@
  */
 
 const DEFAULT_URL = "https://helix-ai-orchestrator.vercel.app";
+const DEFAULT_GITHUB_URL = "https://github.com/gadkaridarshan/Helix";
+const DEFAULT_REFERENCE_URL = "https://helix-ai-orchestrator.vercel.app";
+const DEFAULT_CONTACT_EMAIL = "hello@helix-ai.dev";
+
+function normalizeUrl(value: string | undefined, fallback: string): string {
+  if (value && value.trim().length > 0) {
+    return value.trim().replace(/\/+$/, "");
+  }
+  return fallback;
+}
 
 function resolveCanonicalUrl(): string {
-  const fromEnv = process.env.NEXT_PUBLIC_BRAND_URL;
-  if (fromEnv && fromEnv.trim().length > 0) {
-    return fromEnv.trim().replace(/\/+$/, "");
-  }
-  return DEFAULT_URL;
+  return normalizeUrl(process.env.NEXT_PUBLIC_BRAND_URL, DEFAULT_URL);
 }
 
 export const brand = {
@@ -30,8 +36,9 @@ export const brand = {
   description:
     "Helix decomposes every prompt into atomic, reviewable units, executes them in order with explicit dependencies, and verifies each unit against the rest of your repo (types, tests, lint) before shipping a small, reviewable PR.",
   url: resolveCanonicalUrl(),
-  githubUrl: "https://github.com/gadkaridarshan/Helix",
-  twitterHandle: "@helix",
+  githubUrl: DEFAULT_GITHUB_URL,
+  referenceUrl: DEFAULT_REFERENCE_URL,
+  contactEmail: DEFAULT_CONTACT_EMAIL,
 } as const;
 
 export type Brand = typeof brand;

@@ -2,130 +2,87 @@
 /**
  * @helix:story USER-63000
  *
- * Button — shared primitive for every CTA across the marketing site.
- *
- * Renders as an `<a>` when `href` is provided (anchor CTAs that may be
- * external or hash links) and as a `<button>` otherwise. The visual
- * surface is identical in both cases — the only thing that changes is
- * the semantic element. This keeps the FinalCTA / Footer / Hero CTAs
- * visually consistent without duplicating the gradient + glow styling.
+ * Button — shared CTA primitive used by Navbar, Hero, FinalCTA, etc.
  *
  * Variants:
- *   • `primary`  — gradient brand→accent surface, high contrast, used
- *                  for the single most important action per surface.
- *   • `secondary`— translucent white surface with border, used for the
- *                  parallel action next to a primary.
- *   • `ghost`    — bare link with a subtle underline-on-hover, used
- *                  for tertiary actions inside dense surfaces.
+ *   • `primary`   — solid cyan, the dominant CTA on the page
+ *   • `secondary` — translucent glass, sits next to primary
+ *   • `ghost`     — text-only, used in nav and dense layouts
  *
- * Sizes:
- *   • `sm` / `md` / `lg` — tokenised height + padding so the same
- *     component can drive a tiny inline CTA up to the FinalCTA hero
- *     button without copy-pasting Tailwind classes.
+ * Supports both `<button>` (default) and `<a>` rendering for true
+ * link CTAs — pass `href` to switch. Pure server component: no
+ * client-side state, no event handlers.
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
-export type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonSize = "sm" | "md" | "lg";
 
-export interface BaseButtonProps {
+export interface ButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "href"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  className?: string;
+  href?: string;
+  external?: boolean;
   children: React.ReactNode;
 }
 
-export type ButtonLinkProps = BaseButtonProps & {
-  href: string;
-  external?: boolean;
-  type?: never;
-  disabled?: boolean;
-  onClick?: never;
-};
-
-export type ButtonActionProps = BaseButtonProps & {
-  href?: undefined;
-  external?: never;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
-
-export type ButtonProps = ButtonLinkProps | ButtonActionProps;
-
-const baseSurface =
-  "inline-flex items-center justify-center gap-2 font-medium tracking-tight " +
-  "transition-colors transition-shadow duration-150 " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 " +
-  "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 " +
-  "disabled:cursor-not-allowed disabled:opacity-60 select-none whitespace-nowrap";
-
-const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm rounded-lg",
-  md: "h-11 px-5 text-sm rounded-xl",
-  lg: "h-12 px-6 text-base rounded-xl sm:h-14 sm:px-8 sm:text-lg",
-};
-
-const variantStyles: Record<ButtonVariant, string> = {
+const variantMap: Record<ButtonVariant, string> = {
   primary:
-    "text-slate-950 bg-gradient-to-r from-cyan-300 via-cyan-400 to-violet-400 " +
-    "shadow-[0_10px_40px_-12px_rgba(34,211,238,0.55)] " +
-    "hover:from-cyan-200 hover:via-cyan-300 hover:to-violet-300 " +
-    "active:from-cyan-300 active:via-cyan-400 active:to-violet-400",
+    "bg-brand-500 text-ink-950 hover:bg-brand-400 active:bg-brand-600 shadow-[0_8px_30px_-12px_rgba(34,211,238,0.6)]",
   secondary:
-    "text-white border border-white/15 bg-white/[0.06] backdrop-blur-sm " +
-    "hover:bg-white/[0.1] hover:border-white/25",
+    "bg-white/5 text-ink-100 ring-1 ring-inset ring-white/15 hover:bg-white/10 hover:ring-white/25 backdrop-blur",
   ghost:
-    "text-slate-200 bg-transparent hover:text-white " +
-    "underline-offset-4 hover:underline",
+    "bg-transparent text-ink-200 hover:text-ink-50 hover:bg-white/5",
 };
 
-function composeClassName(
-  variant: ButtonVariant,
-  size: ButtonSize,
-  className?: string,
-): string {
-  return cn(baseSurface, sizeStyles[size], variantStyles[variant], className);
+const sizeMap: Record<ButtonSize, string> = {
+  sm: "h-9 px-3 text-sm",
+  md: "h-11 px-5 text-sm",
+  lg: "h-12 px-6 text-base",
+};
+
+function baseClasses(variant: ButtonVariant, size: ButtonSize): string {
+  return cn(
+    "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight",
+    "transition-colors duration-150 ease-out",
+    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400",
+    variantMap[variant],
+    sizeMap[size],
+  );
 }
 
-export function Button(props: ButtonProps): React.ReactElement {
-  const variant: ButtonVariant = props.variant ?? "primary";
-  const size: ButtonSize = props.size ?? "md";
-  const composed = composeClassName(variant, size, props.className);
+export function Button({
+  variant = "primary",
+  size = "md",
+  href,
+  external,
+  className,
+  children,
+  type,
+  ...rest
+}: ButtonProps): React.ReactElement {
+  const classes = cn(baseClasses(variant, size), className);
 
-  if (props.href !== undefined) {
-    const { href, external } = props;
-    const isExternal = external ?? /^https?:\/\//.test(href);
-    if (isExternal) {
-      return (
-        <a
-          href={href}
-          className={composed}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {props.children}
-        </a>
-      );
+  if (href !== undefined) {
+    const anchorProps: React.AnchorHTMLAttributes<HTMLAnchorElement> = {
+      href,
+      className: classes,
+      children,
+    };
+    if (external) {
+      anchorProps.target = "_blank";
+      anchorProps.rel = "noreferrer noopener";
     }
-    return (
-      <a href={href} className={composed}>
-        {props.children}
-      </a>
-    );
+    return <a {...anchorProps} />;
   }
 
-  const { type, disabled, onClick } = props;
   return (
-    <button
-      type={type ?? "button"}
-      className={composed}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {props.children}
+    <button className={classes} type={type ?? "button"} {...rest}>
+      {children}
     </button>
   );
 }

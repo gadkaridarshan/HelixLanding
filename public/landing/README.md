@@ -2,48 +2,46 @@
 
 Marketing site for **Helix** — the atomic work-breakdown orchestrator for AI coding agents.
 
-> **Live site:** <https://helix-ai-orchestrator.vercel.app>
+> **Important — this repo is the live site for this workspace.** The canonical production URL for this product is configured in `lib/brand.ts` (`brand.url`) and can be overridden via the `NEXT_PUBLIC_BRAND_URL` environment variable. The URL below is **only** a visual / brand reference and is **not** deployed from this repository.
+>
+> 🔗 **Reference site** (visual / brand reference only — **not** this product's live site):
+> <https://helix-ai-orchestrator.vercel.app>
 >
 > Source: <https://github.com/gadkaridarshan/Helix>
 
-This repo **is** the live site. Deploying this repository to your own Vercel account gives you a public marketing site for the Helix AI orchestrator at the domain you configure in `lib/brand.ts` (or override via the `NEXT_PUBLIC_BRAND_URL` environment variable).
-
 ## What this site is
 
-A standalone Next.js (App Router) marketing site for **Helix**, the AI coding orchestrator that:
+A standalone Next.js (App Router) marketing site for Helix, the AI coding orchestrator that:
 
 - Decomposes every prompt into atomic, reviewable units.
 - Executes units in order with explicit dependencies.
 - Verifies each unit against the rest of your repo (types, tests, lint).
 - Produces small, reviewable PRs instead of one sprawling diff.
 
-## Target users
-
-The landing copy and sections are tuned for the audiences the Helix orchestrator serves:
-
-- **Founders** — ship MVPs without an engineering org.
-- **Engineers** — keep PRs small and reviews meaningful.
-- **Tech leads / platform teams** — enforce code health at scale.
-- **Product managers** — turn specs into merged code, not tickets.
-- **AI enthusiasts** — see what production-grade agentic workflows look like.
-
 ## Sections shipped
 
 1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
 2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
 3. **StatsBar** — quick metric strip.
-4. **Features** — six capability tiles with icons.
-5. **HowItWorks** — four-step describe → decompose → apply/review/merge → ship flow.
-6. **Personas** — tabbed role-targeted value props.
-7. **SocialProof** — logos and short testimonials.
-8. **FAQ** — native `<details>` disclosure, fully accessible, no client JS.
-9. **FinalCTA** — gradient panel closing call-to-action.
-10. **Footer** — brand mark, secondary nav, copyright.
+4. **Features** — six capability tiles.
+5. **HowItWorks** — four-step orchestration flow.
+6. **Personas** — role-targeted value props (Developer, Tech Lead, AI Engineer, PM, Founder).
+7. **FinalCTA** — closing conversion block.
+8. **FAQ** — accessible disclosure list.
+9. **Footer** — site-wide footer + legal links + social.
+
+## Stack
+
+- **Next.js 16** (App Router, server components by default)
+- **React 19**
+- **TypeScript 5** (strict)
+- **Tailwind CSS v4** (design tokens via `@theme`)
+- **next/font** (Inter + JetBrains Mono)
 
 ## Prerequisites
 
-- **Node.js** ≥ 20.x (Node 20 LTS or newer recommended)
-- **npm** ≥ 10.x (or pnpm / yarn — commands below use npm)
+- **Node.js 20+** (Next.js 16 requirement)
+- **npm 10+** (pnpm / yarn work too — commands below use npm)
 - A **Vercel** account (only required for deployment)
 
 ## Quick start
@@ -88,7 +86,7 @@ The landing copy and sections are tuned for the audiences the Helix orchestrator
    npm run build
    ```
 
-   **Verify:** ends with `✓ Compiled successfully` and a route table that includes `○ /`. No `Module not found` or unresolved import warnings.
+   **Verify:** ends with `✓ Compiled successfully` and a route table that includes `○ /`, `○ /sitemap.xml`, `○ /robots.txt`, and `○ /og.svg`. No `Module not found` or unresolved import warnings.
 
 6. **Run the production build locally**
 
@@ -96,18 +94,6 @@ The landing copy and sections are tuned for the audiences the Helix orchestrator
    npm run start
    ```
 
-   Boots the optimized build on <http://localhost:3000>.
+   Boots the optimized server on <http://localhost:3000>. Use this to sanity-check the build artifact before deploying.
 
-## Deploy to Vercel
-
-This repo is a standard Next.js (App Router) project. Vercel auto-detects Next.js and uses these defaults:
-
-| Setting        | Value           |
-| -------------- | --------------- |
-| Build command  | `next build`    |
-| Output         | `.next`         |
-| Install        | `npm install`   |
-| Dev command    | `next dev`      |
-| Node version   | 20.x (auto)     |
-
-### Option A — Vercel CLI (fastest)
+## Project layout

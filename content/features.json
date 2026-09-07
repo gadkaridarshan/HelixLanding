@@ -1,37 +1,27 @@
 {
-  "eyebrow": "Capabilities",
-  "heading": "Everything Helix does so your team doesn't have to.",
-  "description": "A focused toolset for code-orchestration work — built around reviewable change, not autonomous chaos.",
+  "eyebrow": "What Helix does",
+  "heading": "Four primitives, one orchestrated pipeline.",
+  "description": "Helix is built on a small, well-defined set of primitives that compose into a fully autonomous coding workflow.",
   "items": [
     {
       "title": "Atomic decomposition",
-      "description": "Splits ambiguous requests into a directed graph of small, reviewable diffs you can reason about.",
+      "description": "Every prompt is split into small, reviewable units with explicit preconditions and a single goal each.",
       "icon": "atom"
     },
     {
-      "title": "Convention-aware edits",
-      "description": "Reads your repo's style, imports, and test patterns before it writes a line. No surprise refactors.",
-      "icon": "convention"
+      "title": "Dependency graph",
+      "description": "Atoms run in parallel where independent and gate on their dependencies — exactly like a build graph.",
+      "icon": "graph"
     },
     {
-      "title": "Review gate enforcement",
-      "description": "Pauses after each atom for human review, CI green, or policy checks. You stay in control of the merge button.",
-      "icon": "gate"
+      "title": "Repo-aware verification",
+      "description": "Each atom is checked against the rest of your repo: type-check, tests, lint, and contract assertions.",
+      "icon": "shield"
     },
     {
-      "title": "Branch & PR hygiene",
-      "description": "Creates one branch and one PR per atom with conventional titles, descriptions, and reviewers assigned.",
-      "icon": "branch"
-    },
-    {
-      "title": "Resumable runs",
-      "description": "Pause, replay, or fork any atom. Every run is checkpointed so you can iterate without losing work.",
-      "icon": "resume"
-    },
-    {
-      "title": "Local-first execution",
-      "description": "Runs against your real files in your real repo. No copy-paste playground, no detached cloud sandbox.",
-      "icon": "local"
+      "title": "Reviewable PRs",
+      "description": "Output is one or more small PRs you can actually review — never a 4,000-line sprawling diff.",
+      "icon": "git"
     }
   ]
 }

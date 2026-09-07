@@ -43,9 +43,9 @@ const content: HowItWorksContent = howItWorksData as HowItWorksContent;
 
 function StepConnector(): React.ReactElement {
   return (
-    <span
+    <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-full hidden h-8 w-px -translate-x-1/2 bg-gradient-to-b from-cyan-400/40 via-violet-400/40 to-transparent md:block"
+      className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/10 to-transparent lg:block"
     />
   );
 }
@@ -53,90 +53,81 @@ function StepConnector(): React.ReactElement {
 export function HowItWorks({
   className,
 }: HowItWorksProps): React.ReactElement {
-  const { eyebrow, heading, description, steps } = content;
-
   return (
     <section
       id="how-it-works"
-      data-testid="how-it-works"
       aria-labelledby="how-it-works-heading"
       className={
-        "relative isolate overflow-hidden py-20 sm:py-28 lg:py-32 " +
-        (className ?? "")
+        "relative isolate py-20 sm:py-28 lg:py-32 " + (className ?? "")
       }
     >
-      {/* Decorative background — soft aurora glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      >
-        <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl" />
-      </div>
-
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-cyan-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-            {eyebrow}
-          </span>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-400">
+            {content.eyebrow}
+          </p>
           <h2
             id="how-it-works-heading"
-            className="mt-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            className="mt-3 text-3xl font-bold tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
           >
-            {heading}
+            {content.heading}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-            {description}
+          <p className="mt-4 text-lg leading-8 text-ink-300">
+            {content.description}
           </p>
         </div>
 
-        <ol
-          role="list"
-          className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-6"
-        >
-          {steps.map((step, idx) => (
-            <li
-              key={step.number}
-              className="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-colors hover:border-cyan-400/30 hover:bg-white/[0.05]"
-            >
-              {idx < steps.length - 1 ? <StepConnector /> : null}
-
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-violet-500/20 font-mono text-sm font-bold text-cyan-300">
-                  {step.number}
-                </span>
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Step {idx + 1}
-                </span>
-              </div>
-
-              <h3 className="mt-5 text-lg font-semibold text-white">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                {step.description}
-              </p>
-
-              {step.bullets.length > 0 ? (
-                <ul role="list" className="mt-4 space-y-2">
-                  {step.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex items-start gap-2 text-sm text-slate-300"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-1.5 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400"
-                      />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </li>
-          ))}
-        </ol>
+        <div className="relative mx-auto mt-16 max-w-4xl">
+          <StepConnector />
+          <ol role="list" className="space-y-10 lg:space-y-16">
+            {content.steps.map((step) => (
+              <li
+                key={step.number}
+                className="relative grid grid-cols-1 gap-6 lg:grid-cols-[auto_1fr] lg:gap-10"
+              >
+                <div className="flex items-start gap-4 lg:flex-col lg:items-center lg:text-center">
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-brand-400/40 bg-brand-500/10 font-mono text-lg font-semibold text-brand-300">
+                    {step.number}
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+                  <h3 className="text-xl font-semibold text-ink-50">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-base leading-7 text-ink-300">
+                    {step.description}
+                  </p>
+                  <ul
+                    role="list"
+                    className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2"
+                  >
+                    {step.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex items-start gap-2 text-sm text-ink-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="mt-0.5 h-4 w-4 shrink-0 text-brand-400"
+                          aria-hidden="true"
+                        >
+                          <path d="M5 12l4 4L19 7" />
+                        </svg>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Container>
     </section>
   );

@@ -1,46 +1,50 @@
 {
   "eyebrow": "How it works",
-  "heading": "From prompt to merged PR, atom by atom.",
-  "description": "Helix turns every coding task into a directed acyclic graph of small, reviewable units — then executes them in order with verification gates between each step.",
+  "heading": "From a sentence to reviewable PRs.",
+  "description": "Helix turns a single high-level prompt into an executable, verifiable plan — and ships it as small, reviewable diffs.",
   "steps": [
     {
       "number": "01",
       "title": "Describe the goal",
-      "description": "Tell Helix what you want to build. It accepts natural-language prompts, ticket links, or diffs to extend.",
+      "description": "Drop a prompt, a ticket, or a rough spec. Helix ingests intent — not implementation details — and scopes the work against your repository.",
       "bullets": [
-        "Prompt or ticket in, plan out",
-        "Idempotent — re-run to refine",
-        "Local or remote execution"
+        "Natural language prompts",
+        "Issue / ticket import",
+        "Repo-scoped context",
+        "Optional constraints"
       ]
     },
     {
       "number": "02",
       "title": "Decompose into atoms",
-      "description": "Helix breaks the goal into atomic work units with explicit dependencies. Each atom is small enough to review in under five minutes.",
+      "description": "Helix breaks the work into atomic, reviewable units. Each atom has explicit preconditions, a single goal, and the contracts it must satisfy.",
       "bullets": [
-        "Dependency graph per goal",
-        "Each atom is a single concern",
-        "Reviewable in < 5 minutes"
+        "Atomic work-breakdown",
+        "Explicit preconditions",
+        "Per-atom contracts",
+        "Parallelizable where safe"
       ]
     },
     {
       "number": "03",
       "title": "Apply, review, merge",
-      "description": "Parallel agents implement each atom; Helix gates execution on dependencies and verifies the result against types, tests, and lint before opening the PR.",
+      "description": "Agents execute atoms in dependency order. Every atom is gated on the surrounding repo: type-check, tests, lint, and contract assertions must all pass.",
       "bullets": [
-        "Parallel where safe",
-        "Serial where dependent",
-        "Types + tests + lint gates"
+        "Dependency-gated execution",
+        "Repo-aware verification",
+        "Per-atom review surface",
+        "Auto-rollback on failure"
       ]
     },
     {
       "number": "04",
       "title": "Ship with confidence",
-      "description": "Every atom lands as its own PR with full provenance — what changed, why, and which gates it passed. Roll back any atom without touching the rest.",
+      "description": "Output is a stream of small, reviewable PRs — auditable, replayable, and easy to merge. You stay in control of what reaches main.",
       "bullets": [
-        "One PR per atom",
-        "Full audit trail",
-        "Replayable end-to-end"
+        "Small reviewable PRs",
+        "Replayable build graph",
+        "Audit trail per atom",
+        "Human-in-the-loop merge"
       ]
     }
   ]

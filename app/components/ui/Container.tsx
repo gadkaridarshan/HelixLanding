@@ -1,4 +1,3 @@
-// helix: app/components/ui/Container.tsx
 /**
  * @helix:story USER-23000
  *
