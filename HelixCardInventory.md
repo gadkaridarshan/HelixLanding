@@ -1,7 +1,8 @@
 # Card Inventory
 
+- Sep 7, 2026, 9:20:50 AM CDT | USER-574000 | done | development | Correct live site URL copy
+- Sep 7, 2026, 9:20:40 AM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 9:18:49 AM CDT | USER-633000 | done | development | Clarify reference site link copy
-- Sep 7, 2026, 9:18:21 AM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 9:12:38 AM CDT | USER-868000 | done | development | Clarify reference site link copy
 - Sep 7, 2026, 9:10:00 AM CDT | USER-440000 | done | development | Correct reference site link copy
 - Sep 7, 2026, 8:59:45 AM CDT | USER-384000 | done | development | Clarify reference site link copy
