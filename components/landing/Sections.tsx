@@ -9,10 +9,12 @@
  *   SocialProof     → credibility strip just below the fold
  *   StatsBar        → quick metric reinforcement
  *   Features        → core capability grid
- *   HowItWorks      → 4-step walkthrough
+ *   HowItWorks      → 3-step walkthrough
  *   Personas        → who Helix is for
+ *   UseCases        → representative scenarios + quotes
  *   FAQ             → last-mile objections
  *   FinalCTA        → closing conversion moment
+ *   CTASection      → final full-bleed call-to-action block
  *
  * The order is the source of truth — `app/page.tsx` simply renders
  * Navbar + Sections + Footer inside the layout chrome.
@@ -20,30 +22,30 @@
 import type { ReactElement } from "react";
 
 import { CTASection } from "@/components/sections/CTASection";
-import { FAQ } from "@/components/sections/faq/FAQ";
-import { Features } from "@/components/sections/features";
-import { FinalCTA } from "@/components/sections/finalcta/FinalCTA";
-import { Hero } from "@/components/sections/hero";
-import { HomePage } from "@/components/sections/homePage";
-import { HowItWorks } from "@/components/sections/how-it-works";
-import { Personas } from "@/components/sections/personas/Personas";
+import { FAQ } from "@/components/sections/FAQ";
+import { Features } from "@/components/sections/Features";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Hero } from "@/components/sections/Hero";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Personas } from "@/components/sections/Personas";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { StatsBar } from "@/components/sections/StatsBar";
+import { UseCases } from "@/components/UseCases";
 
 export function Sections(): ReactElement {
   return (
-    <main id="main" className="relative isolate">
+    <>
       <Hero />
       <SocialProof />
       <StatsBar />
       <Features />
       <HowItWorks />
       <Personas />
+      <UseCases />
       <FAQ />
       <FinalCTA />
       <CTASection />
-      <HomePage />
-    </main>
+    </>
   );
 }
 

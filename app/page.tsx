@@ -1,22 +1,18 @@
 // helix: app/page.tsx
-/**
- * @helix:story USER-303000
- *
- * Landing page entry — renders the Navbar, the full narrative
- * section sequence owned by `components/landing/Sections`, and the
- * global footer. Everything else (metadata, fonts, theme) is set
- * up by `app/layout.tsx`.
- */
-import { Navbar } from "@/app/components/Navbar";
-import { Footer } from "@/components/sections/Footer";
-import { Sections } from "@/components/landing/Sections";
+import type { ReactElement } from "react";
 
-export default function Page(): React.ReactElement {
+import { Sections } from "@/components/landing/Sections";
+import { Footer } from "@/components/sections/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+
+export default function Page(): ReactElement {
   return (
-    <>
+    <div className="relative min-h-screen overflow-x-hidden">
       <Navbar />
-      <Sections />
+      <main>
+        <Sections />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
