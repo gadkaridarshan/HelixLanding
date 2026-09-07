@@ -29,6 +29,11 @@ interface FooterColumn {
   links: ReadonlyArray<FooterLink>;
 }
 
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
 const productLinks: ReadonlyArray<FooterLink> = [
   { label: "Features", href: "#features" },
   { label: "How it works", href: "#how-it-works" },
@@ -62,6 +67,10 @@ const columns: ReadonlyArray<FooterColumn> = [
   { title: "Legal", links: legalLinks },
 ];
 
+const socialLinks: ReadonlyArray<SocialLink> = [
+  { label: "GitHub", href: brand.githubUrl },
+];
+
 function ColumnLinks({ column }: { column: FooterColumn }): React.ReactElement {
   return (
     <div>
@@ -73,7 +82,7 @@ function ColumnLinks({ column }: { column: FooterColumn }): React.ReactElement {
           <li key={`${column.title}-${link.label}`}>
             <a
               href={link.href}
-              className="text-sm text-ink-100 transition hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900 rounded-sm"
+              className="inline-flex items-center text-sm text-ink-100 transition hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900 rounded-sm"
               {...(link.external
                 ? {
                     target: "_blank",
@@ -81,7 +90,7 @@ function ColumnLinks({ column }: { column: FooterColumn }): React.ReactElement {
                   }
                 : {})}
             >
-              {link.label}
+              <span>{link.label}</span>
               {link.external ? (
                 <span aria-hidden="true" className="ml-1 text-ink-300/60">
                   ↗
@@ -97,6 +106,13 @@ function ColumnLinks({ column }: { column: FooterColumn }): React.ReactElement {
 
 export function Footer({ className }: FooterProps): React.ReactElement {
   const year = new Date().getFullYear();
+  const hostname = (() => {
+    try {
+      return new URL(brand.url).hostname;
+    } catch {
+      return brand.url;
+    }
+  })();
 
   return (
     <footer
@@ -127,98 +143,119 @@ export function Footer({ className }: FooterProps): React.ReactElement {
             <a
               href="#hero"
               className="inline-flex items-center gap-2 text-white"
-              aria-label={`${brand.name} — go to top`}
+              aria-label={`${brand.name} — back to top`}
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 text-[12px] font-bold text-ink-950 shadow-lg shadow-brand-500/20"
-              >
-                H
-              </span>
-              <span className="font-mono text-sm font-semibold tracking-tight">
-                {brand.name}
-              </span>
-            </a>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-200/80">
-              {brand.description}
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href={brand.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${brand.name} on GitHub`}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-ink-100 transition hover:border-brand-400/40 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-brand-400 to-accent-500 text-ink-950 shadow-lg shadow-brand-500/20"
               >
                 <svg
-                  aria-hidden="true"
                   viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"
-                  />
-                </svg>
-              </a>
-              <a
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${brand.name} live site`}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-ink-100 transition hover:border-brand-400/40 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4"
+                  role="presentation"
                 >
-                  <path d="M15 3h6v6" />
-                  <path d="M10 14 21 3" />
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <circle cx="12" cy="12" r="2.5" />
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="9"
+                    ry="3.5"
+                    transform="rotate(60 12 12)"
+                  />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="9"
+                    ry="3.5"
+                    transform="rotate(120 12 12)"
+                  />
                 </svg>
-              </a>
-            </div>
+              </span>
+              <span className="font-mono text-base font-semibold tracking-tight">
+                {brand.name}
+              </span>
+            </a>
+
+            <p className="mt-4 max-w-sm text-sm text-ink-200/80">
+              {brand.description}
+            </p>
+
+            <ul role="list" className="mt-6 flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${brand.name} on ${social.label}`}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/5 text-ink-100 transition hover:border-brand-400/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.77-.01 3.14 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
+                    </svg>
+                    <span className="sr-only">{social.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Link columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
+          <nav
+            aria-label="Footer"
+            className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7"
+          >
             {columns.map((column) => (
               <ColumnLinks key={column.title} column={column} />
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col-reverse items-start justify-between gap-6 border-t border-white/5 pt-8 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/5 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs text-ink-300/70">
-            © {year} {brand.name}. All rights reserved.
+            © {year} {brand.name}. Hosted on{" "}
+            <a
+              href={brand.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink-100 underline-offset-4 transition hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900 rounded-sm"
+            >
+              {hostname}
+            </a>
+            .
           </p>
 
-          {/* Vercel deployment badge */}
           <a
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Deployed on Vercel"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-ink-100 transition hover:border-white/20 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
+            className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-ink-100 transition hover:border-brand-400/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
           >
             <svg
-              aria-hidden="true"
               viewBox="0 0 24 24"
-              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
               className="h-3.5 w-3.5"
+              fill="currentColor"
+              aria-hidden="true"
             >
-              <path d="M12 2 1 21h22L12 2Zm0 4.5L19.5 19h-15L12 6.5Z" />
+              <path d="M24 22.525H0L12 1.475 24 22.525Z" />
             </svg>
-            <span>Deployed on Vercel</span>
+            <span className="font-medium">Deployed on Vercel</span>
           </a>
         </div>
       </Container>

@@ -21,16 +21,16 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 
 ## Sections shipped
 
-1. **Navbar** — sticky brand mark, section anchors, early-access CTA.
+1. **Navbar** — sticky brand mark, section anchors, and an early-access CTA.
 2. **Hero** — headline, dual CTAs (live site + GitHub), decorative atom/orbit SVG, social-proof bullets.
 3. **StatsBar** — quick metric strip (atoms, verified PRs, supported stacks).
 4. **Features** — capability grid highlighting atomic planning, parallelization gating, language-aware protected paths, and quality bar.
 5. **HowItWorks** — three-step plan → execute → verify walkthrough.
 6. **Personas** — role-targeted value props for Developer, Tech Lead, AI Engineer, Product Manager, and Founder via a tabbed UI.
-7. **SocialProof** — credibility strip with logos / quotes from teams using Helix.
+7. **SocialProof** — testimonial/logo strip reinforcing credibility.
 8. **FAQ** — native `<details>` disclosure, fully accessible, no client JS.
-9. **FinalCTA** — gradient panel closing call-to-action.
-10. **Footer** — brand wordmark, secondary nav, social links, Vercel badge.
+9. **Cta** (Final CTA) — gradient panel closing call-to-action.
+10. **Footer** — brand wordmark, navigation links, legal links, social links, and a "deployed on Vercel" badge.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 - **npm** ≥ 10.x. `pnpm` and `yarn` also work; the commands below assume `npm`.
 - A **Vercel** account — only required for deployment, not for local development.
 
-## Running locally
+## Quick start
 
 1. **Install dependencies**
 
@@ -86,18 +86,18 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
    npm run start
    ```
 
-   Boots the optimized build on port 3000. **Verify:** the page renders identically to `npm run dev` but with minified assets.
+   Boots the optimized build on port 3000. The page should render identically to the dev server.
 
 ## Deploy to Vercel
 
-This repo is a standard Next.js (App Router) project and is the **live site** for this workspace — distinct from the reference demo linked above. It works out-of-the-box on Vercel:
+This repo is a standard Next.js (App Router) project and is the **live site** for this workspace — distinct from the reference demo linked above. It works out-of-the-box on Vercel.
 
-### Option A — Vercel CLI (recommended)
+### Option A — Vercel CLI (recommended for first deploy)
 
 ```bash
 npm i -g vercel
 vercel login
-vercel        # preview deployment
+vercel        # preview deployment to a per-PR URL
 vercel --prod # production deployment
 ```
 
@@ -113,34 +113,35 @@ vercel --prod # production deployment
 
 > The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`) and can be overridden via the `NEXT_PUBLIC_BRAND_URL` environment variable. It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
 
+## Environment variables
+
+| Variable                 | Purpose                                                                    |
+| ------------------------ | -------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_BRAND_URL`  | Canonical production URL for `<title>`, OG cards, footer hostname.         |
+
+## Project layout
+
+- `app/` — Next.js App Router entry (`layout.tsx`, `page.tsx`, `globals.css`, `fonts.ts`).
+- `components/landing/` — **Single source of truth** for every section (Navbar, Hero, StatsBar, Features, HowItWorks, Personas, SocialProof, FAQ, Cta, Footer).
+- `components/sections/` and `app/components/sections/` — Thin re-export shims so either alias resolves to the same component tree.
+- `components/ui/` — Shared primitives (`Container`, `cn`).
+- `content/` — Structured content (feature copy, FAQ entries, personas, etc.).
+- `lib/` — Brand identity (`lib/brand.ts`) and design tokens (`lib/theme.ts`).
+- `public/` — Static assets (favicon, OG image, marketing imagery).
+
 ## Reference vs. live site — at a glance
 
 | Label               | URL                                          | What it is                                                                 |
 | ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
 | **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
-| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`. |
+| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
 
-## Project layout
+## Troubleshooting
 
-- `app/` — Next.js App Router entry (layout, pages, global styles, fonts).
-- `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, SocialProof, FinalCTA, FAQ, Navbar, Footer).
-- `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
-- `components/ui/` — Shared primitives (`Container`, `cn`).
-- `content/` — Structured content (copy, FAQs, feature data, personas).
-- `lib/` — Shared utilities and brand constants (`lib/brand.ts`, `lib/theme.ts`).
-- `public/` — Static assets (favicon, OG image, marketing imagery).
-
-## Environment variables
-
-Copy `.env.example` to `.env.local` for local overrides:
-
-```bash
-cp .env.example .env.local
-```
-
-| Variable                  | Purpose                                                          |
-| ------------------------- | ---------------------------------------------------------------- |
-| `NEXT_PUBLIC_BRAND_URL`   | Canonical production URL (metadata, OG cards, sitemap, Footer).  |
+- **`Module not found: Can't resolve '@/...'`** — the `@/*` path alias is defined in `tsconfig.json` (`baseUrl: "."`, `paths: { "@/*": ["./*"] }`). Re-run `npm install` if a fresh clone.
+- **Build fails on Tailwind classes** — this repo uses Tailwind v4 with the `@tailwindcss/postcss` plugin; ensure `postcss.config.mjs` and `app/globals.css` `@theme` block are intact.
+- **Fonts missing (FOIT / 404 on `next/font/google`)** — only happens in offline builds. Run `npm run build` with network access; `next/font` fetches at build time.
+- **Vercel build reports `Cannot find module 'next'`** — Vercel uses `installCommand: npm install` (see `vercel.json`). The `package.json` already pins `next@^16.3.4`.
 
 ## License
 
