@@ -1,6 +1,6 @@
 // helix: app/page.tsx
 /**
- * @helix:story USER-23000
+ * @helix:story USER-63000
  *
  * Page assembly — root composition for the Helix landing page.
  *

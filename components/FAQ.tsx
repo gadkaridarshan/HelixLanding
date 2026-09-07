@@ -1,96 +1,89 @@
-// helix: components/Faq.tsx
 /**
- * @helix:story USER-23000
+ * @helix:story USER-933000
  *
- * Faq — accessible FAQ section using native `<details>` disclosure
- * widgets. Fully server-rendered, no client JS required.
+ * FAQ — the canonical Frequently Asked Questions section for the
+ * Helix landing page.
+ *
+ * Content is sourced from `@/content/faq.json` and covers:
+ *   • What Helix is
+ *   • Onboarding / how it differs from raw agents
+ *   • Pricing & usage
+ *   • Language & framework support
+ *   • Self-hosting & deployment
+ *   • Verification & safety
+ *
+ * Renders a fully accessible server-rendered accordion using the
+ * shared `<FaqAccordion>` client island — no manual ARIA wiring.
  */
 import * as React from "react";
 
+import { FaqAccordion } from "@/components/landing/faq/FaqAccordion";
 import { Container } from "@/components/ui/Container";
+
+import faqData from "@/content/faq.json";
 
 export interface FaqProps {
   className?: string;
 }
 
-interface FaqEntry {
+interface FaqItem {
   id: string;
   question: string;
   answer: string;
 }
 
-const faqs: ReadonlyArray<FaqEntry> = [
-  {
-    id: "what-is-helix",
-    question: "What is Helix?",
-    answer:
-      "Helix is the atomic work-breakdown orchestrator for AI coding agents. It decomposes every prompt into small, reviewable units, executes them in dependency order, and verifies each one (types, tests, lint) before opening a PR.",
-  },
-  {
-    id: "how-is-it-different",
-    question: "How is Helix different from a normal AI coding agent?",
-    answer:
-      "Most agents produce one large, hard-to-review diff. Helix produces many small, dependency-ordered, verified PRs — so review stays fast and the codebase stays green.",
-  },
-  {
-    id: "what-stacks",
-    question: "Which stacks does Helix support?",
-    answer:
-      "Helix works with TypeScript / JavaScript, Python, Go, and Rust out of the box, and adapts to most monorepos via language-aware protected paths.",
-  },
-  {
-    id: "self-hosted",
-    question: "Can I self-host Helix?",
-    answer:
-      "Yes. Helix runs locally against your existing repository, and CI integration keeps the same quality bar on every push.",
-  },
-  {
-    id: "pricing",
-    question: "How is Helix priced?",
-    answer:
-      "Early-access is free for solo developers and small teams. Pricing for larger teams scales with verified units shipped.",
-  },
-];
+interface FaqContent {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  items: FaqItem[];
+}
+
+const content: FaqContent = faqData as FaqContent;
 
 export function Faq({ className }: FaqProps): React.ReactElement {
+  const { eyebrow, title, subtitle, items } = content;
+
   return (
     <section
       id="faq"
       aria-labelledby="faq-heading"
       className={
-        "relative isolate py-20 sm:py-28 lg:py-32 " + (className ?? "")
+        "relative isolate overflow-hidden py-20 sm:py-28 lg:py-32 " +
+        (className ?? "")
       }
     >
+      {/* Decorative background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute left-1/2 top-0 h-72 w-[60rem] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-3xl" />
+      </div>
+
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <h2
-            id="faq-heading"
-            className="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
-          >
-            Frequently asked questions
-          </h2>
-          <p className="mt-4 text-base text-slate-300 sm:text-lg">
-            Everything you need to know before shipping with Helix.
-          </p>
-        </div>
-        <div className="mx-auto mt-12 max-w-3xl space-y-3">
-          {faqs.map((entry) => (
-            <details
-              key={entry.id}
-              className="group rounded-card border border-white/10 bg-white/5 p-5 open:bg-white/[7%]"
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Sticky heading column */}
+          <div className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-cyan-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+              {eyebrow}
+            </span>
+            <h2
+              id="faq-heading"
+              className="mt-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-medium text-white">
-                <span>{entry.question}</span>
-                <span
-                  aria-hidden="true"
-                  className="shrink-0 text-slate-400 transition group-open:rotate-45"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-sm text-slate-300">{entry.answer}</p>
-            </details>
-          ))}
+              {title}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-300">
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Accordion column */}
+          <div className="lg:col-span-8">
+            <FaqAccordion items={items} />
+          </div>
         </div>
       </Container>
     </section>

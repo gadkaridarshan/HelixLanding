@@ -21,22 +21,21 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 
 ## Sections shipped
 
-1. **Navbar** — sticky brand mark, section anchors, early-access CTA.
+1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
 2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
-3. **StatsBar** — quick metric strip (atoms, verified PRs, supported stacks).
-4. **Features** — capability grid highlighting atomic planning, parallelization gating, language-aware protected paths, and quality bar.
+3. **StatsBar** — quick metric strip.
+4. **Features** — six capability tiles with icons.
 5. **HowItWorks** — three-step plan → execute → verify walkthrough.
-6. **Personas** — role-targeted value props for Developer, Tech Lead, AI Engineer, Product Manager, and Founder via a tabbed UI.
-7. **SocialProof** — testimonial / quote strip.
+6. **Personas** — solo founders, platform teams, OSS maintainers.
+7. **FinalCTA** — gradient panel closing call-to-action.
 8. **FAQ** — native `<details>` disclosure, fully accessible, no client JS.
-9. **FinalCTA** — gradient panel closing call-to-action.
-10. **Footer** — brand mark, secondary nav, social links, "deployed on Vercel" badge, copyright.
+9. **Footer** — brand mark, secondary nav, copyright.
 
 ## Prerequisites
 
-- **Node.js** ≥ 20.x (App Router minimum).
-- **npm** ≥ 10.x. `pnpm` and `yarn` also work; the commands below assume `npm`.
-- A **Vercel** account — only required for deployment, not for local development.
+- **Node.js** ≥ 20.x
+- **npm** ≥ 10.x (or pnpm / yarn — commands below use npm)
+- A Vercel account (only required for deployment)
 
 ## Quick start
 
@@ -45,6 +44,8 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
    ```bash
    npm install
    ```
+
+   **Verify:** completes without errors and creates `node_modules/` plus `package-lock.json`.
 
 2. **Run the dev server**
 
@@ -86,22 +87,38 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
    npm run start
    ```
 
-   Boots the optimized build on port 3000. **Verify:** `curl -sI http://localhost:3000` returns `HTTP/1.1 200 OK` and the HTML body contains the Helix wordmark.
+   Boots the optimized build on port 3000.
+
+   **Verify:** `curl -I http://localhost:3000` returns `HTTP/1.1 200 OK` and the served HTML contains the wordmark "Helix".
 
 ## Deploy to Vercel
 
-This repo is a standard Next.js (App Router) project and is the **live site** for this workspace — distinct from the reference demo linked above. It works out-of-the-box on Vercel.
+This repo is the **live site** for this workspace — distinct from the reference demo linked at the top. It works out-of-the-box on Vercel; the root `vercel.json` pins the framework (`nextjs`), build/install/dev/output commands, region (`iad1`), security headers, and long-lived caching for `/_next/static/*` and `/fonts/*`.
 
-### Option A — Vercel CLI (recommended for first deploy)
+### Option A — Vercel CLI (recommended for this repo)
 
-```bash
-npm i -g vercel
-vercel login
-vercel        # preview deployment
-vercel --prod # production deployment
-```
+1. Install the CLI and authenticate:
 
-**Verify:** the CLI prints a `Production:` URL pointing at the brand domain (or the temporary `*.vercel.app` if `NEXT_PUBLIC_BRAND_URL` is not yet configured).
+   ```bash
+   npm i -g vercel
+   vercel login
+   ```
+
+2. From the repo root, deploy a preview:
+
+   ```bash
+   vercel
+   ```
+
+   **Verify:** the CLI prints a `Preview URL` line (e.g. `https://helix-landing-<hash>.vercel.app`). Open it — the hero, gradient background, and Final CTA all render without console errors.
+
+3. Promote the preview to production:
+
+   ```bash
+   vercel --prod
+   ```
+
+   **Verify:** the CLI prints a `Production URL` line and exits 0.
 
 ### Option B — Git integration
 
@@ -111,37 +128,37 @@ vercel --prod # production deployment
    - Build command: `next build`
    - Output: `.next`
    - Install command: `npm install`
-4. (Optional) Set `NEXT_PUBLIC_BRAND_URL` in **Environment Variables** to the production domain.
-5. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
-
-**Verify:** the Vercel dashboard shows the deployment as `Ready` and the assigned domain renders the hero section without 404s.
+4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
 
 > The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`) and can be overridden via the `NEXT_PUBLIC_BRAND_URL` environment variable. It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
-
-## Environment variables
-
-| Variable                 | Purpose                                                                    |
-| ------------------------ | -------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_BRAND_URL`  | Canonical production URL for `<title>`, OG cards, footer hostname.         |
-
-See `.env.example` for the full list. Copy it to `.env.local` for local development.
-
-## Project layout
-
-- `app/` — Next.js App Router entry (layout, pages, global styles, metadata, fonts).
-- `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
-- `components/sections/` and `app/components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
-- `components/ui/` — Shared primitives (`Container`, `cn`).
-- `content/` — Structured content (copy, FAQs, feature data, vercel.json).
-- `lib/` — Shared utilities and brand constants (`lib/brand.ts`, `lib/theme.ts`).
-- `public/` — Static assets (favicon, OG image, marketing imagery).
 
 ## Reference vs. live site — at a glance
 
 | Label               | URL                                          | What it is                                                                 |
 | ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
 | **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
-| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.  |
+| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
+
+## Project layout
+
+- `app/` — Next.js App Router entry (layout, pages, global styles).
+- `components/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
+- `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
+- `components/ui/` — Shared primitives (`Container`, `cn`).
+- `content/` — Structured content (copy, FAQs, feature data).
+- `lib/` — Shared utilities and brand constants (`lib/brand.ts`).
+- `public/` — Static assets (favicon, OG image, marketing imagery).
+- `vercel.json` — Vercel project config (framework, build/output commands, region, security headers, caching).
+
+## Environment variables
+
+Copy `.env.example` to `.env.local` and fill in the values for local development.
+
+| Variable                | Required | Purpose                                                                              |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_BRAND_URL` | No       | Canonical production URL embedded in metadata + footer. Defaults to the reference.   |
+
+Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser bundle.
 
 ## License
 

@@ -1,32 +1,141 @@
-**Layout notes**
+// helix: app/globals.css
+/**
+ * @helix:story USER-63000
+ *
+ * Global stylesheet — Tailwind v4 entry point + design tokens.
+ *
+ * The `@theme` block is generated from `lib/theme.ts` (see that file
+ * for the typed token surface) and emits CSS variables Tailwind
+ * resolves at build time. Layered radial/grid background sits below
+ * every section so the page never reads as flat.
+ */
+@import "tailwindcss";
 
-- `components/landing/` is the single source of truth for every section. `components/sections/` and `app/components/sections/` are thin re-export shims so either alias resolves to the same component tree.
-- Brand surface (name, description, canonical URL) lives in `lib/brand.ts` and is consumed by `app/layout.tsx`, the Footer, the Final CTA, OG cards, and the README.
-- Design tokens (palette, radii, shadows, typography scale) are typed in `lib/theme.ts`; Tailwind's `@theme` block in `app/globals.css` generates the matching CSS variables.
+@theme {
+  /* ink — cool dark canvas */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
 
-## Sections shipped
+  /* brand — cyan CTA family */
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
 
-1. **Navbar** — sticky brand mark, section anchors, early-access CTA.
-2. **Hero** — headline, dual CTAs (live site + GitHub), decorative atom/orbit SVG, social-proof bullets.
-3. **StatsBar** — quick metric strip (atoms, verified PRs, supported stacks).
-4. **Features** — capability grid highlighting atomic planning, parallelization gating, language-aware protected paths, and quality bar.
-5. **HowItWorks** — three-step plan → execute → verify walkthrough.
-6. **Personas** — role-targeted value props for Developer, Tech Lead, AI Engineer, Product Manager, and Founder via a tabbed UI.
-7. **SocialProof** — GitHub stars/forks badge linking to the source repo + testimonial-style placeholders.
-8. **FAQ** — accessible accordion with marketing questions (what is Helix, parallelization, supported stacks, self-hosting).
-9. **FinalCTA** — gradient panel closing call-to-action.
-10. **Footer** — brand mark, secondary nav, GitHub star CTA, Vercel deploy reference, copyright.
+  /* accent — violet emphasis */
+  --color-accent-50: #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+  --color-accent-700: #6d28d9;
+  --color-accent-800: #5b21b6;
+  --color-accent-900: #4c1d95;
 
-## What was built (this board)
+  /* aurora — multi-stop highlight */
+  --color-aurora-300: #67e8f9;
+  --color-aurora-400: #a78bfa;
+  --color-aurora-500: #f472b6;
+  --color-aurora-600: #22d3ee;
+  --color-aurora-700: #8b5cf6;
 
-- **Brand theme & globals** — Inter + JetBrains Mono via `next/font` in `app/fonts.ts`; typed theme tokens (`colors`, `gradient`, `radii`, `shadows`) in `lib/theme.ts`; Tailwind v4 `@theme` block + layered radial/grid background in `app/globals.css`.
-- **Hero, Features, HowItWorks** — above-the-fold headline + dual CTAs, a 3×2 feature grid, and a three-step plan → execute → verify flow, each fully typed, responsive, and consuming the shared theme tokens.
-- **Personas, SocialProof, FAQ, FinalCTA, Footer** — role-targeted tabs covering Developer / Tech Lead / AI Engineer / Product Manager / Founder, social proof with GitHub badges, accessible FAQ accordion, gradient closing CTA, and a Footer with brand mark, secondary nav, and Vercel/GitHub references.
-- **Page assembly** — `app/page.tsx` composes every section in the correct order (Navbar → Hero → StatsBar → Features → HowItWorks → Personas → SocialProof → FAQ → FinalCTA → Footer) and resolves cleanly through the section-shim tree.
-- **Vercel deployment** — `content/vercel.json` and a Vercel-ready Next.js 14 App Router configuration so the site deploys with no extra setup. Reference-site link copy is explicitly labelled "Reference site — not the live site" to avoid confusion with `brand.url`.
+  /* radii */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
 
-## Deploy to Vercel
+  /* shadows */
+  --shadow-glow: 0 0 60px -15px rgba(34, 211, 238, 0.45);
 
-This repo is the **live site** for this workspace — distinct from the reference demo linked at the top. It works out-of-the-box on Vercel:
+  /* font families — wired to next/font variables */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
-### Option A — Vercel CLI (recommended)
+/* Base reset + body polish */
+html,
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-ink-100);
+}
+
+/* Layered, non-flat page background:
+   1. soft cyan/violet radial glow at top
+   2. faint grid texture overlay
+   3. deep ink base
+   Fixed-attached so it survives scroll without paying paint cost per section. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 20% 0%,
+      rgba(34, 211, 238, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 90% 10%,
+      rgba(139, 92, 246, 0.16),
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 50% 100%,
+      rgba(244, 114, 182, 0.08),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #020617 0%, #0a0f1f 60%, #020617 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* Accessible focus ring — consistent across the marketing site. */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Reduce motion respect — kill the aurora pulse + scroll snap if requested. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
