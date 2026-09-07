@@ -1,24 +1,23 @@
 // helix: lib/brand.ts
 /**
- * @helix:story USER-285000
- *
  * Single source of truth for brand identity strings.
  *
  * Used by:
  *   • `app/layout.tsx`     — SEO metadata, OG, Twitter
  *   • `app/sitemap.ts`     — canonical URL
- *   • `app/layout.metadata.ts` (if split)
- *   • `components/Footer.tsx`, `FinalCTA.tsx`, etc.
+ *   • `app/page.tsx`       — landing page chrome
+ *   • `components/sections/footer/Footer.tsx` — footer brand line
+ *   • `components/sections/finalcta/FinalCTA.tsx` etc.
  *
  * The canonical production URL defaults to the upstream Vercel
  * deployment. Override via `NEXT_PUBLIC_BRAND_URL` for previews or
  * custom domains.
  */
 
-const DEFAULT_BRAND_URL = "https://helix-ai-orchestrator.vercel.app";
-const DEFAULT_OG_IMAGE = "/og-image.svg";
-const DEFAULT_TWITTER_HANDLE = "@helix_ai";
-const DEFAULT_THEME_COLOR_DARK = "#050816";
+export const DEFAULT_BRAND_URL = "https://helix-ai-orchestrator.vercel.app";
+export const DEFAULT_OG_IMAGE = "/og-image.svg";
+export const DEFAULT_TWITTER_HANDLE = "@helix_ai";
+export const DEFAULT_THEME_COLOR_DARK = "#050816";
 
 const envUrl = process.env["NEXT_PUBLIC_BRAND_URL"]?.trim();
 const envOg = process.env["NEXT_PUBLIC_BRAND_OG_IMAGE"]?.trim();
@@ -43,16 +42,15 @@ export const themeColorDark: string =
 
 export const brand = {
   name: "Helix",
-  tagline: "Atomic work-breakdown for AI coding agents",
-  title: "Helix — Atomic Work-Breakdown Orchestrator for AI Coding Agents",
-  description:
-    "Helix decomposes any engineering goal into reviewable atoms, fans them out to parallel AI agents with dependency gating, and ships auditable PRs you can trust.",
+  shortName: "Helix",
+  tagline:
+    "AI coding agent orchestration. Atomic units. Repo-aware verification. One PR per task.",
   url: canonicalUrl,
-  ogImageUrl,
-  twitterHandle,
+  ogImage: ogImageUrl,
+  twitter: twitterHandle,
   themeColorDark,
-  github: "https://github.com/gadkaridarshan/Helix",
-  liveSite: canonicalUrl,
+  description:
+    "Helix orchestrates your coding agent into atomic, repo-aware units — each verified and merged as a single PR.",
 } as const;
 
 export type Brand = typeof brand;

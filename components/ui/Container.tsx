@@ -1,48 +1,46 @@
 // helix: components/ui/Container.tsx
-/**
- * @helix:story USER-445000
- *
- * Container — width-clamped, horizontally-padded layout primitive
- * used by every section to keep a consistent max-width.
- *
- * Renders a `<div>` with `mx-auto` + responsive horizontal padding
- * and a configurable `maxWidth` (default `6xl`). Pure server
- * component; no client interactivity.
- */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export type ContainerWidth = "5xl" | "6xl" | "7xl";
+export type ContainerSize = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl";
 
 export interface ContainerProps {
-  as?: keyof React.JSX.IntrinsicElements;
-  maxWidth?: ContainerWidth;
+  /** Max-width token. Defaults to `xl`. */
+  size?: ContainerSize;
+  /** Optional className passthrough. */
   className?: string;
+  /** Render as a child element (e.g. for `<main>` or `<article>` wrappers). */
+  as?: keyof React.JSX.IntrinsicElements;
+  /** Slot content. */
   children: React.ReactNode;
-  id?: string;
 }
 
-const maxWidthClasses: Record<ContainerWidth, string> = {
-  "5xl": "max-w-5xl",
-  "6xl": "max-w-6xl",
-  "7xl": "max-w-7xl",
+const sizeClasses: Record<ContainerSize, string> = {
+  sm: "max-w-screen-sm",
+  md: "max-w-screen-md",
+  lg: "max-w-screen-lg",
+  xl: "max-w-screen-xl",
+  "2xl": "max-w-screen-2xl",
+  "3xl": "max-w-[1600px]",
+  "4xl": "max-w-[1760px]",
+  "5xl": "max-w-[1920px]",
+  "6xl": "max-w-[2048px]",
+  "7xl": "max-w-[2240px]",
 };
 
 export function Container({
-  as = "div",
-  maxWidth = "6xl",
+  size = "xl",
   className,
+  as: Tag = "div",
   children,
-  id,
 }: ContainerProps): React.ReactElement {
-  const Component = as as React.ElementType;
+  const Component = Tag as React.ElementType;
   return (
     <Component
-      id={id}
       className={cn(
         "mx-auto w-full px-4 sm:px-6 lg:px-8",
-        maxWidthClasses[maxWidth],
+        sizeClasses[size],
         className,
       )}
     >

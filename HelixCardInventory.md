@@ -1,10 +1,13 @@
 # Card Inventory
 
+- Sep 7, 2026, 4:19:21 PM CDT | USER-521000 | in_progress | development | CTA section component
+- Sep 7, 2026, 4:19:15 PM CDT | USER-215000 | done | development | FAQ section component
+- Sep 7, 2026, 4:18:37 PM CDT | USER-94000 | todo | development | Footer with Vercel SEO
+- Sep 7, 2026, 4:18:37 PM CDT | USER-303000 | in_progress | development | Helix landing page site
+- Sep 7, 2026, 4:18:31 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 1:46:33 PM CDT | USER-434000 | done | development | FAQ CTA Footer sections
-- Sep 7, 2026, 1:45:12 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 1:44:12 PM CDT | USER-167000 | done | development | Hero HowItWorks Features Personas Social
 - Sep 7, 2026, 1:41:06 PM CDT | USER-11000 | done | deployment | Vercel deployment and SEO wiring
-- Sep 7, 2026, 1:39:56 PM CDT | USER-303000 | todo | development | Helix landing page site
 - Sep 7, 2026, 8:31:03 AM CDT | USER-986000 | done | development | Scaffold brand theme and section
 - Sep 7, 2026, 8:27:37 AM CDT | USER-349000 | done | development | Helix AI orchestrator landing page
 - Sep 7, 2026, 8:23:20 AM CDT | USER-956000 | done | development | FAQ CTA footer and Vercel
