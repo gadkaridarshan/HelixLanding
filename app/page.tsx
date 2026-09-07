@@ -1,39 +1,43 @@
 // helix: app/page.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-604000
  *
- * Landing page composition — single ordered tree of all section
- * components. Sections themselves own their internal layout, styling,
- * and copy.
+ * Page assembly — root composition for the Helix landing page.
  *
- * Section order is deliberate:
- *   1. Navbar (sticky brand chrome)
- *   2. Hero (above-the-fold value prop + CTAs + decorative visual)
- *   3. StatsBar (quick metric strip)
- *   4. Features (six core capabilities)
- *   5. HowItWorks (three-step execution loop)
- *   6. Personas (who Helix is for + social proof)
- *   7. FAQ (objection handling)
- *   8. FinalCTA (last conversion push)
- *   9. Footer (reference-site pointer + link columns + brand mark)
+ * This file is the single source of truth for the section order of the
+ * marketing surface. Every section is a self-contained server component,
+ * composed in a deliberate narrative flow:
+ *
+ *   Navbar → Hero → StatsBar → Features → HowItWorks
+ *     → Personas → FAQ → FinalCTA → Footer
+ *
+ * Notes:
+ * - Pure server component — no client interactivity at the page level.
+ * - Sections are imported from `@/components/sections/*` (the canonical
+ *   implementation) and exposed under `@/app/components/sections/*` via
+ *   thin re-export shims for tooling that expects the `app/`-prefixed
+ *   paths.
+ * - Backgrounds, typography, and theme tokens are defined globally in
+ *   `app/layout.tsx` + `app/globals.css` and consumed via Tailwind
+ *   utilities throughout the section tree.
  */
 import * as React from "react";
 
-import { Navbar } from "@/components/landing/Navbar/Navbar";
-import { Hero } from "@/components/landing/hero/Hero";
-import { StatsBar } from "@/components/landing/stats-bar/StatsBar";
-import { Features } from "@/components/landing/features/Features";
-import { HowItWorks } from "@/components/landing/how-it-works/HowItWorks";
-import { Personas } from "@/components/landing/personas/Personas";
-import { FAQ } from "@/components/landing/faq/FAQ";
-import { FinalCTA } from "@/components/landing/final-cta/FinalCTA";
-import { Footer } from "@/components/landing/footer/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { StatsBar } from "@/components/sections/StatsBar";
+import { Features } from "@/components/sections/Features";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Personas } from "@/components/sections/Personas";
+import { FAQ } from "@/components/sections/FAQ";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Footer } from "@/components/sections/Footer";
 
 export default function Page(): React.ReactElement {
   return (
-    <>
+    <div className="relative min-h-screen bg-ink text-ink-foreground antialiased">
       <Navbar />
-      <main>
+      <main id="main" className="relative">
         <Hero />
         <StatsBar />
         <Features />
@@ -43,6 +47,6 @@ export default function Page(): React.ReactElement {
         <FinalCTA />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

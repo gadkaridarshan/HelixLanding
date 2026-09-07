@@ -12,41 +12,22 @@ Marketing site for **Helix** — the atomic work-breakdown orchestrator for AI c
 
 ## What this site is
 
-A standalone Next.js (App Router) marketing site for Helix, the AI coding orchestrator that:
+A standalone Next.js 14 (App Router) marketing site for Helix, the AI coding orchestrator that:
 
 - Decomposes every prompt into atomic, reviewable units.
 - Executes units in order with explicit dependencies.
 - Verifies each unit against the rest of your repo (types, tests, lint).
 - Produces small, reviewable PRs instead of one sprawling diff.
 
-## Sections shipped
+The site is built to be deployed to Vercel out-of-the-box and is engineered as a single cohesive landing surface — not a multi-route app.
 
-1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
-2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
-3. **StatsBar** — quick metric strip.
-4. **Features** — six core capabilities (atomic decomposition, ordered execution, repo-aware verification, small PRs, pluggable agent, auditability).
-5. **HowItWorks** — three-step execution loop (decompose → execute & verify → ship).
-6. **Personas** — built-for grid (developers, PMs, founders, enterprise) + testimonial.
-7. **FAQ** — native `<details>` accordion with six common questions.
-8. **FinalCTA** — closing conversion panel.
-9. **Footer** — link columns, brand mark, and an explicitly-labelled reference-site pointer.
-
-## Tech stack
-
-- **Next.js 14+** App Router (server components by default).
-- **React 19**.
-- **Tailwind CSS v4** (via `@tailwindcss/postcss`).
-- **TypeScript** (strict).
-- **next/font/google** — Inter (UI) + JetBrains Mono (code).
-- **Vercel-ready** — no platform-specific code.
-
-## Requirements
+## Prerequisites
 
 - **Node.js** ≥ 20.x (Next.js 14 App Router minimum).
 - **npm** ≥ 10.x (commands below assume npm; pnpm/yarn work too).
 - A Vercel account — only required for deployment, not for local dev.
 
-## Quick start
+## Running locally
 
 1. **Install dependencies**
 
@@ -100,17 +81,6 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
    npm run start
    ```
 
-   Open <http://localhost:3000>.
+   Boots the optimized build on port 3000.
 
-## Deploy to Vercel
-
-1. Push this repo to GitHub.
-2. Import the repo in Vercel (New Project → Import).
-3. Vercel auto-detects Next.js — no build command or output directory
-   overrides required.
-4. After the first deploy, set the production domain to match
-   `brand.url` in `lib/brand.ts` (or update `brand.url` to match your
-   Vercel-assigned domain). Either is fine — `brand.url` is the
-   single source of truth for the canonical live URL.
-
-## Project structure
+## Project Structure

@@ -1,0 +1,19 @@
+### Option B — Git integration
+
+1. Push the repo to GitHub/GitLab/Bitbucket.
+2. Visit <https://vercel.com/new> and **Import Project**.
+3. Vercel auto-detects Next.js. Leave defaults:
+   - Build command: `next build`
+   - Output: `.next`
+   - Install command: `npm install`
+4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent
+   deploys are cached.
+
+> The canonical production URL for **this** live site is defined in
+> `lib/brand.ts` (`brand.url`). It is **not** the reference URL listed
+> at the top of this README — that one points only to an external
+> visual reference and is not deployed from this repository.
+
+## License
+
+See repository metadata.

@@ -1,80 +1,52 @@
-// helix: lib/brand.ts
-/**
- * @helix:story USER-969000
- * @helix:story USER-303000
- * @helix:story USER-440000
- *
- * Brand constants — single source of truth for naming, tagline,
- * description, and canonical URLs used across the landing surface
- * (metadata, layout, sections, social proof).
- *
- * URL policy — read carefully, this is the load-bearing bit:
- *
- *   • `url`  is the **LIVE SITE** for this product — the canonical
- *     production URL that Vercel will deploy this workspace to. Every
- *     piece of UI that wants to point visitors at "this site, deployed"
- *     reads `brand.url`.
- *
- *   • The URL `https://helix-ai-orchestrator.vercel.app` is **NOT** the
- *     live site for this product. It is an externally-hosted Helix
- *     deployment used purely as a visual / brand reference. It is not
- *     deployed from this repo and visitors should never be led to
- *     believe that following a link to it would take them back to the
- *     site they are currently viewing.
- *
- *     Anywhere that URL is rendered on this product's live site it
- *     **must** be labelled as a "reference site" link (see the Footer
- *     for the canonical pattern). It must never be labelled as "live
- *     site", "deployed", or otherwise conflated with `brand.url`.
- *
- *   • `githubUrl` is the source repository. It is a build-time
- *     reference, not a destination for end-user conversion flows.
- */
+## What was built
 
-export const brand = {
-  /** Product / company name. */
-  name: "Helix",
+This board shipped a complete, Vercel-deployable marketing surface for
+Helix across the following deliverables:
 
-  /** Short, headline-friendly tagline used in metadata + hero. */
-  tagline: "Atomic work-breakdown for AI coding agents",
+- **Project scaffold & global theme** — Next.js 14 App Router + TypeScript
+  + Tailwind v4, Inter / JetBrains Mono via `next/font`, brand tokens
+  (ink / brand / accent / aurora palettes, radii, typography, spacing)
+  in `lib/brand.ts` and `@theme` in `app/globals.css`, polished
+  gradient + grid + noise background system, and a shared layout shell.
+- **Section composition root** — `app/page.tsx` orders every section
+  in a deliberate narrative flow: Navbar → Hero → StatsBar → Features
+  → HowItWorks → Personas → FAQ → FinalCTA → Footer.
+- **Above-the-fold sections** — Hero (gradient headline, dual CTAs,
+  decorative atom/orbit SVG, social-proof bullets), StatsBar (quick
+  metric strip), and the section composition shell.
+- **Capability sections** — Features (six tiles with icons) and
+  HowItWorks (three numbered steps: plan → execute → verify).
+- **Audience & social proof** — Personas covering solo founders,
+  platform teams, OSS maintainers, product managers, and enterprise
+  builders, with tailored value props and CTAs.
+- **Conversion & footer** — FinalCTA gradient panel, accessible FAQ
+  accordion (native `<details>`, no client JS), and Footer with brand
+  mark, link columns, GitHub CTA, and an explicitly-labeled
+  reference-site pointer.
+- **Dual-tree section re-exports** — every section ships as a single
+  canonical implementation under `components/landing/**` with thin
+  re-export shims under `components/sections/` and
+  `app/components/sections/`, so both path trees resolve to the same
+  component.
+- **Vercel-ready deployment** — `vercel.json`, `.vercelignore`, and a
+  clean `.gitignore` configured so the site deploys out-of-the-box via
+  the Vercel CLI or Git integration.
+- **Reference vs. live site copy** — every surface that links to the
+  external Vercel demo labels it as a **reference site** (visual /
+  brand reference only), distinct from the live landing site defined
+  by `brand.url` in `lib/brand.ts`. Visible text, badges, and
+  accessible names all make this distinction explicit.
 
-  /**
-   * One-sentence product description. Used in:
-   *   • `metadata.description`
-   *   • Open Graph + Twitter card
-   *   • Hero sub-headline
-   *
-   * Keep under ~160 chars for SEO meta-description best practice.
-   */
-  description:
-    "Helix decomposes every prompt into atomic, reviewable units, executes them in order with explicit dependencies, and verifies each against the rest of your repo — producing small, reviewable PRs instead of one sprawling diff.",
+## Reference vs. live site — at a glance
 
-  /**
-   * Live site URL — the canonical production URL that Vercel will
-   * deploy this workspace to. This is THE URL for "this product's
-   * live site". Sections and metadata that need to point visitors at
-   * "this site, deployed" read this value.
-   */
-  url: "https://helix-landing.vercel.app",
+| Label               | URL                                          | What it is                                                                 |
+| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
+| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
+| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
 
-  /**
-   * Visual / brand reference site only. Externally hosted. NOT
-   * deployed from this repo. Anywhere this is rendered on the live
-   * site it must be explicitly labelled as a "reference site" link.
-   */
-  referenceSiteUrl: "https://helix-ai-orchestrator.vercel.app",
+## Deploy to Vercel
 
-  /** Source repository. */
-  githubUrl: "https://github.com/gadkaridarshan/Helix",
+This repo is a standard Next.js (App Router) project and works
+out-of-the-box on Vercel.
 
-  /** Social handle (no leading @). */
-  twitterHandle: "@helix_ai",
-
-  /** Locale for metadata / OG tags. */
-  locale: "en_US",
-
-  /** Primary accent color used for theme-color meta + brand mark. */
-  accent: "#22d3ee",
-} as const;
-
-export type Brand = typeof brand;
+### Option A — Vercel CLI (recommended)
