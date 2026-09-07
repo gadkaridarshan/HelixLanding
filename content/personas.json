@@ -1,92 +1,76 @@
 {
-  "eyebrow": "Built for every role",
-  "heading": "Helix fits how you already work",
-  "description": "Whether you're shipping solo or leading a team, Helix decomposes every prompt into small, reviewable units so you stay in control of the diff.",
+  "eyebrow": "Built for every role on the team",
+  "heading": "One orchestrator. Every workflow.",
+  "description": "Helix adapts to the way each member of your team ships code — so atomic work-breakdown is useful from the first commit to the last review.",
   "items": [
     {
-      "id": "solo-founder",
-      "title": "Solo Founders",
-      "tagline": "Ship faster without burning out",
-      "description": "Turn one big idea into a stack of small, reviewable PRs you can actually trust.",
-      "painPoints": [
-        "AI generates a wall of code you can't review",
-        "Every change risks breaking the rest of the app",
-        "Hard to stay in flow when the diff is overwhelming"
-      ],
+      "id": "solo-dev",
+      "role": "Solo dev",
+      "title": "Move from idea to PR without losing the thread",
+      "description": "Describe the goal in plain language and Helix returns reviewable units — with types, tests, and a clean diff for each one.",
       "outcomes": [
-        "Small, atomic PRs you can read in minutes",
-        "Repo-aware verification catches regressions early",
-        "Stay in shipping mode instead of cleanup mode"
+        "Skip the blank-page paralysis on big refactors",
+        "Keep personal projects on a real, auditable cadence",
+        "Ship side projects without babysitting long-running agents"
       ],
-      "icon": "rocket"
+      "quote": "It feels like pair-programming with a teammate who actually remembers the last ten PRs."
     },
     {
       "id": "staff-engineer",
-      "title": "Staff Engineers",
-      "tagline": "Keep architectural standards as agents ship",
-      "description": "Decomposition exposes intent; verification enforces the bar your codebase already expects.",
-      "painPoints": [
-        "Agents bypass the conventions you spent years enforcing",
-        "Sprawling diffs hide subtle coupling and dead code",
-        "Review burden falls back on you either way"
-      ],
+      "role": "Staff engineer",
+      "title": "Decompose monoliths into reviewable units",
+      "description": "Hand Helix a sprawling initiative and get back a sequenced plan with explicit dependencies — so you can review the shape of the change before the change itself.",
       "outcomes": [
-        "Each unit is checked against types, tests, and lint",
-        "Dependency graph prevents cross-module breakage",
-        "PRs arrive structured, not monolithic"
+        "See the dependency graph before any code lands",
+        "Re-run any unit deterministically with full replay",
+        "Trace every change back to the original intent"
       ],
-      "icon": "shield"
+      "quote": "The atomic unit of work is finally visible end-to-end."
     },
     {
-      "id": "engineering-manager",
-      "title": "Engineering Managers",
-      "tagline": "Predictable velocity without the babysitting",
-      "description": "Helix turns agent output into a stream of safe, auditable work — your team reviews outcomes, not chaos.",
-      "painPoints": [
-        "Throughput claims don't match what actually ships",
-        "Hard to attribute agent output to a deliverable",
-        "Quality drift erodes trust in the AI toolchain"
-      ],
+      "id": "engineering-leader",
+      "role": "Eng leader",
+      "title": "Forecast, parallelize, and unblock with confidence",
+      "description": "Helix surfaces what is parallelizable, what is blocked, and where reviewers should focus — turning orchestrator output into engineering signal.",
       "outcomes": [
-        "Each run is replayable and auditable end-to-end",
-        "Throughput measured in merged PRs, not tokens",
-        "Quality bar enforced automatically, not negotiated"
+        "Identify blockers in real time across active runs",
+        "Tune throughput by adjusting parallelism per unit",
+        "Replace status meetings with live run telemetry"
       ],
-      "icon": "graph"
+      "quote": "We finally have a single pane of glass for every agent run in flight."
     },
     {
-      "id": "tech-lead",
-      "title": "Tech Leads",
-      "tagline": "Stay close to the design without doing every PR",
-      "description": "Dependency-aware execution keeps architectural seams intact so you can delegate safely.",
-      "painPoints": [
-        "Agents love to refactor the wrong abstraction",
-        "Cross-cutting changes get committed in one shot",
-        "Hard to coach a team when the diff is unreadable"
-      ],
+      "id": "product-manager",
+      "role": "Product manager",
+      "title": "Translate intent into shippable increments",
+      "description": "Write the spec the way you already do — Helix turns it into a sequenced set of small PRs you can demo at the next standup.",
       "outcomes": [
-        "Decomposed units respect module boundaries",
-        "Each PR is scoped to one architectural concern",
-        "Coach on the diff, not the cleanup"
-      ],
-      "icon": "compass"
+        "Demo every increment without waiting for the whole epic",
+        "Roll back any unit without touching the rest",
+        "Keep stakeholders in the loop with shareable run URLs"
+      ]
     },
     {
-      "id": "ai-engineer",
-      "title": "AI Engineers",
-      "tagline": "A real orchestration substrate for agents",
-      "description": "Helix is the runtime you wanted: explicit dependency graphs, repo-aware checks, replayable runs.",
-      "painPoints": [
-        "Most 'agents' are prompts dressed up as systems",
-        "No notion of dependency between steps",
-        "Evaluation is an afterthought, not a primitive"
-      ],
+      "id": "qa-platform",
+      "role": "QA & platform",
+      "title": "Verify each unit before it merges",
+      "description": "Every unit is checked against the rest of the repo — types, lint, tests — so flaky merges stop sneaking in through long-running agent runs.",
       "outcomes": [
-        "Explicit DAG with gated, parallel execution",
-        "Repo-aware verification as a first-class step",
-        "Replayable runs you can diff and audit"
-      ],
-      "icon": "atom"
+        "Block merges that break the type graph or the test suite",
+        "Replay failed units locally with the same inputs",
+        "Audit which intent produced which diff, days later"
+      ]
+    },
+    {
+      "id": "open-source",
+      "role": "Open-source maintainer",
+      "title": "Triage contributions without burning out",
+      "description": "Helix breaks community asks into reviewable units, so contributors can land useful work even before a maintainer is online.",
+      "outcomes": [
+        "Pre-screen contributions for style and type-safety",
+        "Run contributor units against the latest main",
+        "Welcome first-time contributors with a guided flow"
+      ]
     }
   ]
 }

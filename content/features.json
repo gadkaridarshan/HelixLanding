@@ -1,41 +1,41 @@
 {
-  "eyebrow": "What Helix does",
-  "heading": "Seven things Helix does that raw agents don't.",
-  "description": "Helix is the orchestrator sitting on top of your favourite AI coding agent. It turns every prompt into small, reviewable, repo-aware changes — and gives every kind of user the workflow they actually want.",
+  "eyebrow": "Capabilities",
+  "heading": "Everything Helix does, end to end",
+  "description": "Seven capabilities that turn a one-paragraph intent into reviewable, verified code.",
   "items": [
     {
       "title": "Atomic decomposition",
-      "description": "Every prompt is broken into atomic cards with explicit inputs, outputs, and acceptance criteria — so no change is bigger than a human can review.",
+      "description": "Breaks every prompt into the smallest reviewable units so work stays auditable and parallelizable.",
       "icon": "atom"
     },
     {
-      "title": "Parallel agent orchestration",
-      "description": "Helix fans out work to multiple agents, runs independent atoms in parallel, and gates downstream steps on the ones they depend on. No more serial waiting.",
+      "title": "Dependency-aware execution",
+      "description": "Orders units by real code-graph dependencies and runs independent units in parallel for speed.",
       "icon": "graph"
     },
     {
       "title": "Repo-aware verification",
-      "description": "Each atom is checked against the rest of your repo — types, tests, lint, and your own quality scripts — before any PR is opened.",
+      "description": "Re-checks every unit against your whole repo — types, tests, lint — before it can be merged.",
       "icon": "shield"
     },
     {
       "title": "Reviewable PR output",
-      "description": "Helix ships one small PR per atom, with a clear description, the prompt that produced it, and the verification log. Reviewing AI code finally feels normal.",
+      "description": "Produces small, well-scoped PRs per unit instead of one sprawling diff that no one wants to review.",
       "icon": "git"
     },
     {
       "title": "Persona-targeted workflows",
-      "description": "Solo founder, staff engineer, EM, tech lead, or AI engineer — Helix surfaces the right defaults, dashboards, and guardrails for each role.",
+      "description": "Tones, guardrails, and tool surfaces tuned per role so solo devs, teams, and leads all get a useful default.",
       "icon": "persona"
     },
     {
       "title": "Multi-stack support",
-      "description": "TypeScript, Python, Go, Rust, Ruby, Java — Helix reads your repo, picks the right toolchain per file, and verifies with the project's own scripts.",
+      "description": "First-class adapters for TypeScript, Python, Go, Rust, and more — pick your stack, keep your conventions.",
       "icon": "stack"
     },
     {
-      "title": "Quality bar enforcement",
-      "description": "Define your quality bar once — coverage thresholds, lint rules, review checklist — and Helix blocks any PR that doesn't meet it.",
+      "title": "Quality-bar enforcement",
+      "description": "A configurable quality gate keeps every merged unit held to the same standard as the rest of your codebase.",
       "icon": "review"
     }
   ]

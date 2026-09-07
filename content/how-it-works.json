@@ -1,36 +1,36 @@
 {
   "eyebrow": "How it works",
-  "heading": "From prompt to PR in three steps.",
-  "description": "Helix takes a single goal and turns it into a stream of small, verified, mergeable changes — without you babysitting an agent for hours.",
+  "heading": "From intent to merged code in three steps",
+  "description": "Helix turns a natural-language goal into a chain of small, verified, reviewable units of work.",
   "steps": [
     {
       "number": "01",
       "title": "Describe the goal",
-      "description": "Tell Helix what you want — a feature, a refactor, a bug fix — in plain language. It reads your repo, asks clarifying questions, and locks down an acceptance criteria.",
+      "description": "Tell Helix what you want in plain language. No prompts to engineer — just the outcome.",
       "bullets": [
-        "Natural-language intent, no DSL to learn",
-        "Repo is read first so suggestions match your stack",
-        "Acceptance criteria agreed before any code is written"
+        "Natural-language intent, not prompt craft",
+        "Optional constraints: stack, files to touch, tests required",
+        "Helix reads your repo to ground the request"
       ]
     },
     {
       "number": "02",
       "title": "Decompose & orchestrate",
-      "description": "Helix decomposes the goal into atomic cards, then fans them out to parallel agents. Independent atoms run in parallel; dependent ones wait on their inputs.",
+      "description": "Helix breaks the goal into atomic units, orders them by dependency, and runs the safe ones in parallel.",
       "bullets": [
-        "Each atom has explicit inputs, outputs, and a test plan",
-        "Dependency graph runs independent units in parallel",
-        "Every atom is verified against the live repo before merging"
+        "Atomic units with explicit dependencies",
+        "Parallel execution where the code-graph allows",
+        "Live status for every unit in flight"
       ]
     },
     {
       "number": "03",
       "title": "Review & ship",
-      "description": "You get one small, focused PR per atom — with the prompt that produced it, the verification log, and a replay link. Approve, request changes, or let Helix iterate.",
+      "description": "Each unit ships as a small, verified PR you can review on its own. Replay any run end-to-end.",
       "bullets": [
-        "Small reviewable diffs instead of one sprawling change",
-        "Auditable trail: prompt → atom → verification → PR",
-        "Replayable runs so any merge can be reproduced or rolled back"
+        "Per-unit PRs with full diffs and rationale",
+        "Type-check, tests, and lint verified against your repo",
+        "Replayable runs for auditing and debugging"
       ]
     }
   ]

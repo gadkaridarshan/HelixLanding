@@ -4,7 +4,7 @@
  *
  * Hero — re-export shim so `@/app/components/sections/Hero`
  * resolves to the canonical implementation at
- * `@/components/sections/Hero`.
+ * `@/components/sections/hero/Hero`.
  */
-export { Hero } from "@/components/sections/Hero";
-export { default } from "@/components/sections/Hero";
+export { Hero } from "@/components/sections/hero/Hero";
+export { default } from "@/components/sections/hero/Hero";

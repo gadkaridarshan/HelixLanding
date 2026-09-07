@@ -3,11 +3,7 @@
  * @helix:story USER-507000
  *
  * HowItWorks — section-level re-export shim so
- * `@/components/sections/HowItWorks` resolves to the section barrel at
- * `@/components/sections/how-it-works`, which in turn resolves to the
- * canonical implementation at `@/components/HowItWorks`.
+ * `@/components/sections/HowItWorks` resolves to the canonical
+ * implementation at `@/components/sections/how-it-works`.
  */
-export {
-  HowItWorks,
-  default,
-} from "@/components/sections/how-it-works";
+export { HowItWorks, default } from "./how-it-works";

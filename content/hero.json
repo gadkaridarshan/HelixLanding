@@ -1,9 +1,21 @@
 {
-  "eyebrow": "Atomic Work-Breakdown Orchestrator",
-  "headline": "Plan, write, and ship code",
-  "highlight": "one atomic PR at a time.",
-  "subheadline": "Helix breaks every change into reviewable, conventional steps so your team ships faster without surrendering code review, conventions, or context.",
-  "primaryCta": { "label": "Start free", "href": "#start" },
-  "secondaryCta": { "label": "See how it works", "href": "#how-it-works" },
-  "trustLine": "No credit card · Open source · Built for review-heavy teams"
+  "eyebrow": "Atomic work-breakdown for AI coding agents",
+  "headline": "Ship AI-generated code",
+  "headlineAccent": "one reviewable unit at a time.",
+  "subhead": "Helix turns every prompt into sequenced, dependency-aware units — each verified against your repo and landed as its own small, auditable PR.",
+  "primaryCta": {
+    "label": "Get early access",
+    "href": "#final-cta"
+  },
+  "secondaryCta": {
+    "label": "View on GitHub",
+    "href": "https://github.com/gadkaridarshan/Helix",
+    "external": true
+  },
+  "bullets": [
+    { "text": "Decomposes every prompt into atomic units" },
+    { "text": "Verifies each unit against types, tests, and lint" },
+    { "text": "Produces small, reviewable PRs — not one sprawling diff" },
+    { "text": "Replayable runs with full audit trail" }
+  ]
 }

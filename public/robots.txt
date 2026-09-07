@@ -1,13 +1,43 @@
-# Helix Landing — robots.txt
-# https://www.robotstxt.org/robotstxt.html
+# helix: public/robots.txt
+# @helix:story USER-915000
+#
+# Production robots policy for the Helix marketing site.
+#
+#   • Allow all well-behaved crawlers (Google, Bing, DuckDuckGo, etc.).
+#   • Disallow Next.js internals, build artifacts, and the source map
+#     directory so we never surface internal paths in search results.
+#   • Point crawlers at the sitemap(s) emitted by this site:
+#       - `/sitemap.xml`           — dynamic (App Router, canonical)
+#       - `/sitemap-static.xml`    — static fallback in /public
+#
+# The sitemap URLs below intentionally use the canonical production
+# host configured in `lib/brand.ts` (`brand.url`, overridable via
+# `NEXT_PUBLIC_BRAND_URL`). Update both URLs together if the brand
+# surface changes.
 
 User-agent: *
 Allow: /
-
-# Block Vercel preview/internal paths from indexing
-Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
+Disallow: /api/
+Disallow: /*.map$
 
-# Reference the sitemap so crawlers can discover all routes
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
 Sitemap: https://helix-ai-orchestrator.vercel.app/sitemap.xml
+Sitemap: https://helix-ai-orchestrator.vercel.app/sitemap-static.xml

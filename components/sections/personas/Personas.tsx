@@ -2,100 +2,81 @@
 /**
  * @helix:story USER-495000
  *
- * Personas — role-targeted value props for six user types:
- *   • Developer
- *   • Engineering Manager
- *   • Product Manager
- *   • AI/ML Engineer
- *   • Startup Founder
- *   • Enterprise Architect
+ * Personas — canonical audience-targeted value-prop section.
  *
- * Pure server component. The tabs are interactive on the client via a
- * small dedicated client island (`PersonasTabs`), which keeps this file
- * a server component while still letting visitors switch between roles.
- *
- * Each panel renders a `PersonaCard` (the shared UI primitive in
- * `@/components/ui/persona-card`) for visual consistency with the rest
- * of the marketing surface.
+ * Composed of:
+ *   • `PersonasTabs` (client island, keyboard-navigable role switcher)
+ *   • `PersonaCard`  (server-rendered value-prop card primitive)
+ *   • `personas.json` content (sourced from `@/content/personas.json`)
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+
+import personasData from "@/content/personas.json";
 import { PersonaCard } from "@/components/ui/persona-card";
 import { PersonasTabs } from "@/components/sections/personas/PersonasTabs";
-import personas from "@/content/personas.json";
+
+export interface PersonasProps {
+  className?: string;
+}
+
+export interface PersonaItem {
+  id: string;
+  role: string;
+  title: string;
+  description: string;
+  outcomes: ReadonlyArray<string>;
+  quote?: string;
+}
 
 interface PersonasContent {
-  body: string;
-  bullets: ReadonlyArray<string>;
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: ReadonlyArray<PersonaItem>;
 }
 
-interface PersonasRole {
-  id: string;
-  label: string;
-  valueProp: string;
-  icon:
-    | "Code2"
-    | "Users"
-    | "Briefcase"
-    | "Cpu"
-    | "Rocket"
-    | "Building2";
-  content: PersonasContent;
-}
+const content: PersonasContent = personasData as PersonasContent;
 
-const roles = (personas as { roles: PersonasRole[] }).roles;
-
-export function Personas(): React.ReactElement {
+export function Personas({ className }: PersonasProps): React.ReactElement {
   return (
     <section
       id="personas"
       aria-labelledby="personas-heading"
-      className="relative isolate py-20 sm:py-28"
+      className={
+        "relative isolate overflow-hidden py-20 sm:py-28 " + (className ?? "")
+      }
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
         <div className="absolute inset-0 bg-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.08),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(139,92,246,0.08),transparent_60%)]" />
+        <div className="absolute left-1/2 top-0 h-[480px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-500/15 blur-3xl" />
+        <div className="absolute right-0 bottom-0 h-[360px] w-[600px] translate-x-1/3 translate-y-1/3 rounded-full bg-brand-500/15 blur-3xl" />
       </div>
 
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">
-            Built for every role
-          </p>
-          <h2
-            id="personas-heading"
-            className="mt-3 text-balance text-3xl font-bold tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
-          >
-            See yourself in the workflow
-          </h2>
-          <p className="mt-5 text-pretty text-base leading-relaxed text-ink-300 sm:text-lg">
-            Pick the role that sounds most like you. Each one shows the
-            exact value Helix delivers for that workflow — no fluff, no
-            hand-waving.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow={content.eyebrow}
+          heading={content.heading}
+          description={content.description}
+        />
 
-        <div className="mt-12">
-          <PersonasTabs
-            roles={roles}
-            labelledById="personas-heading"
-            renderPanel={(role) => (
-              <PersonaCard
-                id={role.id}
-                label={role.label}
-                valueProp={role.valueProp}
-                icon={role.icon}
-                body={role.content.body}
-                bullets={role.content.bullets}
-              />
-            )}
-          />
-        </div>
+        <PersonasTabs items={content.items}>
+          {(active) => <PersonaCard persona={active} />}
+        </PersonasTabs>
+
+        {/* Static list below tabs — visible to crawlers / no-JS */}
+        <ul className="mt-12 hidden [html.no-js_&]:grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {content.items.map((persona) => (
+            <li key={persona.id}>
+              <PersonaCard persona={persona} />
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );
