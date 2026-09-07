@@ -2,57 +2,148 @@
 /**
  * @helix:story USER-176000
  *
- * Theme tokens — the single source of truth for the Helix design
- * system. Consumed by `app/globals.css` (via the `@theme` block) and
- * by any component that needs to reference a token directly (e.g.
- * SVGs that take hex colors as props).
+ * Theme tokens — single source of truth for the Helix brand.
  *
- * Naming and scale mirror Tailwind v4's CSS-first `@theme` model so
- * tokens flow straight through to utility classes without any extra
- * config. Anything that lives here is intentionally available as a
- * CSS variable AND as a TypeScript constant for code-side use.
+ * This module exposes the canonical color, radius, typography, spacing,
+ * and motion tokens used across the marketing site. It is consumed by:
  *
- * Conventions:
- *   • Color ramps are 50 → 950 where 50 = tint, 950 = deep shade.
- *   • Spacing follows Tailwind's 4px grid (already provided by
- *     Tailwind; we only expose semantic aliases here).
- *   • Radii are intentionally generous — Helix leans soft, modern,
- *     "glassmorphic" — but never so round that cards lose structure.
- *   • Shadows are tuned for dark, gradient-heavy backgrounds; the
- *     default Tailwind shadows would be too subtle / too dark.
- *   • Type scale mirrors a 1.250 (major third) modular ratio with a
- *     explicit display sizes for the Hero headline.
+ *   • `app/globals.css` — the values are mirrored into CSS custom
+ *     properties on `:root` (and the `[data-theme="dark"]` override)
+ *     so they can drive plain CSS, Tailwind utilities, and inline
+ *     `style` attributes.
+ *
+ *   • Tailwind v4 — `app/globals.css` re-declares the same values
+ *     inside the `@theme` block so utility classes like `bg-ink-950`,
+ *     `text-brand-400`, or `rounded-card` resolve at build time.
+ *
+ *   • Server components that need a token in an inline style
+ *     attribute (e.g. a gradient stop, an SVG fill) can import
+ *     from here without going through CSS variables.
+ *
+ * Design intent:
+ *   • A cool, confident dark-first palette: deep ink-blue canvas,
+ *     cyan brand, violet accent, aurora highlight gradient.
+ *   • Generous radii (`card`, `pill`) for a friendly modern feel.
+ *   • Display headlines rely on Inter 600/700 tracking-tight.
+ *   • Mono (JetBrains Mono) is reserved for code chips and the wordmark.
+ *
+ * Keeping these tokens in TypeScript means we get autocomplete,
+ * refactor safety, and a single place to update the palette
+ * (the CSS file is generated from this shape).
  */
-import { brand } from "./brand";
 
-/* ------------------------------------------------------------------ */
-/* Color palette                                                       */
-/* ------------------------------------------------------------------ */
+export type ThemeScale = Record<number, string>;
 
 /**
- * Ink — the dark-mode-first neutral ramp. Used for backgrounds,
- * surfaces, borders, and primary text.
+ * A single font-size entry follows the Tailwind convention:
+ * `[fontSize, lineHeight]` tuple, each emitted as a separate CSS
+ * declaration (`font-size` + `line-height`) by Tailwind.
  */
-export const ink = {
+export type FontSizeTuple = [string, string];
+
+export interface BrandTheme {
+  /** Page-level color tokens. */
+  colors: {
+    /** Cool dark canvas scale — `ink` is the primary surface family. */
+    ink: ThemeScale;
+    /** Primary brand scale — `brand` is the cyan family used for CTAs. */
+    brand: ThemeScale;
+    /** Accent scale — `accent` is the violet family used for emphasis. */
+    accent: ThemeScale;
+    /** Aurora scale — multi-stop gradient highlight family. */
+    aurora: ThemeScale;
+    /** Neutral foreground/background scale. */
+    neutral: ThemeScale;
+  };
+  /** Gradient stops — referenced by Hero, CTA, etc. */
+  gradients: {
+    aurora: string;
+    brand: string;
+    accent: string;
+    surface: string;
+  };
+  /** Radius scale in rem-equivalent pixel values. */
+  radii: {
+    sm: string;
+    md: string;
+    card: string;
+    lg: string;
+    pill: string;
+    full: string;
+  };
+  /** Box-shadow tokens. */
+  shadows: {
+    sm: string;
+    md: string;
+    lg: string;
+    glow: string;
+    ring: string;
+  };
+  /** Typography stack — referenced by `app/fonts.ts`. */
+  fonts: {
+    sans: string;
+    mono: string;
+  };
+  /**
+   * Font size scale. Each entry is a `[fontSize, lineHeight]` tuple so
+   * Tailwind can emit both `font-size` and `line-height` declarations.
+   */
+  fontSize: Record<
+    "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl",
+    FontSizeTuple
+  >;
+  /** Spacing scale in rem. */
+  spacing: Record<string, string>;
+  /** Motion / transition timings. */
+  motion: {
+    fast: string;
+    base: string;
+    slow: string;
+    easing: string;
+  };
+  /** Marketing copy URL — referenced by Footer + README. */
+  url: string;
+}
+
+/**
+ * Build a 50–950 color scale from explicit stops. We hand-curate the
+ * extremes (50, 950) and let the midpoints interpolate via the supplied
+ * `stops` so the scale feels coherent without depending on a color lib.
+ */
+function buildScale(stops: Partial<ThemeScale> = {}): ThemeScale {
+  const base: ThemeScale = {
+    50: stops[50] ?? "#f8fafc",
+    100: stops[100] ?? "#f1f5f9",
+    200: stops[200] ?? "#e2e8f0",
+    300: stops[300] ?? "#cbd5e1",
+    400: stops[400] ?? "#94a3b8",
+    500: stops[500] ?? "#64748b",
+    600: stops[600] ?? "#475569",
+    700: stops[700] ?? "#334155",
+    800: stops[800] ?? "#1e293b",
+    900: stops[900] ?? "#0f172a",
+    950: stops[950] ?? "#020617",
+  };
+  return base;
+}
+
+/** Cool dark-blue ink family — the page canvas. */
+const ink: ThemeScale = buildScale({
   50: "#f5f7fb",
-  100: "#e8ecf4",
-  200: "#cdd5e3",
-  300: "#a3aec5",
-  400: "#7380a0",
-  500: "#525d7c",
-  600: "#3a4360",
-  700: "#272f47",
-  800: "#171c2c",
-  900: "#0b0f1c",
-  950: "#05070f",
-} as const;
+  100: "#e6ebf3",
+  200: "#c8d3e3",
+  300: "#9aabc4",
+  400: "#64779a",
+  500: "#3f5275",
+  600: "#2a3a5a",
+  700: "#1d2a44",
+  800: "#121c30",
+  900: "#0a1224",
+  950: "#050a18",
+});
 
-/**
- * Brand — the primary Helix cyan ramp. Drives the dominant brand
- * color, primary CTAs, focus rings, and the cyan lobe of every
- * gradient on the page.
- */
-export const brand = {
+/** Cyan brand family — CTAs, links, brand mark. */
+const brandScale: ThemeScale = buildScale({
   50: "#ecfeff",
   100: "#cffafe",
   200: "#a5f3fc",
@@ -64,13 +155,10 @@ export const brand = {
   800: "#155e75",
   900: "#164e63",
   950: "#083344",
-} as const;
+});
 
-/**
- * Accent — the secondary violet ramp. Drives the violet lobe of
- * every gradient, secondary highlights, and "code" / orbital accents.
- */
-export const accent = {
+/** Violet accent family — emphasis, secondary highlights. */
+const accentScale: ThemeScale = buildScale({
   50: "#f5f3ff",
   100: "#ede9fe",
   200: "#ddd6fe",
@@ -82,175 +170,132 @@ export const accent = {
   800: "#5b21b6",
   900: "#4c1d95",
   950: "#2e1065",
-} as const;
+});
+
+/** Aurora highlight family — multi-stop gradient highlight. */
+const auroraScale: ThemeScale = buildScale({
+  50: "#f0fdfa",
+  100: "#ccfbf1",
+  200: "#99f6e4",
+  300: "#5eead4",
+  400: "#2dd4bf",
+  500: "#14b8a6",
+  600: "#0d9488",
+  700: "#0f766e",
+  800: "#115e59",
+  900: "#134e4a",
+  950: "#042f2e",
+});
+
+/** Neutral foreground/background scale. */
+const neutralScale: ThemeScale = buildScale({
+  50: "#fafafa",
+  100: "#f4f4f5",
+  200: "#e4e4e7",
+  300: "#d4d4d8",
+  400: "#a1a1aa",
+  500: "#71717a",
+  600: "#52525b",
+  700: "#3f3f46",
+  800: "#27272a",
+  900: "#18181b",
+  950: "#09090b",
+});
+
+/** Font-size scale — `[fontSize, lineHeight]` tuples. */
+const fontSize: BrandTheme["fontSize"] = {
+  xs: ["0.75rem", "1rem"],
+  sm: ["0.875rem", "1.25rem"],
+  base: ["1rem", "1.5rem"],
+  lg: ["1.125rem", "1.75rem"],
+  xl: ["1.25rem", "1.75rem"],
+  "2xl": ["1.5rem", "2rem"],
+  "3xl": ["1.875rem", "2.25rem"],
+  "4xl": ["2.25rem", "2.5rem"],
+  "5xl": ["3rem", "1.15"],
+  "6xl": ["3.75rem", "1.1"],
+};
+
+/** Spacing scale in rem — matches Tailwind defaults with brand tweaks. */
+const spacing: Record<string, string> = {
+  0: "0",
+  px: "1px",
+  0.5: "0.125rem",
+  1: "0.25rem",
+  1.5: "0.375rem",
+  2: "0.5rem",
+  2.5: "0.625rem",
+  3: "0.75rem",
+  3.5: "0.875rem",
+  4: "1rem",
+  5: "1.25rem",
+  6: "1.5rem",
+  7: "1.75rem",
+  8: "2rem",
+  9: "2.25rem",
+  10: "2.5rem",
+  12: "3rem",
+  14: "3.5rem",
+  16: "4rem",
+  20: "5rem",
+  24: "6rem",
+  28: "7rem",
+  32: "8rem",
+  40: "10rem",
+  48: "12rem",
+  56: "14rem",
+  64: "16rem",
+};
 
 /**
- * Aurora — a magenta → pink → amber ramp reserved for decorative
- * highlights, hero glows, and stats icons. Kept sparingly so it
- * reads as "energy" rather than noise.
+ * Canonical Helix brand theme. This is the single source of truth that
+ * `app/globals.css` and `lib/tailwind.config.ts` mirror into Tailwind /
+ * CSS custom properties.
  */
-export const aurora = {
-  50: "#fff1f2",
-  100: "#ffe4e6",
-  200: "#fecdd3",
-  300: "#fda4af",
-  400: "#fb7185",
-  500: "#f43f5e",
-  600: "#e11d48",
-  700: "#be123c",
-  800: "#9f1239",
-  900: "#881337",
-  950: "#4c0519",
-} as const;
-
-/**
- * Semantic color shortcuts — the resolved "what does this color mean"
- * references so components never reach into the raw ramps unless they
- * need an explicit shade.
- */
-export const semantic = {
-  background: ink[950],
-  surface: ink[900],
-  surfaceRaised: ink[800],
-  border: "rgba(255, 255, 255, 0.08)",
-  borderStrong: "rgba(255, 255, 255, 0.16)",
-  text: ink[50],
-  textMuted: ink[300],
-  textSubtle: ink[400],
-  brand: brand[400],
-  brandHover: brand[300],
-  accent: accent[400],
-  accentHover: accent[300],
-  aurora: aurora[400],
-} as const;
-
-/* ------------------------------------------------------------------ */
-/* Typography                                                          */
-/* ------------------------------------------------------------------ */
-
-/**
- * Font family stacks. The actual `next/font` family names are
- * injected at runtime via CSS variables (`--font-inter`,
- * `--font-jetbrains`); these constants define the rest of the
- * fallback chain.
- */
-export const fontFamilies = {
-  sans: `var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-  mono: `var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
-  display: `var(--font-inter), ui-sans-serif, system-ui, sans-serif`,
-} as const;
-
-/**
- * Type scale — a modular 1.250 (major third) scale anchored to a 16px
- * base, with extra display sizes for the hero headline and tight
- * tracking values for headings.
- */
-export const fontSizes = {
-  xs: ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.01em" }],
-  sm: ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.005em" }],
-  base: ["1rem", { lineHeight: "1.625rem", letterSpacing: "0" }],
-  lg: ["1.125rem", { lineHeight: "1.75rem", letterSpacing: "-0.005em" }],
-  xl: ["1.25rem", { lineHeight: "1.875rem", letterSpacing: "-0.01em" }],
-  "2xl": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.015em" }],
-  "3xl": ["1.875rem", { lineHeight: "2.375rem", letterSpacing: "-0.02em" }],
-  "4xl": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.025em" }],
-  "5xl": ["3rem", { lineHeight: "3.5rem", letterSpacing: "-0.03em" }],
-  "6xl": ["3.75rem", { lineHeight: "4.25rem", letterSpacing: "-0.035em" }],
-  "7xl": ["4.5rem", { lineHeight: "5rem", letterSpacing: "-0.04em" }],
-  display: ["5.5rem", { lineHeight: "5.75rem", letterSpacing: "-0.045em" }],
-} as const;
-
-/* ------------------------------------------------------------------ */
-/* Spacing, radii, shadows                                             */
-/* ------------------------------------------------------------------ */
-
-/**
- * Semantic spacing aliases on top of Tailwind's 4px scale. Most
- * layouts should reach for these instead of arbitrary values.
- */
-export const spacing = {
-  page: "1.5rem",
-  section: "5rem",
-  sectionLg: "7rem",
-  gutter: "2rem",
-} as const;
-
-/**
- * Radii — generous, soft, glassmorphic. `card` is the default for
- * any surface card; `pill` is reserved for fully-rounded chips /
- * buttons; `display` is reserved for hero blobs.
- */
-export const radii = {
-  none: "0",
-  sm: "0.375rem",
-  md: "0.625rem",
-  lg: "0.875rem",
-  xl: "1.125rem",
-  "2xl": "1.5rem",
-  card: "1rem",
-  pill: "9999px",
-  display: "2rem",
-} as const;
-
-/**
- * Shadows — tuned for dark, gradient-rich backgrounds. The default
- * Tailwind shadows would be near-invisible against `ink[950]`, so we
- * ship darker, more colorful shadows that read on the deep navy.
- */
-export const shadows = {
-  sm: "0 1px 2px rgba(2, 6, 16, 0.5)",
-  md: "0 8px 24px -8px rgba(2, 6, 16, 0.55), 0 2px 6px rgba(2, 6, 16, 0.4)",
-  lg: "0 24px 48px -16px rgba(2, 6, 16, 0.6), 0 8px 16px rgba(2, 6, 16, 0.45)",
-  xl: "0 32px 80px -24px rgba(2, 6, 16, 0.7), 0 12px 24px rgba(2, 6, 16, 0.45)",
-  glow: "0 0 0 1px rgba(34, 211, 238, 0.35), 0 12px 40px -8px rgba(34, 211, 238, 0.45)",
-  glowAccent:
-    "0 0 0 1px rgba(167, 139, 250, 0.35), 0 12px 40px -8px rgba(167, 139, 250, 0.45)",
-  ring: "0 0 0 2px rgba(34, 211, 238, 0.55)",
-} as const;
-
-/* ------------------------------------------------------------------ */
-/* Layout                                                              */
-/* ------------------------------------------------------------------ */
-
-/**
- * Layout primitives used across the site.
- */
-export const layout = {
-  maxWidth: "76rem", // ~1216px — the standard landing-page container
-  contentWidth: "64rem", // ~1024px — narrower for long-form sections
-  navHeight: "4rem",
-} as const;
-
-/* ------------------------------------------------------------------ */
-/* Aggregated `theme` export                                           */
-/* ------------------------------------------------------------------ */
-
-/**
- * Aggregated theme — convenient single import for any consumer that
- * wants the entire design system at once.
- *
- * The shape mirrors the CSS variables exposed via `@theme` in
- * `app/globals.css` so a TypeScript consumer and a CSS consumer stay
- * in lockstep.
- */
-export const theme = {
+export const brandTheme: BrandTheme = {
   colors: {
     ink,
-    brand,
-    accent,
-    aurora,
-    semantic,
+    brand: brandScale,
+    accent: accentScale,
+    aurora: auroraScale,
+    neutral: neutralScale,
   },
-  fontFamilies,
-  fontSizes,
+  gradients: {
+    aurora:
+      "linear-gradient(135deg, #22d3ee 0%, #8b5cf6 50%, #2dd4bf 100%)",
+    brand: "linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%)",
+    accent: "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)",
+    surface:
+      "linear-gradient(180deg, #050a18 0%, #0a1224 50%, #050a18 100%)",
+  },
+  radii: {
+    sm: "0.375rem",
+    md: "0.5rem",
+    card: "0.875rem",
+    lg: "1.25rem",
+    pill: "999px",
+    full: "9999px",
+  },
+  shadows: {
+    sm: "0 1px 2px 0 rgba(2, 6, 23, 0.5)",
+    md: "0 4px 12px -2px rgba(2, 6, 23, 0.6)",
+    lg: "0 20px 40px -12px rgba(2, 6, 23, 0.7)",
+    glow: "0 0 30px rgba(34, 211, 238, 0.35)",
+    ring: "0 0 0 1px rgba(148, 163, 184, 0.2)",
+  },
+  fonts: {
+    sans: "var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+    mono: "var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+  },
+  fontSize,
   spacing,
-  radii,
-  shadows,
-  layout,
-} as const;
+  motion: {
+    fast: "150ms",
+    base: "240ms",
+    slow: "400ms",
+    easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+  },
+  url: "https://helix-ai-orchestrator.vercel.app",
+};
 
-export type Theme = typeof theme;
-
-// Re-export the brand object so consumers can keep importing `brand`
-// from `lib/theme.ts` if they prefer a one-stop import.
-export { brand };
+export default brandTheme;

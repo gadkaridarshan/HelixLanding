@@ -2,83 +2,34 @@
 /**
  * @helix:story USER-176000
  *
- * Centralized font registration for the Helix landing site.
+ * Fonts — Inter (display + body) and JetBrains Mono (code/wordmark) loaded
+ * via `next/font/google`. The exported CSS variables are applied to
+ * `<html>` in `app/layout.tsx` and re-declared inside the Tailwind v4
+ * `@theme` block in `app/globals.css` so utilities like `font-sans` and
+ * `font-mono` resolve at build time.
  *
- * Owns the canonical `next/font/google` configuration for the two
- * font families used across the site:
- *
- *   • **Inter** — primary UI / body / heading face. A modern,
- *     geometric grotesque designed for screens with excellent
- *     legibility at small sizes and a confident tone at large
- *     display sizes. Weights 400 / 500 / 600 / 700 cover body text,
- *     labels, headings, and the brand display headline.
- *
- *   • **JetBrains Mono** — monospace face reserved for code-style
- *     accents (logo wordmark, terminal / CLI snippets, code chips).
- *     Weights 400 / 500 / 600 give us a regular, a medium for
- *     emphasis, and a bold for logo / CTA accents.
- *
- * Both fonts are wired through `next/font/google`, which self-hosts
- * the woff2 files at build time so we don't ship render-blocking
- * external CSS and we keep a single source of truth for the font
- * stack. Each font exposes its computed family + metrics as a CSS
- * variable (`--font-inter`, `--font-jetbrains`) so they can be
- * referenced from `app/globals.css`, Tailwind's `@theme`, and any
- * inline `style` attribute without re-importing.
- *
- * `display: "swap"` guarantees the browser renders fallback text
- * immediately while the web font loads, preventing FOIT.
- *
- * Consumers:
- *   • `app/layout.tsx` injects `--font-inter` and `--font-jetbrains`
- *     onto `<html>` so every page inherits the stack.
- *   • `app/globals.css` exposes them through `:root` and Tailwind's
- *     `@theme` (`--font-sans`, `--font-mono`).
+ * We pick Inter 400/500/600/700 for a confident, modern display voice and
+ * JetBrains Mono 400/500 for code chips, the wordmark, and any inline
+ * `<code>` blocks. Both fonts are loaded with `display: "swap"` so the
+ * page stays readable while the webfonts stream in, and `preload: true`
+ * so the LCP text paints fast.
  */
 import { Inter, JetBrains_Mono } from "next/font/google";
 
-/**
- * Primary sans-serif face for the entire site.
- * Used for body copy, headings, navigation, buttons, and the brand
- * display headline.
- */
 export const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  preload: true,
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
-  preload: true,
-  fallback: [
-    "ui-sans-serif",
-    "system-ui",
-    "-apple-system",
-    "Segoe UI",
-    "Roboto",
-    "Helvetica Neue",
-    "Arial",
-    "sans-serif",
-  ],
 });
 
-/**
- * Monospace face reserved for code, CLI snippets, and brand accents.
- * Used by the Helix wordmark, terminal mockups, and any inline
- * `<code>` / `<pre>` block.
- */
 export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-jetbrains",
-  weight: ["400", "500", "600"],
   preload: true,
-  fallback: [
-    "ui-monospace",
-    "SFMono-Regular",
-    "Menlo",
-    "Monaco",
-    "Consolas",
-    "Liberation Mono",
-    "Courier New",
-    "monospace",
-  ],
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500"],
 });
+
+export const fontVariables = `${inter.variable} ${jetbrainsMono.variable}`;

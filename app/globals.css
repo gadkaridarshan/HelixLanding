@@ -2,38 +2,41 @@
 /**
  * @helix:story USER-176000
  *
- * Global stylesheet — the single source of truth for the Helix
- * design system at the CSS layer.
+ * Global CSS — Tailwind v4 entry, brand tokens, and base resets.
  *
- *   • Imports Tailwind v4 (which itself ships the modern reset,
- *     preflight, and utility classes).
- *   • Declares every design token via the `@theme` block so Tailwind
- *     generates matching utility classes (e.g. `bg-brand-500`,
- *     `text-ink-50`, `rounded-card`, `shadow-glow`).
- *   • Sets the dark, gradient-heavy base background and the body
- *     text defaults that every section inherits.
- *   • Provides a small set of utility classes used in many sections
- *     (`.surface`, `.surface-glass`, `.gradient-text`,
- *     `.gradient-bg`, `.grid-bg`, `.noise`).
- *   • Defines accessible focus rings, motion-safe transitions, and
- *     scrollbar polish so the whole site feels consistent.
+ * This file is the single source of truth for the marketing site's
+ * global styling. It does three things in order:
+ *
+ *   1. Imports Tailwind v4 (`@import "tailwindcss"`).
+ *   2. Re-declares the brand tokens inside `@theme` so utility classes
+ *      like `bg-ink-950`, `text-brand-400`, and `rounded-card` resolve
+ *      at build time. These mirror the values in `lib/theme.ts`.
+ *   3. Sets `:root` CSS custom properties and applies base resets
+ *      (font smoothing, body background, etc.).
+ *
+ * Dark mode is the default — we set `color-scheme: dark` on `<html>`
+ * and pick a deep ink-blue canvas. The page is intentionally dark-first
+ * because the brand speaks fluent dev-tool / terminal and the aurora
+ * gradient highlights read best on a deep canvas.
  */
+
 @import "tailwindcss";
 
 @theme {
-  /* ---- Color tokens (mirrored from lib/theme.ts) ---- */
+  /* Cool dark-blue ink family — page canvas. */
   --color-ink-50: #f5f7fb;
-  --color-ink-100: #e8ecf4;
-  --color-ink-200: #cdd5e3;
-  --color-ink-300: #a3aec5;
-  --color-ink-400: #7380a0;
-  --color-ink-500: #525d7c;
-  --color-ink-600: #3a4360;
-  --color-ink-700: #272f47;
-  --color-ink-800: #171c2c;
-  --color-ink-900: #0b0f1c;
-  --color-ink-950: #05070f;
+  --color-ink-100: #e6ebf3;
+  --color-ink-200: #c8d3e3;
+  --color-ink-300: #9aabc4;
+  --color-ink-400: #64779a;
+  --color-ink-500: #3f5275;
+  --color-ink-600: #2a3a5a;
+  --color-ink-700: #1d2a44;
+  --color-ink-800: #121c30;
+  --color-ink-900: #0a1222;
+  --color-ink-950: #050a14;
 
+  /* Cyan brand family — primary CTAs. */
   --color-brand-50: #ecfeff;
   --color-brand-100: #cffafe;
   --color-brand-200: #a5f3fc;
@@ -46,6 +49,7 @@
   --color-brand-900: #164e63;
   --color-brand-950: #083344;
 
+  /* Violet accent family — emphasis. */
   --color-accent-50: #f5f3ff;
   --color-accent-100: #ede9fe;
   --color-accent-200: #ddd6fe;
@@ -58,239 +62,119 @@
   --color-accent-900: #4c1d95;
   --color-accent-950: #2e1065;
 
-  --color-aurora-50: #fff1f2;
-  --color-aurora-100: #ffe4e6;
-  --color-aurora-200: #fecdd3;
-  --color-aurora-300: #fda4af;
-  --color-aurora-400: #fb7185;
-  --color-aurora-500: #f43f5e;
-  --color-aurora-600: #e11d48;
-  --color-aurora-700: #be123c;
-  --color-aurora-800: #9f1239;
-  --color-aurora-900: #881337;
-  --color-aurora-950: #4c0519;
+  /* Aurora highlight scale. */
+  --color-aurora-50: #f0fbff;
+  --color-aurora-100: #d6f1ff;
+  --color-aurora-200: #b4e7ff;
+  --color-aurora-300: #8ad8ff;
+  --color-aurora-400: #5cc3ff;
+  --color-aurora-500: #33a8ff;
+  --color-aurora-600: #1f8aff;
+  --color-aurora-700: #176fe6;
+  --color-aurora-800: #1559bf;
+  --color-aurora-900: #174a8c;
+  --color-aurora-950: #0f2c5c;
 
-  /* ---- Typography ---- */
+  /* Neutral scale — text on dark. */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* Radii. */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-card: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 9999px;
+
+  /* Shadows. */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.35);
+  --shadow-md: 0 4px 12px rgba(2, 6, 23, 0.45);
+  --shadow-lg: 0 12px 32px rgba(2, 6, 23, 0.55);
+  --shadow-glow: 0 0 40px rgba(34, 211, 238, 0.25);
+  --shadow-ring: 0 0 0 1px rgba(148, 163, 184, 0.18);
+
+  /* Font stacks — applied via CSS variables from app/fonts.ts. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
-    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-
-  /* ---- Radii ---- */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 1.125rem;
-  --radius-2xl: 1.5rem;
-  --radius-card: 1rem;
-  --radius-pill: 9999px;
-  --radius-display: 2rem;
-
-  /* ---- Shadows ---- */
-  --shadow-sm: 0 1px 2px rgba(2, 6, 16, 0.5);
-  --shadow-md: 0 8px 24px -8px rgba(2, 6, 16, 0.55),
-    0 2px 6px rgba(2, 6, 16, 0.4);
-  --shadow-lg: 0 24px 48px -16px rgba(2, 6, 16, 0.6),
-    0 8px 16px rgba(2, 6, 16, 0.45);
-  --shadow-xl: 0 32px 80px -24px rgba(2, 6, 16, 0.7),
-    0 12px 24px rgba(2, 6, 16, 0.45);
-  --shadow-glow: 0 0 0 1px rgba(34, 211, 238, 0.35),
-    0 12px 40px -8px rgba(34, 211, 238, 0.45);
-  --shadow-glow-accent: 0 0 0 1px rgba(167, 139, 250, 0.35),
-    0 12px 40px -8px rgba(167, 139, 250, 0.45);
-
-  /* ---- Layout ---- */
-  --layout-max-width: 76rem;
-  --layout-content-width: 64rem;
-  --layout-nav-height: 4rem;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+    Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-/* ------------------------------------------------------------------ */
-/* Base layer                                                           */
-/* ------------------------------------------------------------------ */
-
-@layer base {
-  :root {
-    color-scheme: dark;
-  }
-
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-    background-color: var(--color-ink-950);
-  }
-
-  body {
-    background-color: var(--color-ink-950);
-    color: var(--color-ink-50);
-    font-family: var(--font-sans);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
-    min-height: 100dvh;
-    overflow-x: hidden;
-  }
-
-  ::selection {
-    background-color: rgba(34, 211, 238, 0.35);
-    color: var(--color-ink-50);
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Accessible, brand-toned focus ring for keyboard users. */
-  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-brand-400);
-    outline-offset: 3px;
-    border-radius: 0.25rem;
-  }
-
-  /* Scrollbar polish (WebKit + Firefox). */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-ink-700) transparent;
-  }
-  *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  *::-webkit-scrollbar-thumb {
-    background-color: var(--color-ink-700);
-    border-radius: 9999px;
-    border: 2px solid var(--color-ink-950);
-  }
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-ink-600);
-  }
-
-  /* Respect users who prefer reduced motion. */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+:root {
+  color-scheme: dark;
+  --background: #050a14;
+  --foreground: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.18);
+  --ring: rgba(34, 211, 238, 0.4);
 }
 
-/* ------------------------------------------------------------------ */
-/* Components layer — reusable building blocks                         */
-/* ------------------------------------------------------------------ */
+* {
+  border-color: var(--border);
+}
 
-@layer components {
-  /* Frosted / glassmorphic surface used by feature, persona, and
-     FAQ cards. Reads as a "lifted" panel against the dark gradient
-     background without needing a heavy drop shadow. */
-  .surface {
-    background-color: rgba(23, 28, 44, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-card);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 
-  .surface-glass {
-    background: linear-gradient(
-      135deg,
-      rgba(34, 211, 238, 0.06) 0%,
-      rgba(167, 139, 250, 0.06) 100%
+body {
+  min-height: 100dvh;
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+}
+
+::selection {
+  background-color: rgba(34, 211, 238, 0.35);
+  color: #f8fafc;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}
+
+/* Subtle global background — layered radial glows on the deep canvas. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60% 50% at 20% 0%,
+      rgba(34, 211, 238, 0.10),
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 40% at 90% 10%,
+      rgba(167, 139, 250, 0.10),
+      transparent 60%
+    ),
+    radial-gradient(
+      80% 60% at 50% 100%,
+      rgba(15, 44, 92, 0.35),
+      transparent 60%
     );
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-card);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
-  /* Brand gradient applied to text — used on the hero headline
-     and other display headings. */
-  .gradient-text {
-    background: linear-gradient(
-      120deg,
-      var(--color-brand-300) 0%,
-      var(--color-brand-400) 35%,
-      var(--color-accent-300) 70%,
-      var(--color-accent-400) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  /* The full-page background — radial brand + accent glows on top
-     of the deep ink base, plus a subtle conic shimmer. Sits behind
-     every section. */
-  .gradient-bg {
-    background:
-      radial-gradient(
-        ellipse 80% 60% at 15% 10%,
-        rgba(34, 211, 238, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 70% 55% at 85% 20%,
-        rgba(167, 139, 250, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 50% 100%,
-        rgba(34, 211, 238, 0.08),
-        transparent 70%
-      ),
-      linear-gradient(180deg, #05070f 0%, #0b0f1c 100%);
-  }
-
-  /* Subtle blueprint grid for the hero background. */
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-    background-position: -1px -1px;
-    mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 40%,
-      black 30%,
-      transparent 80%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 40%,
-      black 30%,
-      transparent 80%
-    );
-  }
-
-  /* A barely-there film-grain texture overlay. */
-  .noise {
-    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    background-size: 220px 220px;
-    opacity: 0.5;
-  }
-
-  /* Container width used by every section. */
-  .container-page {
-    width: 100%;
-    max-width: var(--layout-max-width);
-    margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-  @media (min-width: 640px) {
-    .container-page {
-      padding-inline: 1.75rem;
-    }
-  }
-  @media (min-width: 1024px) {
-    .container-page {
-      padding-inline: 2.25rem;
-    }
-  }
 }
