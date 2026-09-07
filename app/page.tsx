@@ -4,14 +4,8 @@
  *
  * Page assembly — root composition for the Helix landing page.
  *
- * Single source of truth for the section order of the marketing surface:
- *
  *   Navbar → Hero → StatsBar → Features → HowItWorks
  *     → Personas → SocialProof → FAQ → FinalCTA → Footer
- *
- * Each section is a self-contained server component; the page itself
- * has no client interactivity. Section-owned paths under `components/*`
- * are the canonical implementations for this card.
  */
 import * as React from "react";
 
@@ -30,7 +24,7 @@ export default function Page(): React.ReactElement {
   return (
     <>
       <Navbar />
-      <main id="main">
+      <main id="main" className="relative">
         <Hero />
         <StatsBar />
         <Features />

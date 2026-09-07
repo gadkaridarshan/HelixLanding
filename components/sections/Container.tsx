@@ -1,3 +1,3 @@
-// helix: app/components/ui/Container.tsx
+// helix: components/sections/Container.tsx
 export { Container } from "@/components/ui/Container";
 export { default } from "@/components/ui/Container";

@@ -2,12 +2,8 @@
 /**
  * @helix:story USER-308000
  *
- * Root layout for the Helix landing page. Applies brand fonts to `<html>`,
- * sets the dark color scheme, and mounts the global metadata + viewport
- * for the marketing site.
- *
- * Pure server component. Global CSS (Tailwind v4 + `@theme` brand tokens)
- * is loaded via `app/globals.css`.
+ * Root layout — applies brand fonts to `<html>`, sets the dark color scheme,
+ * and mounts the global metadata + viewport for the marketing site.
  */
 import type { Metadata, Viewport } from "next";
 import * as React from "react";
@@ -40,14 +36,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: brand.url,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1220",
+  themeColor: "#020617",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -60,13 +52,7 @@ export default function RootLayout({
 }): React.ReactElement {
   return (
     <html lang="en" className={fontVariables}>
-      <body className="min-h-screen bg-ink-950 font-sans text-neutral-100 antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-400 focus:px-3 focus:py-2 focus:text-ink-950"
-        >
-          Skip to main content
-        </a>
+      <body className="min-h-screen bg-slate-950 font-sans text-slate-100 antialiased">
         {children}
       </body>
     </html>
