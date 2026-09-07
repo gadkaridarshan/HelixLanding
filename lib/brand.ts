@@ -1,5 +1,6 @@
 // helix: lib/brand.ts
 /**
+ * @helix:story USER-969000
  * @helix:story USER-303000
  * @helix:story USER-440000
  *
@@ -24,43 +25,56 @@
  *     Anywhere that URL is rendered on this product's live site it
  *     **must** be labelled as a "reference site" link (see the Footer
  *     for the canonical pattern). It must never be labelled as "live
- *     site", "our site", "the Helix app", or anything that would
- *     conflate the two.
+ *     site", "deployed", or otherwise conflated with `brand.url`.
+ *
+ *   • `githubUrl` is the source repository. It is a build-time
+ *     reference, not a destination for end-user conversion flows.
  */
 
-export interface Brand {
-  /** Short product name. */
-  name: string;
-  /** Brand mark (single character / glyph) used in the navbar logo. */
-  mark: string;
-  /** One-line value proposition shown in metadata + hero. */
-  tagline: string;
-  /** Longer description for SEO + social cards. */
-  description: string;
-  /** Canonical live URL of this product (what Vercel deploys). */
-  url: string;
-  /** Visual / brand reference URL — labelled as "reference site" only. */
-  referenceUrl: string;
-  /** Source repository. */
-  repoUrl: string;
-  /** Primary support / contact email (placeholder). */
-  email: string;
-  /** OG image path under `public/`. */
-  ogImage: string;
-  /** Twitter handle. */
-  twitter: string;
-}
-
-export const brand: Brand = {
+export const brand = {
+  /** Product / company name. */
   name: "Helix",
-  mark: "H",
+
+  /** Short, headline-friendly tagline used in metadata + hero. */
   tagline: "Atomic work-breakdown for AI coding agents",
+
+  /**
+   * One-sentence product description. Used in:
+   *   • `metadata.description`
+   *   • Open Graph + Twitter card
+   *   • Hero sub-headline
+   *
+   * Keep under ~160 chars for SEO meta-description best practice.
+   */
   description:
-    "Helix decomposes every prompt into atomic, reviewable units, executes them in order with explicit dependencies, and verifies each unit against your repo — producing small, reviewable PRs instead of one sprawling diff.",
+    "Helix decomposes every prompt into atomic, reviewable units, executes them in order with explicit dependencies, and verifies each against the rest of your repo — producing small, reviewable PRs instead of one sprawling diff.",
+
+  /**
+   * Live site URL — the canonical production URL that Vercel will
+   * deploy this workspace to. This is THE URL for "this product's
+   * live site". Sections and metadata that need to point visitors at
+   * "this site, deployed" read this value.
+   */
   url: "https://helix-landing.vercel.app",
-  referenceUrl: "https://helix-ai-orchestrator.vercel.app",
-  repoUrl: "https://github.com/gadkaridarshan/Helix",
-  email: "hello@helix.dev",
-  ogImage: "/og.svg",
-  twitter: "@helix_dev",
-};
+
+  /**
+   * Visual / brand reference site only. Externally hosted. NOT
+   * deployed from this repo. Anywhere this is rendered on the live
+   * site it must be explicitly labelled as a "reference site" link.
+   */
+  referenceSiteUrl: "https://helix-ai-orchestrator.vercel.app",
+
+  /** Source repository. */
+  githubUrl: "https://github.com/gadkaridarshan/Helix",
+
+  /** Social handle (no leading @). */
+  twitterHandle: "@helix_ai",
+
+  /** Locale for metadata / OG tags. */
+  locale: "en_US",
+
+  /** Primary accent color used for theme-color meta + brand mark. */
+  accent: "#22d3ee",
+} as const;
+
+export type Brand = typeof brand;
