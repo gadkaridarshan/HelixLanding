@@ -1,31 +1,31 @@
 {
-  "eyebrow": "FAQ",
-  "heading": "Questions, answered.",
-  "description": "Everything you need to know about Helix and how it orchestrates atomic work-breakdown for AI coding agents.",
+  "eyebrow": "Questions, answered",
+  "heading": "Frequently asked questions.",
+  "description": "Everything you need to know before kicking the tires on Helix.",
   "items": [
     {
-      "question": "What is Helix, in one sentence?",
-      "answer": "Helix is an atomic work-breakdown orchestrator for AI coding agents — it decomposes every prompt into reviewable units, executes them in dependency order, and verifies each one against your repo before opening a PR."
+      "question": "What is an \"atom\"?",
+      "answer": "An atom is the smallest unit of work Helix will execute on your behalf — typically a focused, reviewable change with explicit preconditions and a single goal. Atoms compose into a build graph Helix can parallelize and verify."
     },
     {
-      "question": "How is it different from running an agent directly in my IDE?",
-      "answer": "An in-IDE agent produces one sprawling diff. Helix produces many small, reviewable PRs — each scoped to a single atomic unit — so code review stays fast and regressions stay local."
+      "question": "Does Helix actually run code, or only plan?",
+      "answer": "Helix plans, executes, and verifies. Atoms are executed against your repository inside an isolated environment with type-check, tests, lint, and contract assertions as gating checks."
     },
     {
-      "question": "Which AI models does Helix support?",
-      "answer": "Helix is model-agnostic. Bring any coding-agent capable of running shell commands and reading diffs — the orchestrator handles decomposition, dependency gating, and verification around the model."
+      "question": "How big are the PRs Helix produces?",
+      "answer": "Small. Each PR corresponds to one or a handful of related atoms — typically tens to low-hundreds of lines, not thousands. You review and merge at your own pace."
     },
     {
-      "question": "Can I self-host Helix?",
-      "answer": "Yes. Helix is MIT licensed. The orchestrator runs as a Node.js process; the dashboard is the Next.js marketing + control-plane site you are looking at right now."
+      "question": "Do I have to merge the PRs Helix opens?",
+      "answer": "No. Every PR is a proposal — humans stay in the loop. You can review, request changes, or close. Helix never pushes directly to main."
     },
     {
-      "question": "Does Helix send my code anywhere?",
-      "answer": "Only to the model provider you configure. Helix itself has no telemetry and no required cloud account — set the provider API key and you're done."
+      "question": "Which languages and frameworks does Helix support?",
+      "answer": "Helix is language-agnostic at the orchestration layer and ships first-class verifiers for TypeScript, Python, Go, and Rust. Custom verifiers can be added per-repository."
     },
     {
-      "question": "How do I deploy this site to Vercel?",
-      "answer": "From the repo root, run `vercel` for a preview deploy and `vercel --prod` for production. The included `vercel.json` pins framework, region, and security headers automatically."
+      "question": "Is Helix open source?",
+      "answer": "Yes. Helix is open source under the MIT license. Self-host the orchestrator or use the hosted version — same code path."
     }
   ]
 }

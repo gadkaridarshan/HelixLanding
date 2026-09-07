@@ -1,8 +1,7 @@
 /**
- * @helix:story USER-23000
+ * @helix:story USER-604000
  *
- * FAQ — re-export shim so `@/app/components/sections/FAQ` resolves
+ * Faq — re-export shim so `@/app/components/sections/Faq` resolves
  * to the canonical implementation.
  */
-export { Faq as FAQ } from "@/components/Faq";
-export { default } from "@/components/Faq";
+export { FAQ as Faq, FAQ } from "@/components/Faq";

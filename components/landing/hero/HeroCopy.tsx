@@ -1,74 +1,84 @@
 // helix: components/landing/hero/HeroCopy.tsx
 /**
- * @helix:story USER-23000
+ * @helix:story USER-303000
  *
- * HeroCopy — the text column of the hero section: headline, subhead,
- * dual CTAs, and social-proof bullets. Pure server component.
+ * HeroCopy — the text column of the Hero. Renders the headline,
+ * subhead, primary + secondary CTAs, and the social-proof bullet
+ * strip.
+ *
+ * Pure server component. Uses the shared `Button` primitive and
+ * `Container`-style layout (left column only).
  */
 import * as React from "react";
 
+import { Button } from "@/components/ui/Button";
 import { brand } from "@/lib/brand";
 
 export interface HeroCopyProps {
   className?: string;
 }
 
-interface Bullet {
-  id: string;
-  text: string;
-}
-
-const bullets: ReadonlyArray<Bullet> = [
-  { id: "atomic", text: "Atomic plans you can read and approve." },
-  { id: "verified", text: "Type-checked, tested, and linted on every unit." },
-  { id: "small-prs", text: "Small, dependency-ordered PRs — not one big diff." },
+const proofBullets: ReadonlyArray<string> = [
+  "Atomic work-breakdown",
+  "Repo-aware verification",
+  "Small, reviewable PRs",
 ];
 
-export function HeroCopy({ className }: HeroCopyProps): React.ReactElement {
+export function HeroCopy({
+  className,
+}: HeroCopyProps): React.ReactElement {
   return (
     <div className={className}>
-      <p className="inline-flex items-center gap-2 rounded-pill border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-slate-200">
-        <span
-          aria-hidden="true"
-          className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"
-        />
-        Now in early access
-      </p>
+      <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-ink-200 backdrop-blur">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-400" />
+        <span>Now in early access</span>
+      </div>
+
       <h1
         id="hero-heading"
-        className="mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl"
+        className="mt-5 text-4xl font-bold tracking-tight text-ink-50 sm:text-5xl lg:text-6xl"
       >
         {brand.tagline}.
       </h1>
-      <p className="mt-5 max-w-xl text-base text-slate-300 sm:text-lg">
-        {brand.description}
+
+      <p className="mt-5 max-w-xl text-lg leading-8 text-ink-300">
+        {brand.shortDescription}
       </p>
 
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="#cta"
-          className="inline-flex items-center justify-center rounded-pill bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-slate-100"
-        >
-          Get early access
-        </a>
-        <a
+      <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+        <Button href={brand.url} variant="primary" size="lg" external>
+          Try {brand.name}
+        </Button>
+        <Button
           href={brand.githubUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-pill border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          variant="secondary"
+          size="lg"
+          external
         >
           View on GitHub
-        </a>
+        </Button>
       </div>
 
-      <ul className="mt-8 space-y-2 text-sm text-slate-300">
-        {bullets.map((bullet) => (
-          <li key={bullet.id} className="flex items-start gap-2">
-            <span
+      <ul
+        role="list"
+        className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-300"
+      >
+        {proofBullets.map((bullet) => (
+          <li key={bullet} className="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-4 w-4 text-brand-400"
               aria-hidden="true"
-              className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400"
-            />
-            {bullet.text}
+            >
+              <path d="M5 12l4 4L19 7" />
+            </svg>
+            <span>{bullet}</span>
           </li>
         ))}
       </ul>

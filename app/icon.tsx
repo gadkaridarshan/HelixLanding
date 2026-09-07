@@ -1,21 +1,22 @@
-/**
- * @helix:story USER-525000
- *
- * Favicon generator — Next.js App Router convention. Generates a multi-size
- * favicon at build time so the deployed URL exposes /icon (and the
- * automatically-resolved /favicon.ico) without us shipping a binary asset
- * through git. The atom/orbit motif matches the brand mark.
- */
 import { ImageResponse } from "next/og";
 
 import { brand } from "@/lib/brand";
 
+/**
+ * @helix:story USER-915000
+ *
+ * Favicon generator — emits a 32×32 PNG favicon at build time so
+ * the browser never 404s. Uses the brand cyan + the "H" wordmark
+ * motif. Served at `/favicon.ico` automatically by Next.js.
+ */
 export const size = {
   width: 32,
   height: 32,
 };
 
 export const contentType = "image/png";
+
+export const dynamic = "force-static";
 
 export default function Icon(): ImageResponse {
   return new ImageResponse(
@@ -28,38 +29,16 @@ export default function Icon(): ImageResponse {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "linear-gradient(135deg, #020617 0%, #0f172a 60%, #020617 100%)",
-          borderRadius: 6,
-          fontSize: 20,
+            "radial-gradient(circle at 30% 30%, #22d3ee 0%, #0891b2 60%, #0e7490 100%)",
+          color: "#020617",
           fontWeight: 700,
-          color: "#22d3ee",
-          letterSpacing: "-0.02em",
-          position: "relative",
+          fontSize: 22,
+          letterSpacing: -1,
+          fontFamily: "Inter, system-ui, sans-serif",
+          borderRadius: 8,
         }}
       >
-        {/* Orbital ring */}
-        <div
-          style={{
-            position: "absolute",
-            width: 28,
-            height: 28,
-            borderRadius: "50%",
-            border: "1.5px solid rgba(167, 139, 250, 0.55)",
-            display: "flex",
-          }}
-        />
-        {/* Brand glyph */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#22d3ee",
-            textShadow: "0 0 8px rgba(34, 211, 238, 0.55)",
-          }}
-        >
-          {brand.glyph}
-        </div>
+        {brand.name.charAt(0)}
       </div>
     ),
     { ...size }

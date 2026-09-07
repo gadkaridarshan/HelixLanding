@@ -1,21 +1,13 @@
-// helix: components/FinalCTA.tsx
+// helix: components/FinalCta.tsx
 /**
- * @helix:story USER-82000
+ * @helix:story USER-63000
  *
- * FinalCTA — the closing "ship atomic PRs" call-to-action banner that
- * sits just above the site footer. This is the visitor's last chance
- * to convert before the footer links take over.
+ * FinalCTA — last-call-to-action band rendered just above the
+ * Footer. Headline + supporting copy + primary CTA + secondary
+ * "view on GitHub" link. Brand surface sourced from `lib/brand.ts`
+ * so the CTA URL stays in sync with metadata and the footer.
  *
- * Pure server component. CTA copy and links are sourced from
- * `lib/brand.ts` so the canonical URL / GitHub URL stay in lock-step
- * with the rest of the site. Renders with the shared `Container`
- * primitive and `Button` CTA — primary → live orchestrator,
- * secondary → GitHub repo.
- *
- * Lives at the canonical path `components/FinalCTA.tsx` (this file).
- * Re-export shims at `components/sections/FinalCTA.tsx` and
- * `app/components/sections/FinalCTA.tsx` point here so both import
- * paths resolve to the same implementation.
+ * Pure server component.
  */
 import * as React from "react";
 
@@ -23,111 +15,56 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { brand } from "@/lib/brand";
 
-export interface FinalCTAProps {
+export interface FinalCtaProps {
   className?: string;
 }
 
-export function FinalCTA({ className }: FinalCTAProps): React.ReactElement {
+export function FinalCTA({
+  className,
+}: FinalCtaProps): React.ReactElement {
   return (
     <section
       id="final-cta"
       aria-labelledby="final-cta-heading"
       className={
-        "relative isolate overflow-hidden py-20 sm:py-28 " + (className ?? "")
+        "relative isolate py-20 sm:py-28 lg:py-32 " + (className ?? "")
       }
     >
-      {/* Layered aurora + radial spotlight background */}
+      {/* Aurora backdrop */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900" />
-        <div
-          className="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl"
-          style={{ filter: "blur(120px)" }}
-        />
-        <div
-          className="absolute bottom-0 right-0 h-[28rem] w-[28rem] translate-x-1/3 translate-y-1/3 rounded-full bg-accent-500/20 blur-3xl"
-          style={{ filter: "blur(120px)" }}
-        />
-        {/* faint grid */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 75%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 75%)",
-          }}
-        />
+        <div className="absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-aurora-500/20 blur-3xl" />
       </div>
 
       <Container>
-        <div className="relative mx-auto max-w-3xl text-center">
-          {/* Eyebrow pill */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-300">
-            <span
-              aria-hidden="true"
-              className="inline-block h-1.5 w-1.5 rounded-full bg-brand-400"
-            />
-            Ready when you are
-          </span>
-
+        <div className="relative mx-auto max-w-3xl rounded-3xl border border-white/10 bg-slate-950/60 px-6 py-12 text-center shadow-[0_30px_120px_-30px_rgba(34,211,238,0.35)] backdrop-blur sm:px-12 sm:py-16">
           <h2
             id="final-cta-heading"
-            className="mt-6 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            className="text-3xl font-bold tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
           >
-            Stop reviewing one giant diff.{" "}
-            <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-accent-400 bg-clip-text text-transparent">
-              Ship atomic ones.
-            </span>
+            Ready to ship smaller, reviewable PRs?
           </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-7 text-ink-300 sm:text-lg">
-            {brand.name} turns every prompt into a chain of small, reviewable,
-            verified units — so your AI coding agents ship code you can
-            actually merge. Try the live orchestrator or read the source on
-            GitHub.
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-ink-300">
+            Spin up Helix against your repo and watch a single prompt
+            decompose into auditable, verifiable, merge-ready diffs.
           </p>
-
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              href={brand.url}
-              external
-              variant="primary"
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              Try the live orchestrator
-              <span aria-hidden="true" className="ml-1">
-                →
-              </span>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <Button href={brand.url} variant="primary" size="lg" external>
+              Try {brand.name}
             </Button>
             <Button
               href={brand.githubUrl}
-              external
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto"
+              external
             >
-              Read on GitHub
+              View on GitHub
             </Button>
           </div>
-
-          <p className="mt-6 text-xs text-ink-400">
-            Open source · Self-hostable · Built for teams that review their PRs
-          </p>
         </div>
       </Container>
-
-      {/* Decorative bottom edge to ease into footer */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
-      />
     </section>
   );
 }
