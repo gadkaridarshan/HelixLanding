@@ -1,31 +1,34 @@
-// helix: app/components/ui/Container.tsx
-import type { ElementType, HTMLAttributes, ReactNode } from "react";
-import { cn } from "../../components/ui/cn";
+import type { HTMLAttributes } from "react";
+import { cn } from "@/components/ui/cn";
 
-interface ContainerProps extends HTMLAttributes<HTMLElement> {
-  as?: ElementType;
-  children?: ReactNode;
+export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * When true, removes the default horizontal padding.
+   */
+  flush?: boolean;
 }
 
 /**
- * `Container` — horizontal layout wrapper that constrains content width
- * and applies consistent horizontal padding across marketing sections.
+ * Container — max-width, horizontally-padded layout wrapper.
+ * The canonical implementation lives here; `components/ui/Container.tsx`
+ * re-exports it so the `@/components/ui/Container` alias resolves from
+ * both the `app/` and root-level section trees.
  */
 export function Container({
-  as: Tag = "div",
   className,
-  children,
-  ...rest
+  flush = false,
+  ...props
 }: ContainerProps) {
   return (
-    <Tag
+    <div
       className={cn(
-        "mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8",
-        className
+        "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8",
+        flush && "px-0",
+        className,
       )}
-      {...rest}
-    >
-      {children}
-    </Tag>
+      {...props}
+    />
   );
 }
+
+export default Container;

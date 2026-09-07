@@ -1,4 +1,3 @@
-// helix: app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -41,15 +40,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Helix — Atomic Work-Breakdown Orchestrator",
-    description:
-      "Plan, write, and ship code in atomic, reviewable steps. Helix is the AI coding orchestrator that respects your files, your conventions, and your reviewers.",
+    description: "Plan, write, and ship code in atomic, reviewable steps. Helix is the AI coding orchestrator that respects your files, your conventions, and your reviewers.",
     images: ["/og-image.svg"],
     creator: "@helix",
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
   },
