@@ -1,59 +1,59 @@
 // helix: components/ui/SectionHeading.tsx
 /**
- * @helix:story USER-956000
+ * @helix:story USER-616000
  *
- * SectionHeading — shared section header primitive.
+ * SectionHeading — shared eyebrow + heading + description primitive
+ * used by every marketing section (Features, HowItWorks, Personas,
+ * FAQ, FinalCTA). Centralizing it means the typographic rhythm and
+ * spacing stay consistent across the page.
  *
- * Renders a consistent eyebrow + heading + optional description
- * triplet used by every marketing section (FAQ, Features, Personas,
- * etc.). Pure server component, no client interactivity.
- *
- * The heading gets an `id` so the surrounding `<section>` can use
- * `aria-labelledby` for screen readers without duplicating text.
+ * Pure server component: zero JS.
  */
 import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
 export interface SectionHeadingProps {
+  className?: string;
   eyebrow?: string;
   heading: string;
   description?: string;
   headingId?: string;
   align?: "left" | "center";
-  className?: string;
 }
 
 export function SectionHeading({
+  className,
   eyebrow,
   heading,
   description,
   headingId,
   align = "center",
-  className,
 }: SectionHeadingProps): React.ReactElement {
   const alignment =
-    align === "center" ? "text-center mx-auto" : "text-left";
+    align === "center" ? "items-center text-center" : "items-start text-left";
 
   return (
-    <div
-      className={cn("flex max-w-3xl flex-col gap-3", alignment, className)}
-    >
+    <div className={cn("flex flex-col gap-4", alignment, className)}>
       {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-300">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-brand-300">
+          <span
+            aria-hidden="true"
+            className="h-1.5 w-1.5 rounded-full bg-brand-400"
+          />
           {eyebrow}
-        </p>
+        </span>
       ) : null}
+
       <h2
         id={headingId}
-        className="text-3xl font-semibold tracking-tight text-ink-50 sm:text-4xl lg:text-5xl"
+        className="max-w-3xl text-balance text-3xl font-semibold tracking-tight text-ink-50 sm:text-4xl md:text-5xl"
       >
-        <span className="bg-gradient-to-r from-ink-50 via-ink-100 to-ink-300 bg-clip-text text-transparent">
-          {heading}
-        </span>
+        {heading}
       </h2>
+
       {description ? (
-        <p className="text-base leading-relaxed text-ink-300 sm:text-lg">
+        <p className="max-w-2xl text-pretty text-base leading-relaxed text-ink-300 sm:text-lg">
           {description}
         </p>
       ) : null}

@@ -1,50 +1,36 @@
 {
   "eyebrow": "How it works",
-  "heading": "From a sentence to reviewable PRs.",
-  "description": "Helix turns a single high-level prompt into an executable, verifiable plan — and ships it as small, reviewable diffs.",
+  "heading": "From prompt to PR in three steps.",
+  "description": "Helix takes a single goal and turns it into a stream of small, verified, mergeable changes — without you babysitting an agent for hours.",
   "steps": [
     {
       "number": "01",
       "title": "Describe the goal",
-      "description": "Drop a prompt, a ticket, or a rough spec. Helix ingests intent — not implementation details — and scopes the work against your repository.",
+      "description": "Tell Helix what you want — a feature, a refactor, a bug fix — in plain language. It reads your repo, asks clarifying questions, and locks down an acceptance criteria.",
       "bullets": [
-        "Natural language prompts",
-        "Issue / ticket import",
-        "Repo-scoped context",
-        "Optional constraints"
+        "Natural-language intent, no DSL to learn",
+        "Repo is read first so suggestions match your stack",
+        "Acceptance criteria agreed before any code is written"
       ]
     },
     {
       "number": "02",
-      "title": "Decompose into atoms",
-      "description": "Helix breaks the work into atomic, reviewable units. Each atom has explicit preconditions, a single goal, and the contracts it must satisfy.",
+      "title": "Decompose & orchestrate",
+      "description": "Helix decomposes the goal into atomic cards, then fans them out to parallel agents. Independent atoms run in parallel; dependent ones wait on their inputs.",
       "bullets": [
-        "Atomic work-breakdown",
-        "Explicit preconditions",
-        "Per-atom contracts",
-        "Parallelizable where safe"
+        "Each atom has explicit inputs, outputs, and a test plan",
+        "Dependency graph runs independent units in parallel",
+        "Every atom is verified against the live repo before merging"
       ]
     },
     {
       "number": "03",
-      "title": "Apply, review, merge",
-      "description": "Agents execute atoms in dependency order. Every atom is gated on the surrounding repo: type-check, tests, lint, and contract assertions must all pass.",
+      "title": "Review & ship",
+      "description": "You get one small, focused PR per atom — with the prompt that produced it, the verification log, and a replay link. Approve, request changes, or let Helix iterate.",
       "bullets": [
-        "Dependency-gated execution",
-        "Repo-aware verification",
-        "Per-atom review surface",
-        "Auto-rollback on failure"
-      ]
-    },
-    {
-      "number": "04",
-      "title": "Ship with confidence",
-      "description": "Output is a stream of small, reviewable PRs — auditable, replayable, and easy to merge. You stay in control of what reaches main.",
-      "bullets": [
-        "Small reviewable PRs",
-        "Replayable build graph",
-        "Audit trail per atom",
-        "Human-in-the-loop merge"
+        "Small reviewable diffs instead of one sprawling change",
+        "Auditable trail: prompt → atom → verification → PR",
+        "Replayable runs so any merge can be reproduced or rolled back"
       ]
     }
   ]

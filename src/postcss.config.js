@@ -1,14 +1,11 @@
 /**
  * @helix:story USER-63000
  *
- * PostCSS config for the Helix marketing site.
+ * PostCSS config — Tailwind v4 entry point.
  *
- * Tailwind v4 ships its own PostCSS plugin (`@tailwindcss/postcss`)
- * which handles `@import "tailwindcss"` declarations plus the
- * `@theme` token surface defined in `app/globals.css`.
- *
- * `autoprefixer` is kept in the chain for any hand-written CSS that
- * needs vendor prefixes (Tailwind v4 already emits most of them).
+ * Helix uses Tailwind v4 (no `tailwind.config.ts` plugin chain) and
+ * processes its stylesheet via `@tailwindcss/postcss`. Autoprefixer
+ * is included for last-mile vendor prefixing on older browsers.
  */
 module.exports = {
   plugins: {
