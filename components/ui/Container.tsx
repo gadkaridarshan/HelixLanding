@@ -2,34 +2,32 @@
 /**
  * @helix:story USER-604000
  *
- * Container — shared width-constrained wrapper used by every section
- * to keep content aligned to the same max-width gutters.
- *
- * Pure server component. Renders a `<div>` with the configured
- * `max-w-*` class plus responsive horizontal padding.
+ * Container — shared layout primitive that constrains content to a
+ * max width and applies consistent horizontal padding across all
+ * sections. Pure server component.
  */
 import * as React from "react";
 
-import { cn } from "@/components/ui/cn";
-
 export interface ContainerProps {
-  className?: string;
   children: React.ReactNode;
+  className?: string;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 export function Container({
-  className,
   children,
+  className,
+  as,
 }: ContainerProps): React.ReactElement {
+  const Component = (as ?? "div") as React.ElementType;
   return (
-    <div
-      className={cn(
-        "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
-        className
-      )}
+    <Component
+      className={
+        "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 " + (className ?? "")
+      }
     >
       {children}
-    </div>
+    </Component>
   );
 }
 
