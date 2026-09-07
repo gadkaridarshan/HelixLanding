@@ -24,20 +24,12 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
 2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
 3. **StatsBar** — quick metric strip.
-4. **Features** — seven core capabilities as a card grid.
-5. **HowItWorks** — 3-step orchestration flow (Describe → Decompose → Verify).
-6. **Personas** — role-targeted value props (Solo Founders, Staff Engineers, Eng Managers, Tech Leads, AI Engineers).
-7. **FAQ** — common objections, answered (native `<details>`, no client JS).
-8. **FinalCTA** — last-mile conversion band with primary + secondary CTAs.
-9. **Footer** — Product / Resources / Company / Legal link columns + social links.
-
-## Stack
-
-- **Next.js 16** (App Router, RSC) on **React 19**.
-- **TypeScript** (strict).
-- **Tailwind CSS v4** via `@tailwindcss/postcss`.
-- `clsx` + `tailwind-merge` for class composition.
-- `next/font/google` (Inter + JetBrains Mono) — no external font CDN.
+4. **Features** — six capability tiles with icons.
+5. **HowItWorks** — three-step plan → execute → verify walkthrough.
+6. **Personas** — solo founders, platform teams, OSS maintainers.
+7. **FinalCTA** — gradient panel closing call-to-action.
+8. **FAQ** — native `<details>` disclosure, fully accessible, no client JS.
+9. **Footer** — brand mark, secondary nav, copyright.
 
 ## Prerequisites
 
@@ -80,47 +72,67 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 
 ## Deploy to Vercel
 
-This repo is a standard Next.js (App Router) project and is the **live site** for this workspace — distinct from the reference demo linked above. The included `vercel.json` pins the framework, build command, output directory, and security headers so a one-step deploy is reliable.
+This repo ships a top-level `vercel.json` declaring `framework: "nextjs"`,
+so a fresh `vercel --prod` works out-of-the-box with no extra config.
 
-### Option A — Vercel CLI (recommended for this repo)
+### Option A — Vercel CLI (recommended)
 
 ```bash
-npm i -g vercel
-vercel login
-vercel        # preview deployment
-vercel --prod # production deployment
+npm i -g vercel          # one-time, requires Vercel CLI ≥ 34.x
+vercel login             # one-time
+vercel link --yes        # one-time: creates .vercel/
+vercel --prod            # production deployment
 ```
+
+`vercel --prod` will:
+
+1. Upload the repo to Vercel.
+2. Read `vercel.json` → `framework: "nextjs"` → auto-detect build/install commands.
+3. Run `npm install && npm run build` and produce `.next/`.
+4. Apply the security headers from `vercel.json`
+   (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`,
+   `Permissions-Policy`) and the long-lived cache headers for
+   `/og.svg`, `/favicon.svg`, `/favicon.ico`.
+5. Promote the deployment to production.
 
 ### Option B — Git integration
 
 1. Push the repo to GitHub/GitLab/Bitbucket.
 2. Visit <https://vercel.com/new> and **Import Project**.
-3. Vercel auto-detects Next.js from `vercel.json`. The defaults match the project:
-   - Framework: `nextjs`
+3. Vercel reads `vercel.json` and pre-fills the framework settings.
+   Leave defaults:
    - Build command: `next build`
    - Output: `.next`
    - Install command: `npm install`
-4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
+4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent
+   deploys are cached.
 
-> The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`). It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
+### Post-deploy verification
 
-### Environment variables
+```bash
+PROD_URL="https://helix-ai-orchestrator.vercel.app"
+curl -sI "$PROD_URL/"             | head -n 1
+curl -sI "$PROD_URL/og.svg"       | head -n 1
+curl -sI "$PROD_URL/favicon.svg"  | head -n 1
+```
 
-Copy `.env.example` to `.env.local` for local dev, and configure the same key on Vercel under **Project → Settings → Environment Variables**:
-
-| Variable                  | Required | Purpose                                                                          |
-| ------------------------- | -------- | -------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_BRAND_URL`   | No       | Canonical production URL for metadata + OG cards. Defaults to the reference URL. |
+The canonical production URL for **this** live site is defined in
+`lib/brand.ts` (`brand.url`). It is **not** the reference URL listed
+at the top of this README — that one points only to an external
+visual reference and is not deployed from this repository.
 
 ## Project layout
 
-- `app/` — Next.js App Router entry (layout, pages, global styles, fonts).
+- `app/` — Next.js App Router entry (layout, pages, global styles)
 - `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
 - `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
-- `components/ui/` — Shared primitives (`Button`, `Container`, `SectionHeading`, `FeatureCard`, `cn`).
-- `content/` — Structured content (copy, FAQs, feature data, personas).
-- `lib/` — Shared utilities and brand constants (`lib/brand.ts`).
-- `public/` — Static assets (favicon, OG image, marketing imagery, `site.webmanifest`).
+- `components/sections/final-cta/` — Canonical FinalCTA band (USER-63000).
+- `components/sections/footer/` — Canonical site footer (USER-63000).
+- `components/ui/` — Shared primitives (`Container`, `Button`, `cn`).
+- `content/` — Structured content (copy, FAQs, feature data)
+- `lib/` — Shared utilities and brand constants (`lib/brand.ts`)
+- `public/` — Static assets (favicon, OG image, marketing imagery)
+- `vercel.json` — Vercel project config (framework, headers, cache).
 
 ## Reference vs. live site — at a glance
 

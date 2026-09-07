@@ -1,41 +1,41 @@
 {
-  "eyebrow": "Capabilities",
-  "heading": "Everything Helix does, end to end",
-  "description": "Seven capabilities that turn a one-paragraph intent into reviewable, verified code.",
+  "eyebrow": "What Helix does",
+  "heading": "Every prompt becomes a reviewable unit of work",
+  "description": "Helix turns a single sentence into a stack of small, dependency-ordered changes — each verified against your repo before the next runs.",
   "items": [
     {
       "title": "Atomic decomposition",
-      "description": "Breaks every prompt into the smallest reviewable units so work stays auditable and parallelizable.",
+      "description": "Helix breaks each prompt into the smallest meaningful units so each one can be reviewed, reverted, or merged independently.",
       "icon": "atom"
     },
     {
       "title": "Dependency-aware execution",
-      "description": "Orders units by real code-graph dependencies and runs independent units in parallel for speed.",
+      "description": "Units run in the right order — files, modules, and tests are sequenced so partial states never get committed.",
       "icon": "graph"
     },
     {
       "title": "Repo-aware verification",
-      "description": "Re-checks every unit against your whole repo — types, tests, lint — before it can be merged.",
+      "description": "Every unit is type-checked, linted, and tested against the live repo before it can be promoted.",
       "icon": "shield"
     },
     {
       "title": "Reviewable PR output",
-      "description": "Produces small, well-scoped PRs per unit instead of one sprawling diff that no one wants to review.",
+      "description": "Each unit lands as a small, focused pull request with a clear description and a replayable run log.",
       "icon": "git"
     },
     {
       "title": "Persona-targeted workflows",
-      "description": "Tones, guardrails, and tool surfaces tuned per role so solo devs, teams, and leads all get a useful default.",
+      "description": "Helix adapts its planning to founders, engineers, PMs, and designers — every persona gets the workflow that fits.",
       "icon": "persona"
     },
     {
       "title": "Multi-stack support",
-      "description": "First-class adapters for TypeScript, Python, Go, Rust, and more — pick your stack, keep your conventions.",
+      "description": "TypeScript, Python, Go, Rust, Swift — Helix works against whichever stack your repo is actually written in.",
       "icon": "stack"
     },
     {
       "title": "Quality-bar enforcement",
-      "description": "A configurable quality gate keeps every merged unit held to the same standard as the rest of your codebase.",
+      "description": "Tests, types, and lint aren't optional. Helix treats your existing quality bar as the contract for every unit.",
       "icon": "review"
     }
   ]

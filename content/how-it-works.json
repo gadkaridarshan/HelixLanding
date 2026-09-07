@@ -1,36 +1,36 @@
 {
   "eyebrow": "How it works",
-  "heading": "From intent to merged code in three steps",
-  "description": "Helix turns a natural-language goal into a chain of small, verified, reviewable units of work.",
+  "heading": "Three steps from prompt to pull request",
+  "description": "Helix turns intent into shipped code through a transparent, three-step orchestration loop you can audit at every stage.",
   "steps": [
     {
       "number": "01",
       "title": "Describe the goal",
-      "description": "Tell Helix what you want in plain language. No prompts to engineer — just the outcome.",
+      "description": "Write a sentence about what you want. Helix turns it into a structured plan with explicit success criteria and the files it expects to touch.",
       "bullets": [
-        "Natural-language intent, not prompt craft",
-        "Optional constraints: stack, files to touch, tests required",
-        "Helix reads your repo to ground the request"
+        "Natural-language intent, no DSL required",
+        "Auto-detected success criteria",
+        "Scope preview before any code runs"
       ]
     },
     {
       "number": "02",
       "title": "Decompose & orchestrate",
-      "description": "Helix breaks the goal into atomic units, orders them by dependency, and runs the safe ones in parallel.",
+      "description": "Helix breaks the goal into atomic units, orders them by dependency, and runs them in parallel where it can — gating each one on the previous unit's verification.",
       "bullets": [
-        "Atomic units with explicit dependencies",
-        "Parallel execution where the code-graph allows",
-        "Live status for every unit in flight"
+        "Atomic, dependency-ordered units",
+        "Parallel execution where safe",
+        "Hard gate on types, tests, and lint"
       ]
     },
     {
       "number": "03",
       "title": "Review & ship",
-      "description": "Each unit ships as a small, verified PR you can review on its own. Replay any run end-to-end.",
+      "description": "Each unit lands as a small pull request with a clear description and a replayable run log. Merge the ones you want, revert the ones you don't.",
       "bullets": [
-        "Per-unit PRs with full diffs and rationale",
-        "Type-check, tests, and lint verified against your repo",
-        "Replayable runs for auditing and debugging"
+        "Small, focused PRs per unit",
+        "Replayable run log per change",
+        "One-click revert on any unit"
       ]
     }
   ]

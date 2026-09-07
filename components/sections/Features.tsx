@@ -10,4 +10,4 @@
  * alias) so the TypeScript module resolver does not bind the local `Features`
  * export back to itself.
  */
-export { Features, default } from "./features";
+export { Features, default } from "./features/Features";

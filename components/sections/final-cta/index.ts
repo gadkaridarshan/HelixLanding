@@ -2,15 +2,12 @@
 /**
  * @helix:story USER-63000
  *
- * FinalCTA — folder-level re-export so
- * `@/components/sections/final-cta` resolves to the canonical
- * implementation alongside the sibling `@/components/sections/FinalCTA`
- * named import used by `app/page.tsx`.
+ * Barrel export for the FinalCTA section. Re-exports the canonical
+ * component so callers can write:
  *
- * The canonical implementation lives at `components/landing/final-cta/FinalCTA.tsx`
- * (or, when that module is absent, the canonical fallback
- * `components/sections/FinalCTA.tsx`). This file keeps the owned path
- * `components/sections/final-cta/**` populated without forking the
- * implementation.
+ *     import { FinalCTA } from "@/components/sections/final-cta";
+ *
+ * without leaking the internal file layout.
  */
-export { FinalCta, default } from "@/components/sections/FinalCTA";
+export { FinalCTA, default } from "./FinalCTA";
+export type { FinalCTAProps } from "./FinalCTA";

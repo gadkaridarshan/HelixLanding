@@ -2,14 +2,12 @@
 /**
  * @helix:story USER-63000
  *
- * Footer — folder-level re-export so
- * `@/components/sections/footer` resolves to the canonical
- * implementation alongside the sibling `@/components/sections/Footer`
- * named import used by `app/page.tsx`.
+ * Barrel export for the Footer section. Re-exports the canonical
+ * component so callers can write:
  *
- * The canonical implementation lives at `components/Footer.tsx`,
- * with `components/sections/Footer.tsx` acting as a named re-export
- * shim. This file keeps the owned path `components/sections/footer/**`
- * populated without forking the implementation.
+ *     import { Footer } from "@/components/sections/footer";
+ *
+ * without leaking the internal file layout.
  */
-export { Footer, default } from "@/components/sections/Footer";
+export { Footer, default } from "./Footer";
+export type { FooterProps } from "./Footer";

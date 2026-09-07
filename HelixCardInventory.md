@@ -1,9 +1,9 @@
 # Card Inventory
 
-- Sep 7, 2026, 11:15:06 AM CDT | USER-63000 | in_progress | development | Assembly footer CTA Vercel deploy · deliverable: README.md
+- Sep 7, 2026, 11:22:09 AM CDT | USER-63000 | in_progress | development | Assembly footer CTA Vercel deploy · deliverable: README.md
+- Sep 7, 2026, 11:22:03 AM CDT | USER-507000 | done | development | Features how-it-works sections
 - Sep 7, 2026, 11:14:57 AM CDT | USER-495000 | done | development | Hero personas sections
 - Sep 7, 2026, 11:13:58 AM CDT | USER-915000 | todo | deployment | Final integration polish Vercel deploy
-- Sep 7, 2026, 11:13:47 AM CDT | USER-507000 | todo | development | Features how-it-works sections
 - Sep 7, 2026, 11:12:42 AM CDT | USER-171000 | done | development | Social proof FAQ CTA assembly
 - Sep 7, 2026, 10:55:21 AM CDT | USER-310000 | done | development | Complete Helix landing site
 - Sep 7, 2026, 10:53:44 AM CDT | USER-956000 | done | development | FAQ CTA footer and Vercel

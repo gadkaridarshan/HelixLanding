@@ -1,49 +1,28 @@
-// helix: app/page.tsx
-/**
- * @helix:story USER-171000
- *
- * Landing page assembly for the Helix AI orchestrator marketing
- * site. Composes every section in render order so the full page is
- * auditable from one file.
- *
- * Render order:
- *   1. Hero           — above-the-fold value prop
- *   2. StatsBar       — quick metric strip
- *   3. Features       — seven core capabilities
- *   4. HowItWorks     — 3-step orchestration flow
- *   5. Personas       — role-targeted value props
- *   6. SocialProof    — testimonial grid (USER-171000)
- *   7. FAQ            — common objections, answered (USER-171000)
- *   8. FinalCTA       — last-mile conversion band (USER-171000)
- *
- * Navbar and Footer are owned by `app/layout.tsx` so they wrap every
- * route consistently. All sections are server components, with their
- * interactive bits (mobile menu, persona tabs) isolated as small
- * `"use client"` islands. Composition here is intentionally explicit
- * so it is trivial to audit the full page by reading one file.
- */
-import * as React from "react";
+The canonical production URL for **this** live site is defined in
+`lib/brand.ts` (`brand.url`). It is **not** the reference URL listed
+at the top of this README — that one points only to an external
+visual reference and is not deployed from this repository.
 
-import { FAQ } from "@/components/sections/FAQ";
-import { Features } from "@/components/sections/Features";
-import { FinalCTA } from "@/components/sections/FinalCTA";
-import { Hero } from "@/components/sections/Hero";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Personas } from "@/components/sections/Personas";
-import { SocialProof } from "@/components/sections/SocialProof";
-import { StatsBar } from "@/components/sections/StatsBar";
+## Project layout
 
-export default function Page(): React.ReactElement {
-  return (
-    <main id="main" className="relative">
-      <Hero />
-      <StatsBar />
-      <Features />
-      <HowItWorks />
-      <Personas />
-      <SocialProof />
-      <FAQ />
-      <FinalCTA />
-    </main>
-  );
-}
+- `app/` — Next.js App Router entry (layout, pages, global styles)
+- `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
+- `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
+- `components/sections/final-cta/` — Canonical FinalCTA band (USER-63000).
+- `components/sections/footer/` — Canonical site footer (USER-63000).
+- `components/ui/` — Shared primitives (`Container`, `Button`, `cn`).
+- `content/` — Structured content (copy, FAQs, feature data)
+- `lib/` — Shared utilities and brand constants (`lib/brand.ts`)
+- `public/` — Static assets (favicon, OG image, marketing imagery)
+- `vercel.json` — Vercel project config (framework, headers, cache).
+
+## Reference vs. live site — at a glance
+
+| Label               | URL                                          | What it is                                                                 |
+| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
+| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
+| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
+
+## License
+
+See repository metadata.

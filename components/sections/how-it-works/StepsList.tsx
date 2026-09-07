@@ -1,93 +1,59 @@
 // helix: components/sections/how-it-works/StepsList.tsx
 /**
- * @helix:story USER-933000
+ * @helix:story USER-507000
  *
- * StepsList — internal subcomponent for the HowItWorks section. Renders
- * a horizontal/responsive grid of step cards sourced from the HowItWorks
- * content JSON. Pure server component.
- *
- * Consumers should normally use `<HowItWorks />` directly; this subcomponent
- * exists to keep the section composable for future layouts.
+ * StepsList — vertical list of `StepItem` rows used by HowItWorks.
+ * Pure server component; renders an accessible ordered list with
+ * connectors between rows.
  */
 import * as React from "react";
 
-import howItWorksData from "@/content/how-it-works.json";
+import { StepItem, type StepItemBullet } from "./StepItem";
 
-export interface StepsListProps {
-  className?: string;
-}
-
-interface Step {
+export interface HowItWorksStep {
   number: string;
   title: string;
   description: string;
-  bullets: string[];
+  bullets: ReadonlyArray<string>;
 }
 
-interface HowItWorksContent {
-  eyebrow: string;
-  heading: string;
-  description: string;
-  steps: Step[];
+export interface StepsListProps {
+  steps: ReadonlyArray<HowItWorksStep>;
+  className?: string;
 }
 
-const { steps } = howItWorksData as HowItWorksContent;
+/**
+ * `StepItem` doesn't yet consume `StepItemBullet`, but we re-export
+ * the type here so consumers can grow richer step payloads later
+ * without changing the public surface.
+ */
+export type { StepItemBullet };
 
-export function StepsList({
-  className,
-}: StepsListProps): React.ReactElement {
+export function StepsList({ steps, className }: StepsListProps): React.ReactElement {
   return (
     <ol
       role="list"
       className={
-        "grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-6 " +
+        "relative mx-auto flex w-full max-w-3xl flex-col gap-4 " +
         (className ?? "")
       }
     >
       {steps.map((step, idx) => (
-        <li
-          key={step.number}
-          className="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-colors hover:border-cyan-400/30 hover:bg-white/[0.05]"
-        >
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-violet-500/20 font-mono text-sm font-bold text-cyan-300">
-              {step.number}
-            </span>
-            <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
-              Step {idx + 1}
-            </span>
-          </div>
-          <h3 className="mt-5 text-lg font-semibold text-white">
-            {step.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-300">
-            {step.description}
-          </p>
-          <ul role="list" className="mt-5 space-y-2">
-            {step.bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="flex items-start gap-2 text-sm text-slate-300"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300"
-                >
-                  <path
-                    d="M4 10.5l4 4 8-9"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        </li>
+        <div key={step.number} className="relative">
+          {idx < steps.length - 1 ? (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[2.05rem] top-16 hidden h-[calc(100%-2rem)] w-px bg-gradient-to-b from-brand-500/40 via-white/10 to-transparent sm:block"
+            />
+          ) : null}
+          <StepItem
+            number={step.number}
+            title={step.title}
+            description={step.description}
+            bullets={step.bullets}
+            reverse={idx % 2 === 1}
+          />
+        </div>
       ))}
     </ol>
   );
