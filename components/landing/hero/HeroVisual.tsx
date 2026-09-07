@@ -36,110 +36,86 @@ export function HeroVisual({
             <stop offset="60%" stopColor="#22d3ee" stopOpacity="0.05" />
             <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
           </radialGradient>
-          <linearGradient id="hv-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#67e8f9" />
+          <linearGradient id="hv-card" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0b1124" />
+            <stop offset="100%" stopColor="#070b1c" />
+          </linearGradient>
+          <linearGradient id="hv-stroke" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#22d3ee" />
             <stop offset="100%" stopColor="#8b5cf6" />
           </linearGradient>
-          <linearGradient id="hv-card" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.08)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0.02)" />
-          </linearGradient>
-          <pattern
-            id="hv-grid"
-            x="0"
-            y="0"
-            width="22"
-            height="22"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M22 0 L0 0 0 22"
-              fill="none"
-              stroke="rgba(148,163,184,0.10)"
-              strokeWidth="0.5"
-            />
-          </pattern>
         </defs>
 
-        {/* Background */}
-        <rect width="600" height="600" fill="transparent" />
-        <rect width="600" height="600" fill="url(#hv-grid)" />
-        <circle cx="300" cy="300" r="240" fill="url(#hv-glow)" />
+        {/* Soft glow */}
+        <circle cx="300" cy="300" r="260" fill="url(#hv-glow)" />
 
-        {/* Orbits */}
-        <g
-          fill="none"
-          stroke="url(#hv-stroke)"
-          strokeWidth="1.2"
-          opacity="0.85"
-        >
-          <ellipse cx="300" cy="300" rx="220" ry="80" />
-          <ellipse
-            cx="300"
-            cy="300"
-            rx="220"
-            ry="80"
-            transform="rotate(60 300 300)"
-          />
-          <ellipse
-            cx="300"
-            cy="300"
-            rx="220"
-            ry="80"
-            transform="rotate(120 300 300)"
-          />
-        </g>
-
-        {/* Nucleus */}
-        <circle cx="300" cy="300" r="28" fill="#0a0f1f" />
-        <circle
-          cx="300"
-          cy="300"
-          r="28"
-          fill="none"
-          stroke="url(#hv-stroke)"
-          strokeWidth="2"
-        />
-        <circle cx="300" cy="300" r="6" fill="#22d3ee" />
-
-        {/* Electrons / nodes */}
-        <g fill="#22d3ee">
-          <circle cx="520" cy="300" r="5" />
-          <circle cx="80" cy="300" r="5" />
-          <circle cx="410" cy="170" r="5" />
-          <circle cx="190" cy="430" r="5" />
-          <circle cx="410" cy="430" r="5" />
-          <circle cx="190" cy="170" r="5" />
-        </g>
-
-        {/* Code-surface card */}
+        {/* Code surface card */}
         <g>
           <rect
             x="120"
-            y="430"
+            y="170"
             width="360"
-            height="120"
-            rx="14"
+            height="260"
+            rx="18"
             fill="url(#hv-card)"
-            stroke="rgba(148,163,184,0.25)"
+            stroke="rgba(148,163,184,0.2)"
+            strokeWidth="1"
           />
-          <g fontFamily="JetBrains Mono, monospace" fontSize="11">
-            <circle cx="138" cy="450" r="4" fill="#ef4444" opacity="0.7" />
-            <circle cx="152" cy="450" r="4" fill="#f59e0b" opacity="0.7" />
-            <circle cx="166" cy="450" r="4" fill="#10b981" opacity="0.7" />
-            <text x="138" y="480" fill="#94a3b8">
-              $ helix plan "add OAuth login"
-            </text>
-            <text x="138" y="500" fill="#67e8f9">
-              → 4 atomic units
-            </text>
-            <text x="138" y="520" fill="#c084fc">
-              ✓ unit 1/4 — tests pass
-            </text>
-            <text x="138" y="540" fill="#94a3b8">
-              … awaiting review
-            </text>
+          {/* Window dots */}
+          <circle cx="142" cy="192" r="5" fill="#f87171" opacity="0.7" />
+          <circle cx="158" cy="192" r="5" fill="#facc15" opacity="0.7" />
+          <circle cx="174" cy="192" r="5" fill="#34d399" opacity="0.7" />
+          {/* Code lines */}
+          <g opacity="0.85">
+            <rect x="140" y="220" width="160" height="6" rx="3" fill="#22d3ee" />
+            <rect x="140" y="238" width="220" height="6" rx="3" fill="#64748b" />
+            <rect x="156" y="256" width="140" height="6" rx="3" fill="#8b5cf6" />
+            <rect x="156" y="274" width="200" height="6" rx="3" fill="#64748b" />
+            <rect x="156" y="292" width="120" height="6" rx="3" fill="#22d3ee" />
+            <rect x="140" y="310" width="240" height="6" rx="3" fill="#64748b" />
+            <rect x="156" y="328" width="160" height="6" rx="3" fill="#8b5cf6" />
+            <rect x="140" y="346" width="200" height="6" rx="3" fill="#64748b" />
+            <rect x="140" y="380" width="80" height="20" rx="6" fill="#22d3ee" opacity="0.9" />
           </g>
+        </g>
+
+        {/* Orbit rings */}
+        <g className="helix-orbit-slow" style={{ transformOrigin: "300px 300px" }}>
+          <ellipse
+            cx="300"
+            cy="300"
+            rx="240"
+            ry="90"
+            fill="none"
+            stroke="url(#hv-stroke)"
+            strokeWidth="1.5"
+            opacity="0.6"
+          />
+        </g>
+        <g className="helix-orbit" style={{ transformOrigin: "300px 300px" }}>
+          <ellipse
+            cx="300"
+            cy="300"
+            rx="200"
+            ry="70"
+            fill="none"
+            stroke="url(#hv-stroke)"
+            strokeWidth="1.2"
+            opacity="0.4"
+            transform="rotate(35 300 300)"
+          />
+        </g>
+
+        {/* Atom nucleus */}
+        <circle cx="300" cy="300" r="14" fill="#22d3ee" />
+        <circle cx="300" cy="300" r="22" fill="none" stroke="#22d3ee" strokeOpacity="0.4" strokeWidth="1" />
+
+        {/* Orbiting units */}
+        <g className="helix-orbit" style={{ transformOrigin: "300px 300px" }}>
+          <circle cx="540" cy="300" r="6" fill="#8b5cf6" />
+        </g>
+        <g className="helix-orbit-slow" style={{ transformOrigin: "300px 300px" }}>
+          <circle cx="60" cy="300" r="5" fill="#22d3ee" />
         </g>
       </svg>
     </div>

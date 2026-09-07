@@ -1,12 +1,12 @@
 // helix: components/sections/SocialProof.tsx
 /**
+ * @helix:story USER-303000
  * @helix:story USER-349000
  *
  * SocialProof section — trust strip rendered just below the Hero.
- * Shows lightweight "used at" logos + a one-line endorsement, then
- * a four-metric strip. Designed to build credibility fast.
+ * Shows lightweight "used at" wordmarks + a one-line endorsement,
+ * designed to build credibility fast. Pure server render.
  */
-
 import type { ReactElement } from "react";
 
 import { Container } from "@/components/ui/Container";
@@ -35,7 +35,7 @@ export function SocialProof(): ReactElement {
       <Container>
         <h2
           id="social-proof-heading"
-          className="text-center text-xs font-medium uppercase tracking-widest text-ink-400"
+          className="text-center text-xs font-medium uppercase tracking-widest text-slate-400"
         >
           Trusted by teams shipping faster with Helix
         </h2>
@@ -47,7 +47,7 @@ export function SocialProof(): ReactElement {
             <li
               key={logo.label}
               className={cn(
-                "text-xl text-ink-200 opacity-70 transition hover:opacity-100",
+                "text-xl text-slate-200 opacity-70 transition hover:opacity-100",
                 logo.className,
               )}
             >

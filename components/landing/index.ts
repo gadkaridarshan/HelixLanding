@@ -1,5 +1,6 @@
 // helix: components/landing/index.ts
 /**
+ * @helix:story USER-303000
  * @helix:story USER-986000
  *
  * Composition root for the `components/landing` landing-page tree.
@@ -14,3 +15,4 @@ export * from "@/components/landing/social-proof";
 export * from "@/components/landing/stats-bar";
 export * from "@/components/landing/faq";
 export * from "@/components/landing/final-cta";
+export * from "@/components/landing/footer";

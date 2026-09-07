@@ -1,9 +1,9 @@
-// helix: components/sections/StatsBar.tsx
+// helix: components/landing/stats-bar/StatsBar.tsx
 /**
  * @helix:story USER-303000
  *
- * StatsBar — quick metric strip that sits directly below the Hero. Pure
- * server render, no client state.
+ * StatsBar — quick metric strip that sits directly below the Hero.
+ * Pure server render, no client state.
  */
 import * as React from "react";
 

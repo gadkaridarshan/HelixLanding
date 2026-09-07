@@ -1,4 +1,4 @@
-// helix: components/sections/FinalCTA.tsx
+// helix: components/landing/final-cta/FinalCTA.tsx
 /**
  * @helix:story USER-303000
  *
