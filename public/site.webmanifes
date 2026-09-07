@@ -1,33 +1,25 @@
 {
-  "name": "Helix — Atomic work-breakdown for AI coding agents",
+  "name": "Helix — Atomic work breakdown for AI coding agents",
   "short_name": "Helix",
-  "description": "Atomic work-breakdown orchestrator for AI coding agents. Decompose prompts, execute units in dependency order, verify against your repo, ship small reviewable PRs.",
+  "description": "The orchestrator for AI coding agents. Decompose any goal into reviewable, atomic PRs.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#020617",
   "theme_color": "#020617",
-  "lang": "en-US",
-  "categories": ["developer", "productivity", "utilities"],
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/og.svg",
-      "sizes": "1200x630",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "src": "/apple-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
     }
-  ]
+  ],
+  "categories": ["developer", "productivity", "utilities"]
 }

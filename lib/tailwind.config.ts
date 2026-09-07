@@ -1,28 +1,30 @@
-// helix: tailwind.config.ts
 /**
  * @helix:story USER-63000
  *
- * Tailwind CSS configuration for the Helix landing site.
+ * Tailwind config — Tailwind v4 reads tokens from
+ * `app/globals.css` (`@theme` block) and ignores this file for
+ * token registration. We keep a minimal stub so any tool that
+ * introspects `tailwind.config.*` (older editors, docs generators,
+ * or the rare plugin that still requires it) finds the file.
  *
- * Tailwind v4 reads its design tokens from the `@theme` block in
- * `app/globals.css`. This file exists so older tooling (IDE
- * intellisense, class-name autocompletion, third-party plugins)
- * keeps working without warning. The actual token values live in
- * CSS so they are the single source of truth.
+ * Do NOT add theme tokens here — they belong in
+ * `app/globals.css` under `@theme`.
  */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./app/**/*.{ts,tsx,js,jsx,md,mdx}",
-    "./components/**/*.{ts,tsx,js,jsx,md,mdx}",
-    "./content/**/*.{ts,tsx,js,jsx,json,md,mdx}",
-    "./lib/**/*.{ts,tsx,js,jsx,md,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./content/**/*.{js,ts,jsx,tsx,mdx,md,json}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };
 
 export default config;

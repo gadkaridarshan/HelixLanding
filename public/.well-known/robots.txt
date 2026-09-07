@@ -1,0 +1,62 @@
+## Deploying to Vercel
+
+### Option A — CLI (recommended for first deploy)
+
+1. **Install the Vercel CLI** (if you don't already have it)
+
+    ```bash
+    npm i -g vercel
+    ```
+
+2. **Log in**
+
+    ```bash
+    vercel login
+    ```
+
+3. **Link the project** (one-time)
+
+    ```bash
+    vercel link
+    ```
+
+    Accept the defaults. This creates `.vercel/project.json`.
+
+4. **Deploy to production**
+
+    ```bash
+    vercel --prod
+    ```
+
+    Vercel will run `npm install`, `next build`, and serve from `.next/`. The `vercel.json` at the repo root sets framework, output directory, and production headers.
+
+5. **Verify the deployment**
+
+    ```bash
+    curl -sI https://<your-project>.vercel.app/ | head -n 1
+    curl -s  https://<your-project>.vercel.app/sitemap.xml | head -n 5
+    curl -s  https://<your-project>.vercel.app/robots.txt
+    ```
+
+### Option B — Git integration
+
+1. Push the repo to GitHub/GitLab/Bitbucket.
+2. Import the repo in the Vercel dashboard (<https://vercel.com/new>).
+3. Vercel auto-detects Next.js, picks up `vercel.json`, and uses `next build`.
+4. Every push to `main` triggers a production deploy. Every PR gets a preview URL.
+
+### Custom domain
+
+Set `NEXT_PUBLIC_BRAND_URL=https://yourdomain.com` in **Project Settings → Environment Variables**, then add the domain under **Settings → Domains**. `metadataBase`, the sitemap, canonical URLs, and OG image tags all pick up the override automatically.
+
+## Environment variables
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `NEXT_PUBLIC_BRAND_URL` | No | `https://helix-ai-orchestrator.vercel.app` | Canonical production URL. Used for `metadataBase`, sitemap, canonical link, OG tags. |
+
+All other brand fields (name, tagline, description, GitHub URL, contact email, OG image path) are compile-time constants in `lib/brand.ts`.
+
+## Content management
+
+Marketing copy lives in `content/*.json`. Each section consumes its own JSON file at build time — there is no CMS, no API, and no runtime cost. To change copy:

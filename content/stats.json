@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Trusted by teams shipping with Helix",
+  "items": [
+    {
+      "label": "Atomic PRs shipped",
+      "value": "12,400",
+      "suffix": "+"
+    },
+    {
+      "label": "Repos decomposed",
+      "value": "320"
+    },
+    {
+      "label": "Agent-hours saved",
+      "value": "48k",
+      "suffix": "h"
+    },
+    {
+      "label": "Median PR review",
+      "value": "14",
+      "suffix": "min"
+    }
+  ]
+}

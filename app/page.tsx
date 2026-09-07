@@ -1,28 +1,55 @@
-The canonical production URL for **this** live site is defined in
-`lib/brand.ts` (`brand.url`). It is **not** the reference URL listed
-at the top of this README — that one points only to an external
-visual reference and is not deployed from this repository.
+// helix: app/page.tsx
+/**
+ * @helix:story USER-34000
+ *
+ * Home page — composes every marketing section in narrative order so
+ * a visitor evaluates the full Helix AI orchestrator story end-to-end
+ * before the final CTA.
+ *
+ * Render order (top-to-bottom):
+ *   1. Navbar        — sticky brand chrome + early-access CTA
+ *   2. Hero          — above-the-fold value prop + atom/orbit visual
+ *   3. StatsBar      — credibility numbers
+ *   4. Features      — seven-card capability grid
+ *   5. HowItWorks    — 3-step orchestration flow
+ *   6. Personas      — role-targeted value props (tab switcher island)
+ *   7. FAQ           — objections / clarifications
+ *   8. FinalCTA      — closing conversion block
+ *   9. Footer        — site map + legal + social
+ *
+ * Each section owns its own copy via `content/*.json` so marketing
+ * can iterate without touching this file. This page is a pure server
+ * component — the only client islands live inside Personas
+ * (keyboard-navigable role switcher) and any explicitly-marked
+ * interactive sections downstream.
+ */
 
-## Project layout
+import * as React from "react";
 
-- `app/` — Next.js App Router entry (layout, pages, global styles)
-- `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
-- `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
-- `components/sections/final-cta/` — Canonical FinalCTA band (USER-63000).
-- `components/sections/footer/` — Canonical site footer (USER-63000).
-- `components/ui/` — Shared primitives (`Container`, `Button`, `cn`).
-- `content/` — Structured content (copy, FAQs, feature data)
-- `lib/` — Shared utilities and brand constants (`lib/brand.ts`)
-- `public/` — Static assets (favicon, OG image, marketing imagery)
-- `vercel.json` — Vercel project config (framework, headers, cache).
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { StatsBar } from "@/components/sections/StatsBar";
+import { Features } from "@/components/sections/Features";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Personas } from "@/components/sections/Personas";
+import { FAQ } from "@/components/sections/FAQ";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Footer } from "@/components/sections/Footer";
 
-## Reference vs. live site — at a glance
-
-| Label               | URL                                          | What it is                                                                 |
-| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
-| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
-| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
-
-## License
-
-See repository metadata.
+export default function HomePage(): React.ReactElement {
+  return (
+    <>
+      <Navbar />
+      <main id="main" className="relative">
+        <Hero />
+        <StatsBar />
+        <Features />
+        <HowItWorks />
+        <Personas />
+        <FAQ />
+        <FinalCTA />
+      </main>
+      <Footer />
+    </>
+  );
+}

@@ -1,22 +1,24 @@
-// helix: next.config.mjs
 /**
  * @helix:story USER-63000
  *
- * Next.js configuration for the Helix landing site.
+ * Next.js 16 configuration. Marketing site is a static-rendered
+ * App Router project — no image domains, no rewrites, no
+ * experimental flags beyond the defaults. Kept minimal so the
+ * build is reproducible on Vercel + locally.
  *
- * - `reactStrictMode`: enables extra dev-time correctness checks.
- * - `poweredByHeader`: disabled so the `X-Powered-By` header doesn't
- *   leak framework info on the marketing surface.
- * - `experimental.optimizePackageImports`: keeps the Tailwind / React
- *   build graphs lean for Vercel's edge cache.
+ * Tailwind v4 handles all design tokens via `app/globals.css`,
+ * so no JS Tailwind config is required for token registration.
  */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  experimental: {
-    optimizePackageImports: ["clsx", "tailwind-merge"],
-  },
+  // Production source maps off — keep artifacts small for the
+  // marketing surface.
+  productionBrowserSourceMaps: false,
+  // Compress responses served by Next.js (Vercel already adds its
+  // own edge gzip, but this covers local `next start` too).
+  compress: true,
 };
 
 export default nextConfig;

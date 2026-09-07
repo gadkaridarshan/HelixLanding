@@ -1,11 +1,8 @@
-// helix: components/ui/Container.tsx
 /**
- * @helix:story USER-63000
+ * @helix:story USER-604000
  *
- * Container — page-width primitive that constrains content to a
- * readable max width with consistent horizontal padding. Used by
- * every section so the layout grid stays uniform across the
- * marketing surface.
+ * Container — layout primitive that constrains page content
+ * to a responsive max-width with consistent horizontal padding.
  *
  * Pure server component.
  */
@@ -13,27 +10,36 @@ import * as React from "react";
 
 import { cn } from "@/components/ui/cn";
 
-export interface ContainerProps {
-  className?: string;
-  children: React.ReactNode;
-  as?: keyof React.JSX.IntrinsicElements;
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  as?: "div" | "section" | "article" | "main" | "header" | "footer";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
+const sizeMap: Record<NonNullable<ContainerProps["size"]>, string> = {
+  sm: "max-w-3xl",
+  md: "max-w-5xl",
+  lg: "max-w-6xl",
+  xl: "max-w-7xl",
+};
+
 export function Container({
+  as: Tag = "div",
+  size = "lg",
   className,
   children,
-  as: Tag = "div",
+  ...rest
 }: ContainerProps): React.ReactElement {
-  const Component = Tag as React.ElementType;
   return (
-    <Component
+    <Tag
       className={cn(
-        "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
+        "mx-auto w-full px-4 sm:px-6 lg:px-8",
+        sizeMap[size],
         className,
       )}
+      {...rest}
     >
       {children}
-    </Component>
+    </Tag>
   );
 }
 

@@ -1,4 +1,3 @@
-// helix: app/robots.ts
 import type { MetadataRoute } from "next";
 
 import { brand } from "@/lib/brand";
@@ -6,9 +5,12 @@ import { brand } from "@/lib/brand";
 /**
  * @helix:story USER-915000
  *
- * Robots — declares that the entire site is crawlable and points
- * crawlers at the sitemap so search engines can index the production
- * site. Brand URL is the source of truth.
+ * Robots — Next.js App Router file-based convention. Renders the
+ * `/robots.txt` endpoint at the site root using `MetadataRoute.Robots`.
+ *
+ * Keeps the sitemap URL in lockstep with `brand.url` so a custom
+ * domain (via `NEXT_PUBLIC_BRAND_URL`) does not strand crawlers on
+ * the wrong host.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -16,7 +18,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
       },
     ],
     sitemap: `${brand.url}/sitemap.xml`,

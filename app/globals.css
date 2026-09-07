@@ -1,21 +1,43 @@
-// helix: app/globals.css
 /**
  * @helix:story USER-63000
  *
- * Global stylesheet for the Helix landing site.
+ * globals.css — Tailwind v4 entry point + brand token surface.
  *
- * - Tailwind v4 entry point (`@import "tailwindcss"`).
- * - Defines brand color tokens (ink / brand / accent / aurora) used
- *   throughout the marketing surface as Tailwind utility classes.
- * - Sets the global body background to a polished non-flat helix
- *   gradient — radial cyan + violet glows over deep slate, with a
- *   subtle grid texture overlay so the page never looks unfinished.
- * - Provides a serif display font stack for marketing headlines and
- *   a JetBrains Mono stack for code-flavored copy.
+ * Tailwind v4 uses CSS-first configuration: tokens are declared
+ * inside `@theme` and consumed as utilities (`bg-ink-950`,
+ * `text-brand-400`, etc.). No `tailwind.config.js` is required
+ * for token registration, but we keep the PostCSS pipeline
+ * (`@tailwindcss/postcss`) wired up via `postcss.config.js`.
+ *
+ * Layer order (Tailwind v4):
+ *   1. `@import "tailwindcss"` — base + components + utilities
+ *   2. `@theme`                  — design tokens (overrides + new)
+ *   3. `@layer base`             — element-level resets
+ *   4. `@layer components`       — reusable component classes
+ *
+ * The palette below defines the Helix brand surface:
+ *   • `ink-*`    — neutral text + surface scale (deep dark)
+ *   • `brand-*`  — primary cyan accent (CTAs, links)
+ *   • `accent-*` — violet/purple highlight (personas)
+ *   • `aurora-*` — multi-hue gradient stops (hero glows)
  */
+
 @import "tailwindcss";
 
+/* -------------------------------------------------------------------------- */
+/* Theme tokens                                                                */
+/* -------------------------------------------------------------------------- */
+
 @theme {
+  /* Fonts — wired into `app/layout.tsx` via `--font-sans` / `--font-mono` */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Brand color tokens — referenced by Tailwind utilities
+     (e.g. `bg-ink-950`, `text-brand-400`). Names follow the
+     standard Tailwind numeric scale. */
   --color-ink-50: #f8fafc;
   --color-ink-100: #f1f5f9;
   --color-ink-200: #e2e8f0;
@@ -36,84 +58,158 @@
   --color-brand-500: #06b6d4;
   --color-brand-600: #0891b2;
   --color-brand-700: #0e7490;
-  --color-brand-800: #155e75;
-  --color-brand-900: #164e63;
 
   --color-accent-300: #c4b5fd;
   --color-accent-400: #a78bfa;
   --color-accent-500: #8b5cf6;
   --color-accent-600: #7c3aed;
 
-  --color-aurora-400: #f0abfc;
-  --color-aurora-500: #e879f9;
+  --color-aurora-cyan: #22d3ee;
+  --color-aurora-violet: #8b5cf6;
+  --color-aurora-rose: #f472b6;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* Background canvas — used by the body in `app/layout.tsx` */
+  --color-background: #020617;
+  --color-foreground: #f1f5f9;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Base resets                                                                 */
+/* -------------------------------------------------------------------------- */
+
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: rgb(255 255 255 / 0.1);
+  }
+
   html {
-    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    background-color: var(--color-background);
   }
 
   body {
-    background-color: #020617;
-    background-image:
-      radial-gradient(
-        ellipse 80% 60% at 20% 0%,
-        rgba(34, 211, 238, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 70% 60% at 80% 10%,
-        rgba(167, 139, 250, 0.16),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 90% 70% at 50% 100%,
-        rgba(232, 121, 249, 0.10),
-        transparent 60%
-      ),
-      linear-gradient(180deg, #020617 0%, #0b1120 50%, #020617 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-  }
-
-  /* Subtle grid texture overlay so the page never reads as flat */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     font-family: var(--font-sans);
-    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
   }
 
+  /* Focus ring — visible without being noisy */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgb(34 211 238 / 0.35);
+    color: #f8fafc;
+  }
+
+  /* Scrollbar polish (WebKit + Firefox) */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #020617;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 8px;
+    background: rgb(148 163 184 / 0.25);
+    border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: rgb(148 163 184 / 0.45);
+  }
+  * {
+    scrollbar-color: rgb(148 163 184 / 0.25) transparent;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Non-flat background surface                                                 */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The marketing site uses a deep slate base + two soft glows
+ * (cyan + violet) anchored to the top + a faint conic gradient
+ * behind the hero. The result reads as "glass on aurora" — never
+ * a flat single color.
+ *
+ * `body::before` is fixed and sits behind everything via `-z-10`,
+ * so it survives scrolling without parallax jitter. Pointer events
+ * are disabled so the surface never intercepts clicks.
+ */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      900px circle at 15% 0%,
+      rgba(34, 211, 238, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      800px circle at 85% 10%,
+      rgba(139, 92, 246, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      700px circle at 50% 100%,
+      rgba(244, 114, 182, 0.10),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #020617 0%, #0b1220 100%);
+}
+
+/* Subtle grid texture (6% opacity) for the hero — adds depth without noise */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(
+    ellipse 60% 50% at 50% 30%,
+    black,
+    transparent 80%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 50% at 50% 30%,
+    black,
+    transparent 80%
+  );
+}
+
+/* Reduced motion — kill the smooth-scroll + transitions for users who
+   request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

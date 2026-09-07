@@ -1,117 +1,92 @@
-<!-- helix: README.md -->
 # Helix Landing
 
 Marketing site for **Helix** — the atomic work-breakdown orchestrator for AI coding agents.
 
-> **Important — this repo is the live site for this workspace.** The canonical production URL for this product is configured in `lib/brand.ts` (`brand.url`). The URL below is **only** a visual / brand reference and is **not** deployed from this repository.
->
-> 🔗 **Reference site** (visual / brand reference only — **not** this product's live site):
-> <https://helix-ai-orchestrator.vercel.app>
->
-> Source: <https://github.com/gadkaridarshan/Helix>
+> The canonical production URL is configured in `lib/brand.ts` (`brand.url`). Override it via the `NEXT_PUBLIC_BRAND_URL` env var if you ship to a custom domain. The production site lives at **<https://helix-ai-orchestrator.vercel.app/>**.
 
-## What this site is
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-149eca?logo=react)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)](https://www.typescriptlang.org)
 
-A standalone Next.js (App Router) marketing site for Helix, the AI coding orchestrator that:
+---
 
-- Decomposes every prompt into atomic, reviewable units.
-- Executes units in order with explicit dependencies.
-- Verifies each unit against the rest of your repo (types, tests, lint).
-- Produces small, reviewable PRs instead of one sprawling diff.
+## What is this?
 
-## Sections shipped
+A single-page, server-rendered marketing site for the **Helix AI Orchestrator** ([live site](https://helix-ai-orchestrator.vercel.app/), [GitHub](https://github.com/gadkaridarshan/Helix)). Helix decomposes a natural-language goal into dependency-aware, atomic PRs, runs them in isolated worktrees, and ships review-ready code.
 
-1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
-2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
-3. **StatsBar** — quick metric strip.
-4. **Features** — six capability tiles with icons.
-5. **HowItWorks** — three-step plan → execute → verify walkthrough.
-6. **Personas** — solo founders, platform teams, OSS maintainers.
-7. **FinalCTA** — gradient panel closing call-to-action.
-8. **FAQ** — native `<details>` disclosure, fully accessible, no client JS.
-9. **Footer** — brand mark, secondary nav, copyright.
+This repo ships **only the marketing surface** — the orchestrator engine itself lives in the [Helix monorepo](https://github.com/gadkaridarshan/Helix).
+
+## Features
+
+- 🚀 **Static-first** Next.js 16 App Router — zero client JS on the chrome, only one small client island (Personas tabs).
+- 🎨 **Tailwind v4** CSS-first tokens — `ink-*`, `brand-*`, `accent-*`, `aurora-*` palettes, no JS Tailwind config file.
+- 🔍 **Production SEO** — full Open Graph, Twitter Card, JSON-LD-ready metadata, sitemap, robots, web manifest.
+- ♿ **Accessible** — skip-to-content link, keyboard-navigable Personas, focus-visible rings, semantic landmarks.
+- 🛡️ **Hardened** — `vercel.json` adds HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, nosniff.
+- 📦 **One-step deploy** — `vercel --prod` is all you need; everything else is config-free.
 
 ## Prerequisites
 
-- **Node.js** ≥ 20.x
-- **npm** ≥ 10.x (or pnpm / yarn — commands below use npm)
-- A Vercel account (only required for deployment)
+- **Node.js 18.18+** (Node 20 LTS recommended)
+- **npm 9+** (or pnpm / yarn — examples use npm)
+- A [Vercel](https://vercel.com) account if you plan to deploy with `vercel --prod`
+- Git (for cloning + pushing to trigger Vercel git deployments)
 
-## Quick start
+Verify your toolchain:
+
+```bash
+node --version    # v18.18+ or v20+
+npm --version     # 9+
+git --version
+```
+
+## Local development
 
 1. **Install dependencies**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-2. **Run the dev server**
+2. **Configure environment (optional)**
 
-   ```bash
-   npm run dev
-   ```
+    Defaults already match `lib/brand.ts`. Copy the template only if you want to override the canonical URL:
 
-   Open <http://localhost:3000> — the landing page hot-reloads on save.
+    ```bash
+    cp .env.example .env.local
+    ```
 
-3. **Type-check the project**
+    Edit `.env.local` and set `NEXT_PUBLIC_BRAND_URL` to your preview/production domain.
 
-   ```bash
-   npm run type-check
-   ```
+3. **Start the dev server**
 
-   Should report `0 errors`.
+    ```bash
+    npm run dev
+    ```
 
-4. **Production build**
+    Open <http://localhost:3000>.
 
-   ```bash
-   npm run build
-   npm run start
-   ```
+4. **Verify success checks**
 
-   `npm run start` boots the optimized build on port 3000.
+    - The home page loads with the navbar, hero, StatsBar, Features, HowItWorks, Personas, FAQ, FinalCTA, and footer.
+    - The browser tab title is `Helix — Atomic work breakdown for AI coding agents`.
+    - View source: you see `<link rel="canonical">`, OG and Twitter `<meta>` tags, and a sitemap link.
+    - `/sitemap.xml` returns a valid `sitemap` XML response.
+    - `/robots.txt` returns the production allow/deny rules.
 
-## Deploy to Vercel
+5. **Lint and type-check**
 
-This repo is a standard Next.js (App Router) project and is the **live site** for this workspace — distinct from the reference demo linked above. It works out-of-the-box on Vercel:
+    ```bash
+    npm run lint
+    npm run typecheck
+    ```
 
-### Option A — Vercel CLI (recommended for this repo)
+6. **Production build**
 
-```bash
-npm i -g vercel
-vercel login
-vercel        # preview deployment
-vercel --prod # production deployment
-```
+    ```bash
+    npm run build
+    npm run start     # serves the built site on http://localhost:3000
+    ```
 
-### Option B — Git integration
-
-1. Push the repo to GitHub/GitLab/Bitbucket.
-2. Visit <https://vercel.com/new> and **Import Project**.
-3. Vercel auto-detects Next.js. Leave defaults:
-   - Build command: `next build`
-   - Output: `.next`
-   - Install command: `npm install`
-4. Click **Deploy**. The first build takes ~1–2 minutes; subsequent deploys are cached.
-
-> The canonical production URL for **this** live site is defined in `lib/brand.ts` (`brand.url`). It is **not** the reference URL listed at the top of this README — that one points only to an external visual reference and is not deployed from this repository.
-
-## Project layout
-
-- `app/` — Next.js App Router entry (layout, pages, global styles)
-- `components/landing/` — Canonical section implementations (Hero, Features, HowItWorks, Personas, FinalCTA, FAQ, Navbar, Footer).
-- `components/sections/` — Re-export shims so both `@/components/sections/*` and `@/app/components/sections/*` resolve to the same components.
-- `components/ui/` — Shared primitives (`Container`, `cn`).
-- `content/` — Structured content (copy, FAQs, feature data)
-- `lib/` — Shared utilities and brand constants (`lib/brand.ts`)
-- `public/` — Static assets (favicon, OG image, marketing imagery)
-
-## Reference vs. live site — at a glance
-
-| Label               | URL                                          | What it is                                                                 |
-| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
-| **Reference site**  | <https://helix-ai-orchestrator.vercel.app>   | External visual / brand reference only. **Not** deployed from this repo.  |
-| **Live site**       | `brand.url` (see `lib/brand.ts`)             | This repo, deployed to its own domain once configured in `lib/brand.ts`.   |
-
-## License
-
-See repository metadata.
+## Project structure

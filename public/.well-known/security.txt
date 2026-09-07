@@ -1,0 +1,4 @@
+Contact: mailto:hello@helix-ai-orchestrator.vercel.app
+Expires: 2027-12-31T23:59:59z
+Preferred-Languages: en
+Canonical: https://helix-ai-orchestrator.vercel.app/.well-known/security.txt

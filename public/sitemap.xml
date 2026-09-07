@@ -1,41 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  helix: public/sitemap.xml
-  @helix:story USER-915000
+## Local development
 
-  Static sitemap for the Helix landing site. The App Router also
-  exposes a dynamic `app/sitemap.ts` route at `/sitemap.xml`, which
-  takes precedence at runtime. This file is committed as a
-  crawl-friendly fallback so that:
+1. **Install dependencies**
 
-    • Static crawlers and link-checkers that hit `/sitemap.xml`
-      directly see a valid XML document even before the Next.js
-      server has booted.
-    • The Vercel edge cache can serve the file verbatim from
-      `public/` without invoking a server function.
-    • Local preview environments (`npm run start`) without an env
-      override still expose a sensible default URL.
+    ```bash
+    npm install
+    ```
 
-  The canonical URL is sourced from `lib/brand.ts` (`brand.url`)
-  and can be overridden at runtime via `NEXT_PUBLIC_BRAND_URL`.
+2. **Configure environment (optional)**
 
-  When the App Router sitemap is active, search engines should
-  prefer it. This file is intentionally minimal and mirrors the
-  same single-URL surface as `app/sitemap.ts`.
--->
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
->
-  <url>
-    <loc>https://helix-ai-orchestrator.vercel.app/</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link
-      rel="alternate"
-      hreflang="en-US"
-      href="https://helix-ai-orchestrator.vercel.app/"
-    />
-  </url>
-</urlset>
+    Defaults already match `lib/brand.ts`. Copy the template only if you want to override the canonical URL:
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    Edit `.env.local` and set `NEXT_PUBLIC_BRAND_URL` to your preview/production domain.
+
+3. **Start the dev server**
+
+    ```bash
+    npm run dev
+    ```
+
+    Open <http://localhost:3000>.
+
+4. **Verify success checks**
+
+    - The home page loads with the navbar, hero, StatsBar, Features, HowItWorks, Personas, FAQ, FinalCTA, and footer.
+    - The browser tab title is `Helix — Atomic work breakdown for AI coding agents`.
+    - View source: you see `<link rel="canonical">`, OG and Twitter `<meta>` tags, and a sitemap link.
+    - `/sitemap.xml` returns a valid `sitemap` XML response.
+    - `/robots.txt` returns the production allow/deny rules.
+
+5. **Lint and type-check**
+
+    ```bash
+    npm run lint
+    npm run typecheck
+    ```
+
+6. **Production build**
+
+    ```bash
+    npm run build
+    npm run start     # serves the built site on http://localhost:3000
+    ```
+
+## Project structure
