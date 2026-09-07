@@ -1,8 +1,8 @@
 # Card Inventory
 
-- Sep 7, 2026, 10:50:07 AM CDT | USER-217000 | in_progress | deployment | Page assembly and Vercel deployment
-- Sep 7, 2026, 10:50:06 AM CDT | USER-23000 | in_progress | development | Helix landing page site
-- Sep 7, 2026, 10:50:06 AM CDT | USER-128000 | in_progress | development | Hero and personas section
+- Sep 7, 2026, 10:51:00 AM CDT | USER-217000 | done | deployment | Page assembly and Vercel deployment
+- Sep 7, 2026, 10:50:27 AM CDT | USER-128000 | in_progress | development | Hero and personas section
+- Sep 7, 2026, 10:50:25 AM CDT | USER-23000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 10:49:42 AM CDT | USER-604000 | done | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 10:49:39 AM CDT | USER-956000 | in_progress | development | FAQ CTA footer and Vercel
 - Sep 7, 2026, 10:49:37 AM CDT | USER-310000 | in_progress | development | Complete Helix landing site

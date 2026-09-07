@@ -1,20 +1,21 @@
 // helix: app/page.tsx
 /**
- * @helix:story USER-604000
+ * @helix:story USER-23000
  *
- * Page — top-level assembly of the Helix marketing site.
+ * Landing page assembly for the Helix AI orchestrator marketing
+ * site. Composes every section in render order so the full page is
+ * auditable from one file.
  *
- * Renders every section in the order visitors will read them:
- *
- *   1. Navbar          — sticky brand + section anchors
- *   2. Hero            — above-the-fold value proposition
- *   3. StatsBar        — quick credibility metric strip
- *   4. Features        — seven core capability cards
- *   5. HowItWorks      — three-step orchestration explainer
- *   6. Personas        — role-targeted value props (tabbed)
- *   7. FAQ             — common objections, answered
- *   8. FinalCTA        — last-mile conversion band
- *   9. Footer          — site-wide links + wordmark
+ * Render order:
+ *   1. Navbar        — sticky brand + section anchors + CTA
+ *   2. Hero          — above-the-fold value prop
+ *   3. StatsBar      — quick metric strip
+ *   4. Features      — seven core capabilities
+ *   5. HowItWorks    — 3-step orchestration flow
+ *   6. Personas      — role-targeted value props
+ *   7. FAQ           — common objections, answered
+ *   8. FinalCTA      — last-mile conversion band
+ *   9. Footer        — site-wide links + wordmark
  *
  * All sections are server components, with their interactive bits
  * (mobile menu, persona tabs) isolated as small `"use client"`
