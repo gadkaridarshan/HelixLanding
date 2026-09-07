@@ -1,47 +1,66 @@
-import { cn } from "@/lib/cn";
-import type { HTMLAttributes } from "react";
+// helix: components/ui/Section.tsx
+import type { HTMLAttributes, ReactNode } from "react";
+import { cn } from "./cn";
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
   id?: string;
-  /** Vertical padding scale */
-  spacing?: "none" | "sm" | "md" | "lg" | "xl";
-  /** Use a translucent panel background instead of fully transparent */
-  panel?: boolean;
+  eyebrow?: string;
+  title?: ReactNode;
+  description?: ReactNode;
+  align?: "left" | "center";
+  children?: ReactNode;
 }
 
-const spacingMap: Record<NonNullable<SectionProps["spacing"]>, string> = {
-  none: "py-0",
-  sm: "py-10 sm:py-14",
-  md: "py-16 sm:py-20",
-  lg: "py-20 sm:py-28",
-  xl: "py-24 sm:py-32",
-};
-
 /**
- * Section — semantic <section> wrapper with consistent vertical rhythm.
- * `panel` adds a subtle translucent surface for contrast on long pages.
+ * `Section` — vertical rhythm wrapper that pairs an optional eyebrow / title /
+ * description block above arbitrary section content. Keeps marketing sections
+ * visually consistent without locking in structure.
  */
 export function Section({
+  id,
+  eyebrow,
+  title,
+  description,
+  align = "center",
   className,
-  spacing = "lg",
-  panel = false,
   children,
-  ...props
+  ...rest
 }: SectionProps) {
   return (
     <section
+      id={id}
       className={cn(
-        "relative w-full",
-        spacingMap[spacing],
-        panel &&
-          "bg-ink-900/40 border-y border-white/5 backdrop-blur-sm",
-        className,
+        "relative py-20 sm:py-24 lg:py-28",
+        className
       )}
-      {...props}
+      {...rest}
     >
+      {(eyebrow || title || description) && (
+        <div
+          className={cn(
+            "mb-12 sm:mb-16 max-w-3xl",
+            align === "center" && "mx-auto text-center"
+          )}
+        >
+          {eyebrow && (
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-violet-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+              {eyebrow}
+            </div>
+          )}
+          {title && (
+            <h2 className="text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
+              {title}
+            </h2>
+          )}
+          {description && (
+            <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+              {description}
+            </p>
+          )}
+        </div>
+      )}
       {children}
     </section>
   );
 }
-
-export default Section;

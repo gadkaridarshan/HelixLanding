@@ -1,75 +1,66 @@
-import { Container } from "@/components/ui/Container";
+// helix: app/components/sections/StatsBar.tsx
+import type { ReactElement } from "react";
+import { Container } from "../ui/Container";
 
-type Stat = {
+/** @helix:story USER-212000 */
+
+interface Stat {
   value: string;
   label: string;
-  description: string;
-};
+  detail: string;
+}
 
 const stats: Stat[] = [
   {
-    value: "Up to 3x",
+    value: "3x",
     label: "Parallel agents",
-    description: "Run multiple language-scoped workers on one task without collisions.",
+    detail: "Run up to three concurrent Helix agents per workspace.",
   },
   {
-    value: "Locked",
-    label: "Language-aware planning",
-    description: "Helix plans in your repo's language before it writes a single file.",
+    value: "100%",
+    label: "Language-locked",
+    detail: "Planning and writes stay inside your repo's stack.",
   },
   {
-    value: "Protected",
-    label: "Write globs",
-    description: "Sensitive paths are off-limits unless you explicitly unlock them.",
+    value: "0",
+    label: "Untracked writes",
+    detail: "Protected globs guard migrations and config files.",
   },
   {
-    value: "Vercel-ready",
-    label: "Deploy in one click",
-    description: "Output is scaffolded, typed, and wired for a single Vercel deploy.",
+    value: "1-click",
+    label: "Vercel deploy",
+    detail: "Ship the landing page, API, and docs from one push.",
   },
 ];
 
-export function StatsBar() {
+export function StatsBar(): ReactElement {
   return (
     <section
-      aria-labelledby="stats-heading"
-      className="relative isolate border-b border-white/5 bg-slate-950/80 py-12 sm:py-16"
+      id="stats"
+      aria-label="Helix proof points"
+      className="relative border-y border-white/10 bg-white/[0.02] py-12 sm:py-14"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,_rgba(139,92,246,0.08),_rgba(56,189,248,0.08),_rgba(236,72,153,0.08))]"
-      />
-      <Container>
-        <h2 id="stats-heading" className="sr-only">
-          Helix at a glance
-        </h2>
-        <dl className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.10),transparent_60%)]" />
+      <Container className="relative">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-violet-400/40 hover:bg-white/[0.06]"
+              className="flex flex-col gap-1 bg-slate-950/60 px-6 py-6 text-center sm:py-8"
             >
-              <dt className="text-xs font-medium uppercase tracking-wider text-slate-400">
+              <span className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                {s.value}
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-violet-300 sm:text-sm">
                 {s.label}
-              </dt>
-              <dd>
-                <p className="mt-2 bg-gradient-to-r from-white via-violet-200 to-sky-200 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
-                  {s.value}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-300">
-                  {s.description}
-                </p>
-              </dd>
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-violet-500/10 blur-2xl transition group-hover:bg-violet-500/20"
-              />
+              </span>
+              <span className="mt-1 text-xs leading-relaxed text-slate-400 sm:text-sm">
+                {s.detail}
+              </span>
             </div>
           ))}
-        </dl>
+        </div>
       </Container>
     </section>
   );
 }
-
-export default StatsBar;
