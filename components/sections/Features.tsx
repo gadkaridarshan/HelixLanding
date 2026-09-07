@@ -1,9 +1,13 @@
 // helix: components/sections/Features.tsx
 /**
- * @helix:story USER-616000
+ * @helix:story USER-507000
  *
- * Features — re-export shim so `@/components/sections/Features` resolves
- * to the canonical implementation.
+ * Features — section-level re-export shim so
+ * `@/components/sections/Features` resolves to the section barrel at
+ * `@/components/sections/features`, which in turn resolves to the
+ * canonical implementation at `@/components/Features`.
  */
-export { Features } from "@/components/Features";
-export { default } from "@/components/Features";
+export {
+  Features,
+  default,
+} from "@/components/sections/features";

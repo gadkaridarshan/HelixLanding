@@ -1,11 +1,10 @@
 // helix: components/ui/cn.ts
 /**
- * @helix:story USER-604000
+ * @helix:story USER-171000
  *
- * cn — tiny class-name joiner built on `clsx` + `tailwind-merge`.
- *
- * `clsx` handles conditional joining; `tailwind-merge` reconciles
- * conflicting Tailwind utilities so the last-wins class wins.
+ * `cn` — small Tailwind class-name composer built on `clsx` and
+ * `tailwind-merge`. Deduplicates conflicting Tailwind classes so the
+ * later (more specific) utility wins.
  */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";

@@ -1,2 +1,119 @@
-npm install
-npm run dev    # http://localhost:3000
+// helix: app/globals.css
+/**
+ * @helix:story USER-63000
+ *
+ * Global stylesheet for the Helix landing site.
+ *
+ * - Tailwind v4 entry point (`@import "tailwindcss"`).
+ * - Defines brand color tokens (ink / brand / accent / aurora) used
+ *   throughout the marketing surface as Tailwind utility classes.
+ * - Sets the global body background to a polished non-flat helix
+ *   gradient — radial cyan + violet glows over deep slate, with a
+ *   subtle grid texture overlay so the page never looks unfinished.
+ * - Provides a serif display font stack for marketing headlines and
+ *   a JetBrains Mono stack for code-flavored copy.
+ */
+@import "tailwindcss";
+
+@theme {
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
+
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+
+  --color-aurora-400: #f0abfc;
+  --color-aurora-500: #e879f9;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #020617;
+    background-image:
+      radial-gradient(
+        ellipse 80% 60% at 20% 0%,
+        rgba(34, 211, 238, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 70% 60% at 80% 10%,
+        rgba(167, 139, 250, 0.16),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 90% 70% at 50% 100%,
+        rgba(232, 121, 249, 0.10),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #020617 0%, #0b1120 50%, #020617 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Subtle grid texture overlay so the page never reads as flat */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "eyebrow": "Ready when you are",
+  "heading": "Ship small, reviewable PRs — starting today.",
+  "description": "Stop accepting sprawling AI diffs. Helix decomposes every prompt into atomic, dependency-aware units, verifies each against your repo, and hands you small PRs you can actually review.",
+  "primary": {
+    "label": "Deploy Helix",
+    "href": "https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgadkaridarshan%2FHelix&project-name=helix-landing"
+  },
+  "secondary": {
+    "label": "Star on GitHub",
+    "href": "https://github.com/gadkaridarshan/Helix"
+  },
+  "footnote": "Free to self-host. No accounts required to try locally."
+}

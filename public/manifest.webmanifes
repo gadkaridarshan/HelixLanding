@@ -1,0 +1,23 @@
+{
+  "name": "Helix — Atomic work-breakdown for AI coding agents",
+  "short_name": "Helix",
+  "description": "The atomic work-breakdown orchestrator for AI coding agents — ship small, reviewable PRs instead of one sprawling diff.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

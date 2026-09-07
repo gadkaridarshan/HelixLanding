@@ -1,3 +1,4 @@
+// helix: app/robots.ts
 import type { MetadataRoute } from "next";
 
 import { brand } from "@/lib/brand";
@@ -5,10 +6,9 @@ import { brand } from "@/lib/brand";
 /**
  * @helix:story USER-915000
  *
- * Robots — allows all crawlers on the canonical landing page and
- * points search engines at the sitemap. The sitemap URL uses the
- * canonical brand URL so it always points at the live site, not a
- * preview deployment.
+ * Robots — declares that the entire site is crawlable and points
+ * crawlers at the sitemap so search engines can index the production
+ * site. Brand URL is the source of truth.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -16,6 +16,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${brand.url}/sitemap.xml`,

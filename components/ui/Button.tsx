@@ -35,7 +35,7 @@ const variantMap: Record<ButtonVariant, string> = {
   secondary:
     "bg-white/5 text-ink-100 ring-1 ring-inset ring-white/15 hover:bg-white/10 hover:ring-white/25",
   ghost:
-    "bg-transparent text-ink-100 hover:bg-white/5",
+    "bg-transparent text-ink-200 hover:bg-white/5 hover:text-ink-50",
 };
 
 const sizeMap: Record<ButtonSize, string> = {
@@ -45,7 +45,7 @@ const sizeMap: Record<ButtonSize, string> = {
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap";
 
 export function Button({
   variant = "primary",
@@ -60,26 +60,23 @@ export function Button({
   const classes = cn(baseClasses, variantMap[variant], sizeMap[size], className);
 
   if (href) {
-    const anchorProps: React.AnchorHTMLAttributes<HTMLAnchorElement> = {
-      href,
-      className: classes,
-      ...(external
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : {}),
-    };
     return (
-      <a {...anchorProps}>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className={classes}
+      >
         {children}
       </a>
     );
   }
 
-  const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {
-    type: type ?? "button",
-    className: classes,
-    ...rest,
-  };
-  return <button {...buttonProps}>{children}</button>;
+  return (
+    <button type={type ?? "button"} className={classes} {...rest}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;

@@ -1,13 +1,17 @@
-// helix: components/sections/personas/PersonasTabs.tsx
 "use client";
 
+// helix: components/sections/personas/PersonasTabs.tsx
 /**
- * @helix:story USER-742000
+ * @helix:story USER-495000
  *
  * PersonasTabs — small client island that swaps the highlighted role.
- * Pure presentational: receives the role list + content map as props,
- * no global state. Keyboard navigable (←/→/Home/End), focus stays on
- * the active tab, and ARIA follows the WAI-ARIA tabs pattern.
+ * Pure presentational: receives the role list as props (no global
+ * state). Keyboard navigable (←/→/Home/End), focus stays on the
+ * active tab, and ARIA follows the WAI-ARIA tabs pattern.
+ *
+ * The panel renderer is injected by the parent server component so
+ * this client island owns zero copy/layout — only the active index
+ * state.
  */
 import * as React from "react";
 
@@ -18,6 +22,14 @@ export interface PersonaContent {
   bullets: ReadonlyArray<string>;
 }
 
+export type PersonaIconName =
+  | "Code2"
+  | "Users"
+  | "Briefcase"
+  | "Cpu"
+  | "Rocket"
+  | "Building2";
+
 export interface PersonaRole {
   /** Stable id used for the key + tabpanel labelling. */
   id: string;
@@ -25,14 +37,8 @@ export interface PersonaRole {
   label: string;
   /** One-line value prop shown beneath the label. */
   valueProp: string;
-  /** Inline-SVG icon name from the icon set in Personas.tsx. */
-  icon:
-    | "Code2"
-    | "Users"
-    | "Briefcase"
-    | "Cpu"
-    | "Rocket"
-    | "Building2";
+  /** Inline-SVG icon name from the shared icon set. */
+  icon: PersonaIconName;
   /** Rich content rendered in the tabpanel. */
   content: PersonaContent;
 }
@@ -41,11 +47,92 @@ export interface PersonasTabsProps {
   roles: ReadonlyArray<PersonaRole>;
   /** Optional id used by the parent <section> for aria-labelledby. */
   labelledById?: string;
+  /** Renderer for the active panel — typically a `<PersonaCard />`. */
+  renderPanel: (role: PersonaRole) => React.ReactNode;
+}
+
+const ICON_STROKE: React.SVGProps<SVGSVGElement> = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.75,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+};
+
+function RoleIcon({
+  name,
+}: {
+  name: PersonaIconName;
+}): React.ReactElement {
+  const common = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    ...ICON_STROKE,
+  } satisfies React.SVGProps<SVGSVGElement>;
+
+  switch (name) {
+    case "Code2":
+      return (
+        <svg {...common}>
+          <path d="M9 8l-4 4 4 4" />
+          <path d="M15 8l4 4-4 4" />
+        </svg>
+      );
+    case "Users":
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="8" r="3" />
+          <path d="M3 20c0-3 2.7-5 6-5s6 2 6 5" />
+          <circle cx="17" cy="9" r="2.5" />
+          <path d="M15 20c.3-2 1.7-3.5 4-3.5s3.5 1.5 3.5 3.5" />
+        </svg>
+      );
+    case "Briefcase":
+      return (
+        <svg {...common}>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M9 7V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2" />
+          <path d="M3 13h18" />
+        </svg>
+      );
+    case "Cpu":
+      return (
+        <svg {...common}>
+          <rect x="6" y="6" width="12" height="12" rx="2" />
+          <rect x="9" y="9" width="6" height="6" rx="1" />
+          <path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" />
+        </svg>
+      );
+    case "Rocket":
+      return (
+        <svg {...common}>
+          <path d="M14 4c4 0 6 2 6 6 0 4-4 8-9 9-2-5-5-9-5-9s4-6 8-6z" />
+          <circle cx="15" cy="9" r="1.5" />
+          <path d="M9 15l-3 3M11 17l-2 4" />
+        </svg>
+      );
+    case "Building2":
+      return (
+        <svg {...common}>
+          <path d="M4 21V8l8-5 8 5v13" />
+          <path d="M9 21v-6h6v6" />
+          <path d="M8 11h2M8 14h2M14 11h2M14 14h2" />
+        </svg>
+      );
+    default: {
+      const exhaustive: never = name;
+      void exhaustive;
+      return <svg {...common} />;
+    }
+  }
 }
 
 export function PersonasTabs({
   roles,
   labelledById,
+  renderPanel,
 }: PersonasTabsProps): React.ReactElement {
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
   const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
@@ -73,108 +160,82 @@ export function PersonasTabs({
           next = last;
           break;
         default:
-          return;
+          break;
       }
-      event.preventDefault();
-      setActiveIndex(next);
-      focusTab(next);
+      if (next !== null) {
+        event.preventDefault();
+        setActiveIndex(next);
+        // Defer focus to next tick so React commits the new active
+        // state before we re-focus the freshly mounted button.
+        window.requestAnimationFrame(() => focusTab(next as number));
+      }
     },
     [focusTab, roles.length],
   );
 
   if (roles.length === 0) {
-    return <div className="text-slate-400">No personas to display.</div>;
+    return <div className="text-center text-ink-300">No personas yet.</div>;
   }
 
-  const active = roles[activeIndex] ?? roles[0];
-  const tablistId = React.useId();
-  const panelId = `${tablistId}-panel`;
+  const active = roles[activeIndex];
+  const tabsId = "personas-tablist";
 
   return (
-    <div className="mt-10 lg:mt-14">
-      {/* Tab list */}
+    <div className="mx-auto max-w-5xl">
       <div
         role="tablist"
-        aria-orientation="horizontal"
-        aria-label={labelledById ? undefined : "Personas"}
-        className="flex flex-wrap justify-center gap-2 sm:gap-3"
+        id={tabsId}
+        aria-label="Personas"
+        aria-labelledby={labelledById}
+        className="flex flex-wrap items-stretch justify-center gap-2 sm:gap-3"
       >
         {roles.map((role, index) => {
           const selected = index === activeIndex;
           return (
             <button
               key={role.id}
-              ref={(el) => {
-                tabRefs.current[index] = el;
+              ref={(node) => {
+                tabRefs.current[index] = node;
               }}
-              type="button"
+              id={`persona-tab-${role.id}`}
               role="tab"
-              id={`${tablistId}-tab-${role.id}`}
+              type="button"
               aria-selected={selected}
-              aria-controls={panelId}
+              aria-controls={`persona-panel-${role.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveIndex(index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
+              onKeyDown={(event) => handleKeyDown(event, index)}
               className={
-                "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 " +
+                "group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition " +
                 (selected
-                  ? "border-cyan-400/60 bg-cyan-400/10 text-white shadow-[0_0_0_1px_rgba(34,211,238,0.35)]"
-                  : "border-white/10 bg-slate-900/40 text-slate-300 hover:border-white/20 hover:text-white")
+                  ? "border-brand-400/60 bg-brand-500/10 text-brand-200 shadow-[0_0_0_1px_rgba(34,211,238,0.25)]"
+                  : "border-white/10 bg-white/5 text-ink-200 hover:bg-white/10 hover:text-ink-50")
               }
             >
               <span
-                aria-hidden="true"
                 className={
-                  "inline-block h-1.5 w-1.5 rounded-full " +
-                  (selected ? "bg-cyan-300" : "bg-slate-500")
+                  "inline-flex h-7 w-7 items-center justify-center rounded-full " +
+                  (selected
+                    ? "bg-brand-500/20 text-brand-300"
+                    : "bg-white/5 text-ink-200 group-hover:text-ink-50")
                 }
-              />
-              {role.label}
+              >
+                <RoleIcon name={role.icon} />
+              </span>
+              <span className="whitespace-nowrap">{role.label}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Panel */}
       <div
+        key={active.id}
+        id={`persona-panel-${active.id}`}
         role="tabpanel"
-        id={panelId}
-        aria-labelledby={`${tablistId}-tab-${active.id}`}
-        tabIndex={0}
-        className="mt-8 sm:mt-10"
+        aria-labelledby={`persona-tab-${active.id}`}
+        className="mt-8"
       >
-        <div className="mx-auto grid max-w-4xl gap-8 rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8 lg:grid-cols-[1fr_1.4fr] lg:gap-10 lg:p-10">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.18em] text-cyan-300/80">
-              Built for
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              {active.label}
-            </h3>
-            <p className="mt-3 text-base text-cyan-300/90">
-              {active.valueProp}
-            </p>
-          </div>
-          <div>
-            <p className="text-base leading-relaxed text-slate-300/90">
-              {active.content.body}
-            </p>
-            <ul
-              role="list"
-              className="mt-5 space-y-2 text-sm text-slate-200/90"
-            >
-              {active.content.bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="mt-1.5 inline-block h-1.5 w-1.5 flex-none rounded-full bg-cyan-300"
-                  />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        {renderPanel(active)}
       </div>
     </div>
   );

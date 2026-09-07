@@ -1,38 +1,55 @@
 {
-  "eyebrow": "Trusted by teams that ship",
-  "heading": "From solo builders to platform teams.",
-  "logos": [
-    { "name": "Vercel", "label": "Vercel" },
-    { "name": "GitHub", "label": "GitHub" },
-    { "name": "Linear", "label": "Linear" },
-    { "name": "Supabase", "label": "Supabase" },
-    { "name": "PlanetScale", "label": "PlanetScale" },
-    { "name": "Render", "label": "Render" }
-  ],
+  "eyebrow": "Trusted by builders",
+  "heading": "Engineers ship faster with Helix",
+  "description": "From solo founders to staff engineers and AI teams, Helix replaces sprawling diffs with small, reviewable PRs grounded in your codebase.",
   "testimonials": [
     {
-      "quote": "Helix turned our 4,000-line migration into a queue of 200-line PRs. Review is finally fun again.",
-      "author": "Priya N.",
-      "role": "Staff Engineer",
-      "company": "Fintech startup"
+      "id": "tp-1",
+      "quote": "Helix turned our AI coding experiments into actual shipping units. Instead of one massive diff, we get 6 to 10 small PRs that each compile, lint, and pass tests in isolation.",
+      "authorName": "Maya O.",
+      "authorRole": "Staff Engineer",
+      "authorCompany": "Series B fintech",
+      "rating": 5
     },
     {
-      "quote": "I ship two features a day from a coffee shop. The atom graph is my project manager.",
-      "author": "Marcus L.",
-      "role": "Solo founder",
-      "company": "Indie SaaS"
+      "id": "tp-2",
+      "quote": "I describe a feature in a sentence and wake up to PRs that respect our existing module boundaries. The atomic work-breakdown is what made Helix click for us.",
+      "authorName": "Devon K.",
+      "authorRole": "Solo Founder",
+      "authorCompany": "B2B SaaS",
+      "rating": 5
     },
     {
-      "quote": "Reviewer load dropped 40% because every PR Helix opens is small enough to actually read.",
-      "author": "Dana K.",
-      "role": "Engineering Manager",
-      "company": "B2B platform"
+      "id": "tp-3",
+      "quote": "My team stopped debating agent prompts and started reviewing PRs. Helix gives every unit its own dependency map, so we finally trust the agent's output.",
+      "authorName": "Priya R.",
+      "authorRole": "Engineering Manager",
+      "authorCompany": "Devtools",
+      "rating": 5
+    },
+    {
+      "id": "tp-4",
+      "quote": "The verification step is the differentiator. Helix checks each unit against types, tests, and lint before it ever shows up in my review queue.",
+      "authorName": "Aaron T.",
+      "authorRole": "Tech Lead",
+      "authorCompany": "Platform team",
+      "rating": 5
+    },
+    {
+      "id": "tp-5",
+      "quote": "We replaced a brittle homegrown orchestrator with Helix in a weekend. The dependency-aware execution is exactly the model our AI workflows needed.",
+      "authorName": "Sana M.",
+      "authorRole": "AI Engineer",
+      "authorCompany": "ML platform",
+      "rating": 5
+    },
+    {
+      "id": "tp-6",
+      "quote": "Replays are the killer feature for me. When a run fails I can re-run a single unit without burning the whole budget on a retry.",
+      "authorName": "Jordan L.",
+      "authorRole": "Founding Engineer",
+      "authorCompany": "Infrastructure startup",
+      "rating": 5
     }
-  ],
-  "stats": [
-    { "value": "10x", "label": "smaller PRs on average" },
-    { "value": "42%", "label": "less reviewer time per change" },
-    { "value": "3.6x", "label": "faster time-to-merge" },
-    { "value": "100%", "label": "auditable, replayable history" }
   ]
 }

@@ -1,11 +1,13 @@
-# robots.txt — Helix Landing
-# Reference site for marketing. Allows all well-behaved crawlers.
+# Helix Landing — robots.txt
+# https://www.robotstxt.org/robotstxt.html
 
 User-agent: *
 Allow: /
 
-# Block noisy / staging paths (none today, but reserved for the future).
+# Block Vercel preview/internal paths from indexing
 Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
 
-# Sitemap location — Vercel serves this from /sitemap.xml.
-Sitemap: /sitemap.xml
+# Reference the sitemap so crawlers can discover all routes
+Sitemap: https://helix-ai-orchestrator.vercel.app/sitemap.xml

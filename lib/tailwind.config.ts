@@ -1,23 +1,23 @@
-import type { Config } from "tailwindcss";
-
+// helix: tailwind.config.ts
 /**
  * @helix:story USER-63000
  *
- * Tailwind config — intentionally minimal.
+ * Tailwind CSS configuration for the Helix landing site.
  *
- * The Helix design system is fully defined in `app/globals.css` via
- * Tailwind v4's `@theme` block (color tokens for ink/brand/accent/
- * aurora, radii, shadows, and font families wired to next/font CSS
- * variables). Tailwind v4 reads those tokens at build time, so this
- * file only configures the content globs and a couple of safe
- * defaults.
+ * Tailwind v4 reads its design tokens from the `@theme` block in
+ * `app/globals.css`. This file exists so older tooling (IDE
+ * intellisense, class-name autocompletion, third-party plugins)
+ * keeps working without warning. The actual token values live in
+ * CSS so they are the single source of truth.
  */
+import type { Config } from "tailwindcss";
+
 const config: Config = {
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./content/**/*.{ts,tsx,json}",
-    "./lib/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx,js,jsx,md,mdx}",
+    "./components/**/*.{ts,tsx,js,jsx,md,mdx}",
+    "./content/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+    "./lib/**/*.{ts,tsx,js,jsx,md,mdx}",
   ],
   theme: {
     extend: {},

@@ -1,47 +1,47 @@
 {
-  "eyebrow": "FAQ",
-  "heading": "Last-mile questions, answered.",
-  "description": "Everything you need to know before trying Helix — from how orchestration works to how we handle pricing and security.",
+  "eyebrow": "Questions, answered",
+  "heading": "Frequently asked questions",
+  "description": "The honest answers to what teams ask before they put Helix in front of their codebase.",
   "items": [
     {
-      "id": "what-is-helix",
-      "question": "What exactly is Helix?",
-      "answer": "Helix is an atomic work-breakdown orchestrator for AI coding agents. Instead of asking an agent to ship a sprawling diff in one shot, Helix decomposes every prompt into small, reviewable units, executes them in order with explicit dependencies, verifies each unit against your repo (types, tests, lint), and emits small, reviewable PRs."
+      "id": "faq-what",
+      "question": "What exactly does Helix do?",
+      "answer": "Helix takes a single natural-language intent and breaks it into small, atomic units of work. Each unit has its own acceptance criteria, dependency map, and verification gate (types, tests, lint). Units execute in dependency order and surface as reviewable PRs instead of one sprawling diff."
     },
     {
-      "id": "how-does-orchestration-work",
-      "question": "How does the orchestration actually work?",
-      "answer": "You describe the goal. Helix decomposes it into atoms — atomic units of work — with explicit dependency edges. Each atom runs against your repo, is verified locally (types, tests, lint), and is opened as a single, focused PR. Atoms with no dependencies run in parallel; downstream atoms wait for their upstream PRs to merge."
+      "id": "faq-how-verify",
+      "question": "How does Helix verify the agent's output?",
+      "answer": "Each atomic unit is checked against the rest of your repo before it ships. Helix runs your type checker, your test suite, and your linter scoped to the unit's blast radius. If verification fails, the unit is re-tried or surfaced for human review — never silently merged."
     },
     {
-      "id": "what-integrations",
-      "question": "Which integrations are supported?",
-      "answer": "Helix ships with GitHub for source control and PR creation, works with any agent that emits structured diffs, and integrates with the standard CI toolchain (GitHub Actions, Vercel builds, arbitrary runners). The orchestrator itself is open-source, so additional integrations are first-class PRs back into the project."
+      "id": "faq-existing",
+      "question": "Does Helix work with my existing codebase?",
+      "answer": "Yes. Helix reads your repository the same way your senior engineer would — module boundaries, conventions, prior PRs. It does not require a greenfield project or a rewrite. You point it at a Git repo and a ticket, and it produces PRs that respect the code that's already there."
     },
     {
-      "id": "deployment",
-      "question": "How do I deploy Helix?",
-      "answer": "Clone the repo, set the GITHUB_TOKEN and a model API key, and run npm run dev for local use or push to Vercel for a hosted deploy. The provided vercel.json configures the build, install, and dev commands and sets sane security headers out of the box."
+      "id": "faq-prs",
+      "question": "Why PRs instead of one big diff?",
+      "answer": "Small PRs are easier to review, easier to revert, and easier to attribute. Helix's atomic work-breakdown exists so that an agent's output looks like the output of a thoughtful teammate, not a token firehose. Every PR has a clear scope, a clear description, and a clean revert path."
     },
     {
-      "id": "pricing",
-      "question": "Is there a pricing tier?",
-      "answer": "Helix itself is open-source under the repository's license. You only pay for the compute and model API calls you actually consume — the orchestrator is free. Future hosted tiers will be optional and additive, never required to run Helix locally."
+      "id": "faq-languages",
+      "question": "Which languages and frameworks are supported?",
+      "answer": "Helix is language-agnostic at the orchestration layer. Out of the box it ships first-class support for TypeScript, JavaScript, Python, and Go — including their dominant test runners and linters. New languages plug in via a small adapter that exposes the project's verification commands."
     },
     {
-      "id": "security",
-      "question": "How does Helix handle secrets and security?",
-      "answer": "All secrets stay local to your runner — Helix never proxies your tokens or diffs through a third-party service. The orchestrator runs inside your CI, against your repo, with your permissions. Security headers (nosniff, DENY framing, strict referrer policy, locked-down permissions policy) ship by default for the marketing site and can be tuned in vercel.json."
+      "id": "faq-cost",
+      "question": "How is Helix priced?",
+      "answer": "Helix is free during the early-access period. There are no seat fees, no per-PR charges, and no usage caps while we collect feedback. When general availability lands, pricing will be based on units executed per month — predictable, with volume discounts for teams."
     },
     {
-      "id": "repo-safety",
-      "question": "Can Helix damage my repository?",
-      "answer": "No. Every atomic unit opens as a draft PR — nothing merges automatically. You review and merge each PR on your terms. If an atom fails verification, the orchestrator stops the chain and surfaces the failure, so a broken intermediate never reaches your main branch."
+      "id": "faq-security",
+      "question": "Where does my code run?",
+      "answer": "Your code runs in isolated environments scoped to each unit. Helix never trains on your repository, never sends code to third-party model providers without an explicit provider list you control, and ships with audit logs for every run so security teams can review exactly what happened."
     },
     {
-      "id": "open-source",
-      "question": "Can I contribute?",
-      "answer": "Yes. Helix is open-source. Open a PR against the canonical repo, follow the contributing guidelines in the README, and tag the relevant maintainer. Small, well-scoped PRs are reviewed fastest — which is, fittingly, the same philosophy Helix brings to AI-generated code."
+      "id": "faq-get-started",
+      "question": "How do I get started?",
+      "answer": "Clone the repository, point Helix at a ticket or a one-sentence feature description, and watch the first PRs land. The README has a five-minute quick start; the docs go deeper on adapter authoring, dependency graphs, and replays."
     }
   ]
 }

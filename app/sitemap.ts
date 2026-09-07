@@ -1,3 +1,4 @@
+// helix: app/sitemap.ts
 import type { MetadataRoute } from "next";
 
 import { brand } from "@/lib/brand";
