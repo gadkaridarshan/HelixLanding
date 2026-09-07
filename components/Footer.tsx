@@ -2,17 +2,21 @@
 /**
  * @helix:story USER-63000
  *
- * Footer — the closing site map for the marketing page.
+ * Footer — the closing site-map block at the bottom of the marketing
+ * page. Renders a polished multi-column footer (Product, Resources,
+ * Company, Legal) plus social links and copyright.
  *
  * Composition:
- *   • Brand block (logo wordmark, tagline, social icons row).
- *   • Four link columns: Product, Resources, Company, Legal.
- *   • Bottom bar: copyright + small "made with Helix" credit.
+ *   • Brand mark + tagline column (left, on the dark canvas).
+ *   • Four link columns — Product / Resources / Company / Legal.
+ *   • Social row (GitHub, X/Twitter, Discord) with icon glyphs.
+ *   • Copyright row at the bottom, sourced from `brand.name` so
+ *     marketing/legal can update it from `lib/brand.ts`.
  *
  * Copy is sourced from `@/content/footer.json` so marketing can
- * iterate on the link structure without touching this component.
- * Pure server component — semantic `<footer>` landmark with full
- * keyboard navigation and visible focus rings.
+ * iterate without touching this component. Pure server component —
+ * no client interactivity. Renders a semantic `<footer>` with
+ * accessible focus rings.
  */
 import * as React from "react";
 
@@ -39,64 +43,51 @@ interface FooterColumn {
 interface SocialLink {
   label: string;
   href: string;
-  icon: "github" | "twitter" | "linkedin";
+  icon: "github" | "twitter" | "discord";
 }
 
 interface FooterContent {
   tagline: string;
   columns: ReadonlyArray<FooterColumn>;
-  social: ReadonlyArray<SocialLink>;
-  copyright: string;
-  legal: ReadonlyArray<FooterLink>;
+  socials: ReadonlyArray<SocialLink>;
+  legalNote: string;
 }
 
 const content = footerData as FooterContent;
 
-function SocialIcon({
+const SocialIcon = ({
   name,
 }: {
   name: SocialLink["icon"];
-}): React.ReactElement {
+}): React.ReactElement => {
+  const common = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    "aria-hidden": true as const,
+  };
   switch (name) {
     case "github":
       return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"
-          />
+        <svg {...common}>
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.92-.26 1.9-.39 2.88-.39.97 0 1.96.13 2.88.39 2.19-1.48 3.15-1.17 3.15-1.17.63 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.42.36.79 1.07.79 2.16v3.2c0 .31.21.66.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
         </svg>
       );
     case "twitter":
       return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="currentColor"
-        >
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
+        <svg {...common}>
+          <path d="M18.244 2H21.5l-7.5 8.57L23 22h-6.86l-5.37-7.04L4.6 22H1.34l8.04-9.18L1 2h7.02l4.86 6.43L18.244 2Zm-1.2 18h1.9L7.05 4H5.05l11.99 16Z" />
         </svg>
       );
-    case "linkedin":
+    case "discord":
       return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="currentColor"
-        >
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
+        <svg {...common}>
+          <path d="M20.317 4.37a19.79 19.79 0 0 0-4.886-1.515.07.07 0 0 0-.074.035c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.498 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.074-.034A19.79 19.79 0 0 0 3.683 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.128 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.029ZM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.42 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.335-.955 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.42 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.335-.946 2.42-2.157 2.42Z" />
         </svg>
       );
   }
-}
+};
 
 export function Footer({ className }: FooterProps): React.ReactElement {
   const year = new Date().getFullYear();
@@ -104,71 +95,44 @@ export function Footer({ className }: FooterProps): React.ReactElement {
   return (
     <footer
       className={
-        "relative isolate border-t border-white/10 bg-ink-950/80 backdrop-blur supports-[backdrop-filter]:bg-ink-950/60 " +
+        "relative isolate border-t border-white/10 bg-ink-950/60 " +
         (className ?? "")
       }
     >
-      {/* Soft top glow accent for separation from FinalCTA. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"
-      />
+        className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+      >
+        <div className="absolute -top-24 left-1/3 h-72 w-72 rounded-full bg-brand-500/10 blur-3xl" />
+        <div className="absolute right-1/4 -bottom-24 h-72 w-72 rounded-full bg-accent-500/10 blur-3xl" />
+      </div>
 
-      <Container className="py-14 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Brand block */}
-          <div className="lg:col-span-5">
+      <Container className="py-14 sm:py-16">
+        <div className="grid grid-cols-2 gap-10 lg:grid-cols-6">
+          <div className="col-span-2 lg:col-span-2">
             <a
-              href="#hero"
-              className="inline-flex items-center gap-2 font-display text-lg font-semibold text-white"
+              href="#main"
+              className="inline-flex items-center gap-2 font-display text-lg font-semibold text-ink-50"
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 text-ink-950 shadow-[0_0_24px_-4px_rgba(34,211,238,0.6)]"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="2" fill="currentColor" />
-                  <ellipse cx="12" cy="12" rx="10" ry="4" />
-                  <ellipse
-                    cx="12"
-                    cy="12"
-                    rx="10"
-                    ry="4"
-                    transform="rotate(60 12 12)"
-                  />
-                  <ellipse
-                    cx="12"
-                    cy="12"
-                    rx="10"
-                    ry="4"
-                    transform="rotate(120 12 12)"
-                  />
-                </svg>
-              </span>
+                className="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-brand-400 to-accent-500 shadow-[0_0_18px_-2px_rgba(34,211,238,0.7)]"
+              />
               {brand.name}
             </a>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-300">
               {content.tagline}
             </p>
 
-            {/* Social row */}
             <ul className="mt-6 flex items-center gap-3">
-              {content.social.map((social) => (
+              {content.socials.map((social) => (
                 <li key={social.label}>
                   <a
                     href={social.href}
                     aria-label={social.label}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    target={social.href.startsWith("http") ? "_blank" : undefined}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-ink-200 transition-colors hover:border-brand-400/50 hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-ink-200 transition-colors hover:border-brand-400/40 hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
                   >
                     <SocialIcon name={social.icon} />
                   </a>
@@ -177,54 +141,40 @@ export function Footer({ className }: FooterProps): React.ReactElement {
             </ul>
           </div>
 
-          {/* Link columns */}
-          <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-7"
-          >
-            {content.columns.map((column) => (
-              <div key={column.heading}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-400">
-                  {column.heading}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {column.links.map((link) => (
-                    <li key={`${column.heading}-${link.label}`}>
-                      <a
-                        href={link.href}
-                        rel={
-                          link.external ? "noopener noreferrer" : undefined
-                        }
-                        target={link.external ? "_blank" : undefined}
-                        className="text-sm text-ink-200 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
+          {content.columns.map((column) => (
+            <div key={column.heading} className="col-span-1 lg:col-span-1">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-300">
+                {column.heading}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-ink-200 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                      {...(link.external
+                        ? {
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                          }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs text-ink-400">
-            © {year} {content.copyright}
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-ink-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {brand.name}. {content.legalNote}
           </p>
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-ink-400">
-            {content.legal.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <p className="text-ink-500">
+            Built with Next.js · Tailwind v4 · deployed on Vercel.
+          </p>
         </div>
       </Container>
     </footer>

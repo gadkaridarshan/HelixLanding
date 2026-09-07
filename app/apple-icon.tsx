@@ -1,28 +1,25 @@
-// helix: app/icon.tsx
+// helix: app/apple-icon.tsx
 /**
  * @helix:story USER-11000
  *
- * Favicon generator — emits a 32×32 PNG icon at build time so the
- * browser never 404s. Uses the brand cyan + the "H" wordmark
- * motif. Served at `/icon.png` by Next.js App Router.
- *
- * A static `public/favicon.ico` is also shipped so legacy crawlers
- * and the `metadata.icons.icon` entry resolve correctly.
+ * Apple touch icon generator — emits a 180×180 PNG at build time so
+ * iOS home-screen pins render with Helix branding. Served at
+ * `/apple-icon.png` by Next.js App Router.
  */
 import { ImageResponse } from "next/og";
 
 import { brand } from "@/lib/brand";
 
 export const size = {
-  width: 32,
-  height: 32,
+  width: 180,
+  height: 180,
 };
 
 export const contentType = "image/png";
 
 export const dynamic = "force-static";
 
-export default function Icon(): ImageResponse {
+export default function AppleIcon(): ImageResponse {
   return new ImageResponse(
     (
       <div
@@ -36,10 +33,10 @@ export default function Icon(): ImageResponse {
             "radial-gradient(circle at 30% 30%, #22d3ee 0%, #0891b2 60%, #0e7490 100%)",
           color: "#020617",
           fontWeight: 700,
-          fontSize: 22,
-          letterSpacing: -1,
+          fontSize: 128,
+          letterSpacing: -4,
           fontFamily: "Inter, system-ui, sans-serif",
-          borderRadius: 8,
+          borderRadius: 36,
         }}
       >
         {brand.name.charAt(0)}

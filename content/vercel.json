@@ -1,24 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "next build",
-  "installCommand": "npm install",
-  "devCommand": "next dev",
-  "outputDirectory": ".next",
+  "regions": ["iad1"],
   "cleanUrls": true,
   "trailingSlash": false,
-  "regions": ["iad1"],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
         },
         {
           "key": "Referrer-Policy",
@@ -29,26 +29,13 @@
           "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         },
         {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
-        },
-        {
           "key": "X-DNS-Prefetch-Control",
           "value": "on"
         }
       ]
     },
     {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(svg|png|jpg|jpeg|gif|webp|ico|woff2?)",
+      "source": "/(.*)\\.(svg|png|jpg|jpeg|webp|avif|ico)",
       "headers": [
         {
           "key": "Cache-Control",

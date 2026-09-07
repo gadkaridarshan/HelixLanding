@@ -4,15 +4,18 @@ import type { MetadataRoute } from "next";
 import { brand } from "@/lib/brand";
 
 /**
+ * @helix:story USER-11000
  * @helix:story USER-915000
  *
- * Sitemap — declares the single canonical landing page so search
- * engines can index the production site. The brand URL is the
- * source of truth (overridable via `NEXT_PUBLIC_BRAND_URL`),
- * keeping the sitemap and `<link rel="canonical">` in sync.
+ * Sitemap — declares every publicly indexable URL on the Helix
+ * landing site so search engines can crawl it efficiently.
  *
- * Next.js App Router automatically serves this as
- * `/sitemap.xml` at the site root.
+ * The brand URL is the source of truth (overridable via
+ * `NEXT_PUBLIC_BRAND_URL`) so a custom domain keeps the sitemap and
+ * `<link rel="canonical">` in lockstep.
+ *
+ * Next.js App Router serves this file as `/sitemap.xml` at the
+ * site root — no API route, no Vercel rewrite required.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -29,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
           "en-US": siteUrl,
         },
       },
+    },
+    {
+      url: `${siteUrl}/opengraph-image`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.3,
     },
   ];
 }

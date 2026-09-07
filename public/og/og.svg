@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Helix — Atomic work-breakdown for AI coding agents">
+  <defs>
+    <radialGradient id="g1" cx="20%" cy="10%" r="65%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.20" />
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="g2" cx="85%" cy="90%" r="55%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.24" />
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="50%" stop-color="#0b1224" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#g1)" />
+  <rect width="1200" height="630" fill="url(#g2)" />
+
+  <!-- Atom / orbit motif -->
+  <g transform="translate(960 315)" fill="none" stroke="url(#brand)" stroke-width="2" opacity="0.55">
+    <ellipse rx="200" ry="80" />
+    <ellipse rx="200" ry="80" transform="rotate(60)" />
+    <ellipse rx="200" ry="80" transform="rotate(-60)" />
+    <circle r="10" fill="#22d3ee" stroke="none" />
+  </g>
+
+  <!-- Brand glyph -->
+  <g transform="translate(80 80)">
+    <rect width="56" height="56" rx="14" fill="#22d3ee" />
+    <text x="28" y="42" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="36" fill="#020617">H</text>
+    <text x="80" y="40" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="28" fill="#f8fafc">Helix</text>
+  </g>
+
+  <!-- Headline -->
+  <g font-family="Inter, system-ui, sans-serif" font-weight="800" letter-spacing="-3">
+    <text x="80" y="340" font-size="92" fill="#f8fafc">Atomic work-breakdown</text>
+    <text x="80" y="430" font-size="92" fill="#22d3ee">for AI coding agents.</text>
+  </g>
+
+  <!-- Footer -->
+  <g font-family="Inter, system-ui, sans-serif" font-size="26" fill="#94a3b8">
+    <text x="80" y="560">Decompose. Orchestrate. Ship auditable PRs.</text>
+    <text x="1120" y="560" text-anchor="end" fill="#67e8f9">helix-ai-orchestrator.vercel.app</text>
+  </g>
+</svg>

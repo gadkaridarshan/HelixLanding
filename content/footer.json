@@ -1,5 +1,5 @@
 {
-  "tagline": "The atomic work-breakdown orchestrator for AI coding agents. Decompose a goal into dependency-aware, review-ready PRs.",
+  "tagline": "Atomic work breakdown for AI coding agents — turn a single intent into review-ready PRs.",
   "columns": [
     {
       "heading": "Product",
@@ -14,13 +14,13 @@
       "heading": "Resources",
       "links": [
         {
-          "label": "Documentation",
-          "href": "https://github.com/gadkaridarshan/Helix#readme",
+          "label": "GitHub",
+          "href": "https://github.com/gadkaridarshan/Helix",
           "external": true
         },
         {
-          "label": "GitHub repo",
-          "href": "https://github.com/gadkaridarshan/Helix",
+          "label": "Documentation",
+          "href": "https://github.com/gadkaridarshan/Helix#readme",
           "external": true
         },
         {
@@ -33,15 +33,11 @@
     {
       "heading": "Company",
       "links": [
-        { "label": "About", "href": "#hero" },
+        { "label": "About", "href": "#main" },
+        { "label": "Contact", "href": "mailto:hello@helix-ai.dev" },
         {
-          "label": "Twitter / X",
-          "href": "https://twitter.com/helix",
-          "external": true
-        },
-        {
-          "label": "LinkedIn",
-          "href": "https://www.linkedin.com/company/helix",
+          "label": "Status",
+          "href": "https://helix-ai-orchestrator.vercel.app",
           "external": true
         }
       ]
@@ -49,33 +45,28 @@
     {
       "heading": "Legal",
       "links": [
-        { "label": "Privacy", "href": "#hero" },
-        { "label": "Terms", "href": "#hero" },
-        { "label": "Security", "href": "#hero" }
+        { "label": "Privacy", "href": "#main" },
+        { "label": "Terms", "href": "#main" },
+        { "label": "Security", "href": "https://github.com/gadkaridarshan/Helix/security" }
       ]
     }
   ],
-  "social": [
+  "socials": [
     {
       "label": "GitHub",
       "href": "https://github.com/gadkaridarshan/Helix",
       "icon": "github"
     },
     {
-      "label": "Twitter",
-      "href": "https://twitter.com/helix",
+      "label": "Twitter / X",
+      "href": "https://twitter.com/helixai",
       "icon": "twitter"
     },
     {
-      "label": "LinkedIn",
-      "href": "https://www.linkedin.com/company/helix",
-      "icon": "linkedin"
+      "label": "Discord",
+      "href": "https://discord.gg/helix",
+      "icon": "discord"
     }
   ],
-  "copyright": "Helix. All rights reserved.",
-  "legal": [
-    { "label": "Privacy", "href": "#hero" },
-    { "label": "Terms", "href": "#hero" },
-    { "label": "Cookies", "href": "#hero" }
-  ]
+  "legalNote": "All rights reserved."
 }

@@ -1,18 +1,18 @@
 {
-  "eyebrow": "Ready to ship",
-  "heading": "Decompose your next idea into shippable code.",
-  "description": "Join the early-access cohort. Helix turns a one-paragraph brief into atomic, review-ready PRs — so your team spends time on architecture, not plumbing.",
+  "eyebrow": "Ready when you are",
+  "heading": "Ship a feature before your coffee gets cold.",
+  "description": "Spin up Helix, describe the goal, and let atomic agents hand you a stack of review-ready PRs. No boilerplate, no babysitting.",
   "primaryCta": {
     "label": "Get early access",
-    "href": "#hero"
+    "href": "https://helix-ai-orchestrator.vercel.app"
   },
   "secondaryCta": {
     "label": "Star on GitHub",
     "href": "https://github.com/gadkaridarshan/Helix"
   },
   "bullets": [
-    "Self-host or cloud",
-    "Audit-ready PRs",
-    "Zero vendor lock-in"
+    "One-line intent → dependency graph in seconds",
+    "Isolated worktrees, auditable runs",
+    "Review-ready PRs with full traces"
   ]
 }
