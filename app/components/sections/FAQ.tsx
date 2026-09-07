@@ -2,10 +2,9 @@
 /**
  * @helix:story USER-956000
  *
- * FAQ section — re-exports the canonical implementation under
- * `components/sections/FAQ` so the alias resolves from the `app/` and
- * root-level section trees alike.
+ * Re-export the canonical FAQ implementation from
+ * `components/landing/faq/FAQ` so both `@/app/components/sections/FAQ`
+ * and `@/components/sections/FAQ` resolve to the same component.
  */
-
-export { FAQ } from "@/components/sections/FAQ";
-export { default } from "@/components/sections/FAQ";
+export { FAQ } from "@/components/landing/faq/FAQ";
+export { default } from "@/components/landing/faq/FAQ";

@@ -1,47 +1,52 @@
 {
-  "eyebrow": "Common questions",
-  "title": "Everything you wanted to ask before you ship with Helix.",
-  "subtitle": "Quick answers about how Helix orchestrates atomic work, integrates with your stack, and ships to production.",
+  "eyebrow": "Questions, answered",
+  "title": "Frequently asked questions",
+  "subtitle": "Everything you need to know about Helix, from how it works under the hood to how it ships to your team.",
   "items": [
     {
       "id": "what-is-helix",
       "question": "What exactly is Helix?",
-      "answer": "Helix is an AI coding orchestrator that breaks a feature request into a stream of small, reviewable cards. Each card maps to one commit and one pull request, so your reviewers always see a focused diff instead of a wall of speculative code."
+      "answer": "Helix is an AI coding orchestrator. It takes a feature request — a bug, a refactor, a whole epic — and breaks it down into atomic, reviewable cards. Each card is one focused change: one commit, one PR, one decision. You stay in control; Helix handles the planning, writing, and self-review."
     },
     {
-      "id": "how-is-it-different",
-      "question": "How is Helix different from a normal code agent?",
-      "answer": "Most agents generate a large, hard-to-review patch in a single pass. Helix decomposes the same intent into ordered, dependency-aware cards, executes them sequentially, and stops for review at every boundary. The result is auditable, revertable, and friendly to your existing CI."
+      "id": "how-does-it-differ",
+      "question": "How is Helix different from running an LLM in my editor?",
+      "answer": "Most coding assistants generate a wall of text and hope you review it. Helix plans the work first, decomposes it into small verifiable steps, and verifies each step before moving on. The result is a stream of mergeable PRs you can actually review, instead of a 2,000-line diff you'll never read."
     },
     {
-      "id": "where-runs",
-      "question": "Where does Helix run?",
-      "answer": "Helix is self-hostable. You can run it on your laptop, on a VM, on Kubernetes, or as a managed deploy on Vercel. It works against any Git host — GitHub, GitLab, Bitbucket, or a self-hosted Gitea — and never requires pushing your code to a third party."
+      "id": "languages-frameworks",
+      "question": "Which languages and frameworks does Helix support?",
+      "answer": "Helix works against any repository it can read: TypeScript, JavaScript, Python, Go, Rust, Java, Kotlin, Swift, Ruby, and more. It uses your existing test runner, linter, and type-checker to verify every card. No special tooling or DSL to learn."
+    },
+    {
+      "id": "self-hosting",
+      "question": "Can I self-host Helix?",
+      "answer": "Yes. Helix is MIT licensed and self-hostable. You bring your own model provider (OpenAI, Anthropic, Bedrock, Azure, a local Ollama instance — anything with an OpenAI-compatible API), point Helix at your repos, and run it on your own infrastructure."
+    },
+    {
+      "id": "deployment",
+      "question": "Where can I deploy Helix?",
+      "answer": "Helix itself runs anywhere a Node.js or container workload runs — Vercel, Fly.io, Render, a plain VPS, or Kubernetes. The Helix landing site you are looking at is deployed on Vercel. See the vercel.json and .vercelignore shipped with the repo for the reference configuration."
     },
     {
       "id": "integrations",
-      "question": "Which languages, frameworks, and tools does it support?",
-      "answer": "Helix is language-agnostic: it reads your repo to infer conventions, then operates on the files it finds. Teams ship with it for Next.js, React, Node, Python, Go, Rust, and more. It respects your linters, formatters, and test runners rather than imposing its own."
+      "question": "How does Helix integrate with GitHub, GitLab, and Bitbucket?",
+      "answer": "Helix opens a PR (or merge request) per card using your existing SCM credentials. It reads your CI logs, posts review comments, and watches PR status to know when a card is verified. You can require human approval on every PR or let Helix auto-merge green cards."
     },
     {
       "id": "pricing",
-      "question": "How is Helix licensed and priced?",
-      "answer": "Helix is MIT licensed and free to self-host. Cloud-hosted tiers and team features will be introduced as the project stabilizes — see the GitHub repo for the current roadmap."
+      "question": "Is Helix free? What's the pricing model?",
+      "answer": "The orchestrator is MIT licensed and free forever. You only pay for the model tokens Helix consumes, billed by your chosen provider. Bring your own key, or plug into your enterprise LLM gateway. No Helix-side markup, no per-seat fees."
     },
     {
       "id": "security",
-      "question": "How do you keep my code and credentials safe?",
-      "answer": "Helix runs on your infrastructure with your secrets. It never requires you to upload source code to a third-party service. All Git credentials are scoped to the repositories you choose, and every action is auditable in your own Git history."
+      "question": "How does Helix handle secrets and security?",
+      "answer": "Helix never sends your source code to a third party unless you point it at your own provider that does. Tokens, signing keys, and SCM credentials stay in your environment — Helix reads them, never exfiltrates them. Audit logs are local-first and exportable."
     },
     {
-      "id": "review",
-      "question": "Will my reviewers actually like this?",
-      "answer": "Yes — that is the whole point. Helix produces small, single-purpose pull requests with clear commit messages and a description of the card that produced each change. Reviewers see one decision at a time, with the context they need to approve or request changes."
-    },
-    {
-      "id": "deploy",
-      "question": "Can I deploy Helix to Vercel?",
-      "answer": "The Helix landing page itself is Vercel-ready out of the box. The orchestrator runtime can be deployed to Vercel, Fly, Render, or any container host — see the deployment guide in the repo for a step-by-step walkthrough."
+      "id": "vercel-deploy",
+      "question": "Can I deploy this landing page to Vercel right now?",
+      "answer": "Yes — click the Vercel deploy badge in the footer or push the repo to a connected Vercel project. The shipped vercel.json configures the Next.js build, output directory, and framework detection so the deploy is one-click."
     }
   ]
 }

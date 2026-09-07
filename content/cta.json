@@ -1,26 +1,16 @@
 {
   "eyebrow": "Ready when you are",
-  "title": "Ship atomic code, not vague AI suggestions.",
-  "subtitle": "Plan, write, and review one card at a time. Helix turns your next idea into a stream of small, reviewable pull-requests — on your repo, on your rules.",
+  "title": "Ship your next feature in atomic, reviewable steps.",
+  "subtitle": "Helix plans, writes, and reviews code as a stream of focused cards. Every change is one commit, one PR, and one decision — so your team can move fast without losing the plot.",
   "primaryCta": {
-    "label": "Get started — it's free",
+    "label": "Get started on GitHub",
     "href": "https://github.com/gadkaridarshan/Helix",
     "external": true
   },
   "secondaryCta": {
-    "label": "Star on GitHub",
-    "href": "https://github.com/gadkaridarshan/Helix",
-    "external": true
-  },
-  "tertiaryCta": {
     "label": "Read the docs",
-    "href": "/#how-it-works",
+    "href": "#how-it-works",
     "external": false
   },
-  "badges": [
-    "MIT licensed",
-    "Self-hostable",
-    "Vercel-ready",
-    "Works with any Git host"
-  ]
+  "footnote": "MIT licensed · Self-hostable · Vercel-ready"
 }

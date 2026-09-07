@@ -2,12 +2,14 @@
 /**
  * @helix:story USER-956000
  *
- * FAQ section — server component that renders the FAQ accordion from
- * `content/faq.json`. The interactivity is delegated to a small
- * client component (`FAQAccordionItem`).
+ * FAQ — accordion list of common questions about Helix.
+ * Reads structured content from `content/faq.json` so copy can be edited
+ * without touching the component. Renders as a server component shell
+ * with a small "use client" island per item for accordion state.
  */
-import { Container } from "@/components/ui/Container";
-import { FAQAccordionItem } from "./FAQAccordionItem";
+import type { ReactElement } from "react";
+import { Container } from "@/app/components/ui/Container";
+import { FAQAccordionItem } from "@/components/landing/faq/FAQAccordionItem";
 import faqData from "@/content/faq.json";
 
 interface FAQItem {
@@ -17,50 +19,47 @@ interface FAQItem {
 }
 
 interface FAQContent {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   items: FAQItem[];
 }
 
-export function FAQ(): React.ReactElement {
-  const data = faqData as FAQContent;
-  const items = Array.isArray(data.items) ? data.items : [];
+export function FAQ(): ReactElement {
+  const content = faqData as FAQContent;
 
   return (
     <section
       id="faq"
-      aria-labelledby="faq-heading"
-      className="relative isolate overflow-hidden py-20 sm:py-28"
+      className="relative py-24 sm:py-32 bg-slate-950 overflow-hidden"
+      aria-labelledby="faq-title"
     >
-      {/* Subtle radial background so the section reads as polished, not flat. */}
       <div
+        className="pointer-events-none absolute inset-0 opacity-40"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(56,189,248,0.10),_transparent_55%),radial-gradient(ellipse_at_bottom,_rgba(168,85,247,0.08),_transparent_60%)]"
-      />
-      <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          {data.eyebrow ? (
-            <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-sky-300/80">
-              {data.eyebrow}
-            </p>
-          ) : null}
+      >
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[480px] w-[860px] rounded-full bg-gradient-to-b from-cyan-500/15 via-cyan-500/5 to-transparent blur-3xl" />
+      </div>
+
+      <Container className="relative">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-400">
+            {content.eyebrow}
+          </p>
           <h2
-            id="faq-heading"
-            className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            id="faq-title"
+            className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white"
           >
-            {data.title}
+            {content.title}
           </h2>
-          {data.subtitle ? (
-            <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-              {data.subtitle}
-            </p>
-          ) : null}
+          <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-300">
+            {content.subtitle}
+          </p>
         </div>
 
-        {items.length > 0 ? (
-          <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-3 sm:mt-16 sm:gap-4">
-            {items.map((item) => (
+        <div className="mx-auto mt-14 max-w-3xl">
+          <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm divide-y divide-white/10 shadow-2xl shadow-cyan-500/5">
+            {content.items.map((item) => (
               <FAQAccordionItem
                 key={item.id}
                 id={item.id}
@@ -69,7 +68,7 @@ export function FAQ(): React.ReactElement {
               />
             ))}
           </div>
-        ) : null}
+        </div>
       </Container>
     </section>
   );

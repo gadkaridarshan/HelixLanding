@@ -2,197 +2,186 @@
 /**
  * @helix:story USER-956000
  *
- * Site footer — brand mark, navigation links, GitHub star CTA, and
- * Vercel deploy reference.
+ * Footer — brand mark, navigation columns, GitHub star CTA, and a
+ * Vercel deploy reference. Server-rendered, no interactivity.
  */
-import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import ctaData from "@/content/cta.json";
+import type { ReactElement } from "react";
+import { Container } from "@/app/components/ui/Container";
 
-interface NavLink {
-  label: string;
-  href: string;
+interface FooterColumn {
+  heading: string;
+  links: { label: string; href: string; external?: boolean }[];
 }
 
-interface NavGroup {
-  title: string;
-  links: NavLink[];
-}
-
-const NAV_GROUPS: NavGroup[] = [
+const columns: FooterColumn[] = [
   {
-    title: "Product",
+    heading: "Product",
     links: [
-      { label: "Features", href: "/#features" },
-      { label: "How it works", href: "/#how-it-works" },
-      { label: "Personas", href: "/#personas" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "Features", href: "#features" },
+      { label: "How it works", href: "#how-it-works" },
+      { label: "For your role", href: "#personas" },
+      { label: "FAQ", href: "#faq" },
     ],
   },
   {
-    title: "Project",
+    heading: "Resources",
     links: [
-      { label: "GitHub", href: "https://github.com/gadkaridarshan/Helix" },
-      { label: "Roadmap", href: "https://github.com/gadkaridarshan/Helix#roadmap" },
-      { label: "Changelog", href: "https://github.com/gadkaridarshan/Helix/releases" },
-      { label: "License (MIT)", href: "https://github.com/gadkaridarshan/Helix/blob/main/LICENSE" },
+      {
+        label: "GitHub repo",
+        href: "https://github.com/gadkaridarshan/Helix",
+        external: true,
+      },
+      { label: "Documentation", href: "#get-started" },
+      { label: "Changelog", href: "https://github.com/gadkaridarshan/Helix/releases", external: true },
     ],
   },
   {
-    title: "Deploy",
+    heading: "Company",
     links: [
-      { label: "Deploy to Vercel", href: "https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgadkaridarshan%2FHelix&project-name=helix-landing" },
-      { label: "Self-host guide", href: "https://github.com/gadkaridarshan/Helix#self-host" },
-      { label: "Environment variables", href: "https://github.com/gadkaridarshan/Helix#configuration" },
+      { label: "About", href: "#" },
+      { label: "Contact", href: "mailto:hello@helix-ai.dev", external: true },
+      { label: "Privacy", href: "#" },
     ],
   },
 ];
 
-const SOCIAL: NavLink[] = [
-  { label: "GitHub", href: "https://github.com/gadkaridarshan/Helix" },
-];
-
-export function Footer(): React.ReactElement {
-  const starCta = (ctaData as { secondaryCta?: { label: string; href: string } }).secondaryCta ?? {
-    label: "Star on GitHub",
-    href: "https://github.com/gadkaridarshan/Helix",
-  };
+export function Footer(): ReactElement {
+  const year = new Date().getFullYear();
 
   return (
     <footer
+      className="relative border-t border-white/10 bg-slate-950"
       aria-labelledby="footer-heading"
-      className="relative isolate overflow-hidden border-t border-white/10 bg-slate-950/80 py-16 sm:py-20"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(56,189,248,0.08),_transparent_60%)]"
-      />
-      <Container>
-        <h2 id="footer-heading" className="sr-only">
-          Site footer
-        </h2>
+      <h2 id="footer-heading" className="sr-only">
+        Site footer
+      </h2>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Brand + CTA */}
-          <div className="lg:col-span-5">
-            <Link
-              href="/"
+      <div
+        className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+        aria-hidden="true"
+      />
+
+      <Container className="py-14">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
+          <div className="lg:col-span-1">
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 text-white"
               aria-label="Helix home"
-              className="inline-flex items-center gap-2 text-lg font-semibold text-white"
             >
-              <span
+              <svg
+                viewBox="0 0 32 32"
                 aria-hidden="true"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-violet-500 text-slate-950 shadow-md shadow-sky-500/30"
+                className="h-7 w-7 text-cyan-400"
               >
-                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                  <path
-                    d="M4 7l8-4 8 4-8 4-8-4zM4 12l8 4 8-4M4 17l8 4 8-4"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              <span>Helix</span>
-            </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
-              Atomic work-breakdown for AI-assisted engineering. Plan, write,
-              and review one card at a time — on your repo, on your rules.
+                <defs>
+                  <linearGradient id="ft-mark" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#22d3ee" />
+                    <stop offset="100%" stopColor="#6366f1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="16" cy="16" r="3.2" fill="url(#ft-mark)" />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="13"
+                  ry="5"
+                  fill="none"
+                  stroke="url(#ft-mark)"
+                  strokeWidth="1.5"
+                  opacity="0.7"
+                />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="13"
+                  ry="5"
+                  fill="none"
+                  stroke="url(#ft-mark)"
+                  strokeWidth="1.5"
+                  opacity="0.5"
+                  transform="rotate(60 16 16)"
+                />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="13"
+                  ry="5"
+                  fill="none"
+                  stroke="url(#ft-mark)"
+                  strokeWidth="1.5"
+                  opacity="0.5"
+                  transform="rotate(-60 16 16)"
+                />
+              </svg>
+              <span className="text-lg font-bold tracking-tight">Helix</span>
+            </a>
+
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+              The atomic work-breakdown orchestrator. Plan, write, and ship
+              code in focused, reviewable steps.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={starCta.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/10"
-              >
-                <svg viewBox="0 0 16 16" fill="currentColor" className="h-4 w-4" aria-hidden="true">
-                  <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
-                </svg>
-                <span>{starCta.label}</span>
-              </a>
-              <Link
-                href="/#get-started"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-violet-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-md shadow-sky-500/20 transition-all hover:from-sky-300 hover:to-violet-400"
-              >
-                Get started
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                  <path
-                    d="M5 10h10M11 5l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
-            </div>
+            <a
+              href="https://github.com/gadkaridarshan/Helix"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+            >
+              <svg viewBox="0 0 16 16" aria-hidden="true" className="h-4 w-4">
+                <path
+                  fill="currentColor"
+                  d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                />
+              </svg>
+              Star on GitHub
+            </a>
           </div>
 
-          {/* Nav groups */}
-          <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7"
-          >
-            {NAV_GROUPS.map((group) => (
-              <div key={group.title}>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  {group.title}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-3">
+            {columns.map((col) => (
+              <div key={col.heading}>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+                  {col.heading}
                 </h3>
                 <ul className="mt-4 space-y-3">
-                  {group.links.map((link) => {
-                    const external = /^https?:\/\//.test(link.href);
-                    return (
-                      <li key={link.label}>
-                        <Link
-                          href={link.href}
-                          {...(external
-                            ? { target: "_blank", rel: "noreferrer noopener" }
-                            : {})}
-                          className="text-sm text-slate-300 transition-colors hover:text-white"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        {...(link.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="text-sm text-slate-400 hover:text-cyan-300 focus-visible:text-cyan-300 focus-visible:outline-none transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
-          </nav>
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col-reverse items-start gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Helix. MIT licensed.
+            © {year} Helix. MIT licensed. Built for teams that still review
+            their pull requests.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
-            <span>Deploy-ready on</span>
-            <a
-              href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgadkaridarshan%2FHelix&project-name=helix-landing"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-slate-200 transition-colors hover:border-white/25 hover:bg-white/10"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
-                <path d="M12 2 2 19.5h20L12 2Zm0 4.6 6.4 11.1H5.6L12 6.6Z" />
+
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <span>Deployed on</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-white">
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5">
+                <path
+                  fill="currentColor"
+                  d="M24 22.525H0l12-21.05 12 21.05ZM4.26 20.61h15.48L12 6.36 4.26 20.61Z"
+                />
               </svg>
-              <span>Vercel</span>
-            </a>
-            {SOCIAL.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="hover:text-white"
-              >
-                {s.label}
-              </a>
-            ))}
+              <span className="font-semibold tracking-wide">Vercel</span>
+            </span>
           </div>
         </div>
       </Container>

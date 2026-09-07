@@ -1,7 +1,7 @@
 // helix: app/page.tsx
 /**
  * @helix:story USER-217000
- * @helix:story USER-986000
+ * @helix:story USER-956000
  *
  * Helix landing page — assembled, single-route marketing page.
  *
@@ -9,7 +9,7 @@
  * (`components/landing/Sections.tsx`) which owns the full narrative
  * order. Individual sections are server components (or thin "use
  * client" islands where interactivity is required), imported from
- * `components/layout` and `app/components/sections` so the page file
+ * `components/landing` and `app/components/sections` so the page file
  * itself stays a clean composition surface with no inline business
  * logic.
  *
