@@ -30,6 +30,7 @@
  */
 import * as React from "react";
 
+import { Container } from "@/components/ui/Container";
 import { brand } from "@/lib/brand";
 
 const REFERENCE_SITE_URL = "https://helix-ai-orchestrator.vercel.app";
@@ -97,13 +98,13 @@ export function Footer({ className }: FooterProps): React.ReactElement {
         (className ?? "")
       }
     >
-      <div className="mx-auto max-w-6xl px-6 py-12">
+      <Container className="py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
               <span
                 aria-hidden="true"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-950 font-bold"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 font-bold text-slate-950"
               >
                 H
               </span>
@@ -116,25 +117,21 @@ export function Footer({ className }: FooterProps): React.ReactElement {
             </p>
           </div>
 
-          {COLUMNS.map((col) => (
-            <nav
-              key={col.title}
-              aria-label={col.title}
-              className="text-sm"
-            >
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                {col.title}
-              </h3>
+          {COLUMNS.map((column) => (
+            <div key={column.title}>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                {column.title}
+              </h4>
               <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.href}>
+                {column.links.map((link) => (
+                  <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-slate-400 transition hover:text-white"
+                      className="text-sm text-slate-400 transition-colors hover:text-white"
                       {...(link.external
                         ? {
                             target: "_blank",
-                            rel: "noopener noreferrer",
+                            rel: "noreferrer noopener",
                           }
                         : {})}
                     >
@@ -143,79 +140,68 @@ export function Footer({ className }: FooterProps): React.ReactElement {
                   </li>
                 ))}
               </ul>
-            </nav>
+            </div>
           ))}
         </div>
 
-        <div className="mt-12 rounded-lg border border-amber-500/30 bg-amber-500/5 p-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
-            <span
-              className="inline-flex shrink-0 items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-amber-300"
-              aria-hidden="true"
-            >
+        <div className="hx-divider mt-12" />
+
+        {/* Reference-site pointer — explicit, unambiguous, multi-layered. */}
+        <aside
+          aria-label="Reference site notice"
+          className="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/[0.04] p-5 sm:p-6"
+        >
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-amber-300">
               {REFERENCE_SITE_BADGE}
             </span>
-            <div className="text-sm leading-relaxed text-slate-300">
-              <p className="font-semibold text-white">
-                This is{" "}
-                <span className="underline decoration-amber-400/60 underline-offset-2">
-                  not
-                </span>{" "}
-                the live landing page for {brand.name}.
-              </p>
-              <p className="mt-2 text-slate-400">
-                The link below goes to a{" "}
-                <strong className="font-semibold text-slate-200">
-                  reference site
-                </strong>{" "}
-                ({REFERENCE_SITE_HOST}) used only as a visual / brand
-                reference. The live landing page for this product is a{" "}
-                <strong className="font-semibold text-slate-200">
-                  different site
-                </strong>{" "}
-                — it is not deployed from this repository.
-              </p>
-              <p className="mt-3">
-                <a
-                  href={REFERENCE_SITE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={REFERENCE_SITE_LABEL}
-                  title={REFERENCE_SITE_LABEL}
-                  className="inline-flex items-center gap-1.5 text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition hover:text-cyan-200 hover:decoration-cyan-300"
-                >
-                  <span>
-                    View reference site: {REFERENCE_SITE_HOST}
-                  </span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </p>
-              <p className="mt-3 text-xs text-slate-500">
-                <span className="sr-only">{REFERENCE_SITE_DESCRIPTION}</span>
-                <span aria-hidden="true">
-                  Reference site — visual / brand reference only. Not the live
-                  landing page.
-                </span>
-              </p>
-            </div>
+            <span className="text-xs font-medium text-slate-400">
+              Not the live site — visual reference only
+            </span>
           </div>
-        </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center">
+          <p className="mt-3 text-sm leading-relaxed text-slate-300">
+            {REFERENCE_SITE_DESCRIPTION}
+          </p>
+
+          <p className="mt-3 text-sm text-slate-400">
+            Reference site:{" "}
+            <a
+              href={REFERENCE_SITE_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={REFERENCE_SITE_LABEL}
+              title={REFERENCE_SITE_LABEL}
+              className="font-medium text-amber-300 underline-offset-4 hover:underline"
+            >
+              {REFERENCE_SITE_HOST}
+              <span aria-hidden="true" className="ml-1">
+                ↗
+              </span>
+            </a>
+            <span className="mx-2 text-slate-600">·</span>
+            Live site for this product:{" "}
+            <a
+              href={brand.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={`${brand.name} — live site (${brand.url})`}
+              className="font-medium text-cyan-300 underline-offset-4 hover:underline"
+            >
+              {brand.url}
+            </a>
+          </p>
+        </aside>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-3 text-xs text-slate-500 sm:flex-row sm:items-center">
           <p>
             © {year} {brand.name}. All rights reserved.
           </p>
           <p>
-            Live site:{" "}
-            <a
-              href={brand.url}
-              className="text-slate-400 underline decoration-slate-500/50 underline-offset-4 transition hover:text-white hover:decoration-slate-300"
-            >
-              {brand.url.replace(/^https?:\/\//, "")}
-            </a>
+            Built for engineers who refuse to ship a 1,000-line AI diff.
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

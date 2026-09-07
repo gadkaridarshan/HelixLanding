@@ -1,244 +1,159 @@
 // helix: components/sections/Features.tsx
 /**
+ * @helix:story USER-773000
  * @helix:story USER-303000
  *
- * Features — three-up feature grid with icon, title, and description.
- * Pure server render.
+ * Features — grid of 5 feature cards highlighting the core Helix value
+ * props:
+ *
+ *   1. Atomic planning
+ *   2. Parallel agents
+ *   3. Atomic work-breakdown
+ *   4. GIVEN / WHEN / THEN acceptance criteria
+ *   5. Verified, reviewable PRs
+ *
+ * Self-contained: imports only the shared Container + cn helper.
+ * Fully typed, responsive, theme-token driven.
  */
 import * as React from "react";
 
-export interface FeatureItem {
+import { Container } from "@/components/ui/Container";
+import { cn } from "@/components/ui/cn";
+
+import styles from "@/components/sections/Features.module.css";
+
+interface Feature {
   readonly title: string;
   readonly description: string;
   readonly icon: React.ReactNode;
 }
 
+const FEATURES: ReadonlyArray<Feature> = [
+  {
+    title: "Atomic planning",
+    description:
+      "Every prompt is decomposed into reviewable units before any code is written — so you always know what's about to ship.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M4 6h6M4 12h10M4 18h7"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <circle cx="18" cy="6" r="2" fill="currentColor" />
+        <circle cx="20" cy="12" r="2" fill="currentColor" />
+        <circle cx="17" cy="18" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    title: "Parallel agents",
+    description:
+      "Independent units execute concurrently across a fleet of coding agents — dependencies stay explicit, conflicts stay rare.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M12 3v3m0 12v3m9-9h-3M6 12H3m13.5-6.5-2.1 2.1M8.6 17.4l-2.1 2.1m12.9 0-2.1-2.1M8.6 6.6 6.5 4.5"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <circle cx="12" cy="12" r="3" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    title: "Atomic work-breakdown",
+    description:
+      "Each unit is a self-contained, mergeable change with a clear diff, a clear owner, and a clear rollback story.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.75" />
+        <rect x="13" y="3" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.75" />
+        <rect x="3" y="13" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.75" />
+        <rect x="13" y="13" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.75" fill="currentColor" fillOpacity="0.15" />
+      </svg>
+    ),
+  },
+  {
+    title: "GIVEN / WHEN / THEN criteria",
+    description:
+      "Every unit ships with explicit acceptance criteria — tests, type checks, and lint rules that gate the merge.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M5 6h14M5 12h10M5 18h7"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <path
+          d="m16 16 2 2 4-4"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Verified, reviewable PRs",
+    description:
+      "Each unit is checked against the rest of your repo — types, tests, lint — and lands as a small, human-reviewable PR.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="6" cy="6" r="2" stroke="currentColor" strokeWidth="1.75" />
+        <circle cx="6" cy="18" r="2" stroke="currentColor" strokeWidth="1.75" />
+        <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.75" />
+        <path
+          d="M6 8v8M8 6h6a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H8"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+];
+
 export interface FeaturesProps {
   className?: string;
 }
-
-function AtomIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="2" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" />
-      <ellipse
-        cx="12"
-        cy="12"
-        rx="10"
-        ry="4"
-        transform="rotate(60 12 12)"
-      />
-      <ellipse
-        cx="12"
-        cy="12"
-        rx="10"
-        ry="4"
-        transform="rotate(120 12 12)"
-      />
-    </svg>
-  );
-}
-
-function ShieldIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
-      <path d="M9 12l2 2 4-4" />
-    </svg>
-  );
-}
-
-function ListIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 6h12" />
-      <path d="M8 12h12" />
-      <path d="M8 18h12" />
-      <circle cx="4" cy="6" r="1" />
-      <circle cx="4" cy="12" r="1" />
-      <circle cx="4" cy="18" r="1" />
-    </svg>
-  );
-}
-
-function BranchIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="6" cy="6" r="2" />
-      <circle cx="6" cy="18" r="2" />
-      <circle cx="18" cy="12" r="2" />
-      <path d="M6 8v8" />
-      <path d="M6 12c4 0 6 0 10-2" />
-    </svg>
-  );
-}
-
-function GraphIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="6" cy="6" r="2" />
-      <circle cx="18" cy="6" r="2" />
-      <circle cx="6" cy="18" r="2" />
-      <circle cx="18" cy="18" r="2" />
-      <circle cx="12" cy="12" r="2" />
-      <path d="M7.5 7.5L11 11" />
-      <path d="M16.5 7.5L13 11" />
-      <path d="M7.5 16.5L11 13" />
-      <path d="M16.5 16.5L13 13" />
-    </svg>
-  );
-}
-
-function HandshakeIcon(): React.ReactElement {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-6 w-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 12l3-3 4 4-3 3z" />
-      <path d="M21 12l-3-3-4 4 3 3z" />
-      <path d="M9 13l3 3 3-3" />
-      <path d="M12 8l2-2h3" />
-      <path d="M12 8l-2-2H7" />
-    </svg>
-  );
-}
-
-const FEATURES: ReadonlyArray<FeatureItem> = [
-  {
-    title: "Atomic decomposition",
-    description:
-      "Every prompt is broken into small, single-purpose units with explicit inputs, outputs, and dependencies.",
-    icon: <AtomIcon />,
-  },
-  {
-    title: "Repo-aware verification",
-    description:
-      "Each unit is type-checked, linted, and tested against the rest of the repo before it ships.",
-    icon: <ShieldIcon />,
-  },
-  {
-    title: "Ordered execution",
-    description:
-      "Units run in a deterministic order. If something fails, you get the exact unit — not a 4,000-line diff.",
-    icon: <ListIcon />,
-  },
-  {
-    title: "Reviewable PRs",
-    description:
-      "Open one PR per unit or bundle related units. Either way, every change is small enough to review in minutes.",
-    icon: <BranchIcon />,
-  },
-  {
-    title: "Dependency graph",
-    description:
-      "Visualise the unit graph and the impact of every change before it leaves the orchestrator.",
-    icon: <GraphIcon />,
-  },
-  {
-    title: "Plays well with humans",
-    description:
-      "Pause, edit, or reorder units from the CLI or web UI. Helix augments your workflow — it doesn't replace it.",
-    icon: <HandshakeIcon />,
-  },
-];
 
 export function Features({ className }: FeaturesProps): React.ReactElement {
   return (
     <section
       id="features"
+      className={cn(styles.root, className)}
       aria-labelledby="features-heading"
-      className={"relative py-20 md:py-28 " + (className ?? "")}
     >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-violet-300">
-            Features
-          </span>
-          <h2
-            id="features-heading"
-            className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl"
-          >
-            Built for reviewable AI-generated code.
+      <Container>
+        <header className={styles.header}>
+          <span className={styles.eyebrow}>Why Helix</span>
+          <h2 id="features-heading" className={styles.heading}>
+            One orchestrator. Every unit verified.
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            Helix gives your AI coding agent a backbone: every unit is small,
-            every dependency is explicit, and every change is verified
-            against the rest of your repo before it ships.
+          <p className={styles.subheading}>
+            Helix replaces sprawling AI diffs with a pipeline of small,
+            reviewable, test-gated changes — so the code that lands is the
+            code you wanted.
           </p>
-        </div>
+        </header>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className={styles.grid} role="list">
           {FEATURES.map((feature) => (
-            <li
-              key={feature.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-cyan-400/40 hover:bg-white/[0.05]"
-            >
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-violet-500/20 text-cyan-300">
+            <li key={feature.title} className={styles.card}>
+              <span className={styles.iconWrap} aria-hidden="true">
                 {feature.icon}
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-white">
-                {feature.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                {feature.description}
-              </p>
+              </span>
+              <h3 className={styles.cardTitle}>{feature.title}</h3>
+              <p className={styles.cardBody}>{feature.description}</p>
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 }

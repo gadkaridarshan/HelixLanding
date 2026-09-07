@@ -2,74 +2,65 @@
 /**
  * @helix:story USER-303000
  *
- * FinalCTA — closing call-to-action panel before the footer. Pure
- * server render.
+ * FinalCTA — last call-to-action block before the footer. Reinforces
+ * the value prop and gives a single, unmissable "request access"
+ * affordance.
  */
 import * as React from "react";
 
-import { brand } from "@/lib/brand";
+import { Container } from "@/components/ui/Container";
 
-export interface FinalCTAProps {
-  className?: string;
-}
-
-export function FinalCTA({ className }: FinalCTAProps): React.ReactElement {
+export function FinalCTA(): React.ReactElement {
   return (
     <section
       id="cta"
+      className="relative scroll-mt-24 py-20 sm:py-28"
       aria-labelledby="cta-heading"
-      className={
-        "relative border-t border-white/5 py-20 md:py-28 " + (className ?? "")
-      }
     >
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-950/80 to-slate-900/80 p-10 md:p-16">
-          <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
-          <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl" />
+      <Container>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-950/80 to-slate-900/80 px-8 py-14 text-center shadow-[0_30px_80px_-30px_rgba(34,211,238,0.25)] sm:px-14 sm:py-20">
+          {/* glow */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[60%] -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-24 left-1/3 h-72 w-[50%] rounded-full bg-violet-500/20 blur-3xl"
+          />
 
-          <div className="relative grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <h2
-                id="cta-heading"
-                className="text-3xl font-bold tracking-tight text-white md:text-4xl"
-              >
-                Stop reviewing AI diffs.{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-violet-300 bg-clip-text text-transparent">
-                  Start reviewing units.
-                </span>
-              </h2>
-              <p className="mt-4 max-w-md text-lg text-slate-300">
-                {brand.name} is in private beta. Tell us what you&apos;re
-                building and we&apos;ll get you onboarded.
-              </p>
-            </div>
-            <form
-              className="flex flex-col gap-3 sm:flex-row"
-              action="mailto:hello@helix.dev"
-              method="post"
-              encType="text/plain"
+          <p className="relative hx-chip mx-auto">
+            <span className="hx-chip-dot" aria-hidden="true" />
+            <span>Private beta — limited seats</span>
+          </p>
+
+          <h2
+            id="cta-heading"
+            className="relative mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl"
+          >
+            Stop reviewing{" "}
+            <span className="hx-text-gradient">1,000-line AI diffs</span>.
+          </h2>
+          <p className="relative mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
+            Get onboarded to the Helix private beta and ship your next AI
+            feature as a series of small, verified, mergeable PRs.
+          </p>
+
+          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a href="mailto:hello@helix.dev?subject=Helix%20early%20access" className="hx-btn-primary">
+              Request early access
+            </a>
+            <a
+              href="https://github.com/gadkaridarshan/Helix"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hx-btn-secondary"
             >
-              <label htmlFor="cta-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="cta-email"
-                type="email"
-                name="email"
-                required
-                placeholder="you@company.com"
-                className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-slate-500 focus:border-cyan-400/60 focus:outline-none focus:ring-2 focus:ring-cyan-400/30"
-              />
-              <button
-                type="submit"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-6 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition hover:brightness-110"
-              >
-                Request access
-              </button>
-            </form>
+              Read the source
+            </a>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -8,6 +8,5 @@
  * and root-level section trees alike. The reference-site link inside the
  * Hero is explicitly labelled as such (never as the live site).
  */
-
 export { Hero } from "@/components/landing/hero/Hero";
 export { default } from "@/components/landing/hero/Hero";

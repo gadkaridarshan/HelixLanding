@@ -1,46 +1,83 @@
 <!-- helix: README.md -->
-# Helix Landing
+# Helix Landing — Scaffold
 
-Marketing site for **Helix** — the atomic work-breakdown orchestrator for AI coding agents.
+This is the **scaffold** for the Helix marketing site: a Vercel-ready
+Next.js 14 (App Router) project with TypeScript, Tailwind v4, and the
+global theme tokens (color palette, gradients, background pattern, type
+scale via `next/font`) that every later section re-uses.
 
-> **Important — the live landing page is a different site.** The canonical production URL for this product is configured in `lib/brand.ts` (`brand.url`). The URL below is **only** a visual / brand reference and is **not** deployed from this repository.
->
-> 🔗 **Reference site** (visual / brand reference only — **not** this product's live site):
-> <https://helix-ai-orchestrator.vercel.app>
->
-> 🔗 **Live landing page** for this product (deployed from this repo):
-> <https://helix.dev>
->
-> Source: <https://github.com/gadkaridarshan/Helix>
+> **Note — what this card ships.** This README documents the **scaffold**.
+> `app/page.tsx` is intentionally a minimal placeholder; the real
+> Navbar / Hero / StatsBar / Features / HowItWorks / Personas /
+> FinalCTA / FAQ / Footer sections land in subsequent cards.
 
-## What this site is
+> **Reference vs. live.** The URL
+> <https://helix-ai-orchestrator.vercel.app> is an externally-hosted
+> visual reference only — it is **not** deployed from this repository.
+> The canonical production URL for this product is configured in
+> `lib/brand.ts` (`brand.url`).
 
-A standalone Next.js (App Router) marketing site for Helix, the AI coding orchestrator that:
+## Prerequisites
 
-- Decomposes every prompt into atomic, reviewable units.
-- Executes units in order with explicit dependencies.
-- Verifies each unit against the rest of your repo (types, tests, lint).
-- Produces small, reviewable PRs instead of one sprawling diff.
+- **Node.js** ≥ 20.x (Next.js 14 App Router minimum).
+- **npm** ≥ 10.x (commands below assume npm; pnpm/yarn work too).
+- A Vercel account — only required for deployment, not for local dev.
 
-## Sections shipped
+## Quick start
 
-1. **Navbar** — sticky brand mark + section anchors + early-access CTA.
-2. **Hero** — headline, dual CTAs, decorative atom/orbit SVG, social-proof bullets.
-3. **StatsBar** — quick metric strip.
-4. **Features** — six-up capability grid with custom SVG icons.
-5. **HowItWorks** — numbered four-step walkthrough.
-6. **Personas** — three-up "who is this for" cards with quotes + benefits.
-7. **FAQ** — accessible `details`/`summary` accordion.
-8. **FinalCTA** — closing conversion panel with email capture.
-9. **Footer** — link columns, brand mark, and a clearly-labelled reference-site pointer.
+1. **Install dependencies**
 
-## URL policy (load-bearing)
+   ```bash
+   npm install
+   ```
 
-- `brand.url` (in `lib/brand.ts`) is the **live** landing page for this product.
-- `https://helix-ai-orchestrator.vercel.app` is an externally-hosted Helix
-  deployment used purely as a visual / brand reference. It is **not**
-  the live landing page for this product and is **not** deployed from
-  this repo.
-- Every place that surfaces the reference URL (Hero, Footer, README)
-  labels it as a **reference site**. It is never labelled as "live
-  site", "production", or "this site".
+2. **Run the dev server**
+
+   ```bash
+   npm run dev
+   ```
+
+   Open <http://localhost:3000>. Hot reload is enabled; saving any file
+   under `app/` or `components/` refreshes the page immediately.
+
+   **Success check:** the browser renders the placeholder hero with the
+   gradient headline ("Atomic work-breakdown for AI coding agents.")
+   over the layered cyan/violet background. No 404s in the network
+   panel for fonts or favicon.
+
+3. **Type-check the project**
+
+   ```bash
+   npm run typecheck
+   ```
+
+   **Success check:** prints `0 errors` and exits 0.
+
+4. **Lint**
+
+   ```bash
+   npm run lint
+   ```
+
+   **Success check:** exits 0 with no errors.
+
+5. **Production build**
+
+   ```bash
+   npm run build
+   ```
+
+   **Success check:** ends with `✓ Compiled successfully` and a route
+   table that includes `○ /`. No `Module not found` or unresolved
+   import warnings.
+
+6. **Run the production build locally**
+
+   ```bash
+   npm run start
+   ```
+
+   **Success check:** boots on port 3000 and renders the same
+   placeholder page as `npm run dev`.
+
+## Project layout

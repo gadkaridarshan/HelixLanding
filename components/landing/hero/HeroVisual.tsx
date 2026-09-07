@@ -36,86 +36,96 @@ export function HeroVisual({
             <stop offset="60%" stopColor="#22d3ee" stopOpacity="0.05" />
             <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
           </radialGradient>
-          <linearGradient id="hv-card" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0b1124" />
-            <stop offset="100%" stopColor="#070b1c" />
-          </linearGradient>
           <linearGradient id="hv-stroke" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#22d3ee" />
             <stop offset="100%" stopColor="#8b5cf6" />
           </linearGradient>
+          <linearGradient id="hv-stroke-2" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#f59e0b" />
+          </linearGradient>
         </defs>
 
-        {/* Soft glow */}
+        {/* glow */}
         <circle cx="300" cy="300" r="260" fill="url(#hv-glow)" />
 
-        {/* Code surface card */}
-        <g>
-          <rect
-            x="120"
-            y="170"
-            width="360"
-            height="260"
-            rx="18"
-            fill="url(#hv-card)"
-            stroke="rgba(148,163,184,0.2)"
-            strokeWidth="1"
-          />
-          {/* Window dots */}
-          <circle cx="142" cy="192" r="5" fill="#f87171" opacity="0.7" />
-          <circle cx="158" cy="192" r="5" fill="#facc15" opacity="0.7" />
-          <circle cx="174" cy="192" r="5" fill="#34d399" opacity="0.7" />
-          {/* Code lines */}
-          <g opacity="0.85">
-            <rect x="140" y="220" width="160" height="6" rx="3" fill="#22d3ee" />
-            <rect x="140" y="238" width="220" height="6" rx="3" fill="#64748b" />
-            <rect x="156" y="256" width="140" height="6" rx="3" fill="#8b5cf6" />
-            <rect x="156" y="274" width="200" height="6" rx="3" fill="#64748b" />
-            <rect x="156" y="292" width="120" height="6" rx="3" fill="#22d3ee" />
-            <rect x="140" y="310" width="240" height="6" rx="3" fill="#64748b" />
-            <rect x="156" y="328" width="160" height="6" rx="3" fill="#8b5cf6" />
-            <rect x="140" y="346" width="200" height="6" rx="3" fill="#64748b" />
-            <rect x="140" y="380" width="80" height="20" rx="6" fill="#22d3ee" opacity="0.9" />
-          </g>
-        </g>
-
-        {/* Orbit rings */}
-        <g className="helix-orbit-slow" style={{ transformOrigin: "300px 300px" }}>
+        {/* orbits */}
+        <g
+          fill="none"
+          stroke="url(#hv-stroke)"
+          strokeWidth="1.5"
+          strokeOpacity="0.7"
+        >
+          <ellipse cx="300" cy="300" rx="240" ry="90" />
           <ellipse
             cx="300"
             cy="300"
             rx="240"
             ry="90"
-            fill="none"
-            stroke="url(#hv-stroke)"
-            strokeWidth="1.5"
-            opacity="0.6"
+            transform="rotate(60 300 300)"
           />
-        </g>
-        <g className="helix-orbit" style={{ transformOrigin: "300px 300px" }}>
           <ellipse
             cx="300"
             cy="300"
-            rx="200"
-            ry="70"
-            fill="none"
-            stroke="url(#hv-stroke)"
-            strokeWidth="1.2"
-            opacity="0.4"
-            transform="rotate(35 300 300)"
+            rx="240"
+            ry="90"
+            transform="rotate(-60 300 300)"
           />
         </g>
 
-        {/* Atom nucleus */}
-        <circle cx="300" cy="300" r="14" fill="#22d3ee" />
-        <circle cx="300" cy="300" r="22" fill="none" stroke="#22d3ee" strokeOpacity="0.4" strokeWidth="1" />
+        {/* nucleus */}
+        <circle cx="300" cy="300" r="18" fill="#22d3ee" />
+        <circle
+          cx="300"
+          cy="300"
+          r="38"
+          fill="none"
+          stroke="#22d3ee"
+          strokeOpacity="0.4"
+          strokeWidth="1"
+        />
 
-        {/* Orbiting units */}
-        <g className="helix-orbit" style={{ transformOrigin: "300px 300px" }}>
-          <circle cx="540" cy="300" r="6" fill="#8b5cf6" />
+        {/* electrons */}
+        <g fill="#8b5cf6">
+          <circle cx="540" cy="300" r="8" />
+          <circle cx="60" cy="300" r="8" />
         </g>
-        <g className="helix-orbit-slow" style={{ transformOrigin: "300px 300px" }}>
-          <circle cx="60" cy="300" r="5" fill="#22d3ee" />
+        <g fill="#f59e0b">
+          <circle cx="420" cy="438" r="6" />
+          <circle cx="180" cy="162" r="6" />
+        </g>
+
+        {/* code surface — bottom-left */}
+        <g transform="translate(60 400)">
+          <rect
+            width="220"
+            height="120"
+            rx="14"
+            fill="rgba(15,23,42,0.85)"
+            stroke="rgba(148,163,184,0.25)"
+          />
+          <rect width="220" height="22" rx="14" fill="rgba(148,163,184,0.12)" />
+          <circle cx="14" cy="11" r="3" fill="#f87171" />
+          <circle cx="26" cy="11" r="3" fill="#fbbf24" />
+          <circle cx="38" cy="11" r="3" fill="#34d399" />
+          <g
+            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
+            fontSize="10"
+            fill="#cbd5e1"
+          >
+            <text x="14" y="48">unit 1: parse prompt</text>
+            <text x="14" y="66" fill="#94a3b8">unit 2: scaffold types</text>
+            <text x="14" y="84" fill="#22d3ee">unit 3: implement</text>
+            <text x="14" y="102" fill="#94a3b8">unit 4: verify + PR</text>
+          </g>
+        </g>
+
+        {/* atoms — top-right */}
+        <g transform="translate(420 80)" stroke="url(#hv-stroke-2)" fill="none">
+          <circle cx="0" cy="0" r="32" strokeWidth="1.5" />
+          <circle cx="0" cy="0" r="14" fill="rgba(139,92,246,0.15)" />
+          <circle cx="32" cy="0" r="6" fill="#f59e0b" stroke="none" />
+          <circle cx="-32" cy="0" r="6" fill="#22d3ee" stroke="none" />
         </g>
       </svg>
     </div>

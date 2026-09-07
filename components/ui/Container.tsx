@@ -2,32 +2,38 @@
 /**
  * @helix:story USER-303000
  *
- * Container — max-width, horizontally-padded layout wrapper.
+ * Container — horizontal layout rail that constrains content to a
+ * readable max-width while keeping responsive gutters. Used by every
+ * landing section so spacing rhythm stays consistent.
  */
-import type { HTMLAttributes } from "react";
+import * as React from "react";
+
 import { cn } from "@/components/ui/cn";
 
-export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * When true, removes the default horizontal padding.
-   */
-  flush?: boolean;
+export interface ContainerProps {
+  readonly className?: string;
+  readonly children: React.ReactNode;
+  readonly as?: keyof React.JSX.IntrinsicElements;
+  readonly id?: string;
 }
 
 export function Container({
   className,
-  flush = false,
-  ...props
-}: ContainerProps) {
+  children,
+  as: Tag = "div",
+  id,
+}: ContainerProps): React.ReactElement {
+  const Component = Tag as React.ElementType;
   return (
-    <div
+    <Component
+      id={id}
       className={cn(
-        "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8",
-        flush && "px-0",
-        className,
+        "mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10",
+        className
       )}
-      {...props}
-    />
+    >
+      {children}
+    </Component>
   );
 }
 

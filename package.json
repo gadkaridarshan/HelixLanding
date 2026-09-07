@@ -2,6 +2,7 @@
   "name": "helix-landing",
   "version": "0.1.0",
   "private": true,
+  "description": "Marketing site for Helix — the atomic work-breakdown orchestrator for AI coding agents.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

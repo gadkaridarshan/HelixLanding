@@ -2,44 +2,56 @@
 /**
  * @helix:story USER-303000
  *
- * StatsBar — short row of social-proof metrics rendered directly under
- * the Hero. Server-rendered, no interactivity.
+ * StatsBar — compact metric strip that lands directly under the hero.
+ * Three proof points: unit size, verification surface, PR cadence.
  */
 import * as React from "react";
+
+import { Container } from "@/components/ui/Container";
 
 interface Stat {
   readonly value: string;
   readonly label: string;
+  readonly detail: string;
 }
 
-const stats: readonly Stat[] = [
-  { value: "4×", label: "faster PR throughput" },
-  { value: "92%", label: "atomic units green on first run" },
-  { value: "0", label: "manual context switching" },
-  { value: "100%", label: "diff traceability" },
+const STATS: ReadonlyArray<Stat> = [
+  {
+    value: "~80 LOC",
+    label: "per atomic unit",
+    detail: "Small enough to review in under two minutes.",
+  },
+  {
+    value: "Repo-aware",
+    label: "verification",
+    detail: "Types, tests, and lint gate every unit before it ships.",
+  },
+  {
+    value: "1 PR",
+    label: "per task",
+    detail: "Linear, dependency-ordered history you can actually merge.",
+  },
 ];
 
 export function StatsBar(): React.ReactElement {
   return (
     <section
-      aria-label="Helix at a glance"
-      className="relative pb-8 sm:pb-12"
+      aria-label="At a glance"
+      className="relative border-y border-white/10 bg-white/[0.02] py-10 backdrop-blur-sm"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="card-glass grid grid-cols-2 gap-px overflow-hidden rounded-2xl sm:grid-cols-4">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="flex flex-col items-start gap-1 bg-brand-ink/40 p-6"
-            >
-              <span className="text-3xl font-semibold text-white sm:text-4xl">
+      <Container>
+        <dl className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {STATS.map((s) => (
+            <div key={s.label} className="flex flex-col gap-1">
+              <dt className="hx-eyebrow">{s.label}</dt>
+              <dd className="text-2xl font-semibold text-white sm:text-3xl">
                 {s.value}
-              </span>
-              <span className="text-sm text-brand-muted">{s.label}</span>
+              </dd>
+              <p className="text-sm text-slate-400">{s.detail}</p>
             </div>
           ))}
-        </div>
-      </div>
+        </dl>
+      </Container>
     </section>
   );
 }

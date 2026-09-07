@@ -24,18 +24,17 @@
  *     Anywhere that URL is rendered on this product's live site it
  *     **must** be labelled as a "reference site" link (see the Footer
  *     for the canonical pattern). It must never be labelled as "live
- *     site", "production", "this site", or anything else that would
- *     suggest it is the live deployment of the workspace the visitor
- *     is browsing.
+ *     site", "deployed site", or any equivalent phrase.
  */
+
 export const brand = {
   name: "Helix",
   tagline: "Atomic work-breakdown for AI coding agents",
   description:
-    "Helix turns every prompt into atomic, reviewable units — then executes, verifies, and ships them as small PRs your team can actually review.",
+    "Helix is the atomic work-breakdown orchestrator for AI coding agents. Decompose every prompt into reviewable steps, execute them in order with explicit dependencies, and ship small, verifiable PRs instead of one sprawling diff.",
   url: "https://helix.dev",
-  ogImage: "/og.svg",
   twitter: "@helixdev",
+  ogImage: "/og.svg",
 } as const;
 
 export type Brand = typeof brand;
