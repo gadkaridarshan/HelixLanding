@@ -2,9 +2,9 @@
 /**
  * @helix:story USER-567000
  *
- * FAQ — root-level re-export of the canonical implementation so
- * `@/components/FAQ` resolves to the same accordion consumed by
- * `app/page.tsx` via `app/components/sections/FAQ`.
+ * FAQ — root-level re-export of the canonical implementation.
+ * Frequently asked questions address objections, pricing, security,
+ * and onboarding concerns raised by every persona.
  *
  * Single source of truth: `components/landing/faq/FAQ`.
  */

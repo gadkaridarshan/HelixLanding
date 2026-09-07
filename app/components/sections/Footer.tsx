@@ -1,3 +1,14 @@
 // helix: app/components/sections/Footer.tsx
-export { Footer } from "@/components/sections/Footer";
-export { default } from "@/components/sections/Footer";
+/**
+ * @helix:story USER-567000
+ * @helix:story USER-384000
+ * @helix:story USER-440000
+ * @helix:story USER-633000
+ * @helix:story USER-641000
+ * @helix:story USER-868000
+ *
+ * Footer — re-export of the canonical implementation from
+ * `components/landing/footer/Footer`.
+ */
+export { Footer } from "@/components/landing/footer/Footer";
+export { default } from "@/components/landing/footer/Footer";

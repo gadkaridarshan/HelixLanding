@@ -2,9 +2,9 @@
 /**
  * @helix:story USER-567000
  *
- * SocialProof — root-level re-export of the canonical implementation
- * so `@/components/SocialProof` resolves to the same trust strip
- * consumed by `app/page.tsx`.
+ * SocialProof — root-level re-export of the canonical implementation.
+ * Social proof surfaces logos, testimonials, and adoption signals so
+ * visitors see trusted-by indicators alongside the personas section.
  *
  * Single source of truth: `components/landing/social-proof/SocialProof`.
  */

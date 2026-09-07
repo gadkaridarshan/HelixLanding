@@ -3,8 +3,8 @@
  * @helix:story USER-567000
  *
  * CTA — root-level re-export of the canonical final-call-to-action
- * implementation so `@/components/CTA` resolves to the same component
- * consumed by `app/page.tsx`.
+ * section. Drives visitors from the marketing surface into the
+ * early-access funnel after they've read the personas and FAQ.
  *
  * Single source of truth: `components/landing/final-cta/FinalCTA`.
  */

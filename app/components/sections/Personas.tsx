@@ -1,6 +1,6 @@
 // helix: app/components/sections/Personas.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-567000
  *
  * Personas — re-export of the canonical implementation under
  * `components/landing/personas/Personas` so the alias resolves from

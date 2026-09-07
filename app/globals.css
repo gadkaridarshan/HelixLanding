@@ -1,267 +1,296 @@
 // helix: app/globals.css
 /**
- * @helix:story USER-303000
+ * @helix:story USER-176000
  *
- * Global stylesheet for the Helix landing site.
+ * Global stylesheet — the single source of truth for the Helix
+ * design system at the CSS layer.
  *
- * - Tailwind v4 entry point (`@import "tailwindcss";`).
- * - CSS custom properties for the brand theme (colors, gradients,
- *   shadows, radii).
- * - Polished, layered background using radial + conic gradients
- *   on the body and a subtle grid + noise overlay.
- * - Reusable utility classes used across sections (chip, heading
- *   scale, subheading, surface card, primary/ghost buttons, skip link).
+ *   • Imports Tailwind v4 (which itself ships the modern reset,
+ *     preflight, and utility classes).
+ *   • Declares every design token via the `@theme` block so Tailwind
+ *     generates matching utility classes (e.g. `bg-brand-500`,
+ *     `text-ink-50`, `rounded-card`, `shadow-glow`).
+ *   • Sets the dark, gradient-heavy base background and the body
+ *     text defaults that every section inherits.
+ *   • Provides a small set of utility classes used in many sections
+ *     (`.surface`, `.surface-glass`, `.gradient-text`,
+ *     `.gradient-bg`, `.grid-bg`, `.noise`).
+ *   • Defines accessible focus rings, motion-safe transitions, and
+ *     scrollbar polish so the whole site feels consistent.
  */
-
 @import "tailwindcss";
 
 @theme {
+  /* ---- Color tokens (mirrored from lib/theme.ts) ---- */
+  --color-ink-50: #f5f7fb;
+  --color-ink-100: #e8ecf4;
+  --color-ink-200: #cdd5e3;
+  --color-ink-300: #a3aec5;
+  --color-ink-400: #7380a0;
+  --color-ink-500: #525d7c;
+  --color-ink-600: #3a4360;
+  --color-ink-700: #272f47;
+  --color-ink-800: #171c2c;
+  --color-ink-900: #0b0f1c;
+  --color-ink-950: #05070f;
+
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
+  --color-brand-950: #083344;
+
+  --color-accent-50: #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+  --color-accent-700: #6d28d9;
+  --color-accent-800: #5b21b6;
+  --color-accent-900: #4c1d95;
+  --color-accent-950: #2e1065;
+
+  --color-aurora-50: #fff1f2;
+  --color-aurora-100: #ffe4e6;
+  --color-aurora-200: #fecdd3;
+  --color-aurora-300: #fda4af;
+  --color-aurora-400: #fb7185;
+  --color-aurora-500: #f43f5e;
+  --color-aurora-600: #e11d48;
+  --color-aurora-700: #be123c;
+  --color-aurora-800: #9f1239;
+  --color-aurora-900: #881337;
+  --color-aurora-950: #4c0519;
+
+  /* ---- Typography ---- */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
     Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  --color-helix-bg: #060818;
-  --color-helix-bg-2: #0b1020;
-  --color-helix-surface: rgba(255, 255, 255, 0.04);
-  --color-helix-surface-strong: rgba(255, 255, 255, 0.06);
-  --color-helix-border: rgba(255, 255, 255, 0.08);
-  --color-helix-border-strong: rgba(255, 255, 255, 0.14);
-  --color-helix-text: #e6ebff;
-  --color-helix-text-muted: #9aa3c7;
-  --color-helix-text-dim: #6b7299;
-  --color-helix-cyan: #22d3ee;
-  --color-helix-violet: #8b5cf6;
-  --color-helix-pink: #f472b6;
-  --color-helix-amber: #fbbf24;
-  --color-helix-emerald: #34d399;
+  /* ---- Radii ---- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  --radius-display: 2rem;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 16, 0.5);
+  --shadow-md: 0 8px 24px -8px rgba(2, 6, 16, 0.55),
+    0 2px 6px rgba(2, 6, 16, 0.4);
+  --shadow-lg: 0 24px 48px -16px rgba(2, 6, 16, 0.6),
+    0 8px 16px rgba(2, 6, 16, 0.45);
+  --shadow-xl: 0 32px 80px -24px rgba(2, 6, 16, 0.7),
+    0 12px 24px rgba(2, 6, 16, 0.45);
+  --shadow-glow: 0 0 0 1px rgba(34, 211, 238, 0.35),
+    0 12px 40px -8px rgba(34, 211, 238, 0.45);
+  --shadow-glow-accent: 0 0 0 1px rgba(167, 139, 250, 0.35),
+    0 12px 40px -8px rgba(167, 139, 250, 0.45);
+
+  /* ---- Layout ---- */
+  --layout-max-width: 76rem;
+  --layout-content-width: 64rem;
+  --layout-nav-height: 4rem;
 }
 
-:root {
-  color-scheme: dark;
-  --hx-radius-sm: 8px;
-  --hx-radius-md: 14px;
-  --hx-radius-lg: 22px;
-  --hx-radius-xl: 28px;
-}
+/* ------------------------------------------------------------------ */
+/* Base layer                                                           */
+/* ------------------------------------------------------------------ */
 
-html,
-body {
-  background: var(--color-helix-bg);
-}
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--color-helix-text);
-  min-height: 100dvh;
-  position: relative;
-  overflow-x: hidden;
-}
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    background-color: var(--color-ink-950);
+  }
 
-/* ---- Polished layered background ----------------------------------- */
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-ink-50);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(
-      1100px 700px at 12% -10%,
-      rgba(34, 211, 238, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      1000px 700px at 90% 0%,
-      rgba(139, 92, 246, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 600px at 50% 110%,
-      rgba(244, 114, 182, 0.12),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #060818 0%, #0a0f24 60%, #060818 100%);
-  pointer-events: none;
-}
+  ::selection {
+    background-color: rgba(34, 211, 238, 0.35);
+    color: var(--color-ink-50);
+  }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  opacity: 0.55;
-  pointer-events: none;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-/* ---- Typography utilities ------------------------------------------ */
+  /* Accessible, brand-toned focus ring for keyboard users. */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
 
-.hx-heading {
-  font-size: clamp(2.25rem, 4.5vw + 0.5rem, 4.25rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  font-weight: 700;
-  color: var(--color-helix-text);
-}
-
-.hx-heading-sm {
-  font-size: clamp(1.75rem, 2.5vw + 0.5rem, 2.5rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  font-weight: 700;
-  color: var(--color-helix-text);
-}
-
-.hx-subheading {
-  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
-  line-height: 1.6;
-  color: var(--color-helix-text-muted);
-  max-width: 60ch;
-}
-
-.hx-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-helix-cyan);
-}
-
-.hx-text-gradient {
-  background: linear-gradient(
-    90deg,
-    #67e8f9 0%,
-    #a78bfa 50%,
-    #f472b6 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* ---- Surface / card utilities -------------------------------------- */
-
-.hx-surface {
-  background: var(--color-helix-surface);
-  border: 1px solid var(--color-helix-border);
-  border-radius: var(--hx-radius-lg);
-  backdrop-filter: blur(10px);
-}
-
-.hx-surface-strong {
-  background: var(--color-helix-surface-strong);
-  border: 1px solid var(--color-helix-border-strong);
-  border-radius: var(--hx-radius-lg);
-  backdrop-filter: blur(12px);
-}
-
-/* ---- Chip / badge -------------------------------------------------- */
-
-.hx-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-helix-text);
-  background: rgba(34, 211, 238, 0.08);
-  border: 1px solid rgba(34, 211, 238, 0.25);
-  border-radius: 999px;
-}
-
-.hx-chip-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: var(--color-helix-cyan);
-  box-shadow: 0 0 12px var(--color-helix-cyan);
-}
-
-/* ---- Buttons ------------------------------------------------------- */
-
-.hx-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: #061018;
-  background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 100%);
-  border-radius: var(--hx-radius-md);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.4) inset,
-    0 12px 30px -10px rgba(139, 92, 246, 0.55);
-  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
-}
-
-.hx-btn-primary:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-}
-
-.hx-btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--color-helix-text);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--color-helix-border-strong);
-  border-radius: var(--hx-radius-md);
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
-}
-
-.hx-btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.22);
-  transform: translateY(-1px);
-}
-
-/* ---- Skip link ----------------------------------------------------- */
-
-.hx-skip-link {
-  position: absolute;
-  top: -100px;
-  left: 1rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--color-helix-bg-2);
-  color: var(--color-helix-text);
-  border-radius: var(--hx-radius-sm);
-  border: 1px solid var(--color-helix-border-strong);
-  z-index: 100;
-}
-
-.hx-skip-link:focus {
-  top: 1rem;
-}
-
-/* ---- Selection ----------------------------------------------------- */
-
-::selection {
-  background: rgba(139, 92, 246, 0.35);
-  color: #ffffff;
-}
-
-/* ---- Reduced motion ------------------------------------------------ */
-
-@media (prefers-reduced-motion: reduce) {
+  /* Scrollbar polish (WebKit + Firefox). */
   * {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-700) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-ink-700);
+    border-radius: 9999px;
+    border: 2px solid var(--color-ink-950);
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-ink-600);
+  }
+
+  /* Respect users who prefer reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Components layer — reusable building blocks                         */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Frosted / glassmorphic surface used by feature, persona, and
+     FAQ cards. Reads as a "lifted" panel against the dark gradient
+     background without needing a heavy drop shadow. */
+  .surface {
+    background-color: rgba(23, 28, 44, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .surface-glass {
+    background: linear-gradient(
+      135deg,
+      rgba(34, 211, 238, 0.06) 0%,
+      rgba(167, 139, 250, 0.06) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* Brand gradient applied to text — used on the hero headline
+     and other display headings. */
+  .gradient-text {
+    background: linear-gradient(
+      120deg,
+      var(--color-brand-300) 0%,
+      var(--color-brand-400) 35%,
+      var(--color-accent-300) 70%,
+      var(--color-accent-400) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* The full-page background — radial brand + accent glows on top
+     of the deep ink base, plus a subtle conic shimmer. Sits behind
+     every section. */
+  .gradient-bg {
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 15% 10%,
+        rgba(34, 211, 238, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 70% 55% at 85% 20%,
+        rgba(167, 139, 250, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 50% 100%,
+        rgba(34, 211, 238, 0.08),
+        transparent 70%
+      ),
+      linear-gradient(180deg, #05070f 0%, #0b0f1c 100%);
+  }
+
+  /* Subtle blueprint grid for the hero background. */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: -1px -1px;
+    mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 40%,
+      black 30%,
+      transparent 80%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 40%,
+      black 30%,
+      transparent 80%
+    );
+  }
+
+  /* A barely-there film-grain texture overlay. */
+  .noise {
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 220px 220px;
+    opacity: 0.5;
+  }
+
+  /* Container width used by every section. */
+  .container-page {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.75rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 2.25rem;
+    }
   }
 }
