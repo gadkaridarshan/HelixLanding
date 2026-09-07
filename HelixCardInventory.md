@@ -1,8 +1,8 @@
 # Card Inventory
 
+- Sep 7, 2026, 9:36:44 AM CDT | USER-954000 | done | development | Hero how-it-works features sections
+- Sep 7, 2026, 9:36:37 AM CDT | USER-176000 | in_progress | development | Brand theme typography and globals
 - Sep 7, 2026, 9:36:16 AM CDT | USER-567000 | done | development | Personas social proof FAQ CTA
-- Sep 7, 2026, 9:36:15 AM CDT | USER-954000 | in_progress | development | Hero how-it-works features sections
-- Sep 7, 2026, 9:35:53 AM CDT | USER-176000 | in_progress | development | Brand theme typography and globals
 - Sep 7, 2026, 9:35:12 AM CDT | USER-604000 | done | deployment | Page assembly and Vercel deployment
 - Sep 7, 2026, 9:31:56 AM CDT | USER-969000 | done | development | Scaffold Next.js theme shell
 - Sep 7, 2026, 9:31:10 AM CDT | USER-303000 | done | development | Helix landing page site
