@@ -1,10 +1,11 @@
 // helix: app/components/sections/FinalCTA.tsx
 /**
- * @helix:story USER-956000
+ * @helix:story USER-986000
  *
- * Re-export the canonical FinalCTA implementation from
- * `components/landing/cta/FinalCTA` so both `@/app/components/sections/FinalCTA`
- * and `@/components/sections/FinalCTA` resolve to the same component.
+ * FinalCTA section — re-exports the canonical implementation under
+ * `components/sections/FinalCTA` so the alias resolves from the
+ * `app/` and root-level section trees alike.
  */
-export { FinalCTA } from "@/components/landing/cta/FinalCTA";
-export { default } from "@/components/landing/cta/FinalCTA";
+
+export { FinalCTA } from "@/components/sections/FinalCTA";
+export { default } from "@/components/sections/FinalCTA";

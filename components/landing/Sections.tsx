@@ -1,62 +1,45 @@
 // helix: components/landing/Sections.tsx
 /**
- * @helix:story USER-986000
+ * @helix:story USER-349000
  *
- * Section composition root — renders every landing section in the
- * canonical narrative order. This is the shared shell that the home
- * page (`app/page.tsx`) composes against so individual section work can
- * land independently without the page file churning on every change.
+ * Section composition root — owns the full narrative order of the
+ * Helix landing page. The narrative arc:
  *
- * Order: Hero → HowItWorks → Features → Personas → SocialProof →
- *        FAQ → CTA → Footer
+ *   Hero            → above-the-fold hook + dual CTA
+ *   SocialProof     → trust strip (logos / metrics)
+ *   Features        → core capability grid
+ *   HowItWorks      → 4-step walkthrough
+ *   Personas        → who Helix is for (developer, founder, etc.)
+ *   StatsBar        → numeric reinforcement
+ *   FAQ             → last-mile objections
+ *   FinalCTA        → closing conversion moment
  *
- * Each section component is imported from its canonical location. While
- * a section is being scaffolded it renders a placeholder anchor with the
- * intended `id` so navigation links resolve and the visual rhythm of the
- * page is preserved end-to-end.
+ * The order is the source of truth — `app/page.tsx` only renders
+ * this component. Reordering the narrative happens here.
  */
 
 import type { ReactElement } from "react";
 
-import { Hero } from "@/app/components/sections/Hero";
-import { HowItWorks } from "@/app/components/sections/HowItWorks";
-import { Features } from "@/app/components/sections/Features";
-import { Personas } from "@/app/components/sections/Personas";
-import { FAQ } from "@/app/components/sections/FAQ";
-import { FinalCTA } from "@/app/components/sections/FinalCTA";
-import { StatsBar } from "@/app/components/sections/StatsBar";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { Hero } from "@/components/sections/Hero";
+import { SocialProof } from "@/components/sections/SocialProof";
+import { Features } from "@/components/sections/Features";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Personas } from "@/components/sections/Personas";
+import { StatsBar } from "@/components/sections/StatsBar";
+import { FAQ } from "@/components/sections/FAQ";
+import { FinalCTA } from "@/components/sections/FinalCTA";
 
-export interface SectionsProps {
-  /**
-   * When true, omit the Navbar/Footer chrome. Useful for previews and
-   * embed routes where the surrounding chrome is provided by the host.
-   */
-  bare?: boolean;
-}
-
-/**
- * Sections — composition root for the Helix landing surface.
- *
- * Renders the full narrative sequence end-to-end. Individual sections
- * own their own typography, animation, and interactivity; this component
- * stays intentionally thin so it can be reused for previews and exports.
- */
-export function Sections({ bare = false }: SectionsProps): ReactElement {
+export function Sections(): ReactElement {
   return (
     <>
-      {!bare && <Navbar />}
-      <main className="relative">
-        <Hero />
-        <HowItWorks />
-        <Features />
-        <Personas />
-        <StatsBar />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      {!bare && <Footer />}
+      <Hero />
+      <SocialProof />
+      <Features />
+      <HowItWorks />
+      <Personas />
+      <StatsBar />
+      <FAQ />
+      <FinalCTA />
     </>
   );
 }

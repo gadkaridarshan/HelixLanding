@@ -1,25 +1,34 @@
 // helix: app/page.tsx
 /**
- * @helix:story USER-217000
- * @helix:story USER-956000
+ * @helix:story USER-349000
  *
- * Helix landing page — assembled, single-route marketing page.
+ * Helix landing page — single-route marketing page.
  *
- * This file is intentionally thin: it composes the section root
- * (`components/landing/Sections.tsx`) which owns the full narrative
- * order. Individual sections are server components (or thin "use
- * client" islands where interactivity is required), imported from
- * `components/landing` and `app/components/sections` so the page file
- * itself stays a clean composition surface with no inline business
- * logic.
+ * This file is intentionally thin: it composes the layout chrome
+ * (Navbar + Footer) around the section composition root
+ * (`components/landing/Sections.tsx`). The page file itself stays a
+ * clean composition surface with no inline business logic, so the
+ * card scope (USER-349000) owns the full narrative and ordering
+ * while downstream section cards can iterate on individual
+ * sections without touching this entry route.
  *
  * This is the entry route for the Vercel deployment.
  */
 
 import type { ReactElement } from "react";
 
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { Sections } from "@/components/landing/Sections";
 
 export default function Page(): ReactElement {
-  return <Sections />;
+  return (
+    <>
+      <Navbar />
+      <main id="main" className="relative">
+        <Sections />
+      </main>
+      <Footer />
+    </>
+  );
 }
