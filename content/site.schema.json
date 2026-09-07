@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Helix site content",
+  "type": "object",
+  "required": [
+    "name",
+    "tagline",
+    "description",
+    "url",
+    "github",
+    "twitter",
+    "referenceSite"
+  ],
+  "properties": {
+    "name": { "type": "string" },
+    "tagline": { "type": "string" },
+    "description": { "type": "string" },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical LIVE site URL for this product."
+    },
+    "github": { "type": "string", "format": "uri" },
+    "twitter": { "type": "string", "format": "uri" },
+    "referenceSite": {
+      "type": "object",
+      "required": [
+        "label",
+        "url",
+        "description",
+        "isLiveSite",
+        "isDeployedFromThisRepo"
+      ],
+      "properties": {
+        "label": { "type": "string" },
+        "shortLabel": { "type": "string" },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "External Helix deployment used as a visual / brand reference. NOT the live site."
+        },
+        "badge": { "type": "string" },
+        "kind": { "type": "string" },
+        "isLiveSite": { "type": "boolean" },
+        "isDeployedFromThisRepo": { "type": "boolean" },
+        "description": { "type": "string" },
+        "ariaLabelTemplate": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

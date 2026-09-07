@@ -1,0 +1,20 @@
+{
+  "$schema": "./site.schema.json",
+  "name": "Helix",
+  "tagline": "Atomic Work-Breakdown Orchestrator",
+  "description": "Helix is the AI coding orchestrator that decomposes every request into reviewable units, executes them in order, and verifies each one against your repo before producing a small, reviewable PR.",
+  "url": "https://helix-landing.vercel.app",
+  "github": "https://github.com/gadkaridarshan/Helix",
+  "twitter": "https://twitter.com/helix_ai",
+  "referenceSite": {
+    "label": "Reference site",
+    "shortLabel": "View Helix reference site",
+    "url": "https://helix-ai-orchestrator.vercel.app",
+    "badge": "Reference site",
+    "kind": "external-reference",
+    "isLiveSite": false,
+    "isDeployedFromThisRepo": false,
+    "description": "A visually similar Helix deployment used purely as a visual / brand reference. This is NOT the live landing page for this product, and it is NOT deployed from this repository.",
+    "ariaLabelTemplate": "Reference site (visual / brand reference only, not this product's live site): {url}"
+  }
+}
