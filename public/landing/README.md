@@ -35,10 +35,10 @@ A standalone Next.js (App Router) marketing site for Helix, the AI coding orches
 
 There are **two** distinct URLs and they refer to **different** sites:
 
-- **Live site (this product):** the value of `brand.url` in [`lib/brand.ts`](./lib/brand.ts). This is the canonical production URL for this workspace's deployment and is the only true "live site" for this product.
-- **Reference site:** [Reference site (visual / brand reference only): helix-ai-orchestrator.vercel.app](https://helix-ai-orchestrator.vercel.app) — used purely as a visual / brand reference. It is **not** the live landing page for this product, it is **not** deployed from this repo, and visitors should not assume following that link takes them to the site they are currently viewing.
+- **Live site (this product):** the value of `brand.url` in [`lib/brand.ts`](../../lib/brand.ts). This is the canonical production URL for this workspace's deployment and is the only true "live site" for this product.
+- **Reference site:** [helix-ai-orchestrator.vercel.app](https://helix-ai-orchestrator.vercel.app) — used purely as a visual / brand reference. It is **not** the live landing page for this product, it is **not** deployed from this repo, and visitors should not assume following that link takes them to the site they are currently viewing.
 
-Any link rendered on the live site that points at the reference URL **must** be labelled as a reference-site link (see the [Footer](./components/sections/Footer.tsx) for the canonical pattern). Do not label it as "live site", "production", or "deployment" — that misleads visitors.
+Any link rendered on the live site that points at the reference URL **must** be labelled as a reference-site link (see the [Footer](../../components/sections/Footer.tsx) for the canonical pattern). Do not label it as "live site", "production", or "deployment" — that misleads visitors.
 
 ## Run locally
 
@@ -57,4 +57,4 @@ Then open <http://localhost:3000>.
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](../../LICENSE).

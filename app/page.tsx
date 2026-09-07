@@ -1,56 +1,30 @@
-// helix: app/page.tsx
-/**
- * @helix:story USER-303000
- *
- * Helix landing page — the canonical marketing page for the product.
- *
- * Sections:
- *   1. Navbar          — sticky top nav
- *   2. Hero            — headline, subhead, primary/secondary CTAs, HeroVisual
- *   3. StatsBar        — quick social proof metrics
- *   4. Features        — product capability grid
- *   5. HowItWorks      — 3-step orchestration walkthrough
- *   6. Personas        — who Helix is for
- *   7. FinalCTA        — closing call-to-action
- *   8. FAQ             — common questions
- *   9. Footer          — site chrome
- */
+## Live site vs. reference site
 
-import { Navbar } from "@/components/sections/Navbar";
-import { Hero } from "@/components/sections/Hero";
-import { StatsBar } from "@/components/sections/StatsBar";
-import { Features } from "@/components/sections/Features";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Personas } from "@/components/sections/Personas";
-import { FinalCTA } from "@/components/sections/FinalCTA";
-import { FAQ } from "@/components/sections/FAQ";
-import { Footer } from "@/components/sections/Footer";
+There are **two** distinct URLs and they refer to **different** sites. Do not conflate them.
 
-export default function Page() {
-  return (
-    <>
-      <Navbar />
-      <main id="main" className="relative isolate overflow-hidden">
-        {/* Decorative global background — gradient + grid + glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-brand-bg"
-        >
-          <div className="absolute inset-0 bg-grid-overlay opacity-[0.35]" />
-          <div className="absolute inset-x-0 top-0 h-[640px] bg-gradient-to-b from-brand-cyan/15 via-brand-violet/10 to-transparent" />
-          <div className="absolute -top-40 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-brand-cyan/20 blur-3xl" />
-          <div className="absolute -bottom-40 right-[-10%] h-[520px] w-[680px] rounded-full bg-brand-violet/20 blur-3xl" />
-        </div>
+- **Live site (this product):** the value of `brand.url` in [`lib/brand.ts`](./lib/brand.ts). This is the canonical production URL that Vercel will deploy this workspace to, and it is the only URL that should ever be described as "live", "production", or "deployed" for this product.
+- **Reference site:** [helix-ai-orchestrator.vercel.app](https://helix-ai-orchestrator.vercel.app) — an externally-hosted Helix deployment used purely as a visual / brand reference. It is **not** the live landing page for this product, it is **not** deployed from this repo, and visitors must not be led to believe that following that link returns them to the site they are currently viewing.
 
-        <Hero />
-        <StatsBar />
-        <Features />
-        <HowItWorks />
-        <Personas />
-        <FinalCTA />
-        <FAQ />
-      </main>
-      <Footer />
-    </>
-  );
-}
+Anywhere the reference URL is rendered on the live site (Footer, README badge, etc.) it **must** be labelled as a "reference site" link, never as the live site, deployment, or production URL. See [`components/sections/Footer.tsx`](./components/sections/Footer.tsx) for the canonical pattern.
+
+## Deployment
+
+This site is a standard Next.js (App Router) project and deploys to Vercel with zero configuration:
+
+1. Push the branch to GitHub.
+2. Import the repository in Vercel.
+3. Accept the auto-detected framework settings.
+4. Deploy.
+
+The canonical production URL is whatever Vercel assigns to the deployment — keep `brand.url` in `lib/brand.ts` in sync if you move the project.
+
+## Stack
+
+- **Next.js 15** (App Router) + **React 19**
+- **TypeScript** with full strict mode
+- **Tailwind CSS v4** (no `tailwind.config.ts` — theme tokens live in `app/globals.css`)
+- Fully static, no backend services
+
+## License
+
+MIT — see [LICENSE](./LICENSE).

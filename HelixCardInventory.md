@@ -1,7 +1,8 @@
 # Card Inventory
 
+- Sep 7, 2026, 9:12:38 AM CDT | USER-868000 | done | development | Clarify reference site link copy
+- Sep 7, 2026, 9:11:14 AM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 9:10:00 AM CDT | USER-440000 | done | development | Correct reference site link copy
-- Sep 7, 2026, 9:09:00 AM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 8:59:45 AM CDT | USER-384000 | done | development | Clarify reference site link copy
 - Sep 7, 2026, 8:51:36 AM CDT | USER-616000 | done | development | Relabel reference site link
 - Sep 7, 2026, 8:31:03 AM CDT | USER-986000 | done | development | Scaffold brand theme and section
