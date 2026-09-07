@@ -1,8 +1,9 @@
 # Card Inventory
 
+- Sep 7, 2026, 4:25:24 PM CDT | USER-468000 | done | development | Use cases section component
+- Sep 7, 2026, 4:24:56 PM CDT | USER-303000 | in_progress | development | Helix landing page site
 - Sep 7, 2026, 4:22:30 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 4:21:31 PM CDT | USER-94000 | done | development | Footer with Vercel SEO
-- Sep 7, 2026, 4:21:13 PM CDT | USER-303000 | todo | development | Helix landing page site
 - Sep 7, 2026, 4:19:23 PM CDT | USER-521000 | done | development | CTA section component
 - Sep 7, 2026, 4:19:15 PM CDT | USER-215000 | done | development | FAQ section component
 - Sep 7, 2026, 1:46:33 PM CDT | USER-434000 | done | development | FAQ CTA Footer sections

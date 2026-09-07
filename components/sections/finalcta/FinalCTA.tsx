@@ -2,25 +2,13 @@
 /**
  * @helix:story USER-303000
  *
- * FinalCTA — last-mile conversion moment before the footer.
+ * FinalCTA — closing conversion moment right before the footer.
+ * Two strong actions and a single-sentence value prop.
  */
 import * as React from "react";
 
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
 import { brand } from "@/lib/brand";
-
-import finalCta from "@/content/finalcta.json";
-
-interface FinalCtaContent {
-  eyebrow: string;
-  heading: string;
-  description: string;
-  primary: { label: string; href: string };
-  secondary: { label: string; href: string };
-}
-
-const content: FinalCtaContent = finalCta as FinalCtaContent;
 
 export interface FinalCTAProps {
   className?: string;
@@ -30,40 +18,45 @@ export function FinalCTA({ className }: FinalCTAProps): React.ReactElement {
   return (
     <section
       id="final-cta"
-      aria-labelledby="final-cta-heading"
-      className={"section-pad " + (className ?? "")}
+      aria-labelledby="final-cta-title"
+      className={
+        "relative isolate overflow-hidden py-24 sm:py-32 " +
+        (className ?? "")
+      }
     >
-      <Container>
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-10 sm:p-14">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[120%] -translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(34,211,238,0.25),rgba(15,23,42,0)_70%)]"
-          />
-          <div className="relative mx-auto max-w-2xl text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-brand-300">
-              {content.eyebrow}
-            </p>
-            <h2
-              id="final-cta-heading"
-              className="mt-3 text-3xl font-semibold tracking-tight text-ink-50 sm:text-4xl"
-            >
-              {content.heading}
-            </h2>
-            <p className="mt-4 text-base text-slate-300 sm:text-lg">
-              {content.description}
-            </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <Button href={content.primary.href} variant="primary" size="lg">
-                {content.primary.label}
-              </Button>
-              <Button href={content.secondary.href} variant="secondary" size="lg">
-                {content.secondary.label}
-              </Button>
-            </div>
-            <p className="mt-6 text-xs text-slate-400">
-              Open source on GitHub · {brand.url.replace(/^https?:\/\//, "")}
-            </p>
-          </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute left-1/2 top-0 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+        <div className="absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/15 blur-3xl" />
+      </div>
+      <Container className="text-center">
+        <h2
+          id="final-cta-title"
+          className="mx-auto max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
+        >
+          Ship verified AI code with{" "}
+          <span className="gradient-text">{brand.name}</span>.
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-pretty text-base text-white/70 sm:text-lg">
+          Open source. Model-agnostic. Built for teams that take main seriously.
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+          <a
+            href={brand.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+          >
+            Get started — it&apos;s open source
+          </a>
+          <a
+            href="#features"
+            className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            See the features
+          </a>
         </div>
       </Container>
     </section>

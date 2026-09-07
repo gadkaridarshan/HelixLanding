@@ -1,25 +1,25 @@
 {
   "eyebrow": "Trusted by builders",
-  "heading": "Engineering teams ship faster with Helix.",
-  "description": "From solo founders to platform teams, Helix fits into the workflows that already work.",
+  "heading": "Teams shipping verified AI code with Helix.",
+  "description": "From early-stage startups to platform teams at scale, Helix is the orchestration layer for AI-driven development.",
   "testimonials": [
     {
-      "quote": "We cut our AI PR review time in half. Helix turns a vague prompt into a stack of tiny, mergeable PRs.",
-      "author": "Maya Chen",
+      "quote": "Helix turned our AI coding agent into a teammate we can actually trust to merge code.",
+      "author": "Avery K.",
       "role": "Staff Engineer",
-      "company": "Northwind"
+      "company": "Series B Fintech"
     },
     {
-      "quote": "Our main branch has been green for six weeks. Atomic units changed everything.",
-      "author": "Jonas Beck",
-      "role": "Solo Founder",
-      "company": "Acme"
+      "quote": "We ship twice as many features per sprint because reviews go from hours to minutes.",
+      "author": "Priya N.",
+      "role": "Head of Product",
+      "company": "B2B SaaS"
     },
     {
-      "quote": "Helix is the missing piece between planning and shipping. Predictable delivery, end-to-end.",
-      "author": "Priya Raman",
-      "role": "Product Manager",
-      "company": "Globex"
+      "quote": "Main hasn't been red in three months. That's a first for us with AI agents.",
+      "author": "Marcus D.",
+      "role": "Founding Engineer",
+      "company": "Dev Tools Startup"
     }
   ]
 }

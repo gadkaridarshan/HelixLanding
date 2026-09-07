@@ -51,21 +51,29 @@ export function SocialProof({
         />
         <ul
           role="list"
-          className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-3"
+          className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3"
         >
           {content.testimonials.map((t) => (
             <li
               key={`${t.author}-${t.company}`}
-              className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+              className="flex h-full flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur"
             >
-              <p className="text-sm leading-relaxed text-slate-200">
-                “{t.quote}”
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-5 w-5 text-cyan-300/80"
+              >
+                <path d="M7.17 6C4.87 6 3 7.87 3 10.17c0 1.94 1.34 3.55 3.13 4.01-.2 1.34-.85 2.51-2.13 3.49 2.36-.34 4.13-1.45 5.16-3.04.71-1.1 1.34-2.54 1.34-4.46C10.5 7.87 8.63 6 7.17 6zm10 0c-2.3 0-4.17 1.87-4.17 4.17 0 1.94 1.34 3.55 3.13 4.01-.2 1.34-.85 2.51-2.13 3.49 2.36-.34 4.13-1.45 5.16-3.04.71-1.1 1.34-2.54 1.34-4.46 0-2.3-1.87-4.17-4.17-4.17z" />
+              </svg>
+              <p className="text-pretty text-base text-white/85">
+                &ldquo;{t.quote}&rdquo;
               </p>
-              <div className="mt-4 text-xs text-slate-400">
-                <span className="font-medium text-ink-50">{t.author}</span>
+              <footer className="mt-auto text-sm text-white/60">
+                <span className="font-medium text-white">{t.author}</span>
                 {" · "}
                 {t.role}, {t.company}
-              </div>
+              </footer>
             </li>
           ))}
         </ul>

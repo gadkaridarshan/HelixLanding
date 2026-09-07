@@ -1,28 +1,37 @@
 // helix: lib/brand.ts
 /**
- * Brand surface — single source of truth for the Helix brand
- * identity (name, canonical URL, OG image, Twitter handle,
- * social URLs, logo URL, and dark theme color).
+ * @helix:story USER-303000
  *
- * Every consumer of brand copy (the page `<title>`, OG/Twitter
- * card metadata, the Footer, the JSON-LD `Organization` block,
- * and any future emails/badges) reads from this module so the
- * identity is never duplicated.
+ * Brand tokens — single source of truth for the Helix name, tagline,
+ * canonical URLs, social handles, and asset paths. Components import
+ * from here instead of hardcoding strings.
  *
- * Values can be overridden via environment variables prefixed
- * with `NEXT_PUBLIC_BRAND_` so Vercel preview deploys can point
- * at staging URLs without code changes.
+ * Environment overrides are read with `NEXT_PUBLIC_BRAND_*` so the
+ * same codebase can be deployed to a staging URL without edits.
  */
 
-export const DEFAULT_BRAND_URL = "https://helix-ai-orchestrator.vercel.app";
-export const DEFAULT_GITHUB_URL =
-  "https://github.com/gadkaridarshan/Helix";
-export const DEFAULT_TWITTER_URL = "https://x.com/helix_ai";
-export const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/company/helix-ai";
-export const DEFAULT_OG_IMAGE = "/og-image.svg";
-export const DEFAULT_LOGO_URL = "/logo.svg";
-export const DEFAULT_TWITTER_HANDLE = "@helix_ai";
-export const DEFAULT_THEME_COLOR_DARK = "#050816";
+export interface Brand {
+  readonly name: string;
+  readonly tagline: string;
+  readonly description: string;
+  readonly url: string;
+  readonly githubUrl: string;
+  readonly twitterUrl: string;
+  readonly linkedInUrl: string;
+  readonly logoUrl: string;
+  readonly ogImageUrl: string;
+  readonly twitterHandle: string;
+  readonly themeColorDark: string;
+}
+
+const DEFAULT_BRAND_URL = "https://helix-ai-orchestrator.vercel.app";
+const DEFAULT_GITHUB_URL = "https://github.com/gadkaridarshan/Helix";
+const DEFAULT_TWITTER_URL = "https://twitter.com/helix";
+const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/company/helix";
+const DEFAULT_LOGO_URL = "/logo.svg";
+const DEFAULT_OG_IMAGE = "/og.png";
+const DEFAULT_TWITTER_HANDLE = "@helix";
+const DEFAULT_THEME_COLOR_DARK = "#05060a";
 
 const envUrl = process.env["NEXT_PUBLIC_BRAND_URL"]?.trim();
 const envOg = process.env["NEXT_PUBLIC_BRAND_OG_IMAGE"]?.trim();
@@ -67,19 +76,21 @@ export const twitterHandle: string =
 export const themeColorDark: string =
   envTheme && envTheme.length > 0 ? envTheme : DEFAULT_THEME_COLOR_DARK;
 
-export const brand = {
+export const brand: Brand = {
   name: "Helix",
-  shortName: "Helix",
-  tagline:
-    "AI coding agent orchestration. Atomic units. Repo-aware verification. One PR per task.",
+  tagline: "Atomic work-breakdown for AI coding agents.",
+  description:
+    "Helix turns a single prompt into verified, merge-ready PRs. Plan atomic units, execute them in order, and ship code that passes types, tests, and lint — every time.",
   url: canonicalUrl,
-  ogImage: ogImageUrl,
-  logoUrl,
   githubUrl,
   twitterUrl,
   linkedInUrl,
-  twitter: twitterHandle,
+  logoUrl,
+  ogImageUrl,
+  twitterHandle,
   themeColorDark,
-} as const;
+};
 
-export type Brand = typeof brand;
+export function canonicalUrl(): string {
+  return canonicalUrl;
+}

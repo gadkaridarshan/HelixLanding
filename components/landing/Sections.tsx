@@ -28,20 +28,22 @@ import { HomePage } from "@/components/sections/homePage";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Personas } from "@/components/sections/personas/Personas";
 import { SocialProof } from "@/components/sections/SocialProof";
+import { StatsBar } from "@/components/sections/StatsBar";
 
 export function Sections(): ReactElement {
   return (
-    <>
+    <main id="main" className="relative isolate">
       <Hero />
       <SocialProof />
-      <HomePage />
+      <StatsBar />
       <Features />
       <HowItWorks />
       <Personas />
       <FAQ />
       <FinalCTA />
       <CTASection />
-    </>
+      <HomePage />
+    </main>
   );
 }
 

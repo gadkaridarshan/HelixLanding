@@ -7,36 +7,37 @@ export interface SectionHeadingProps {
   eyebrow?: string;
   heading: string;
   description?: string;
+  align?: "left" | "center";
   className?: string;
-  headingId?: string;
 }
 
 export function SectionHeading({
   eyebrow,
   heading,
   description,
+  align = "center",
   className,
-  headingId,
 }: SectionHeadingProps): React.ReactElement {
+  const alignment =
+    align === "center"
+      ? "mx-auto text-center"
+      : "text-left";
   return (
-    <div className={cn("mx-auto max-w-2xl text-center", className)}>
+    <header className={cn("max-w-3xl", alignment, className)}>
       {eyebrow ? (
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-brand-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90 sm:text-sm">
           {eyebrow}
         </p>
       ) : null}
-      <h2
-        id={headingId}
-        className="mt-3 text-3xl font-semibold tracking-tight text-ink-50 sm:text-4xl"
-      >
+      <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
         {heading}
       </h2>
       {description ? (
-        <p className="mt-4 text-base text-slate-300 sm:text-lg">
+        <p className="mt-4 text-pretty text-base text-white/70 sm:text-lg">
           {description}
         </p>
       ) : null}
-    </div>
+    </header>
   );
 }
 

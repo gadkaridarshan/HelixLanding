@@ -1,55 +1,51 @@
 {
   "eyebrow": "Built for",
-  "heading": "For every kind of builder.",
-  "description": "Helix fits the way you already work — solo, in a team, or across an enterprise org.",
+  "heading": "Helix is for every team shipping AI code.",
+  "description": "From solo founders to enterprise platform teams, Helix gives every role a predictable, verifiable workflow for AI-driven development.",
   "items": [
+    {
+      "id": "founders",
+      "role": "Solo founders",
+      "title": "Move fast without breaking things.",
+      "description": "Atomic PRs keep main green and your weekends quiet.",
+      "outcomes": [
+        "Atomic PRs keep main green.",
+        "Fewer late-night hotfixes from sprawling AI diffs.",
+        "Velocity your investors can verify."
+      ]
+    },
     {
       "id": "developers",
       "role": "Developers",
       "title": "Ship features, not diffs.",
-      "description": "Stop reviewing 2,000-line AI PRs. Focus on the change that matters.",
+      "description": "Stop reviewing 2,000-line AI PRs and focus on the change that matters.",
       "outcomes": [
+        "Stop reviewing 2,000-line AI PRs.",
         "Every unit passes types, tests, and lint.",
-        "Smaller PRs, faster reviews, happier teams.",
-        "Spend time on design — not on diffs."
-      ],
-      "quote": "Helix turns AI output into work I actually want to merge."
+        "Focus on the change that matters."
+      ]
     },
     {
       "id": "pms",
       "role": "Product managers",
       "title": "Predictable AI delivery.",
-      "description": "Plan features, not vibes. Track each unit end-to-end.",
+      "description": "Plan features, not vibes — and tell stakeholders what shipped and why.",
       "outcomes": [
+        "Plan features, not vibes.",
         "Clear scope per unit, traceable end-to-end.",
-        "Tell stakeholders what shipped and why.",
-        "No more 'AI surprise' in standups."
-      ],
-      "quote": "I finally know what the AI will ship before it ships."
-    },
-    {
-      "id": "founders",
-      "role": "Founders",
-      "title": "Move fast without breaking things.",
-      "description": "Atomic PRs keep main green. Velocity your investors can verify.",
-      "outcomes": [
-        "Fewer late-night hotfixes from sprawling AI diffs.",
-        "Predictable shipping cadence.",
-        "Demo day without a fire drill."
-      ],
-      "quote": "Helix is the only AI tool I'd ship a product on."
+        "Tell stakeholders what shipped and why."
+      ]
     },
     {
       "id": "enterprise",
       "role": "Enterprise teams",
       "title": "Governance, by construction.",
-      "description": "Every change is scoped, reviewed, and verified — automatically.",
+      "description": "Every merge is auditable and policy-compliant without slowing teams down.",
       "outcomes": [
-        "Audit trail per unit, per repo, per release.",
-        "Works with your existing CI and review tooling.",
-        "Self-host on your own infrastructure."
-      ],
-      "quote": "Helix gave us AI velocity without giving up governance."
+        "Per-unit approval and audit trail.",
+        "Sandboxed execution with policy gates.",
+        "Bring your own model and infra."
+      ]
     }
   ]
 }
