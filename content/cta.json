@@ -1,14 +1,16 @@
 {
-  "eyebrow": "Ship small PRs, not sprawling diffs",
-  "heading": "Ready to orchestrate your next feature with Helix?",
-  "description": "Spin up the live orchestrator on Vercel or grab the source and run it locally — small, reviewable PRs are one prompt away.",
-  "primary": {
-    "label": "Try the live orchestrator",
-    "href": "https://helix-ai-orchestrator.vercel.app"
+  "eyebrow": "Ready when you are",
+  "title": "Ship the next feature like you planned it.",
+  "subtitle": "Helix turns one good prompt into a stack of atomic, reviewable pull requests. Start orchestrating your AI coding agents today.",
+  "primaryCta": {
+    "label": "Get early access",
+    "href": "https://github.com/gadkaridarshan/Helix",
+    "external": true
   },
-  "secondary": {
+  "secondaryCta": {
     "label": "View on GitHub",
-    "href": "https://github.com/gadkaridarshan/Helix"
+    "href": "https://github.com/gadkaridarshan/Helix",
+    "external": true
   },
-  "footnote": "Open-source under the repository's license. Bring your own model API key."
+  "footnote": "Open source. Self-hosted. Built for teams that ship."
 }

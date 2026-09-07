@@ -1,0 +1,123 @@
+// helix: components/footer/Footer.module.css
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(500px 240px at 12% 0%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(500px 240px at 90% 100%, rgba(139, 92, 246, 0.12), transparent 60%);
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+.brandBlock {
+  max-width: 24rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: white;
+}
+
+.wordmarkText {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgb(226 232 240);
+}
+
+.subline {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgb(148 163 184);
+}
+
+.column {
+  min-width: 0;
+}
+
+.columnTitle {
+  margin: 0 0 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(165 243 252);
+}
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgb(203 213 225);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.link:hover {
+  color: white;
+}
+
+.link:focus-visible {
+  outline: none;
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.bottom {
+  position: relative;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgb(148 163 184);
+}
+
+.builtWith {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgb(100 116 139);
+}

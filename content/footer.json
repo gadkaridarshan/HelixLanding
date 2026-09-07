@@ -1,72 +1,32 @@
 {
-  "tagline": "Atomic work breakdown for AI coding agents — turn a single intent into review-ready PRs.",
+  "tagline": "Atomic work-breakdown for AI coding agents.",
   "columns": [
     {
-      "heading": "Product",
+      "title": "Product",
       "links": [
-        { "label": "Features", "href": "#features" },
-        { "label": "How it works", "href": "#how-it-works" },
-        { "label": "Personas", "href": "#personas" },
-        { "label": "FAQ", "href": "#faq" }
+        { "label": "Features", "href": "/#features", "external": false },
+        { "label": "How it works", "href": "/#how-it-works", "external": false },
+        { "label": "Personas", "href": "/#personas", "external": false },
+        { "label": "FAQ", "href": "/#faq", "external": false }
       ]
     },
     {
-      "heading": "Resources",
+      "title": "Project",
       "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/gadkaridarshan/Helix",
-          "external": true
-        },
-        {
-          "label": "Documentation",
-          "href": "https://github.com/gadkaridarshan/Helix#readme",
-          "external": true
-        },
-        {
-          "label": "Changelog",
-          "href": "https://github.com/gadkaridarshan/Helix/releases",
-          "external": true
-        }
+        { "label": "GitHub", "href": "https://github.com/gadkaridarshan/Helix", "external": true },
+        { "label": "Live site", "href": "https://helix-ai-orchestrator.vercel.app/", "external": true },
+        { "label": "Changelog", "href": "https://github.com/gadkaridarshan/Helix/releases", "external": true },
+        { "label": "Roadmap", "href": "https://github.com/gadkaridarshan/Helix/issues", "external": true }
       ]
     },
     {
-      "heading": "Company",
+      "title": "Contact",
       "links": [
-        { "label": "About", "href": "#main" },
-        { "label": "Contact", "href": "mailto:hello@helix-ai.dev" },
-        {
-          "label": "Status",
-          "href": "https://helix-ai-orchestrator.vercel.app",
-          "external": true
-        }
-      ]
-    },
-    {
-      "heading": "Legal",
-      "links": [
-        { "label": "Privacy", "href": "#main" },
-        { "label": "Terms", "href": "#main" },
-        { "label": "Security", "href": "https://github.com/gadkaridarshan/Helix/security" }
+        { "label": "Open an issue", "href": "https://github.com/gadkaridarshan/Helix/issues/new", "external": true },
+        { "label": "Discussions", "href": "https://github.com/gadkaridarshan/Helix/discussions", "external": true },
+        { "label": "X / Twitter", "href": "https://twitter.com/helix_ai", "external": true }
       ]
     }
   ],
-  "socials": [
-    {
-      "label": "GitHub",
-      "href": "https://github.com/gadkaridarshan/Helix",
-      "icon": "github"
-    },
-    {
-      "label": "Twitter / X",
-      "href": "https://twitter.com/helixai",
-      "icon": "twitter"
-    },
-    {
-      "label": "Discord",
-      "href": "https://discord.gg/helix",
-      "icon": "discord"
-    }
-  ],
-  "legalNote": "All rights reserved."
+  "copyright": "© 2025 Helix. Crafted for teams who ship."
 }

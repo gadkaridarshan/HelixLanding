@@ -1,47 +1,37 @@
 {
   "eyebrow": "Questions, answered",
   "heading": "Frequently asked questions",
-  "description": "The honest answers to what teams ask before they put Helix in front of their codebase.",
+  "description": "Everything you need to know before you put Helix to work on your repo.",
   "items": [
     {
-      "id": "faq-what",
-      "question": "What exactly does Helix do?",
-      "answer": "Helix takes a single natural-language intent and breaks it into small, atomic units of work. Each unit has its own acceptance criteria, dependency map, and verification gate (types, tests, lint). Units execute in dependency order and surface as reviewable PRs instead of one sprawling diff."
+      "id": "what-is-helix",
+      "question": "What is Helix and how do I use it?",
+      "answer": "Helix is an atomic work-breakdown orchestrator for AI coding agents. Describe the feature or fix you want, and Helix decomposes it into small, well-scoped units — each with its own acceptance criteria. Your coding agent then executes the units sequentially, so dependencies are always satisfied and every change ships clean."
     },
     {
-      "id": "faq-how-verify",
-      "question": "How does Helix verify the agent's output?",
-      "answer": "Each atomic unit is checked against the rest of your repo before it ships. Helix runs your type checker, your test suite, and your linter scoped to the unit's blast radius. If verification fails, the unit is re-tried or surfaced for human review — never silently merged."
+      "id": "how-does-it-deploy",
+      "question": "How do I deploy and run Helix in my workflow?",
+      "answer": "Helix runs locally as a CLI and plugs into the IDE or CI you already use. Point it at a repository, describe what you want shipped, and it returns a stack of atomic pull requests ready to review. There is nothing to host — Helix is an open-source orchestrator that sits between you and the agent."
     },
     {
-      "id": "faq-existing",
-      "question": "Does Helix work with my existing codebase?",
-      "answer": "Yes. Helix reads your repository the same way your senior engineer would — module boundaries, conventions, prior PRs. It does not require a greenfield project or a rewrite. You point it at a Git repo and a ticket, and it produces PRs that respect the code that's already there."
+      "id": "what-is-the-approach",
+      "question": "What is the orchestration approach?",
+      "answer": "Plan, execute, verify. Helix reads your intent and the codebase, produces an ordered list of units with clear scope, hands each unit to your agent with just-enough context, then type-checks, tests, and lints the result before it can move on. Failures pause the loop so nothing ships broken."
     },
     {
-      "id": "faq-prs",
-      "question": "Why PRs instead of one big diff?",
-      "answer": "Small PRs are easier to review, easier to revert, and easier to attribute. Helix's atomic work-breakdown exists so that an agent's output looks like the output of a thoughtful teammate, not a token firehose. Every PR has a clear scope, a clear description, and a clean revert path."
+      "id": "who-is-it-for",
+      "question": "Who is Helix built for?",
+      "answer": "Developers shipping features without reviewing 2,000-line AI diffs. Product managers who need predictable delivery they can report on. Founders who want velocity without late-night hotfixes. And enterprise teams who need governance, traceability, and the option to plug Helix into their own agent stack."
     },
     {
-      "id": "faq-languages",
-      "question": "Which languages and frameworks are supported?",
-      "answer": "Helix is language-agnostic at the orchestration layer. Out of the box it ships first-class support for TypeScript, JavaScript, Python, and Go — including their dominant test runners and linters. New languages plug in via a small adapter that exposes the project's verification commands."
+      "id": "how-is-it-different",
+      "question": "How is Helix different from a plain AI coding agent?",
+      "answer": "Plain agents produce sprawling diffs with mixed quality. Helix enforces structure: every change is a small, scoped, verified unit. You get the speed of an AI agent with the reviewability of a human-sized PR — and a full audit trail of what shipped and why."
     },
     {
-      "id": "faq-cost",
-      "question": "How is Helix priced?",
-      "answer": "Helix is free during the early-access period. There are no seat fees, no per-PR charges, and no usage caps while we collect feedback. When general availability lands, pricing will be based on units executed per month — predictable, with volume discounts for teams."
-    },
-    {
-      "id": "faq-security",
-      "question": "Where does my code run?",
-      "answer": "Your code runs in isolated environments scoped to each unit. Helix never trains on your repository, never sends code to third-party model providers without an explicit provider list you control, and ships with audit logs for every run so security teams can review exactly what happened."
-    },
-    {
-      "id": "faq-get-started",
-      "question": "How do I get started?",
-      "answer": "Clone the repository, point Helix at a ticket or a one-sentence feature description, and watch the first PRs land. The README has a five-minute quick start; the docs go deeper on adapter authoring, dependency graphs, and replays."
+      "id": "can-i-bring-my-own-agent",
+      "question": "Can I bring my own coding agent?",
+      "answer": "Yes. Helix is agent-agnostic. Point it at the agent you already trust — Claude, GPT, an in-house model — and Helix orchestrates the work. Bring your own keys, your own prompts, your own review policy."
     }
   ]
 }
