@@ -1,39 +1,49 @@
-## Deployment to Vercel
+## Local development
 
-1. **Install the Vercel CLI (optional, for one-off deploys)**
-
-    ```bash
-    npm i -g vercel
-    ```
-
-2. **First-time setup**
+1. **Install dependencies**
 
     ```bash
-    vercel login
-    vercel link        # creates .vercel/ and links the project
+    npm install
     ```
 
-3. **Deploy**
+2. **Configure environment (optional)**
+
+    Defaults already match `lib/brand.ts`. Copy the template only if you want to override the canonical URL:
 
     ```bash
-    vercel --prod      # production deploy
-    # or
-    vercel             # preview deploy
+    cp .env.example .env.local
     ```
 
-    Vercel auto-detects Next.js, installs dependencies from `package.json`, runs `npm run build`, and serves the output. No extra config required.
+    Edit `.env.local` and set `NEXT_PUBLIC_BRAND_URL` to your preview/production domain.
 
-## Answer: How do I scaffold and deploy this site?
+3. **Start the dev server**
 
-1. `npm install` to pull dependencies.
-2. `npm run dev` to start the dev server at <http://localhost:3000>.
-3. `npm run build && npm run start` to verify the production build.
-4. `vercel --prod` to ship to production.
+    ```bash
+    npm run dev
+    ```
 
-The scaffold provides:
+    Open <http://localhost:3000>.
 
-- `app/layout.tsx` with full metadata (title, OG, Twitter, canonical, theme color) and Geist font wiring.
-- `app/page.tsx` as the section composer (currently renders the hero `<Section>` placeholder; additional section cards mount into this file).
-- `components/Section.tsx` — the shared wrapper used by every section card for consistent padding, optional eyebrow/heading/description, accessible `aria-labelledby`, and tone variants.
-- `lib/cn.ts` — single class-name helper used everywhere, so future sections share one utility instead of importing `clsx` ad-hoc.
-- Tailwind v4 via PostCSS (`postcss.config.js` + `tailwind.config.ts`) plus the base CSS tokens in `app/globals.css`.
+4. **Verify success checks**
+
+    - The home page loads with the navbar, hero, StatsBar, Features, HowItWorks, Personas, FAQ, FinalCTA, and footer.
+    - The browser tab title is `Helix — Atomic work breakdown for AI coding agents`.
+    - View source: you see `<link rel="canonical">`, OG and Twitter `<meta>` tags, and a sitemap link.
+    - `/sitemap.xml` returns a valid `sitemap` XML response.
+    - `/robots.txt` returns the production allow/deny rules.
+
+5. **Lint and type-check**
+
+    ```bash
+    npm run lint
+    npm run typecheck
+    ```
+
+6. **Production build**
+
+    ```bash
+    npm run build
+    npm run start     # serves the built site on http://localhost:3000
+    ```
+
+## Project structure

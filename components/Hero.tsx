@@ -1,13 +1,10 @@
-// helix: components/Hero.tsx
-/**
- * @helix:story USER-167000
- *
- * Hero — top-level re-export shim so `@/components/Hero` resolves
- * to the canonical implementation at
- * `@/components/sections/hero/Hero`.
- *
- * The canonical Hero is composed of `HeroCopy` (text column) and
- * `HeroVisual` (decorative atom/orbit SVG).
- */
-export { Hero } from "@/components/sections/hero/Hero";
-export { default } from "@/components/sections/hero/Hero";
+[
+  {
+    "text": "// helix: components/Features.tsx\n/**\n * @helix:story USER-167000\n *\n * Features — top-level re-export shim so `@/components/Features`\n * resolves to the canonical implementation at\n * `@/components/sections/features/Features`.\n */\nexport { Features } from \"@/components/sections/features/Features\";\nexport { default } from \"@/components/sections/features/Features\";\n",
+    "type": "text"
+  },
+  {
+    "text": "// helix: components/Personas.tsx\n/**\n * @helix:story USER-167000\n *\n * Personas — top-level re-export shim so `@/components/Personas`\n * resolves to the canonical implementation at\n * `@/components/sections/personas/Personas`.\n */\nexport { Personas } from \"@/components/sections/personas/Personas\";\nexport { default } from \"@/components/sections/personas/Personas\";\n",
+    "type": "text"
+  }
+]

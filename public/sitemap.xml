@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://helix-ai-orchestrator.vercel.app/</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://helix-ai-orchestrator.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://helix-ai-orchestrator.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://helix-ai-orchestrator.vercel.app/" />
+    <image:image>
+      <image:loc>https://helix-ai-orchestrator.vercel.app/og-image.svg</image:loc>
+      <image:title>Helix — Atomic work breakdown for AI coding agents</image:title>
+      <image:caption>Helix AI Orchestrator marketing site</image:caption>
+    </image:image>
   </url>
 </urlset>

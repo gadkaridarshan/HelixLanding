@@ -1,6 +1,6 @@
 // helix: app/layout.tsx
 /**
- * @helix:story USER-303000
+ * @helix:story USER-285000
  *
  * Root layout — sets up the html shell, fonts, theme metadata, and
  * the global stylesheet. Per Next.js App Router conventions this is
