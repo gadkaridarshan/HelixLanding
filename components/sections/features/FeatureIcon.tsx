@@ -1,12 +1,9 @@
 // helix: components/sections/features/FeatureIcon.tsx
 /**
- * @helix:story USER-507000
+ * @helix:story USER-167000
  *
- * FeatureIcon — tiny inline SVG icon set used by FeatureCard.
- *
- * Renders a server-side icon (no client JS) by name. Each glyph
- * follows the brand line-icon style: 24×24, 1.5px stroke, current
- * color, rounded caps.
+ * FeatureIcon — inline-SVG icon set for FeatureCard. Each icon is a
+ * server-rendered glyph with no runtime dependency.
  */
 import * as React from "react";
 
@@ -18,125 +15,117 @@ export type FeaturesIconName =
   | "cards"
   | "persona"
   | "stack"
-  | "review";
+  | "review"
+  | "vercel"
+  | "spark";
 
 export interface FeatureIconProps {
   name: FeaturesIconName;
   className?: string;
-  title?: string;
 }
 
-const stroke = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.5,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-};
-
-function Atom(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <circle cx="12" cy="12" r="2" {...stroke} />
-      <ellipse cx="12" cy="12" rx="10" ry="4" {...stroke} />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" {...stroke} />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" {...stroke} />
-    </svg>
-  );
+function baseProps(className?: string): React.SVGProps<SVGSVGElement> {
+  return {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.75,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": true,
+    className: "h-5 w-5 " + (className ?? ""),
+  };
 }
-
-function Graph(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <circle cx="6" cy="6" r="2" {...stroke} />
-      <circle cx="18" cy="6" r="2" {...stroke} />
-      <circle cx="6" cy="18" r="2" {...stroke} />
-      <circle cx="18" cy="18" r="2" {...stroke} />
-      <circle cx="12" cy="12" r="2" {...stroke} />
-      <path d="M7.5 7.5 10.5 10.5M16.5 7.5 13.5 10.5M7.5 16.5 10.5 13.5M16.5 16.5 13.5 13.5" {...stroke} />
-    </svg>
-  );
-}
-
-function Shield(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path d="M12 3 4 6v6c0 4.5 3.2 8.4 8 9 4.8-.6 8-4.5 8-9V6l-8-3Z" {...stroke} />
-      <path d="m9 12 2 2 4-4" {...stroke} />
-    </svg>
-  );
-}
-
-function Git(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <circle cx="6" cy="6" r="2" {...stroke} />
-      <circle cx="6" cy="18" r="2" {...stroke} />
-      <circle cx="18" cy="12" r="2" {...stroke} />
-      <path d="M6 8v8M8 6h6a4 4 0 0 1 4 4" {...stroke} />
-    </svg>
-  );
-}
-
-function Cards(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <rect x="3" y="6" width="14" height="10" rx="2" {...stroke} />
-      <rect x="7" y="9" width="14" height="10" rx="2" {...stroke} />
-    </svg>
-  );
-}
-
-function Persona(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <circle cx="12" cy="8" r="3.5" {...stroke} />
-      <path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5" {...stroke} />
-    </svg>
-  );
-}
-
-function Stack(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path d="m12 3 9 5-9 5-9-5 9-5Z" {...stroke} />
-      <path d="m3 13 9 5 9-5M3 18l9 5 9-5" {...stroke} />
-    </svg>
-  );
-}
-
-function Review(props: React.SVGProps<SVGSVGElement>): React.ReactElement {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path d="M4 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H9l-5 4V5Z" {...stroke} />
-      <path d="M9 10h6M9 13h4" {...stroke} />
-    </svg>
-  );
-}
-
-const registry: Record<FeaturesIconName, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  atom: Atom,
-  graph: Graph,
-  shield: Shield,
-  git: Git,
-  cards: Cards,
-  persona: Persona,
-  stack: Stack,
-  review: Review,
-};
 
 export function FeatureIcon({
   name,
   className,
-  title,
 }: FeatureIconProps): React.ReactElement {
-  const Glyph = registry[name];
-  return (
-    <span className={className} role={title ? "img" : undefined}>
-      <Glyph focusable="false" />
-      {title ? <title>{title}</title> : null}
-    </span>
-  );
+  const props = baseProps(className);
+  switch (name) {
+    case "atom":
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
+          <ellipse cx="12" cy="12" rx="10" ry="4" />
+          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+        </svg>
+      );
+    case "graph":
+      return (
+        <svg {...props}>
+          <circle cx="6" cy="6" r="2" />
+          <circle cx="18" cy="6" r="2" />
+          <circle cx="12" cy="18" r="2" />
+          <path d="M8 6h8M7 7l4 9M17 7l-4 9" />
+        </svg>
+      );
+    case "shield":
+      return (
+        <svg {...props}>
+          <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+      );
+    case "git":
+      return (
+        <svg {...props}>
+          <circle cx="6" cy="6" r="2" />
+          <circle cx="6" cy="18" r="2" />
+          <circle cx="18" cy="18" r="2" />
+          <path d="M6 8v8M8 6h6a4 4 0 014 4v6" />
+        </svg>
+      );
+    case "cards":
+      return (
+        <svg {...props}>
+          <rect x="3" y="6" width="14" height="12" rx="2" />
+          <rect x="7" y="2" width="14" height="12" rx="2" />
+          <path d="M11 8h6" />
+        </svg>
+      );
+    case "persona":
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="8" r="3" />
+          <path d="M5 21c0-4 3-7 7-7s7 3 7 7" />
+        </svg>
+      );
+    case "stack":
+      return (
+        <svg {...props}>
+          <path d="M12 3l9 5-9 5-9-5 9-5z" />
+          <path d="M3 13l9 5 9-5" />
+          <path d="M3 17l9 5 9-5" />
+        </svg>
+      );
+    case "review":
+      return (
+        <svg {...props}>
+          <path d="M3 5h18v12H8l-5 4z" />
+          <path d="M8 10h8M8 14h5" />
+        </svg>
+      );
+    case "vercel":
+      return (
+        <svg {...props}>
+          <path d="M12 3l9 16H3z" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "spark":
+      return (
+        <svg {...props}>
+          <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M15 15l3 3M6 18l3-3M15 9l3-3" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      );
+  }
 }
 
 export default FeatureIcon;

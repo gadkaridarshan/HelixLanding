@@ -1,13 +1,12 @@
 /**
- * @helix:story USER-445000
+ * @helix:story USER-285000
  *
  * globals.css — Tailwind v4 entry point + brand token surface.
  *
  * Tailwind v4 uses CSS-first configuration: tokens are declared
  * inside `@theme` and consumed as utilities (`bg-ink-950`,
- * `text-brand-400`, etc.). No `tailwind.config.ts` is required for
- * token registration, but the PostCSS pipeline
- * (`@tailwindcss/postcss`) is wired up via `postcss.config.mjs`.
+ * `text-brand-400`, etc.). The PostCSS pipeline is wired up via
+ * `postcss.config.js`.
  *
  * Layer order (Tailwind v4):
  *   1. `@import "tailwindcss"` — base + components + utilities
@@ -176,6 +175,24 @@
 }
 
 @layer components {
+  /* Vertical rhythm used by every landing section. */
+  .section-pad {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  @media (min-width: 640px) {
+    .section-pad {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
   .glass-surface {
     background-color: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);

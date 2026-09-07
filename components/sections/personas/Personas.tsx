@@ -1,6 +1,6 @@
 // helix: components/sections/personas/Personas.tsx
 /**
- * @helix:story USER-495000
+ * @helix:story USER-167000
  *
  * Personas — canonical audience-targeted value-prop section.
  *
@@ -8,6 +8,9 @@
  *   • `PersonasTabs` (client island, keyboard-navigable role switcher)
  *   • `PersonaCard`  (server-rendered value-prop card primitive)
  *   • `personas.json` content (sourced from `@/content/personas.json`)
+ *
+ * Renders at least four persona tiles (founders, PMs, engineering
+ * leads, solo devs, agencies).
  */
 import * as React from "react";
 
@@ -16,7 +19,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 import personasData from "@/content/personas.json";
 import { PersonaCard } from "@/components/ui/persona-card";
-import { PersonasTabs } from "@/components/sections/personas/PersonasTabs";
+import { PersonasTabs } from "./PersonasTabs";
 
 export interface PersonasProps {
   className?: string;
@@ -40,13 +43,15 @@ interface PersonasContent {
 
 const content: PersonasContent = personasData as PersonasContent;
 
+const tabItems = content.items.map((p) => ({ id: p.id, role: p.role }));
+
 export function Personas({ className }: PersonasProps): React.ReactElement {
   return (
     <section
       id="personas"
       aria-labelledby="personas-heading"
       className={
-        "relative isolate overflow-hidden py-20 sm:py-28 " + (className ?? "")
+        "relative isolate scroll-mt-24 py-20 sm:py-28 " + (className ?? "")
       }
     >
       <div
@@ -54,8 +59,7 @@ export function Personas({ className }: PersonasProps): React.ReactElement {
         className="pointer-events-none absolute inset-0 -z-10"
       >
         <div className="absolute inset-0 bg-slate-950" />
-        <div className="absolute left-1/2 top-0 h-[480px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-500/15 blur-3xl" />
-        <div className="absolute right-0 bottom-0 h-[360px] w-[600px] translate-x-1/3 translate-y-1/3 rounded-full bg-brand-500/15 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
       </div>
 
       <Container>
@@ -63,20 +67,18 @@ export function Personas({ className }: PersonasProps): React.ReactElement {
           eyebrow={content.eyebrow}
           heading={content.heading}
           description={content.description}
+          headingId="personas-heading"
         />
 
-        <PersonasTabs items={content.items}>
-          {(active) => <PersonaCard persona={active} />}
+        <PersonasTabs items={tabItems}>
+          {(active) => {
+            const persona = content.items.find((p) => p.id === active.id);
+            if (!persona) {
+              return null;
+            }
+            return <PersonaCard persona={persona} />;
+          }}
         </PersonasTabs>
-
-        {/* Static list below tabs — visible to crawlers / no-JS */}
-        <ul className="mt-12 hidden [html.no-js_&]:grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {content.items.map((persona) => (
-            <li key={persona.id}>
-              <PersonaCard persona={persona} />
-            </li>
-          ))}
-        </ul>
       </Container>
     </section>
   );

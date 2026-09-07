@@ -1,23 +1,22 @@
 // helix: components/sections/hero/Hero.tsx
 /**
- * @helix:story USER-495000
+ * @helix:story USER-167000
  *
  * Hero — canonical above-the-fold value proposition for Helix.
  *
- * Composed from `HeroCopy` (text column) and `HeroVisual`
- * (decorative atom/orbit SVG). Pure server component, no client
- * interactivity.
+ * Composed of `HeroCopy` (headline, subheadline, primary + secondary
+ * CTAs and supporting bullets) and `HeroVisual` (decorative atom/orbit
+ * SVG). Pure server component, no client interactivity.
  *
  * Layout:
  *   • Layered radial gradients + subtle grid texture backdrop.
  *   • Two-column grid on `lg+` (text left, visual right).
- *   • Brand-led headline, dual CTAs, four social-proof bullets.
+ *   • Brand-led headline, dual CTAs (Get Started + Star on GitHub).
  */
 import * as React from "react";
 
-import { Container } from "@/components/ui/Container";
-import { HeroCopy } from "@/components/sections/hero/HeroCopy";
-import { HeroVisual } from "@/components/sections/hero/HeroVisual";
+import { HeroCopy } from "./HeroCopy";
+import { HeroVisual } from "./HeroVisual";
 
 export interface HeroProps {
   className?: string;
@@ -39,17 +38,32 @@ export function Hero({ className }: HeroProps): React.ReactElement {
         className="pointer-events-none absolute inset-0 -z-10"
       >
         <div className="absolute inset-0 bg-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.18),transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(167,139,250,0.14),transparent_60%)]" />
-        <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div
+          className="absolute inset-0 opacity-70"
+          style={{
+            backgroundImage:
+              "radial-gradient(60% 50% at 15% 20%, rgba(34,211,238,0.22) 0%, rgba(34,211,238,0) 60%), radial-gradient(55% 45% at 85% 25%, rgba(167,139,250,0.20) 0%, rgba(167,139,250,0) 65%), radial-gradient(50% 50% at 50% 90%, rgba(192,132,252,0.15) 0%, rgba(192,132,252,0) 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </div>
 
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
+        <div className="lg:col-span-7">
           <HeroCopy />
+        </div>
+        <div className="lg:col-span-5">
           <HeroVisual />
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

@@ -1,30 +1,27 @@
+// helix: tailwind.config.ts
 /**
- * @helix:story USER-63000
+ * @helix:story USER-285000
  *
- * Tailwind config — Tailwind v4 reads tokens from
- * `app/globals.css` (`@theme` block) and ignores this file for
- * token registration. We keep a minimal stub so any tool that
- * introspects `tailwind.config.*` (older editors, docs generators,
- * or the rare plugin that still requires it) finds the file.
- *
- * Do NOT add theme tokens here — they belong in
- * `app/globals.css` under `@theme`.
+ * Tailwind v4 is CSS-first — tokens live in `app/globals.css`
+ * under `@theme`. This file is intentionally minimal: it only
+ * points the Tailwind v4 engine at our content roots so that any
+ * class emitted by `.tsx` files is detected. The full design
+ * token surface (ink/brand/accent/aurora, fonts, radii, shadows)
+ * is declared in `app/globals.css`.
  */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./content/**/*.{js,ts,jsx,tsx,mdx,md,json}",
+    "./app/**/*.{ts,tsx,js,jsx,mdx}",
+    "./components/**/*.{ts,tsx,js,jsx,mdx}",
+    "./lib/**/*.{ts,tsx,js,jsx,mdx}",
+    "./content/**/*.{md,mdx,json}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
 };
 
 export default config;

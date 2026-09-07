@@ -1,21 +1,19 @@
 {
-  "eyebrow": "Atomic work-breakdown for AI coding agents",
-  "headline": "Ship AI-generated code",
-  "headlineAccent": "one reviewable unit at a time.",
-  "subhead": "Helix turns every prompt into sequenced, dependency-aware units — each verified against your repo and landed as its own small, auditable PR.",
+  "eyebrow": "Helix AI Orchestrator",
+  "headline": "Ship AI code without the 2,000-line PRs.",
+  "subheadline": "Helix decomposes every prompt into atomic, dependency-ordered units — each one type-checked, tested, and merged as its own small PR.",
   "primaryCta": {
-    "label": "Get early access",
-    "href": "#final-cta"
+    "label": "Get Started",
+    "href": "https://github.com/gadkaridarshan/Helix"
   },
   "secondaryCta": {
-    "label": "View on GitHub",
-    "href": "https://github.com/gadkaridarshan/Helix",
-    "external": true
+    "label": "Star on GitHub",
+    "href": "https://github.com/gadkaridarshan/Helix"
   },
   "bullets": [
-    { "text": "Decomposes every prompt into atomic units" },
-    { "text": "Verifies each unit against types, tests, and lint" },
-    { "text": "Produces small, reviewable PRs — not one sprawling diff" },
-    { "text": "Replayable runs with full audit trail" }
+    "Atomic units, dependency-ordered",
+    "Parallel agents, hard quality gate",
+    "Replayable run log per change",
+    "Vercel-deployable in one click"
   ]
 }

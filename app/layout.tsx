@@ -1,6 +1,6 @@
 // helix: app/layout.tsx
 /**
- * @helix:story USER-915000
+ * @helix:story USER-285000
  *
  * Root layout — production-ready SEO/OG/Twitter metadata for the
  * Helix Landing marketing site.

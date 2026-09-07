@@ -1,6 +1,6 @@
 // helix: components/sections/how-it-works/StepsList.tsx
 /**
- * @helix:story USER-507000
+ * @helix:story USER-167000
  *
  * StepsList — vertical list of `StepItem` rows used by HowItWorks.
  * Pure server component; renders an accessible ordered list with
@@ -8,7 +8,7 @@
  */
 import * as React from "react";
 
-import { StepItem, type StepItemBullet } from "./StepItem";
+import { StepItem } from "./StepItem";
 
 export interface HowItWorksStep {
   number: string;
@@ -22,38 +22,27 @@ export interface StepsListProps {
   className?: string;
 }
 
-/**
- * `StepItem` doesn't yet consume `StepItemBullet`, but we re-export
- * the type here so consumers can grow richer step payloads later
- * without changing the public surface.
- */
-export type { StepItemBullet };
-
-export function StepsList({ steps, className }: StepsListProps): React.ReactElement {
+export function StepsList({
+  steps,
+  className,
+}: StepsListProps): React.ReactElement {
   return (
     <ol
       role="list"
       className={
-        "relative mx-auto flex w-full max-w-3xl flex-col gap-4 " +
+        "relative mx-auto flex w-full max-w-5xl flex-col gap-6 lg:grid lg:grid-cols-3 lg:gap-6 " +
         (className ?? "")
       }
     >
-      {steps.map((step, idx) => (
-        <div key={step.number} className="relative">
-          {idx < steps.length - 1 ? (
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute left-[2.05rem] top-16 hidden h-[calc(100%-2rem)] w-px bg-gradient-to-b from-brand-500/40 via-white/10 to-transparent sm:block"
-            />
-          ) : null}
+      {steps.map((step) => (
+        <li key={step.number} className="relative">
           <StepItem
             number={step.number}
             title={step.title}
             description={step.description}
             bullets={step.bullets}
-            reverse={idx % 2 === 1}
           />
-        </div>
+        </li>
       ))}
     </ol>
   );

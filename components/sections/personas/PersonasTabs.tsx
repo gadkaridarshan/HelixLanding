@@ -1,6 +1,6 @@
 // helix: components/sections/personas/PersonasTabs.tsx
 /**
- * @helix:story USER-495000
+ * @helix:story USER-167000
  *
  * PersonasTabs — keyboard-navigable role switcher for the Personas
  * section. A small `"use client"` island that owns local UI state
@@ -28,12 +28,12 @@ export interface PersonasTabsProps {
   initialId?: string;
 }
 
-function panelId(itemId: string): string {
-  return `persona-panel-${itemId}`;
-}
-
 function tabId(itemId: string): string {
   return `persona-tab-${itemId}`;
+}
+
+function panelId(itemId: string): string {
+  return `persona-panel-${itemId}`;
 }
 
 export function PersonasTabs({
@@ -42,88 +42,76 @@ export function PersonasTabs({
   initialId,
 }: PersonasTabsProps): React.ReactElement {
   const fallbackId = items[0]?.id ?? "";
-  const [activeId, setActiveId] = React.useState<string>(initialId ?? fallbackId);
+  const [activeId, setActiveId] = React.useState<string>(
+    initialId && items.some((i) => i.id === initialId) ? initialId : fallbackId,
+  );
+
+  const active =
+    items.find((i) => i.id === activeId) ?? items[0] ?? { id: "", role: "" };
+
   const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
 
-  const activeIndex = React.useMemo(
-    () => items.findIndex((item) => item.id === activeId),
-    [items, activeId],
-  );
-
-  const focusTab = React.useCallback((index: number) => {
-    const node = tabRefs.current[index];
-    if (node) node.focus();
+  const focusTab = React.useCallback((idx: number) => {
+    const el = tabRefs.current[idx];
+    if (el) el.focus();
   }, []);
 
-  const moveSelection = React.useCallback(
-    (nextIndex: number) => {
-      const safe = (nextIndex + items.length) % items.length;
-      const next = items[safe];
-      if (!next) return;
-      setActiveId(next.id);
-      // Defer focus until after re-render commits.
-      window.requestAnimationFrame(() => focusTab(safe));
-    },
-    [items, focusTab],
-  );
-
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
-      switch (event.key) {
-        case "ArrowRight":
-          event.preventDefault();
-          moveSelection(index + 1);
-          break;
-        case "ArrowLeft":
-          event.preventDefault();
-          moveSelection(index - 1);
-          break;
-        case "Home":
-          event.preventDefault();
-          moveSelection(0);
-          break;
-        case "End":
-          event.preventDefault();
-          moveSelection(items.length - 1);
-          break;
-        default:
-          break;
-      }
-    },
-    [moveSelection, items.length],
-  );
-
-  const active = items[activeIndex] ?? items[0];
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>): void => {
+    const idx = items.findIndex((i) => i.id === activeId);
+    if (idx < 0) return;
+    let next: number | null = null;
+    switch (e.key) {
+      case "ArrowRight":
+        next = (idx + 1) % items.length;
+        break;
+      case "ArrowLeft":
+        next = (idx - 1 + items.length) % items.length;
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = items.length - 1;
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+    const item = items[next];
+    if (item) {
+      setActiveId(item.id);
+      focusTab(next);
+    }
+  };
 
   return (
     <div className="mt-12">
       <div
         role="tablist"
-        aria-label="Personas"
-        aria-orientation="horizontal"
-        className="flex flex-wrap items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] p-1 backdrop-blur"
+        aria-label="Choose a persona"
+        className="flex flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-2 backdrop-blur"
       >
-        {items.map((item, index) => {
+        {items.map((item, idx) => {
           const selected = item.id === activeId;
           return (
             <button
               key={item.id}
-              ref={(node) => {
-                tabRefs.current[index] = node;
+              ref={(el) => {
+                tabRefs.current[idx] = el;
               }}
-              id={tabId(item.id)}
               type="button"
               role="tab"
+              id={tabId(item.id)}
               aria-selected={selected}
               aria-controls={panelId(item.id)}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(item.id)}
-              onKeyDown={(event) => handleKeyDown(event, index)}
+              onKeyDown={onKeyDown}
               className={
-                "rounded-full px-4 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 " +
+                "rounded-xl px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 " +
                 (selected
-                  ? "bg-brand-500 text-ink-950 shadow-[0_4px_24px_-8px_rgba(34,211,238,0.6)]"
-                  : "text-ink-300 hover:text-ink-100")
+                  ? "bg-gradient-to-r from-cyan-400 to-violet-400 text-slate-950 shadow-[0_4px_18px_rgba(34,211,238,0.25)]"
+                  : "text-slate-300 hover:bg-white/[0.06] hover:text-white")
               }
             >
               {item.role}
@@ -132,18 +120,13 @@ export function PersonasTabs({
         })}
       </div>
 
-      <div className="mt-8">
-        {active ? (
-          <div
-            key={active.id}
-            id={panelId(active.id)}
-            role="tabpanel"
-            aria-labelledby={tabId(active.id)}
-            tabIndex={0}
-          >
-            {children(active)}
-          </div>
-        ) : null}
+      <div
+        role="tabpanel"
+        id={panelId(active.id)}
+        aria-labelledby={tabId(active.id)}
+        className="mt-8"
+      >
+        {children(active)}
       </div>
     </div>
   );
