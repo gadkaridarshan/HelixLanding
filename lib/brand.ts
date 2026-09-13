@@ -1,28 +1,14 @@
-// helix: lib/brand.ts
 /**
- * @helix:story USER-303000
+ * @helix:story USER-285000
  *
- * Brand tokens — single source of truth for the Helix name, tagline,
- * canonical URLs, social handles, and asset paths. Components import
- * from here instead of hardcoding strings.
+ * Brand — centralizes all site-wide brand values (name, tagline, URLs,
+ * colors, etc.) so they can be referenced in one place.
  *
- * Environment overrides are read with `NEXT_PUBLIC_BRAND_*` so the
- * same codebase can be deployed to a staging URL without edits.
+ * Values come from environment variables (with fallbacks) so they can be
+ * overridden per deployment (e.g. staging vs production) without touching
+ * code.
  */
-
-export interface Brand {
-  readonly name: string;
-  readonly tagline: string;
-  readonly description: string;
-  readonly url: string;
-  readonly githubUrl: string;
-  readonly twitterUrl: string;
-  readonly linkedInUrl: string;
-  readonly logoUrl: string;
-  readonly ogImageUrl: string;
-  readonly twitterHandle: string;
-  readonly themeColorDark: string;
-}
+import type { ReactElement } from "react";
 
 const DEFAULT_BRAND_URL = "https://helix-ai-orchestrator.vercel.app";
 const DEFAULT_GITHUB_URL = "https://github.com/gadkaridarshan/Helix";
@@ -63,9 +49,7 @@ export const githubUrl: string =
   envGithub && envGithub.length > 0 ? envGithub : DEFAULT_GITHUB_URL;
 
 export const twitterUrl: string =
-  envTwitterUrl && envTwitterUrl.length > 0
-    ? envTwitterUrl
-    : DEFAULT_TWITTER_URL;
+  envTwitterUrl && envTwitterUrl.length > 0 ? envTwitterUrl : DEFAULT_TWITTER_URL;
 
 export const linkedInUrl: string =
   envLinkedIn && envLinkedIn.length > 0 ? envLinkedIn : DEFAULT_LINKEDIN_URL;
@@ -76,21 +60,16 @@ export const twitterHandle: string =
 export const themeColorDark: string =
   envTheme && envTheme.length > 0 ? envTheme : DEFAULT_THEME_COLOR_DARK;
 
-export const brand: Brand = {
+export const brand = {
   name: "Helix",
-  tagline: "Atomic work-breakdown for AI coding agents.",
+  tagline: "The AI Coding Agent That Ships Verified Code",
   description:
-    "Helix turns a single prompt into verified, merge-ready PRs. Plan atomic units, execute them in order, and ship code that passes types, tests, and lint — every time.",
+    "Helix is an AI coding agent that reads your prompt and codebase, then produces atomic units of work that are type-checked, tested, and linted before they can be merged. Failures pause the loop.",
   url: canonicalUrl,
-  githubUrl,
-  twitterUrl,
-  linkedInUrl,
-  logoUrl,
-  ogImageUrl,
-  twitterHandle,
+  logo: logoUrl,
+  ogImage: ogImageUrl,
+  github: githubUrl,
+  twitter: twitterUrl,
+  linkedIn: linkedInUrl,
   themeColorDark,
 };
-
-export function canonicalUrl(): string {
-  return canonicalUrl;
-}

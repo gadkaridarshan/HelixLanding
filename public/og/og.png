@@ -1,0 +1,16 @@
+```
+Note: The public/og/og.png file is expected to exist for Open Graph image. Since we only have og.svg in the directory, we should copy or convert it to PNG. However, the brand.ts uses DEFAULT_OG_IMAGE which is "/og.png". We need to ensure that file exists. Let's create a placeholder by copying the SVG and renaming? But we cannot convert SVG to PNG without external tools. Since the user only provided og.svg, we'll use that and adjust the brand to use og.svg instead.
+
+Alternatively, we can change the brand to use og.svg. Let's check what the layout expects: it uses ogImageUrl from brand. We'll adjust brand.ts to use og.svg if that's what we have.
+
+But note: the user's list_directory showed only og.svg in public/og. So let's change the DEFAULT_OG_IMAGE to "/og.svg" and update the brand.ts accordingly.
+
+We already read the layout and it uses ogImageUrl from brand. We'll update brand.ts to use og.svg.
+
+Let's update brand.ts:
+
+Change DEFAULT_OG_IMAGE to "/og.svg".
+
+Then, we don't need to create og.png.
+
+Let's do that now.

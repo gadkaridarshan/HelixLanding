@@ -1,12 +1,16 @@
 # Card Inventory
 
+- Sep 13, 2026, 4:12:56 PM CDT | USER-248000 | done | development | FAQ CTA Footer Vercel SEO
+- Sep 13, 2026, 4:12:28 PM CDT | USER-212000 | in_progress | development | create a Landing page for
+- Sep 13, 2026, 4:08:12 PM CDT | USER-889000 | todo | deployment | Configure Vercel deployment SEO
+- Sep 13, 2026, 4:08:12 PM CDT | USER-86000 | todo | development | Add personas social proof
+- Sep 13, 2026, 4:08:12 PM CDT | USER-334000 | todo | development | Setup landing shell and theme
+- Sep 13, 2026, 4:05:28 PM CDT | USER-74000 | todo | development | Personas and social proof sections
+- Sep 13, 2026, 4:05:28 PM CDT | USER-707000 | todo | deployment | Vercel deployment wiring and verification · deliverable: README.md
+- Sep 13, 2026, 4:05:28 PM CDT | USER-45000 | todo | deployment | Vercel deployment and SEO wiring · deliverable: README.md
+- Sep 13, 2026, 4:05:28 PM CDT | USER-285000 | todo | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 4:31:02 PM CDT | USER-397000 | done | development | Use cases grid and metrics
-- Sep 7, 2026, 4:30:30 PM CDT | USER-74000 | in_progress | development | Personas and social proof sections
-- Sep 7, 2026, 4:30:30 PM CDT | USER-248000 | in_progress | development | FAQ CTA Footer Vercel SEO
-- Sep 7, 2026, 4:30:29 PM CDT | USER-707000 | todo | deployment | Vercel deployment wiring and verification · deliverable: README.md
-- Sep 7, 2026, 4:30:17 PM CDT | USER-45000 | in_progress | deployment | Vercel deployment and SEO wiring · deliverable: README.md
 - Sep 7, 2026, 4:29:36 PM CDT | USER-73000 | done | development | Use cases social proof FAQ
-- Sep 7, 2026, 4:29:25 PM CDT | USER-285000 | in_progress | development | Scaffold landing shell and theme · deliverable: README.md
 - Sep 7, 2026, 4:28:26 PM CDT | USER-478000 | done | development | Hero how it works features
 - Sep 7, 2026, 4:26:58 PM CDT | USER-303000 | done | development | Helix landing page site
 - Sep 7, 2026, 4:25:24 PM CDT | USER-468000 | done | development | Use cases section component
@@ -24,5 +28,4 @@
 - Sep 7, 2026, 8:12:13 AM CDT | USER-348000 | done | development | Fix Hero import path resolution
 - Sep 7, 2026, 8:04:05 AM CDT | USER-347000 | done | development | Hero features and how-it-works sections
 - Sep 7, 2026, 8:03:24 AM CDT | USER-212100 | done | development | FAQ accordion section
-- Sep 7, 2026, 8:02:06 AM CDT | USER-212000 | done | development | Personas social proof and final
 - Sep 7, 2026, 7:57:59 AM CDT | USER-179000 | done | development | Project scaffold and global theme

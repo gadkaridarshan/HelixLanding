@@ -1,31 +1,27 @@
-// helix: app/page.tsx
-/**
- * @helix:story USER-285000
- *
- * Home page composition root — composes the global Navbar, the
- * section narrative, and the shared Footer inside the layout
- * chrome established by `app/layout.tsx`.
- *
- * The actual section narrative is owned by
- * `@/components/landing/Sections`, which is the single source of
- * truth for narrative order. Keep this file minimal so future
- * page-level concerns (analytics, structured data, etc.) can be
- * added here without touching section code.
- */
-import type { ReactElement } from "react";
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import Hero from '@/app/components/sections/Hero';
+import Features from '@/app/components/sections/Features';
+import HowItWorks from '@/app/components/sections/HowItWorks';
+import StatsBar from '@/app/components/sections/StatsBar';
+import Personas from '@/app/components/sections/Personas';
+import FAQ from '@/app/components/sections/FAQ';
+import FinalCTA from '@/app/components/sections/FinalCTA';
 
-import { Footer } from "@/components/sections/Footer";
-import { Navbar } from "@/components/sections/Navbar";
-import { Sections } from "@/components/landing/Sections";
-
-export default function Page(): ReactElement {
+export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <>
       <Navbar />
       <main id="main">
-        <Sections />
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <StatsBar />
+        <Personas />
+        <FAQ />
+        <FinalCTA />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
