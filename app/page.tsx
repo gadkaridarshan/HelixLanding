@@ -1,18 +1,18 @@
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import WorkflowSection from '../components/WorkflowSection';
-import CTA from '../components/CTA';
-import Footer from '../components/Footer';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import WorkflowSection from '@/components/WorkflowSection';
+import CTASection from '@/components/CTASection';
+import Footer from '@/components/Footer';
 
-export default function Page() {
+export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Features />
+      <HeroSection />
+      <FeaturesSection />
       <WorkflowSection />
-      <CTA />
+      <CTASection />
       <Footer />
     </>
   );
