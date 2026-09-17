@@ -1,21 +1,23 @@
-// @helix:story [USER-454000]
+// @helix:story [USER-99000]
 import './globals.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Helix AI Orchestrator',
+  description: 'The intelligent workflow automation platform',
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,15 +1,1 @@
-.cta {
-  @apply bg-gradient-to-br from-indigo-50 to-indigo-100;
-}
-
-.title {
-  @apply mb-6;
-}
-
-.description {
-  @apply mb-8;
-}
-
-.buttons {
-  @apply justify-center;
-}
+/* CTA section styles */
