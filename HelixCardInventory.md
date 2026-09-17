@@ -1,7 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 12:53:23 PM CDT | USER-1789649045674 | done | development | Running `npm run dev` I can see the css and the landing page are messed up. Fix
 - Sep 17, 2026, 12:49:48 PM CDT | USER-421000 | done | development | Fix Footer CSS
-- Sep 17, 2026, 12:47:28 PM CDT | USER-1789649045674 | in_progress | development | Running `npm run dev` I can see the css and the landing page are messed up. Fix
 - Sep 17, 2026, 11:54:44 AM CDT | USER-200000 | done | development | Landing Page Shell
 - Sep 17, 2026, 11:51:28 AM CDT | USER-207000 | done | development | Workflow CTA Footer Components
 - Sep 17, 2026, 11:51:05 AM CDT | USER-219000 | done | development | Hero Features Components

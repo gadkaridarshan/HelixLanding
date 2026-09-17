@@ -1,45 +1,48 @@
 import Link from 'next/link';
+import React from 'react';
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   return (
     <nav className="bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3">
-              <span className="text-xl font-bold text-gray-900">Helix</span>
-            </Link>
-          </div>
-          <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Home
-            </Link>
-            <Link href="/features" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Features
-            </Link>
-            <Link href="/workflow" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Workflow
-            </Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Contact
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Link href="/login" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Login
-            </Link>
-            <a
-              href="#"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Get Started
-            </a>
-          </div>
+      <div className="container-custom flex items-center justify-between py-4">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="text-2xl font-bold text-gradient-primary">
+            Helix
+          </Link>
+        </div>
+        <div className="hidden md:flex items-center gap-6">
+          <Link href="/" className="text-gray-600 hover:text-gray-900 transition-all">
+            Home
+          </Link>
+          <Link href="/features" className="text-gray-600 hover:text-gray-900 transition-all">
+            Features
+          </Link>
+          <Link href="/workflow" className="text-gray-600 hover:text-gray-900 transition-all">
+            How It Works
+          </Link>
+          <Link href="/get-started" className="text-gray-600 hover:text-gray-900 transition-all">
+            Get Started
+          </Link>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button className="btn-primary px-5 py-2 text-sm">
+            Sign In
+          </Button>
+          <Button className="btn-secondary px-5 py-2 text-sm border">
+            Sign Up
+          </Button>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+// Button component for navbar actions
+const Button: React.FC<{ className?: string; children: React.ReactNode }> = ({
+  className,
+  children,
+}) => {
+  return <button className={className}>{children}</button>;
+};
+
+export default Navbar;

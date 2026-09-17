@@ -2,22 +2,34 @@ import React from 'react';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="py-20 bg-gray-50" id="hero">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-6">
-          AI Orchestration that Turns Complexity into Clarity
-        </h1>
-        <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-          Helix intelligently coordinates specialized AI agents to break down complex tasks into clear, actionable steps — so you get precise results faster, every time.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/get-started" className="flex-1 sm:flex-1 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-transform transform hover:-translate-y-1">
-            Get Started Free
-          </a>
-          <a href="#features" className="flex-1 sm:flex-1 px-8 py-4 border border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-semibold rounded-lg transition-transform transform hover:-translate-y-1">
-            Learn More
-          </a>
+    <section className="relative min-h-[80vh] flex items-center bg-gradient-primary pt-16 pb-24">
+      <div className="container-custom relative z-10">
+        <div className="text-center text-white">
+          <h1 className="h1-custom">
+            Transform Your Workflow with AI Orchestration
+          </h1>
+          <p className="p-custom">
+            Helix intelligently coordinates specialized AI agents to tackle complex tasks,
+            delivering precise, actionable insights that drive your business forward.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mt-10">
+            <a
+              href="/get-started"
+              className="btn-primary flex-1 sm:flex-1 px-8 py-4 text-center"
+            >
+              Get Started Free
+            </a>
+            <a
+              href="/features"
+              className="btn-secondary flex-1 sm:flex-1 px-8 py-4 text-center"
+            >
+              Learn More
+            </a>
+          </div>
         </div>
+      </div>
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-secondary opacity-20" />
       </div>
     </section>
   );

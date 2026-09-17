@@ -1,7 +1,6 @@
-// @helix:story [USER-454000]
 import './globals.css';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import type { ReactNode } from 'react';
 
 export default function RootLayout({
@@ -11,9 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="antialiased">
         <Navbar />
-        <main>{children}</main>
+        <main className="min-h-screen flex flex-col">{children}</main>
         <Footer />
       </body>
     </html>
