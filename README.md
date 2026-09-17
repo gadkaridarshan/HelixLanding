@@ -16,7 +16,6 @@ A professional marketing landing page for the Helix AI Orchestrator, built with 
 helix-landing/
 ├── app/
 │   ├── globals.css
-│   ├── global.d.ts
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/
@@ -25,23 +24,15 @@ helix-landing/
 │   ├── Features.tsx
 │   ├── Features.module.css
 │   ├── Footer.tsx
+│   ├── Footer.module.css
 │   ├── Hero.tsx
 │   └── Hero.module.css
 ├── public/
 ├── .vscode/
-│   ├── settings.json
-│   └── vercel.json
+│   └── settings.json
 ├── HelixCardInventory.md
 ├── HelixGrandProjectSummary.md
 ├── .gitignore
 ├── next.config.js
 ├── package.json
-├── package-lock.json
-├── README.md
-├── tailwind.config.ts
-└── tsconfig.json
-
-## What was built
-- Implemented the full landing page with layout, global styles, and section components (hero, features, CTA, footer)
-- Ensured the page is responsive and matches the reference site
-- Configured for deployment on Vercel
+└── tailwind.config.js

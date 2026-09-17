@@ -1,0 +1,39 @@
+.testimonials {
+  @apply bg-white;
+}
+
+.title {
+  @apply mb-12;
+}
+
+.grid {
+  @apply gap-8;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm p-6;
+}
+
+.quote {
+  @apply mb-6;
+}
+
+.author {
+  @apply items-center;
+}
+
+.avatar {
+  @apply w-10 h-10;
+}
+
+.name {
+  @apply mb-1;
+}
+
+.title {
+  @apply mb-1;
+}
+
+.company {
+  @apply text-xs;
+}

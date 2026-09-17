@@ -1,35 +1,32 @@
-import React from 'react';
+import styles from './Hero.module.css';
+import { Button } from '@/components/UI/Button';
 
-const Hero: React.FC = () => {
+export default function Hero() {
   return (
-    <section className="relative bg-gray-900 text-white overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="pt-20 pb-14 text-center">
-          <h1 className="text-4xl font-bold lg:text-5xl">
-            Helix AI Orchestrator
-          </h1>
-          <p className="mt-6 text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto">
-            Professional AI workflow automation platform that streamlines your
-            business processes with intelligent orchestration.
-          </p>
-          <div className="mt-10 flex justify-center space-x-6">
-            <a
-              href="#"
-              className="rounded-md bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Get Started
-            </a>
-            <a
-              href="#"
-              className="rounded-md border border-gray-300 px-5 py-3 text-sm font-medium text-gray-100 hover:bg-gray-50"
-            >
-              Learn More
-            </a>
-          </div>
+    <section className={`${styles.hero} min-h-[90vh] flex flex-col items-center justify-center gap-8 text-center py-12`}>
+      <div className={`${styles.content} max-w-4xl space-y-6`}>
+        <h1 className={`${styles.title} text-4xl font-bold text-gray-900 sm:text-5xl`}>
+          Helix AI Orchestrator
+        </h1>
+        <p className={`${styles.subtitle} text-lg text-gray-600`}>
+          Professional AI workflow automation platform that transforms complex processes into streamlined, intelligent workflows.
+        </p>
+        <div className={`${styles.buttons} flex flex-col sm:flex-row gap-4`}>
+          <Button variant="primary" size="lg">
+            Get Started Free
+          </Button>
+          <Button variant="outline" size="lg">
+            Learn More
+          </Button>
+        </div>
+      </div>
+      <div className={`${styles.image} w-full max-w-2xl`}>
+        {/* Placeholder for hero illustration */}
+        <div className="w-full h-96 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl flex items-center justify-center">
+          <svg className="h-12 w-12 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          </svg>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

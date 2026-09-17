@@ -1,71 +1,23 @@
-/* @helix:story [USER-277000] */
 .hero {
-  background: linear-gradient(to right, #4f46e5, #7c3aed);
-  color: white;
-  padding: 4rem 0;
-  text-align: center;
+  @apply bg-white;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.content {
+  @apply space-y-6;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  @apply mb-4;
 }
 
-.description {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
+.subtitle {
+  @apply mb-6;
 }
 
-.buttonGroup {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.buttons {
+  @apply mt-4;
 }
 
-.button,
-.buttonAlt {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.button {
-  background: white;
-  color: #4f46e5;
-}
-
-.button:hover {
-  background: #f3f4f6;
-}
-
-.buttonAlt {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.buttonAlt:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .title {
-    font-size: 2rem;
-  }
-  .description {
-    font-size: 1.125rem;
-  }
+.image {
+  @apply mt-8;
 }

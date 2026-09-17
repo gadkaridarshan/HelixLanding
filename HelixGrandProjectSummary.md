@@ -1,3 +1,3 @@
 # Grand Project Summary
 
-The project is currently marked with the blocked_auto_resolve milestone, indicating that work is halted. Because no disk confirmation exists for the claimed deliverables, the workspace must be considered incomplete. The following files, which were specified as outputs of the done cards, are missing or unverified: app/page.tsx, app/layout.tsx, app/globals.css, components/Hero.tsx, components/Hero.module.css, components/Features.tsx, components/Features.module.css, components/CTA.tsx, components/CTA.module.css, components/Footer.tsx, next.config.js, tailwind.config.ts, tsconfig.json, package.json, vercel.json. Until these artifacts are confirmed on disk, the landing page cannot be regarded as delivered.
+_Will update whenever a card moves to Done._
