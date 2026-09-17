@@ -1,52 +1,47 @@
 /* [project]/components/Features.module.css [app-client] (css) */
 .Features-module__ZD3nRW__features {
-  background-color: #f9fafb;
-  padding: 4rem 0;
-}
-
-.Features-module__ZD3nRW__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .Features-module__ZD3nRW__title {
-  text-align: center;
   margin-bottom: 3rem;
-  font-size: 2rem;
-  font-weight: bold;
 }
 
 .Features-module__ZD3nRW__grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  display: grid;
 }
 
 .Features-module__ZD3nRW__card {
-  text-align: center;
-  background: #fff;
-  border-radius: .5rem;
-  padding: 2rem;
-  box-shadow: 0 4px 6px #0000001a;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 1px 2px 0 #0000000d;
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  border-radius: .75rem;
+  padding: 1.5rem;
+  transition-property: box-shadow;
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
-.Features-module__ZD3nRW__cardTitle {
-  color: #1f2937;
+.Features-module__ZD3nRW__card:hover {
+  --tw-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.Features-module__ZD3nRW__icon {
   margin-bottom: 1rem;
-  font-size: 1.25rem;
-  font-weight: 600;
 }
 
-.Features-module__ZD3nRW__cardDescription {
-  color: #4b5563;
-  line-height: 1.6;
+.Features-module__ZD3nRW__featureTitle {
+  margin-bottom: .5rem;
 }
 
-@media (max-width: 640px) {
-  .Features-module__ZD3nRW__grid {
-    grid-template-columns: 1fr;
-  }
+.Features-module__ZD3nRW__description {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 /*# sourceMappingURL=components_Features_module_css_1igg3k2._.single.css.map*/

@@ -36,3 +36,6 @@ helix-landing/
 ├── HelixCardInventory.md
 ├── HelixGrandProjectSummary.md
 └── .g
+
+## Short Answer
+To get started quickly: install dependencies (`npm install`), start the dev server (`npm run dev`), and visit <http://localhost:3000>.
