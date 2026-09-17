@@ -1,3 +1,4 @@
+// @helix:story [USER-207000]
 import React from 'react';
 
 const Workflow: React.FC = () => {
@@ -14,36 +15,56 @@ const Workflow: React.FC = () => {
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="mb-4">
-              <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="relative w-12 h-12 mb-4">
+              <svg className="w-full h-full text-blue-600" viewBox="0 0 24 24">
               </svg>
+              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                1
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Understand Intent</h3>
-            <p className="text-gray-500">We analyze your request to determine the optimal approach and required expertise.</p>
+            <h3 className="text-xl font-semibold mb-2">Intent</h3>
+            <p className="text-gray-600">
+              Define your goals and desired outcomes.
+            </p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="mb-4">
-              <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="relative w-12 h-12 mb-4">
+              <svg className="w-full h-full text-blue-600" viewBox="0 0 24 24">
               </svg>
+              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                2
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Agent Orchestration</h3>
-            <p className="text-gray-500">Specialized AI agents collaborate to research, analyze, and synthesize information.</p>
+            <h3 className="text-xl font-semibold mb-2">Orchestration</h3>
+            <p className="text-gray-600">
+              AI agents collaborate to break down complex tasks.
+            </p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="mb-4">
-              <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="relative w-12 h-12 mb-4">
+              <svg className="w-full h-full text-blue-600" viewBox="0 0 24 24">
               </svg>
+              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                3
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Quality Validation</h3>
-            <p className="text-gray-500">Results undergo rigorous validation for accuracy, relevance, and completeness.</p>
+            <h3 className="text-xl font-semibold mb-2">Execution</h3>
+            <p className="text-gray-600">
+              Agents execute tasks with precision and efficiency.
+            </p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="mb-4">
-              <svg className="w-12 h-12 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="relative w-12 h-12 mb-4">
+              <svg className="w-full h-full text-blue-600" viewBox="0 0 24 24">
               </svg>
+              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                4
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Actionable Delivery</h3>
-            <p className="text-gray-500">Receive clear, structured outputs ready for immediate implementation.</p>
+            <h3 className="text-xl font-semibold mb-2">Insight</h3>
+            <p className="text-gray-600">
+              Gain actionable insights and drive decisions.
+            </p>
           </div>
         </div>
       </div>

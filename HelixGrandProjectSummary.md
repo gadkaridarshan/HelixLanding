@@ -1,3 +1,3 @@
 # Technical Summary
 
-In place on disk: the full page shell (`app/page.tsx`, `app/layout.tsx`, `app/globals.css`), all section components (`components/Hero.tsx`, `components/Features.tsx`, `components/WorkflowSection.tsx`, `components/CTASection.tsx`, `components/Footer.tsx`), routing and Vercel configuration (`next.config.js`, `tailwind.config.ts`, `tsconfig.json`, `package.json`, `vercel.json`), and SEO meta tags (`pages/_document.js`). Duplicate component folders have been consolidated (USER-1789642611320) and Navbar import errors resolved (USER-999997, USER-546000). Globals.css syntax errors have been corrected (USER-999998). Next to land: resolution of the remaining dev server warnings (USER-1789643783667) and completion of the Workflow CTA Footer Components (USER-207000) and Hero Features Components (USER-219000). After these items are addressed, the build will be clean and ready for Vercel deployment.
+_Will update whenever a card moves to Done._
