@@ -1,7 +1,8 @@
 # Card Inventory
 
+- Sep 17, 2026, 11:44:46 AM CDT | USER-1789642611320 | done | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
+- Sep 17, 2026, 11:16:40 AM CDT | USER-1789643783667 | todo | development | Fix the issues in the description when ran `npm run dev`
 - Sep 17, 2026, 11:14:23 AM CDT | USER-999997 | done | development | Fix Navbar Menu Import
-- Sep 17, 2026, 11:10:07 AM CDT | USER-1789642611320 | in_progress | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
 - Sep 17, 2026, 11:09:24 AM CDT | USER-1789643162679 | done | development | Fix the error in the description
 - Sep 17, 2026, 11:08:49 AM CDT | USER-272000 | closed_incomplete | development | Build Helix Landing Page
 - Sep 17, 2026, 11:07:17 AM CDT | USER-326000 | done | development | Add Vercel Config
