@@ -1,3 +1,3 @@
 # Technical Summary
 
-In place on disk: `pages/index.tsx` (or `app/page.tsx`) imports the Hero, Features, Workflow, CTA, Navbar, and Footer components; each component resides under `src/components/` or `components/` with corresponding CSS modules. Configuration files include `vercel.json`, `next.config.js`, `tailwind.config.ts`, `tsconfig.json`, and `package.json`, all verified to build without TypeScript errors. Global styles (`app/globals.css`) have been fixed, SEO meta tags and JSON‑LD are added via `pages/_document.js`, and internal navigation uses absolute paths (`/features`). The only outstanding item is the duplicate `components/` and `src/components/` folders (USER‑1789642611320) which, once merged or removed, will eliminate the remaining import ambiguities and allow a clean `npm run dev` and Vercel deploy.
+_Will update whenever a card moves to Done._
