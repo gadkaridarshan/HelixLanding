@@ -1,88 +1,105 @@
-export default function Features() {
+import React from 'react';
+
+const Features: React.FC = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Powerful Features
+            How Helix Delivers Value
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Helix combines cutting-edge AI capabilities into a unified platform designed for real-world complexity.
+            Purpose-built AI orchestration that transforms complex workflows into streamlined, intelligent processes.
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Intelligent Task Decomposition
+            </h3>
+            <p className="text-sm text-gray-500">
+              Breaks down complex objectives into manageable subtasks assigned to specialized AI agents.
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 8v4m0 4v4"></path>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Multi-Agent Orchestration</h3>
-            <p className="text-gray-600">
-              Coordinated teams of specialized agents work together, each contributing expertise to solve complex problems.
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Parallel Agent Execution
+            </h3>
+            <p className="text-sm text-gray-500">
+              Multiple AI agents work concurrently on different aspects of a task for faster completion.
             </p>
           </div>
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 8v4l3 3"></path>
-                <circle cx="12" cy="12" r="3"></circle>
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 12l2 2 4-4"></path>
+                <path d="M20 12H9"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Tool Integration</h3>
-            <p className="text-gray-600">
-              Agents securely access external tools—databases, APIs, file systems—to perform actions and gather information.
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Contextual Understanding
+            </h3>
+            <p className="text-sm text-gray-500">
+              Maintains context across steps to ensure coherent, relevant outputs throughout the workflow.
             </p>
           </div>
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 17h6m-6-5h6"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Iterative Reasoning</h3>
-            <p className="text-gray-600">
-              Helix reflects on intermediate results, adjusts strategies, and refines approaches until goals are met.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Structured Outputs</h3>
-            <p className="text-gray-600">
-              Results are organized into clear, actionable formats—reports, plans, code, or data—ready for immediate use.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M8 12h.01M12 12h.01M16 12h.01M12 16h.01M12 8v.01"></path>
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Real-Time Collaboration</h3>
-            <p className="text-gray-600">
-              Work alongside AI agents in shared workspaces, providing guidance and feedback as they operate.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl">
-            <div className="w-12 h-12 mb-4 flex items-center justify-center bg-blue-100 rounded-lg">
-              <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M3 3l18 18"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Enterprise Security</h3>
-            <p className="text-gray-600">
-              Role-based access, audit trails, and data encryption ensure your workflows remain secure and compliant.
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Adaptive Learning
+            </h3>
+            <p className="text-sm text-gray-500">
+              Improves performance over time by learning from outcomes and user feedback.
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 8V14M8 12h8"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Error Handling & Recovery
+            </h3>
+            <p className="text-sm text-gray-500">
+              Detects issues early and implements correction strategies without restarting entire workflows.
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center p-8 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6">
+              <svg className="w-12 h-12 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 17H6a3 3 0 01-3-3V9a3 3 0 013-3h3"></path>
+                <path d="M12 17v-6"></path>
+                <path d="M15 17h3a3 3 0 003-3V9a3 3 0 00-3-3h-3"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Security & Compliance
+            </h3>
+            <p className="text-sm text-gray-500">
+              Enterprise-grade security with audit trails, data encryption, and compliance controls.
             </p>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Features;

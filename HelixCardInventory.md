@@ -1,9 +1,9 @@
 # Card Inventory
 
+- Sep 17, 2026, 11:51:05 AM CDT | USER-219000 | done | development | Hero Features Components
+- Sep 17, 2026, 11:50:08 AM CDT | USER-207000 | in_progress | development | Workflow CTA Footer Components
+- Sep 17, 2026, 11:48:56 AM CDT | USER-200000 | in_progress | development | Landing Page Shell
 - Sep 17, 2026, 11:48:04 AM CDT | USER-1789643783667 | done | development | Fix the issues in the description when ran `npm run dev`
-- Sep 17, 2026, 11:47:50 AM CDT | USER-200000 | done | development | Landing Page Shell
-- Sep 17, 2026, 11:46:41 AM CDT | USER-207000 | in_progress | development | Workflow CTA Footer Components
-- Sep 17, 2026, 11:46:33 AM CDT | USER-219000 | todo | development | Hero Features Components
 - Sep 17, 2026, 11:44:46 AM CDT | USER-1789642611320 | done | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
 - Sep 17, 2026, 11:14:23 AM CDT | USER-999997 | done | development | Fix Navbar Menu Import
 - Sep 17, 2026, 11:09:24 AM CDT | USER-1789643162679 | done | development | Fix the error in the description
