@@ -1,28 +1,66 @@
-/* @helix:story [USER-277000] */
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utils;
 
+/* Custom styles */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary: #0EA5E9;
+  --secondary: #64748B;
+  --accent: #10B981;
+  --dark: #0F172A;
+  --light: #F8FAFC;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Custom gradients */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #0284C7 100%);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, var(--secondary) 0%, #334155 100%);
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #059669 100%);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }

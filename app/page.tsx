@@ -1,14 +1,16 @@
-// @helix:story [USER-277000]
-import Hero from './components/Hero';
-import Features from './components/Features';
-import CTA from './components/CTA';
+// @helix:story [USER-88000]
+import Hero from '@/components/Hero';
+import Features from '@/components/Features';
+import CTA from '@/components/CTA';
+import Footer from '@/components/Footer';
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
       <Features />
       <CTA />
-    </main>
+      <Footer />
+    </>
   );
 }
