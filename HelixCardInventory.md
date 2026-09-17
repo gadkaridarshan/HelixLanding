@@ -1,7 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 1:30:14 PM CDT | USER-29000 | done | development | Add Vercel Config
 - Sep 17, 2026, 1:27:57 PM CDT | USER-1789650865276 | done | development | Fix globals css import
-- Sep 17, 2026, 1:27:54 PM CDT | USER-29000 | in_progress | development | Add Vercel Config
 - Sep 17, 2026, 1:17:19 PM CDT | USER-928000 | done | development | Add SEO files
 - Sep 17, 2026, 12:53:23 PM CDT | USER-1789649045674 | done | development | Running `npm run dev` I can see the css and the landing page are messed up. Fix
 - Sep 17, 2026, 12:49:48 PM CDT | USER-421000 | done | development | Fix Footer CSS
