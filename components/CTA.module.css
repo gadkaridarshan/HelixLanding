@@ -1,0 +1,43 @@
+/* @helix:story [USER-277000] */
+.cta {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #1a2a6c, #2c3e50);
+  color: white;
+}
+
+.cta h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta p {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta .button {
+  display: inline-block;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: #1a2a6c;
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+  font-size: 1.1rem;
+}
+
+.cta .button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 154, 158, 0.6);
+  background: linear-gradient(to right, #fad0c4, #ff9a9e);
+}
