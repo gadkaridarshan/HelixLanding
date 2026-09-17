@@ -1,5 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 1:36:31 PM CDT | USER-155000 | done | development | Verify Vercel Deployable
+- Sep 17, 2026, 1:35:37 PM CDT | USER-1789651896862 | todo | development | page not rendering properly. pls see the description
 - Sep 17, 2026, 1:30:14 PM CDT | USER-29000 | done | development | Add Vercel Config
 - Sep 17, 2026, 1:27:57 PM CDT | USER-1789650865276 | done | development | Fix globals css import
 - Sep 17, 2026, 1:17:19 PM CDT | USER-928000 | done | development | Add SEO files
