@@ -33,9 +33,12 @@ helix-landing/
 ├── public/
 ├── .vscode/
 │   └── settings.json
+├── .gitignore
 ├── HelixCardInventory.md
 ├── HelixGrandProjectSummary.md
-└── .g
+├── next.config.js
+├── package.json
+└── README.md
 
 ## Short Answer
 To get started quickly: install dependencies (`npm install`), start the dev server (`npm run dev`), and visit <http://localhost:3000>.

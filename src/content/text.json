@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "title": "Helix AI Orchestrator",
+    "subtitle": "Professional AI workflow automation platform that transforms complex processes into streamlined, intelligent workflows.",
+    "primaryButtonText": "Get Started Free",
+    "outlineButtonText": "Learn More"
+  },
+  "features": [
+    {
+      "title": "Visual Workflow Builder",
+      "description": "Design complex AI workflows with an intuitive drag-and-drop interface, no coding required."
+    },
+    {
+      "title": "AI-Powered Automation",
+      "description": "Leverage advanced AI models to automate decision-making and optimize your workflows in real-time."
+    },
+    {
+      "title": "Seamless Integrations",
+      "description": "Connect with popular tools and services like Slack, GitHub, Salesforce, and more to streamline your entire tech stack."
+    },
+    {
+      "title": "Enterprise Security",
+      "description": "Role-based access control, audit logs, and GDPR compliance to keep your data secure and private."
+    }
+  ],
+  "cta": {
+    "title": "Ready to orchestrate your AI workflows?",
+    "description": "Join thousands of businesses automating their processes with Helix. Start your free trial today.",
+    "buttonText": "Get Started Free"
+  }
+}

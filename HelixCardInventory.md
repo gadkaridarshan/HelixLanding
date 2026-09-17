@@ -1,7 +1,8 @@
 # Card Inventory
 
+- Sep 17, 2026, 6:33:15 AM CDT | USER-140000 | done | development | Update Landing Page Content
+- Sep 17, 2026, 6:32:59 AM CDT | USER-999999 | in_progress | general | Update README
 - Sep 17, 2026, 6:28:33 AM CDT | USER-579000 | done | development | Vercel Deployment Config
-- Sep 17, 2026, 6:27:56 AM CDT | USER-999999 | in_progress | general | Update README
 - Sep 17, 2026, 6:23:58 AM CDT | USER-1789624187732 | done | development | Site rendering fix
 - Sep 17, 2026, 5:58:17 AM CDT | USER-888000 | done | development | Fix Site Rendering
 - Sep 17, 2026, 5:52:49 AM CDT | USER-735000 | done | development | Add Vercel config
