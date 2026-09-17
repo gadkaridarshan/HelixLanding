@@ -1,7 +1,8 @@
 # Card Inventory
 
+- Sep 17, 2026, 9:13:39 AM CDT | USER-209000 | done | development | Footer Component
+- Sep 17, 2026, 9:12:24 AM CDT | USER-546000 | in_progress | development | Fix Navbar Import
 - Sep 17, 2026, 9:12:13 AM CDT | USER-376000 | done | development | Final Page Integration
-- Sep 17, 2026, 8:08:13 AM CDT | USER-546000 | in_progress | development | Fix Navbar Import
 - Sep 17, 2026, 8:07:55 AM CDT | USER-999998 | done | development | Fix globals CSS errors
 - Sep 17, 2026, 8:05:00 AM CDT | USER-480000 | todo | development | Add SEO Meta Tags
 - Sep 17, 2026, 8:02:36 AM CDT | USER-1789632154099 | todo | development | In Features and How it Works section, talk about Kanban for AI Agents
@@ -14,7 +15,6 @@
 - Sep 17, 2026, 7:00:16 AM CDT | USER-999999 | done | general | Update README
 - Sep 17, 2026, 6:59:59 AM CDT | USER-359000 | done | development | Add Workflow and CTA
 - Sep 17, 2026, 6:51:43 AM CDT | USER-565000 | in_progress | development | Vercel Deploy Config
-- Sep 17, 2026, 6:51:43 AM CDT | USER-209000 | in_progress | development | Footer Component
 - Sep 17, 2026, 6:49:26 AM CDT | VERCEL-001 | closed_incomplete | deployment | Vercel Config
 - Sep 17, 2026, 6:33:15 AM CDT | USER-140000 | done | development | Update Landing Page Content
 - Sep 17, 2026, 6:28:33 AM CDT | USER-579000 | done | development | Vercel Deployment Config
