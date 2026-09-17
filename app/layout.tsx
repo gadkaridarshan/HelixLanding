@@ -1,12 +1,11 @@
 // @helix:story [USER-1789652000000]
 import "./globals.css";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Helix AI Orchestrator",
   description: "The intelligent workflow automation platform",
 };
