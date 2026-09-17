@@ -1,11 +1,13 @@
 # Card Inventory
 
-- Sep 17, 2026, 8:02:00 AM CDT | USER-999998 | done | development | Fix globals CSS errors
+- Sep 17, 2026, 8:07:55 AM CDT | USER-999998 | done | development | Fix globals CSS errors
+- Sep 17, 2026, 8:05:31 AM CDT | USER-546000 | in_progress | development | Fix Navbar Import
+- Sep 17, 2026, 8:05:00 AM CDT | USER-480000 | todo | development | Add SEO Meta Tags
+- Sep 17, 2026, 8:02:36 AM CDT | USER-1789632154099 | todo | development | In Features and How it Works section, talk about Kanban for AI Agents
 - Sep 17, 2026, 8:01:54 AM CDT | USER-156000 | done | development | Features Section
-- Sep 17, 2026, 8:00:56 AM CDT | USER-546000 | in_progress | development | Fix Navbar Import
 - Sep 17, 2026, 7:59:33 AM CDT | USER-2000 | done | development | Hero Section
 - Sep 17, 2026, 7:58:41 AM CDT | USER-454000 | todo | development | Landing Page Shell
-- Sep 17, 2026, 7:47:06 AM CDT | USER-430000 | done | development | Page Assembly
+- Sep 17, 2026, 7:47:05 AM CDT | USER-430000 | done | development | Page Assembly
 - Sep 17, 2026, 7:36:30 AM CDT | USER-376000 | in_progress | development | Final Page Integration
 - Sep 17, 2026, 7:31:33 AM CDT | USER-462000 | done | development | Workflow Section
 - Sep 17, 2026, 7:03:05 AM CDT | USER-718000 | done | development | CTA Section
