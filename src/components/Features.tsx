@@ -38,55 +38,27 @@ const FeaturesSection: React.FC = () => {
               </div>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Real-Time Monitoring
+              Seamless Integration
             </h3>
             <p className="text-gray-600">
-              Track every step of your processes with live dashboards and alerts, ensuring optimal performance at all times.
+              Connect Helix with your existing tools and platforms for a unified workflow experience.
             </p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="relative w-12 h-12 mb-4">
               <svg className="w-full h-full text-indigo-600" viewBox="0 0 24 24">
+                <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               </svg>
               <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
                 3
               </div>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Seamless Integrations
+              Enterprise Grade Security
             </h3>
             <p className="text-gray-600">
-              Connect with your favorite tools and services through pre-built connectors and customizable APIs.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="relative w-12 h-12 mb-4">
-              <svg className="w-full h-full text-indigo-600" viewBox="0 0 24 24">
-              </svg>
-              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
-                4
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Secure & Scalable
-            </h3>
-            <p className="text-gray-600">
-              Enterprise-grade security with automatic scaling to handle any workload, keeping your data safe and systems responsive.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-            <div className="relative w-12 h-12 mb-4">
-              <svg className="w-full h-full text-indigo-600" viewBox="0 0 24 24">
-              </svg>
-              <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
-                5
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Analytics & Reporting
-            </h3>
-            <p className="text-gray-600">
-              Gain deep insights with comprehensive analytics and customizable reports to drive data-driven decisions.
+              Your data is protected with advanced encryption and compliance with industry standards.
             </p>
           </div>
         </div>
