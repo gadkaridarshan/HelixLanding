@@ -1,7 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 11:48:04 AM CDT | USER-1789643783667 | done | development | Fix the issues in the description when ran `npm run dev`
 - Sep 17, 2026, 11:47:50 AM CDT | USER-200000 | done | development | Landing Page Shell
-- Sep 17, 2026, 11:47:46 AM CDT | USER-1789643783667 | in_progress | development | Fix the issues in the description when ran `npm run dev`
 - Sep 17, 2026, 11:46:41 AM CDT | USER-207000 | in_progress | development | Workflow CTA Footer Components
 - Sep 17, 2026, 11:46:33 AM CDT | USER-219000 | todo | development | Hero Features Components
 - Sep 17, 2026, 11:44:46 AM CDT | USER-1789642611320 | done | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
