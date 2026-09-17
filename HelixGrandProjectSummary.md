@@ -1,3 +1,3 @@
 # Technical Summary
 
-_Will update whenever a card moves to Done._
+In place on disk: `vercel.json`, `next.config.js`, `pages/index.tsx` (or `app/page.tsx`), `app/layout.tsx`, `app/globals.css`, component files for Hero, Features, Workflow, CTA, Navbar, Footer, and associated CSS modules; SEO meta tags in `pages/_document.js`; and a fully updated README. Next to land: consolidation of the duplicate `components/` and `src/components/` directories (USER‑1789642611320) and correction of the Navbar menu import (USER‑999997) to eliminate import errors. After these adjustments, the Next.js build will succeed without warnings, and the Vercel deployment will reflect the final, polished marketing page.
