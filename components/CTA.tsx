@@ -1,25 +1,26 @@
-import styles from './CTA.module.css';
-import { Button } from '@/components/UI/Button';
+import React from 'react';
 
-export default function CTA() {
+const CTA: React.FC = () => {
   return (
-    <section className={`${styles.cta} py-16 bg-gradient-to-br from-indigo-50 to-indigo-100`}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className={`${styles.title} text-3xl font-bold text-gray-900 mb-6`}>
-          Ready to Transform Your Workflows?
-        </h2>
-        <p className={`${styles.description} text-lg text-gray-600 mb-8`}>
-          Start your free trial today and experience the power of AI-driven automation.
+    <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+      <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <h1 className="text-4xl font-bold mb-6">
+          Ready to Transform Your Workflow?
+        </h1>
+        <p className="text-lg mb-10 max-w-2xl mx-auto">
+          Experience the power of AI orchestration designed for your specific needs. Start with a free trial or schedule a demo to see Helix in action.
         </p>
-        <div className={`${styles.buttons} flex flex-col sm:flex-row gap-4 justify-center`}>
-          <Button variant="primary" size="lg">
+        <div className="flex flex-col sm:flex-row sm:justify-center gap-4">
+          <a href="#" className="flex-1 bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
             Start Free Trial
-          </Button>
-          <Button variant="outline" size="lg">
-            Watch Demo
-          </Button>
+          </a>
+          <a href="#" className="flex-1 bg-white/20 hover:bg-white/30 border border-white/20 px-6 py-3 rounded-lg font-medium hover:bg-white/30 transition-colors">
+            Schedule Demo
+          </a>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default CTA;

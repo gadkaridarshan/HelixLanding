@@ -1,12 +1,22 @@
 # Card Inventory
 
+- Sep 17, 2026, 6:59:59 AM CDT | USER-359000 | done | development | Add Workflow and CTA
+- Sep 17, 2026, 6:59:48 AM CDT | USER-376000 | in_progress | development | Final Page Integration
+- Sep 17, 2026, 6:59:39 AM CDT | USER-999999 | in_progress | general | Update README
+- Sep 17, 2026, 6:58:03 AM CDT | USER-462000 | in_progress | development | Workflow Section
+- Sep 17, 2026, 6:56:26 AM CDT | USER-718000 | in_progress | development | CTA Section
+- Sep 17, 2026, 6:55:11 AM CDT | USER-454000 | in_progress | development | Landing Page Shell
+- Sep 17, 2026, 6:51:43 AM CDT | USER-565000 | in_progress | development | Vercel Deploy Config
+- Sep 17, 2026, 6:51:43 AM CDT | USER-546000 | in_progress | development | Navigation Bar
+- Sep 17, 2026, 6:51:43 AM CDT | USER-209000 | in_progress | development | Footer Component
+- Sep 17, 2026, 6:49:30 AM CDT | USER-156000 | in_progress | development | Features Section
+- Sep 17, 2026, 6:49:26 AM CDT | VERCEL-001 | closed_incomplete | deployment | Vercel Config
+- Sep 17, 2026, 6:49:26 AM CDT | USER-2000 | in_progress | development | Hero Section
 - Sep 17, 2026, 6:33:15 AM CDT | USER-140000 | done | development | Update Landing Page Content
-- Sep 17, 2026, 6:32:59 AM CDT | USER-999999 | in_progress | general | Update README
 - Sep 17, 2026, 6:28:33 AM CDT | USER-579000 | done | development | Vercel Deployment Config
 - Sep 17, 2026, 6:23:58 AM CDT | USER-1789624187732 | done | development | Site rendering fix
 - Sep 17, 2026, 5:58:17 AM CDT | USER-888000 | done | development | Fix Site Rendering
 - Sep 17, 2026, 5:52:49 AM CDT | USER-735000 | done | development | Add Vercel config
-- Sep 17, 2026, 5:36:43 AM CDT | VERCEL-001 | closed_incomplete | deployment | Vercel Config
 - Sep 17, 2026, 5:36:19 AM CDT | USER-611000 | done | development | Landing Page Shell
 - Sep 17, 2026, 5:31:49 AM CDT | USER-96000 | done | development | Create Button CSS module
 - Sep 17, 2026, 5:20:41 AM CDT | USER-1789622273591 | done | development | Fix the errors found when ran `npm run dev`. the errors are in the description
