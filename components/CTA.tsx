@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CTA: React.FC = () => {
   return (
@@ -7,8 +7,8 @@ const CTA: React.FC = () => {
         <div className="text-center">
           <h2 className="h2-custom">Ready to Transform Your Workflow?</h2>
           <p className="p-custom">
-            Experience the power of AI orchestration that turns complex tasks into
-            simple, actionable outcomes.
+            Experience the power of AI orchestration that turns complex tasks
+            into simple, actionable outcomes.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mt-10">
             <a

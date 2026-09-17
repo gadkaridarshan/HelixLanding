@@ -1,12 +1,16 @@
-import styles from '@/components/Hero.module.css';
-import { Button } from '@/components/UI/Button';
-import text from '@/content/text.json';
+import styles from "@/components/Hero.module.css";
+import { Button } from "@/components/UI/Button";
+import text from "@/content/text.json";
 
 export default function Hero() {
   return (
-    <section className={`${styles.hero} min-h-[90vh] flex flex-col items-center justify-center gap-8 text-center py-12`}>
+    <section
+      className={`${styles.hero} min-h-[90vh] flex flex-col items-center justify-center gap-8 text-center py-12`}
+    >
       <div className={`${styles.content} max-w-4xl space-y-6`}>
-        <h1 className={`${styles.title} text-4xl font-bold text-gray-900 sm:text-5xl`}>
+        <h1
+          className={`${styles.title} text-4xl font-bold text-gray-900 sm:text-5xl`}
+        >
           {text.hero.title}
         </h1>
         <p className={`${styles.subtitle} text-lg text-gray-600`}>

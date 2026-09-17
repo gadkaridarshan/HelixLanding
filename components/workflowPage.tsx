@@ -1,4 +1,4 @@
-import WorkflowSection from '../components/WorkflowSection';
+import WorkflowSection from "../components/WorkflowSection";
 
 export default function WorkflowPage() {
   return (

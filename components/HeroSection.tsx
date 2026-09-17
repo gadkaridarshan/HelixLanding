@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
@@ -9,8 +9,9 @@ const HeroSection: React.FC = () => {
             Transform Your Workflow with AI Orchestration
           </h1>
           <p className="p-custom">
-            Helix intelligently coordinates specialized AI agents to tackle complex tasks,
-            delivering precise, actionable insights that drive your business forward.
+            Helix intelligently coordinates specialized AI agents to tackle
+            complex tasks, delivering precise, actionable insights that drive
+            your business forward.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mt-10">
             <a

@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { HiMenu } from 'react-icons/hi';
-import { HiX } from 'react-icons/hi';
-import { useState } from 'react';
+import Link from "next/link";
+import { HiMenu } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
+import { useState } from "react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +16,22 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link href="#features" className="text-gray-500 hover:text-gray-900">
+            <Link
+              href="#features"
+              className="text-gray-500 hover:text-gray-900"
+            >
               Features
             </Link>
-            <Link href="#workflow" className="text-gray-500 hover:text-gray-900">
+            <Link
+              href="#workflow"
+              className="text-gray-500 hover:text-gray-900"
+            >
               How it Works
             </Link>
-            <Link href="#cta" className="px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">
+            <Link
+              href="#cta"
+              className="px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700"
+            >
               Get Started
             </Link>
           </div>
@@ -31,7 +40,11 @@ const Navbar: React.FC = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="rounded-md p-2 text-gray-500 hover:bg-gray-100"
             >
-              {isOpen ? <HiX className="h-6 w-6" /> : <HiMenu className="h-6 w-6" />}
+              {isOpen ? (
+                <HiX className="h-6 w-6" />
+              ) : (
+                <HiMenu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>

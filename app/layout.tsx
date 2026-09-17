@@ -1,13 +1,12 @@
-// @helix:story [USER-99000]
-import './globals.css';
-import type { Metadata } from 'next';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Helix AI Orchestrator',
-  description: 'The intelligent workflow automation platform',
-  icons: {
-    icon: '/favicon.ico',
-  },
+  title: "Helix AI Orchestrator",
+  description: "The intelligent workflow automation platform",
 };
 
 export default function RootLayout({
@@ -17,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

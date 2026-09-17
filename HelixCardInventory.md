@@ -1,8 +1,9 @@
 # Card Inventory
 
+- Sep 17, 2026, 2:24:34 PM CDT | USER-99000 | done | development | Page Shell Setup
+- Sep 17, 2026, 2:19:27 PM CDT | USER-1789651896862 | in_progress | development | Fix Next.js config error
+- Sep 17, 2026, 2:16:18 PM CDT | USER-1789652000000 | todo | development | Fix layout TS errors
 - Sep 17, 2026, 2:07:47 PM CDT | USER-885000 | done | development | Workflow CTA Footer UI
-- Sep 17, 2026, 2:07:23 PM CDT | USER-99000 | in_progress | development | Page Shell Setup
-- Sep 17, 2026, 2:06:47 PM CDT | USER-1789651896862 | in_progress | development | Fix Next.js config error
 - Sep 17, 2026, 2:05:14 PM CDT | USER-648000 | done | development | Hero and Features UI
 - Sep 17, 2026, 1:51:34 PM CDT | USER-478000 | closed_incomplete | development | Build Landing Page
 - Sep 17, 2026, 1:40:13 PM CDT | USER-106000 | closed_incomplete | development | Build Helix Landing Page

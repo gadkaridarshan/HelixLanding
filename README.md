@@ -1,44 +1,25 @@
-# HelixLanding
+# Helix AI Orchestrator Landing Page
 
-A marketing landing page for the Helix AI orchestrator, built with Next.js and deployed on Vercel.
+A professional marketing landing page for Helix AI Orchestrator built with Next.js.
 
-## Prerequisites
+## Getting Started
 
-Before you begin, ensure you have met the following requirements:
-- [Node.js](https://nodejs.org/) (version 18 or higher)
-- [npm](https://www.npmjs.com/) (version 9 or higher) or [yarn](https://yarnpkg.com/) (version 1.22 or higher)
-- A [Vercel](https://vercel.com/) account for deployment (optional for local development)
+First, install the dependencies:
 
-## Running locally
+```bash
+npm install
+```
 
-Follow these steps to get a local copy up and running:
+Then, run the development server:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/gadkaridarshan/Helix.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd HelixLanding
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-   or if you prefer yarn:
-   ```bash
-   yarn install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   or with yarn:
-   ```bash
-   yarn dev
-   ```
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the landing page.
+```bash
+npm run dev
+```
 
-## Project Structure
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The project follows a standard Next.js application structure:
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://vercel.com/docs/concepts/next.js/overview) for more details.
