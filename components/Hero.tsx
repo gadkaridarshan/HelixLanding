@@ -23,8 +23,7 @@ export default function Hero() {
       <div className={`${styles.image} w-full max-w-2xl`}>
         {/* Placeholder for hero illustration */}
         <div className="w-full h-96 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl flex items-center justify-center">
-          <svg className="h-12 w-12 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          </svg>
+          {/* Illustration or image can be placed here */}
         </div>
       </div>
     </section>

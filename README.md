@@ -35,6 +35,4 @@ helix-landing/
 │   └── settings.json
 ├── HelixCardInventory.md
 ├── HelixGrandProjectSummary.md
-├── .gitignore
-├── next.config.js
-└── package.json
+└── .g
