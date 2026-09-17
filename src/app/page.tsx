@@ -1,10 +1,18 @@
+// @helix:story [USER-454000]
+import { HeroSection } from '@/components/HeroSection';
+import { FeaturesSection } from '@/components/FeaturesSection';
+import { WorkflowSection } from '@/components/WorkflowSection';
+import { CTASection } from '@/components/CTASection';
+import { FooterSection } from '@/components/FooterSection';
+
 export default function HomePage() {
   return (
     <main>
-      <div className="container">
-        <h1>Helix AI Orchestrator</h1>
-        <p>Welcome to the future of workflow automation.</p>
-      </div>
+      <HeroSection />
+      <FeaturesSection />
+      <WorkflowSection />
+      <CTASection />
+      <FooterSection />
     </main>
   );
 }

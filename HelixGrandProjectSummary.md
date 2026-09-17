@@ -1,3 +1,3 @@
 # Technical Summary
 
-In place on disk: the WorkflowSection (`components/WorkflowSection.tsx`), CTASection (`components/CTASection.tsx`), Hero, Features, and Footer components under `src/components/sections/` and `components/`, the Button CSS module, and content in `src/content/text.json`; Vercel configuration files (`vercel.json`, `next.config.js`) from the Vercel Deployment Config and Add Vercel config cards; and site rendering fixes that ensure full Next.js rendering. Next to land: the Landing Page Shell (`app/layout.tsx`) and Final Page Integration (`app/page.tsx`) are currently in progress, awaiting completion to assemble the full page. Once these are finished, a final build will confirm Vercel deployment readiness.
+_Will update whenever a card moves to Done._
