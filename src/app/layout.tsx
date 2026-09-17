@@ -1,7 +1,7 @@
 // @helix:story [USER-454000]
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import type { ReactNode } from 'react';
 
 export default function RootLayout({
