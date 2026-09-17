@@ -1,17 +1,23 @@
-// @helix:story [USER-810000]
+// @helix:story [USER-277000]
+import styles from './Hero.module.css';
+
 export default function Hero() {
   return (
-    <section className="bg-gray-900 text-white py-20">
-      <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          Helix AI Orchestrator
-        </h1>
-        <p className="text-xl md:text-2xl mb-8">
-          Professional AI workflow automation platform
+    <section className={styles.hero}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Helix AI Orchestrator</h1>
+        <p className={styles.description}>
+          Professional AI workflow automation platform that streamlines your
+          development process.
         </p>
-        <a href="#get-started" className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
-          Get Started
-        </a>
+        <div className={styles.buttonGroup}>
+          <a href="https://github.com/gadkaridarshan/Helix" className={styles.button}>
+            View on GitHub
+          </a>
+          <a href="https://helix-ai-orchestrator.vercel.app/" className={styles.buttonAlt}>
+            Try the Demo
+          </a>
+        </div>
       </div>
     </section>
   );

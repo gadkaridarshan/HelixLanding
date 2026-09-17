@@ -16,6 +16,7 @@ A professional marketing landing page for the Helix AI Orchestrator, built with 
 helix-landing/
 ├── app/
 │   ├── globals.css
+│   ├── global.d.ts
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/
@@ -27,6 +28,9 @@ helix-landing/
 │   ├── Hero.tsx
 │   └── Hero.module.css
 ├── public/
+├── .vscode/
+│   ├── settings.json
+│   └── vercel.json
 ├── .gitignore
 ├── next.config.js
 ├── package.json

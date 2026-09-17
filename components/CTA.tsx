@@ -1,16 +1,17 @@
-// @helix:story [USER-810000]
+// @helix:story [USER-277000]
+import styles from './CTA.module.css';
+
 export default function CTA() {
   return (
-    <section className="bg-blue-500 text-white py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6">
-          Ready to streamline your AI workflows?
-        </h2>
-        <p className="text-xl mb-8">
-          Get started with Helix AI Orchestrator today.
+    <section className={styles.cta}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Ready to streamline your workflow?</h2>
+        <p className={styles.description}>
+          Join the future of AI-powered automation. Get started by exploring
+          our open-source repository.
         </p>
-        <a href="/signup" className="bg-white text-blue-500 hover:bg-gray-100 font-medium py-3 px-8 rounded-md transition-colors">
-          Sign Up Free
+        <a href="https://github.com/gadkaridarshan/Helix" className={styles.button}>
+          GitHub Repository
         </a>
       </div>
     </section>

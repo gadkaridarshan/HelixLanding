@@ -1,47 +1,51 @@
 /* @helix:story [USER-277000] */
 .features {
-  padding: 4rem 2rem;
-  background-color: #f8f9fa;
+  padding: 4rem 0;
+  background-color: #f9fafb;
 }
 
-.features h2 {
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 3rem;
-  color: #1a2a6c;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .card {
   background: white;
-  border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.card h3 {
-  color: #1a2a6c;
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: #1f2937;
 }
 
-.card p {
-  color: #555;
+.cardDescription {
+  color: #4b5563;
   line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
