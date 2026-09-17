@@ -1,3 +1,3 @@
 # Technical Summary
 
-_Will update whenever a card moves to Done._
+In place on disk: README.md updated; Workflow and CTA components (`components/Workflow.tsx`, `components/CTA.tsx`); landing page content files (`src/components/sections/Hero.tsx`, `src/components/sections/Features.tsx`, `src/components/sections/CTA.tsx`, `src/content/text.json`); page shell and layout (`app/page.tsx`, `app/layout.tsx`, `app/globals.css`); styled section modules (`components/Hero.tsx`/`.module.css`, `components/Features.tsx`/`.module.css`, `components/CTA.tsx`/`.module.css`, `components/Footer.tsx`); button CSS module; Vercel configuration (`vercel.json`, `next.config.js`), Tailwind and TypeScript configs (`tailwind.config.ts`, `tsconfig.json`), and package manifest (`package.json`); site‑rendering fixes (SWC minify warning resolved, CSS parsing errors addressed).
