@@ -1,12 +1,10 @@
+// @helix:story [USER-454000]
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Helix AI Orchestrator',
-  description: 'The AI orchestrator for complex workflows.',
+  description: 'The ultimate AI orchestrator for building complex workflows.',
 };
 
 export default function RootLayout({
@@ -15,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }
