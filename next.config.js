@@ -6,9 +6,8 @@ const nextConfig = {
   images: {
     domains: [],
   },
-  // Ensure proper handling of images and static assets
+  // Fixes npm packages that depend on `fs` module
   webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -17,6 +16,8 @@ const nextConfig = {
     }
     return config;
   },
+  // Add output export for Vercel static deployment
+  output: 'export',
 };
 
 module.exports = nextConfig;

@@ -1,3 +1,4 @@
+// @helix:story [USER-718000]
 import React from "react";
 
 const CTASection: React.FC = () => {

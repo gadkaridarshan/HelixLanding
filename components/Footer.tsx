@@ -1,24 +1,33 @@
-export default function Footer() {
+// @helix:story [USER-277000]
+import React from "react";
+
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-50">
-      <div className="container-custom py-8">
+    <footer className="bg-gray-800 text-gray-300 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-gray-500">
-            © {new Date().getFullYear()} Helix AI Orchestrator. All rights reserved.
+          <p className="text-sm">
+            &copy; {new Date().getFullYear()} Helix AI Orchestrator. All rights
+            reserved.
           </p>
-          <div className="mt-4 flex justify-center space-x-4">
-            <a href="#" className="text-gray-400 hover:text-gray-500">
-              Terms
+          <div className="mt-4 space-x-4">
+            <a
+              href="#"
+              className="hover:text-gray-200 transition-colors"
+            >
+              Privacy Policy
             </a>
-            <a href="#" className="text-gray-400 hover:text-gray-500">
-              Privacy
-            </a>
-            <a href="#" className="text-gray-400 hover:text-gray-500">
-              Contact
+            <a
+              href="#"
+              className="hover:text-gray-200 transition-colors"
+            >
+              Terms of Service
             </a>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

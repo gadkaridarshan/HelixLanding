@@ -1,4 +1,6 @@
 // @helix:story [USER-1789652000000]
+// @helix:story [USER-277000]
+// @helix:story [USER-454000]
 import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";

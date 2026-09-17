@@ -1,3 +1,4 @@
+// @helix:story [USER-454000]
 import "@/app/globals.css";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
