@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/CTA.module.css"],"sourcesContent":["/* @helix:story [USER-277000] */\n.cta {\n  background: linear-gradient(to right, #7c3aed, #4f46e5);\n  color: white;\n  text-align: center;\n  padding: 4rem 0;\n}\n\n.container {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 0 1rem;\n}\n\n.title {\n  font-size: 2rem;\n  font-weight: bold;\n  margin-bottom: 1.5rem;\n}\n\n.description {\n  font-size: 1.25rem;\n  margin-bottom: 2rem;\n  opacity: 0.9;\n}\n\n.button {\n  display: inline-block;\n  padding: 0.75rem 2rem;\n  background: white;\n  color: #7c3aed;\n  border-radius: 0.5rem;\n  font-weight: 600;\n  text-decoration: none;\n  transition: all 0.2s ease;\n}\n\n.button:hover {\n  background: #f3f4f6;\n}\n\n/* Responsive */\n@media (max-width: 640px) {\n  .title {\n    font-size: 1.75rem;\n  }\n  .description {\n    font-size: 1.125rem;\n  }\n}"],"names":[],"mappings":"AACA;;;;;;;AAOA;;;;;;AAMA;;;;;;AAMA;;;;;;AAMA;;;;;;;;;;;AAWA;;;;AAKA;EACE;;;;EAGA"}}]
+}

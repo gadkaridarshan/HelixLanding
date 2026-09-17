@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/globals.css"],"sourcesContent":["/* @helix:story [USER-277000] */\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\nhtml,\nbody {\n  padding: 0;\n  margin: 0;\n}\n\nbody {\n  @apply bg-gray-50 text-gray-900;\n}"],"names":[],"mappings":"AACA;;AACA;;AACA;;AAEA;;;;;AAOE"}}]
+}

@@ -1,0 +1,72 @@
+/* [project]/components/Hero.module.css [app-client] (css) */
+.Hero-module__Z8hQ_W__hero {
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+  padding: 4rem 0;
+}
+
+.Hero-module__Z8hQ_W__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.Hero-module__Z8hQ_W__title {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.Hero-module__Z8hQ_W__description {
+  opacity: .9;
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+}
+
+.Hero-module__Z8hQ_W__buttonGroup {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  display: flex;
+}
+
+.Hero-module__Z8hQ_W__button, .Hero-module__Z8hQ_W__buttonAlt {
+  border-radius: .5rem;
+  padding: .75rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .2s;
+  display: inline-block;
+}
+
+.Hero-module__Z8hQ_W__button {
+  color: #4f46e5;
+  background: #fff;
+}
+
+.Hero-module__Z8hQ_W__button:hover {
+  background: #f3f4f6;
+}
+
+.Hero-module__Z8hQ_W__buttonAlt {
+  color: #fff;
+  background: none;
+  border: 2px solid #fff;
+}
+
+.Hero-module__Z8hQ_W__buttonAlt:hover {
+  background: #ffffff1a;
+}
+
+@media (max-width: 640px) {
+  .Hero-module__Z8hQ_W__title {
+    font-size: 2rem;
+  }
+
+  .Hero-module__Z8hQ_W__description {
+    font-size: 1.125rem;
+  }
+}
+
+/*# sourceMappingURL=components_Hero_module_css_1igg3k2._.single.css.map*/

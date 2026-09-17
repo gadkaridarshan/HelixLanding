@@ -1,19 +1,25 @@
-// @helix:story [USER-277000]
-import styles from './CTA.module.css';
+import React from 'react';
 
-export default function CTA() {
+const CTA: React.FC = () => {
   return (
-    <section className={styles.cta}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Ready to streamline your workflow?</h2>
-        <p className={styles.description}>
-          Join the future of AI-powered automation. Get started by exploring
-          our open-source repository.
+    <section className="bg-indigo-600 text-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
+        <h2 className="text-3xl font-bold mb-6">
+          Ready to Transform Your Workflow?
+        </h2>
+        <p className="text-xl mb-8">
+          Get started with Helix AI Orchestrator today and experience the
+          future of work automation.
         </p>
-        <a href="https://github.com/gadkaridarshan/Helix" className={styles.button}>
-          GitHub Repository
+        <a
+          href="#"
+          className="rounded-md bg-white px-6 py-3 text-sm font-medium text-indigo-600 hover:bg-gray-50"
+        >
+          Start Free Trial
         </a>
       </div>
     </section>
   );
-}
+};
+
+export default CTA;

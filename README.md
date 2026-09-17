@@ -1,6 +1,6 @@
 # helix-landing
 
-A professional marketing landing page for the Helix AI Orchestrator, built with Next.js and deployed on Vercel. This page showcases the product’s value proposition, features, and call‑to‑action sections, providing a clean, responsive experience for visitors.
+A professional marketing landing page for the Helix AI Orchestrator, built with Next.js and deployed on Vercel. This page showcases the product’s value proposition, features, and call-to-action sections, providing a clean, responsive experience for visitors.
 
 ## Prerequisites
 - Node.js (v18.17.0 or later)
@@ -31,6 +31,8 @@ helix-landing/
 ├── .vscode/
 │   ├── settings.json
 │   └── vercel.json
+├── HelixCardInventory.md
+├── HelixGrandProjectSummary.md
 ├── .gitignore
 ├── next.config.js
 ├── package.json

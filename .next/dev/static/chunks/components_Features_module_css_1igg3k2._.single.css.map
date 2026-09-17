@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/Features.module.css"],"sourcesContent":["/* @helix:story [USER-277000] */\n.features {\n  padding: 4rem 0;\n  background-color: #f9fafb;\n}\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 1rem;\n}\n\n.title {\n  text-align: center;\n  font-size: 2rem;\n  font-weight: bold;\n  margin-bottom: 3rem;\n}\n\n.grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  gap: 2rem;\n}\n\n.card {\n  background: white;\n  padding: 2rem;\n  border-radius: 0.5rem;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n\n.cardTitle {\n  font-size: 1.25rem;\n  font-weight: 600;\n  margin-bottom: 1rem;\n  color: #1f2937;\n}\n\n.cardDescription {\n  color: #4b5563;\n  line-height: 1.6;\n}\n\n/* Responsive */\n@media (max-width: 640px) {\n  .grid {\n    grid-template-columns: 1fr;\n  }\n}"],"names":[],"mappings":"AACA;;;;;AAKA;;;;;;AAMA;;;;;;;AAOA;;;;;;AAMA;;;;;;;;AAQA;;;;;;;AAOA;;;;;AAMA;EACE"}}]
+}

@@ -1,0 +1,52 @@
+/* [project]/components/Features.module.css [app-client] (css) */
+.Features-module__ZD3nRW__features {
+  background-color: #f9fafb;
+  padding: 4rem 0;
+}
+
+.Features-module__ZD3nRW__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.Features-module__ZD3nRW__title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.Features-module__ZD3nRW__grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  display: grid;
+}
+
+.Features-module__ZD3nRW__card {
+  text-align: center;
+  background: #fff;
+  border-radius: .5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px #0000001a;
+}
+
+.Features-module__ZD3nRW__cardTitle {
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.Features-module__ZD3nRW__cardDescription {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .Features-module__ZD3nRW__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_Features_module_css_1igg3k2._.single.css.map*/
