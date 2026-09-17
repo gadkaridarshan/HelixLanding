@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://helix-ai-orchestrator.vercel.app/sitemap.xml
