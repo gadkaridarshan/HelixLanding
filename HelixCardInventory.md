@@ -1,7 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 10:49:35 AM CDT | USER-1789641965242 | done | development | Features link goes to /features instead of #features. Same with other links
 - Sep 17, 2026, 10:47:38 AM CDT | USER-67000 | done | development | Vercel Config Fix
-- Sep 17, 2026, 10:47:32 AM CDT | USER-1789641965242 | in_progress | development | Features link goes to /features instead of #features. Same with other links
 - Sep 17, 2026, 10:43:05 AM CDT | USER-291000 | done | development | Build Landing Page
 - Sep 17, 2026, 10:41:29 AM CDT | USER-1789641140753 | done | development | Links in the NavBar do not work
 - Sep 17, 2026, 9:54:06 AM CDT | USER-900000 | done | development | Fix Navbar Footer Imports

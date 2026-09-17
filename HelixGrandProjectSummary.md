@@ -1,3 +1,3 @@
 # Technical Summary
 
-_Will update whenever a card moves to Done._
+In place on disk: `vercel.json`, `next.config.js`, `tailwind.config.ts`, `tsconfig.json`, `package.json`, `app/layout.tsx`, `app/page.tsx`, `app/globals.css`, `components/Navbar.tsx`, `components/Footer.tsx`, `src/components/Hero.tsx`, `src/components/Features.tsx`, `src/components/WorkflowSection.tsx`, `src/components/CTASection.tsx`, `pages/_document.js`, and the supporting CSS modules for each component. Next to land: update the `Navbar` component’s link `href` attributes to use anchor fragments (e.g., change "/features" to "#features", "/workflow" to "#workflow", etc.) and verify that each target section has a matching `id` attribute. All other TypeScript import and build errors have been resolved, and the project passes `npm run dev` without warnings.
