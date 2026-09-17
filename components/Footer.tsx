@@ -1,60 +1,52 @@
-import React from 'react';
-
-const Footer: React.FC = () => {
+export default function Footer() {
   return (
-    <footer className="bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Product</h3>
+    <footer className="border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Helix</h3>
+            <p className="text-gray-600">
+              AI orchestration platform for complex workflows. Helix coordinates specialized agents to deliver precise,
+              actionable results.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-3">Product</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:underline">Features</a></li>
-              <li><a href="#" className="hover:underline">Pricing</a></li>
-              <li><a href="#" className="hover:underline">Integrations</a></li>
-              <li><a href="#" className="hover:underline">Docs</a></li>
+              <li>Features</li>
+              <li>Workflow</li>
+              <li>Pricing</li>
+              <li>Enterprise</li>
+              <li>Security</li>
             </ul>
           </div>
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Company</h3>
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-3">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:underline">About</a></li>
-              <li><a href="#" className="hover:underline">Blog</a></li>
-              <li><a href="#" className="hover:underline">Careers</a></li>
-              <li><a href="#" className="hover:underline">Contact</a></li>
+              <li>Documentation</li>
+              <li>Blog</li>
+              <li>Case Studies</li>
+              <li>Webinars</li>
+              <li>API Reference</li>
             </ul>
           </div>
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Resources</h3>
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-3">Company</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:underline">Help Center</a></li>
-              <li><a href="#" className="hover:underline">Webinars</a></li>
-              <li><a href="#" className="hover:underline">Case Studies</a></li>
-              <li><a href="#" className="hover:underline">Podcast</a></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Legal</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">Terms of Service</a></li>
-              <li><a href="#" className="hover:underline">Security</a></li>
+              <li>About</li>
+              <li>Careers</li>
+              <li>Press</li>
+              <li>Contact</li>
+              <li>Partners</li>
             </ul>
           </div>
         </div>
-        <div className="border-t pt-8 text-center text-sm text-gray-500">
-          <div className="flex flex-col items-center md:flex-row md:justify-between">
-            <div className="mb-4 md:mb-0">
-              <h2 className="text-xl font-bold text-gray-900">Helix</h2>
-              <p className="text-gray-600">AI Orchestrator</p>
-            </div>
-            <p className="md:text-right">
-              © {new Date().getFullYear()} Helix. All rights reserved.
-            </p>
-          </div>
+        <div className="mt-16 pt-10 border-t border-gray-200">
+          <p className="text-center text-sm text-gray-500">
+            © 2024 Helix AI. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

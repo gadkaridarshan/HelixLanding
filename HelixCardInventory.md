@@ -1,7 +1,7 @@
 # Card Inventory
 
+- Sep 17, 2026, 10:43:05 AM CDT | USER-291000 | done | development | Build Landing Page
 - Sep 17, 2026, 10:41:29 AM CDT | USER-1789641140753 | done | development | Links in the NavBar do not work
-- Sep 17, 2026, 10:40:57 AM CDT | USER-291000 | in_progress | development | Build Landing Page
 - Sep 17, 2026, 9:54:06 AM CDT | USER-900000 | done | development | Fix Navbar Footer Imports
 - Sep 17, 2026, 9:51:37 AM CDT | USER-839000 | done | development | Fix Vercel Config
 - Sep 17, 2026, 9:47:48 AM CDT | USER-619000 | closed_incomplete | development | Helix AI marketing landing page

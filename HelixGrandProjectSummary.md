@@ -1,3 +1,3 @@
 # Technical Summary
 
-In place on disk: the full Next.js landing page structure (`app/page.tsx`, `app/layout.tsx`, `app/globals.css`), all section components (`components/Hero.tsx`, `components/Features.tsx`, `components/WorkflowSection.tsx`, `components/CTASection.tsx`, `components/Footer.tsx`), styling modules, and configuration files (`vercel.json`, `next.config.js`, `tailwind.config.ts`, `tsconfig.json`, `package.json`). The globals.css syntax issues have been corrected, and the project builds without TypeScript errors. Next to land: validation of the Vercel deployment config (addressing the closed_incomplete VERCEL-001 card) and a final deployment verification to ensure the site renders correctly on the Vercel platform.
+_Will update whenever a card moves to Done._
