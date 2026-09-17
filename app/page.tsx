@@ -1,10 +1,10 @@
-// @helix:story [USER-88000]
+// @helix:story [USER-810000]
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
-export default function HomePage() {
+export default function Home() {
   return (
     <>
       <Hero />
