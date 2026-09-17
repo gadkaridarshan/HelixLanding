@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/darshan/Documents/Dream/code/HelixLanding/components/Hero.module.css"],"sourcesContent":[".hero {\n\n    --tw-bg-opacity: 1;\n\n    background-color: rgb(255 255 255 / var(--tw-bg-opacity))\n}\n\n.content > :not([hidden]) ~ :not([hidden]) {\n\n    --tw-space-y-reverse: 0;\n\n    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));\n\n    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse))\n}\n\n.title {\n\n    margin-bottom: 1rem\n}\n\n.subtitle {\n\n    margin-bottom: 1.5rem\n}\n\n.buttons {\n\n    margin-top: 1rem\n}\n\n.image {\n\n    margin-top: 2rem\n}"],"names":[],"mappings":"AAAA;;;;;AAOA;;;;;;AASA;;;;AAKA;;;;AAKA;;;;AAKA"}}]
+}

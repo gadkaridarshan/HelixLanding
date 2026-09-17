@@ -1,3 +1,4 @@
+<!-- @helix:story [USER-999999] -->
 # helix-landing
 
 A professional marketing landing page for the Helix AI Orchestrator, built with Next.js and deployed on Vercel. This page showcases the product’s value proposition, features, and call-to-action sections, providing a clean, responsive experience for visitors.
@@ -36,5 +37,4 @@ helix-landing/
 ├── HelixGrandProjectSummary.md
 ├── .gitignore
 ├── next.config.js
-├── package.json
-└── tailwind.config.js
+└── package.json

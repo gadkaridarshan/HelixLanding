@@ -3,8 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Uncomment the following line if using static export
-  // output: 'export',
+  output: 'export',
 };
 
 module.exports = nextConfig;

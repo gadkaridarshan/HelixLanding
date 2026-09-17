@@ -1,3 +1,3 @@
 # Grand Project Summary
 
-The workspace is incomplete; the following expected deliverable paths are not confirmed on disk:
+_Will update whenever a card moves to Done._
