@@ -1,8 +1,10 @@
 # Card Inventory
 
+- Sep 17, 2026, 11:07:17 AM CDT | USER-326000 | done | development | Add Vercel Config
+- Sep 17, 2026, 11:06:46 AM CDT | USER-999997 | in_progress | development | Fix Navbar Menu Import
+- Sep 17, 2026, 11:06:04 AM CDT | USER-1789643162679 | todo | development | Fix the error in the description
+- Sep 17, 2026, 11:05:55 AM CDT | USER-1789642611320 | in_progress | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
 - Sep 17, 2026, 11:03:11 AM CDT | USER-547000 | done | development | Create Landing Page
-- Sep 17, 2026, 10:58:33 AM CDT | USER-1789642611320 | in_progress | development | There is duplicate components/ and src/components/ folder. This is causing a lot of issues. Fix
-- Sep 17, 2026, 10:53:06 AM CDT | USER-999997 | in_progress | development | Fix Navbar Menu Import
 - Sep 17, 2026, 10:49:35 AM CDT | USER-1789641965242 | done | development | Features link goes to /features instead of #features. Same with other links
 - Sep 17, 2026, 10:47:38 AM CDT | USER-67000 | done | development | Vercel Config Fix
 - Sep 17, 2026, 10:43:05 AM CDT | USER-291000 | done | development | Build Landing Page
